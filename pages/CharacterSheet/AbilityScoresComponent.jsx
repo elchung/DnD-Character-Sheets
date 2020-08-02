@@ -16,7 +16,7 @@ export const AbilityScoreComponent = (
   setChaScore
 ) => {
 
-
+//look at https://material-ui.com/components/switches/ for switches
 
 
   return (
