@@ -1,3 +1,3 @@
-export const scoreToModifier = score => {
-  return Math.floor((score - 10) / 2)
-}
+export const scoreToModifier = (score) => Math.floor((score - 10) / 2);
+
+export default scoreToModifier
