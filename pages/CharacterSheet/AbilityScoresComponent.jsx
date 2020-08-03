@@ -1,10 +1,9 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
 import BaseAbilityScoreComponent from './BaseAbilityScoreComponent'
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 
 export const AbilityScoreComponent = ({
     scoreOnTop, setScoreOnTop,
@@ -13,11 +12,12 @@ export const AbilityScoreComponent = ({
     conScore, setConScore,
     intScore, setIntScore,
     wisScore, setWisScore,
-    chaScore, setChaScore
+    chaScore, setChaScore,
+    style
 }) => {
   return (
-    <Paper Elevation={3} width={10}>
-      <Grid container spacing={4} direction="column" justify="center" alignItems="center" wrap="nowrap">
+    <Card elevation={style.elevation} style={{ width: 125, paddingBottom: 10 }}>
+      <Grid container spacing={1} direction="column" justify="center" alignItems="center" wrap="nowrap">
         <Grid item>
           <FormControlLabel
             control={
@@ -25,7 +25,6 @@ export const AbilityScoreComponent = ({
                 size="small"
                 checked={!scoreOnTop}
                 onChange={() => setScoreOnTop(state => !state)}
-                color="primary"
               />
             }
           />
@@ -79,7 +78,7 @@ export const AbilityScoreComponent = ({
           />
         </Grid>
       </Grid>
-    </Paper>
+    </Card>
   );
 }
 
