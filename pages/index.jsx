@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import AbilityScoreComponent from './CharacterSheet/AbilityScoresComponent';
 import SkillsComponent from './CharacterSheet/SkillsComponent';
+import Grid from '@material-ui/core/Grid';
 
 export default function Home() {
   const [scoreOnTop, setScoreOnTop] = React.useState(false);
@@ -25,33 +26,37 @@ export default function Home() {
   const [expertise, setExpertise] = React.useState(new Set());
 
   return (
-    <Paper>
-      <AbilityScoreComponent
-        scoreOnTop={scoreOnTop}
-        setScoreOnTop={setScoreOnTop}
-        strScore={strScore}
-        setStrScore={setStrScore}
-        dexScore={dexScore}
-        setDexScore={setDexScore}
-        conScore={conScore}
-        setConScore={setConScore}
-        intScore={intScore}
-        setIntScore={setIntScore}
-        wisScore={wisScore}
-        setWisScore={setWisScore}
-        chaScore={chaScore}
-        setChaScore={setChaScore}
-        style={style}
-      />
-      <SkillsComponent
-        abilityScores={abilityScores}
-        proficiencyBonus={proficiencyBonus}
-        skillProficiencies={skillProficiencies}
-        setSkillProficiencies={setSkillProficiencies}
-        expertise={expertise}
-        setExpertise={setExpertise}
-        style={style}
-      />
-    </Paper>
+    <Grid container justify="center" spacing={2} direction="row">
+      <Grid item xs={3}>
+        <AbilityScoreComponent
+          scoreOnTop={scoreOnTop}
+          setScoreOnTop={setScoreOnTop}
+          strScore={strScore}
+          setStrScore={setStrScore}
+          dexScore={dexScore}
+          setDexScore={setDexScore}
+          conScore={conScore}
+          setConScore={setConScore}
+          intScore={intScore}
+          setIntScore={setIntScore}
+          wisScore={wisScore}
+          setWisScore={setWisScore}
+          chaScore={chaScore}
+          setChaScore={setChaScore}
+          style={style}
+        />
+      </Grid>
+      <Grid item xs={3}>
+        <SkillsComponent
+          abilityScores={abilityScores}
+          proficiencyBonus={proficiencyBonus}
+          skillProficiencies={skillProficiencies}
+          setSkillProficiencies={setSkillProficiencies}
+          expertise={expertise}
+          setExpertise={setExpertise}
+          style={style}
+        />
+      </Grid>
+    </Grid>
   );
 }
