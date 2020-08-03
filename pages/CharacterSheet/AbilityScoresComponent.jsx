@@ -6,13 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import BaseAbilityScoreComponent from './BaseAbilityScoreComponent';
 
 export const AbilityScoreComponent = ({
-  scoreOnTop, setScoreOnTop,
-  strScore, setStrScore,
-  dexScore, setDexScore,
-  conScore, setConScore,
-  intScore, setIntScore,
-  wisScore, setWisScore,
-  chaScore, setChaScore,
+  scoreOnTop,
+  setScoreOnTop,
+  abilityScores,
+  setAbilityScores,
   style,
 }) => (
   <Card elevation={style.elevation} style={{ width: 125, paddingBottom: 10 }}>
@@ -28,54 +25,16 @@ export const AbilityScoreComponent = ({
             )}
         />
       </Grid>
-      <Grid item>
-        <BaseAbilityScoreComponent
-          ability="Strength"
-          abilityScore={strScore}
-          setAbilityScore={setStrScore}
-          scoreOnTop={scoreOnTop}
-        />
-      </Grid>
-      <Grid item>
-        <BaseAbilityScoreComponent
-          ability="Dexterity"
-          abilityScore={dexScore}
-          setAbilityScore={setDexScore}
-          scoreOnTop={scoreOnTop}
-        />
-      </Grid>
-      <Grid item>
-        <BaseAbilityScoreComponent
-          ability="Constitution"
-          abilityScore={conScore}
-          setAbilityScore={setConScore}
-          scoreOnTop={scoreOnTop}
-        />
-      </Grid>
-      <Grid item>
-        <BaseAbilityScoreComponent
-          ability="Intellegence"
-          abilityScore={intScore}
-          setAbilityScore={setIntScore}
-          scoreOnTop={scoreOnTop}
-        />
-      </Grid>
-      <Grid item>
-        <BaseAbilityScoreComponent
-          ability="Wisdon"
-          abilityScore={wisScore}
-          setAbilityScore={setWisScore}
-          scoreOnTop={scoreOnTop}
-        />
-      </Grid>
-      <Grid item>
-        <BaseAbilityScoreComponent
-          ability="Charisma"
-          abilityScore={chaScore}
-          setAbilityScore={setChaScore}
-          scoreOnTop={scoreOnTop}
-        />
-      </Grid>
+      {Object.keys(abilityScores).map((ability) => (
+        <Grid item>
+          <BaseAbilityScoreComponent
+            ability={ability}
+            abilityScores={abilityScores}
+            setAbilityScores={setAbilityScores}
+            scoreOnTop={scoreOnTop}
+          />
+        </Grid>
+      ))}
     </Grid>
   </Card>
 );

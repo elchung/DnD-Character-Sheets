@@ -7,11 +7,14 @@ import Box from '@material-ui/core/Box';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
 
 export const BaseAbilityScoreComponent = ({
-  ability, abilityScore, setAbilityScore, scoreOnTop,
+  ability,
+  abilityScores,
+  setAbilityScores,
+  scoreOnTop,
 }) => {
-  const [displayedAbilityScore, setDisplayedAbilityScore] = React.useState(abilityScore);
-  const mainText = scoreOnTop ? displayedAbilityScore : scoreToModifier(abilityScore);
-  const subText = scoreOnTop ? scoreToModifier(abilityScore) : displayedAbilityScore;
+  const [displayedAbilityScore, setDisplayedAbilityScore] = React.useState(abilityScores[ability]);
+  const mainText = scoreOnTop ? displayedAbilityScore : scoreToModifier(abilityScores[ability]);
+  const subText = scoreOnTop ? scoreToModifier(abilityScores[ability]) : displayedAbilityScore;
 
   const handleChange = (event) => {
     const numberInput = event.target.value.replace(/[^0-9]/g, '');
@@ -20,7 +23,9 @@ export const BaseAbilityScoreComponent = ({
   };
 
   const handleBlur = () => {
-    setAbilityScore(displayedAbilityScore);
+    const newScores = { ...abilityScores };
+    newScores[ability] = displayedAbilityScore;
+    setAbilityScores(newScores);
   };
 
   return (
@@ -34,11 +39,15 @@ export const BaseAbilityScoreComponent = ({
             id={`${ability}-ability-maintext`}
             value={mainText}
             onChange={handleChange}
+            onBlur={handleBlur}
             disabled={!scoreOnTop}
             variant="outlined"
             inputProps={{
               style: {
-                fontSize: 30, width: 30, height: 20, textAlign: 'center',
+                fontSize: 30,
+                width: 35,
+                height: 20,
+                textAlign: 'center',
               },
             }}
           />
@@ -48,11 +57,18 @@ export const BaseAbilityScoreComponent = ({
             id={`${ability}-ability-subtext`}
             value={subText}
             onChange={handleChange}
+            onBlur={handleBlur}
             disabled={scoreOnTop}
             variant="outlined"
             inputProps={{
               style: {
-                fontSize: 15, width: 15, height: 0, textAlign: 'center', marginLeft: -5, marginRight: -5, background: 'white',
+                fontSize: 15,
+                width: 15,
+                height: 0,
+                textAlign: 'center',
+                marginLeft: -5,
+                marginRight: -5,
+                background: 'white',
               },
             }}
           />

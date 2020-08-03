@@ -27,26 +27,16 @@ export default function Home() {
 
   return (
     <Grid container justify="center" spacing={2} direction="row">
-      <Grid item xs={3}>
+      <Grid item>
         <AbilityScoreComponent
           scoreOnTop={scoreOnTop}
           setScoreOnTop={setScoreOnTop}
-          strScore={strScore}
-          setStrScore={setStrScore}
-          dexScore={dexScore}
-          setDexScore={setDexScore}
-          conScore={conScore}
-          setConScore={setConScore}
-          intScore={intScore}
-          setIntScore={setIntScore}
-          wisScore={wisScore}
-          setWisScore={setWisScore}
-          chaScore={chaScore}
-          setChaScore={setChaScore}
+          abilityScores={abilityScores}
+          setAbilityScores={setAbilityScores}
           style={style}
         />
       </Grid>
-      <Grid item xs={3}>
+      <Grid item>
         <SkillsComponent
           abilityScores={abilityScores}
           proficiencyBonus={proficiencyBonus}
