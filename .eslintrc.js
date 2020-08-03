@@ -18,7 +18,5 @@ module.exports = {
     'react',
   ],
   rules: {
-    'linebreak-style': ['error', 'windows'],
-    'sort-imports'
   },
 };

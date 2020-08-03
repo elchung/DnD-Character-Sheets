@@ -1,7 +1,7 @@
 import React from 'react';
+import Paper from '@material-ui/core/Paper';
 import AbilityScoreComponent from './CharacterSheet/AbilityScoresComponent';
 import SkillsComponent from './CharacterSheet/SkillsComponent';
-import Paper from '@material-ui/core/Paper';
 
 export default function Home() {
   const [scoreOnTop, setScoreOnTop] = React.useState(false);
@@ -12,16 +12,17 @@ export default function Home() {
   const [wisScore, setWisScore] = React.useState(0);
   const [chaScore, setChaScore] = React.useState(0);
   const [abilityScores, setAbilityScores] = React.useState({
-    'strength': 0,
-    'dexterity': 0,
-    'constitution': 0,
-    'intelligence': 0,
-    'wisdom': 0,
-    'charisma': 0
-  })
-  const style = { elevation: 3 }
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0,
+  });
+  const style = { elevation: 3 };
   const [proficiencyBonus, setProficiencyBonus] = React.useState(2);
-  const [skillProficiencies, setSkillProficiencies] = React.useState({});
+  const [skillProficiencies, setSkillProficiencies] = React.useState(new Set());
+  const [expertise, setExpertise] = React.useState(new Set());
 
   return (
     <Paper>
@@ -47,6 +48,8 @@ export default function Home() {
         proficiencyBonus={proficiencyBonus}
         skillProficiencies={skillProficiencies}
         setSkillProficiencies={setSkillProficiencies}
+        expertise={expertise}
+        setExpertise={setExpertise}
         style={style}
       />
     </Paper>
