@@ -8,9 +8,19 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-import { scoreToModifier } from '../Utils/abilityScoreUtils';
-import CurveText from "./CurveText";
 import PropTypes from 'prop-types';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { scoreToModifier } from '../Utils/abilityScoreUtils';
+
+const theme = createMuiTheme({
+  typography: {
+    subtitle1: {
+      fontSize: 12,
+      color: "gray",
+      marginLeft: 12,
+    },
+  },
+});
 
 export const SkillsComponent = ({
   abilityScores,
@@ -69,12 +79,14 @@ export const SkillsComponent = ({
   );
 
   return (
-    <Card elevation={style.elevation} style={{ width: 250, paddingBottom: 10, paddingTop: 10 }}>
+    <Card elevation={style.elevation} style={style.skillComponent}>
       <Typography align="center" color="textSecondary">Skills</Typography>
-      <CurveText text="Prof" arc={120} radius={400} />
+      <ThemeProvider theme={theme}>
+        <Typography variant="subtitle1">Prof.  Exp.</Typography>
+      </ThemeProvider>
       <List disablePadding dense>
         {Object.keys(skills).map((skill) => (
-          <ListItem key={skill} style={{ marginBottom: -5, paddingBottom: 0, paddingTop: 0 }}>
+          <ListItem key={skill} style={style.skillComponentListItem}>
             <Checkbox
               icon={<RadioButtonUncheckedIcon fontSize="medium" />}
               checkedIcon={<RadioButtonCheckedIcon fontSize="medium" />}
@@ -115,12 +127,12 @@ export const SkillsComponent = ({
   );
 };
 
-CurveText.propTypes = {
+SkillsComponent.propTypes = {
   abilityScores: PropTypes.objectOf(PropTypes.object).isRequired,
   proficiencyBonus: PropTypes.number.isRequired,
   skillProficiencies: PropTypes.instanceOf(Set).isRequired,
   setSkillProficiencies: PropTypes.func.isRequired,
-  expertise: PropTypes.instanceOf(Set),
+  expertise: PropTypes.instanceOf(Set).isRequired,
   setExpertise: PropTypes.func.isRequired,
   style: PropTypes.objectOf(PropTypes.object).isRequired,
 };
