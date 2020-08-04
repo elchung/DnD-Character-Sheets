@@ -1,8 +1,8 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 import BaseAbilityScoreComponent from './BaseAbilityScoreComponent';
 
 export const AbilityScoreComponent = ({
@@ -38,5 +38,13 @@ export const AbilityScoreComponent = ({
     </Grid>
   </Card>
 );
+
+AbilityScoreComponent.propTypes = {
+  scoreOnTop: PropTypes.bool.isRequired,
+  setScoreOnTop: PropTypes.func.isRequired,
+  abilityScores: PropTypes.objectOf(PropTypes.object).isRequired,
+  setAbilityScores: PropTypes.func.isRequired,
+  style: PropTypes.objectOf(PropTypes.object).isRequired,
+};
 
 export default AbilityScoreComponent;

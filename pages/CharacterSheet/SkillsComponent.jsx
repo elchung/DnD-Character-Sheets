@@ -5,14 +5,12 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { omit } from 'lodash/omit';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
+import CurveText from "./CurveText";
+import PropTypes from 'prop-types';
 
 export const SkillsComponent = ({
   abilityScores,
@@ -72,12 +70,9 @@ export const SkillsComponent = ({
 
   return (
     <Card elevation={style.elevation} style={{ width: 250, paddingBottom: 10, paddingTop: 10 }}>
-      <List
-        disablePadding
-        dense
-      >
-        <ListSubheader>Skills</ListSubheader>
-        <ListSubheader>Prof. Exp.</ListSubheader>
+      <Typography align="center" color="textSecondary">Skills</Typography>
+      <CurveText text="Prof" arc={120} radius={400} />
+      <List disablePadding dense>
         {Object.keys(skills).map((skill) => (
           <ListItem key={skill} style={{ marginBottom: -5, paddingBottom: 0, paddingTop: 0 }}>
             <Checkbox
@@ -118,6 +113,16 @@ export const SkillsComponent = ({
       </List>
     </Card>
   );
+};
+
+CurveText.propTypes = {
+  abilityScores: PropTypes.objectOf(PropTypes.object).isRequired,
+  proficiencyBonus: PropTypes.number.isRequired,
+  skillProficiencies: PropTypes.instanceOf(Set).isRequired,
+  setSkillProficiencies: PropTypes.func.isRequired,
+  expertise: PropTypes.instanceOf(Set),
+  setExpertise: PropTypes.func.isRequired,
+  style: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default SkillsComponent;

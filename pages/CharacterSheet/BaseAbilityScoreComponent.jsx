@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
 
 export const BaseAbilityScoreComponent = ({
@@ -76,6 +77,13 @@ export const BaseAbilityScoreComponent = ({
       </CardContent>
     </Card>
   );
+};
+
+BaseAbilityScoreComponent.propTypes = {
+  ability: PropTypes.string.isRequired,
+  abilityScores: PropTypes.objectOf(PropTypes.object).isRequired,
+  setAbilityScores: PropTypes.func.isRequired,
+  scoreOnTop: PropTypes.bool.isRequired,
 };
 
 export default BaseAbilityScoreComponent;
