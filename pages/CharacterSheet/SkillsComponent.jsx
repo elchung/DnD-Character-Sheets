@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { omit } from 'lodash/omit';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
@@ -71,32 +72,28 @@ export const SkillsComponent = ({
 
   return (
     <Card elevation={style.elevation} style={{ width: 250, paddingBottom: 10, paddingTop: 10 }}>
-      <List disablePadding dense>
-        <ListItem align="flex-start">
-          <Typography variant="button">
-            Skills
-          </Typography>
-        </ListItem>
+      <List
+        disablePadding
+        dense
+      >
+        <ListSubheader>Skills</ListSubheader>
+        <ListSubheader>Prof. Exp.</ListSubheader>
         {Object.keys(skills).map((skill) => (
-          <ListItem key={skill} style={{ marginBottom: 0, paddingBottom: 0, paddingTop: 0 }}>
-            <ListItemIcon>
-              <Checkbox
-                icon={<RadioButtonUncheckedIcon fontSize="small" />}
-                checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
-                size="small"
-                onChange={handleProficiencyCheckboxClick}
-                color="primary"
-                edge="start"
-              />
-              <Checkbox
-                icon={<RadioButtonUncheckedIcon fontSize="small" />}
-                checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
-                size="small"
-                onChange={handleExpertiseCheckboxClick}
-                color="primary"
-                edge="start"
-              />
-            </ListItemIcon>
+          <ListItem key={skill} style={{ marginBottom: -5, paddingBottom: 0, paddingTop: 0 }}>
+            <Checkbox
+              icon={<RadioButtonUncheckedIcon fontSize="medium" />}
+              checkedIcon={<RadioButtonCheckedIcon fontSize="medium" />}
+              onChange={handleProficiencyCheckboxClick}
+              color="primary"
+              edge="start"
+            />
+            <Checkbox
+              icon={<RadioButtonUncheckedIcon fontSize="small" />}
+              checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
+              onChange={handleExpertiseCheckboxClick}
+              color="primary"
+              edge="start"
+            />
             <TextField
               id={`${skill}-textfield`}
               value={getSkillVal(skill)}
@@ -105,7 +102,7 @@ export const SkillsComponent = ({
                 style: {
                   fontSize: 15,
                   width: 25,
-                  height: 0,
+                  height: 3,
                   textAlign: 'center',
                   marginLeft: -5,
                   marginRight: 0,
@@ -124,15 +121,3 @@ export const SkillsComponent = ({
 };
 
 export default SkillsComponent;
-
-// props = {
-//   "abilities": {
-//     strength: #,
-//     dexterity: #,
-//     constitution: #,
-//     intelligence: #,
-//     wisdom: #,
-//     charisma: #,
-//   }
-//   "proficiency" = #
-// }
