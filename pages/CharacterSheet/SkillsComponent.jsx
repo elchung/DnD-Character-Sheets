@@ -9,9 +9,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { omit } from 'lodash/omit';
-import { scoreToModifier } from '../Utils/abilityScoreUtils';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import { scoreToModifier } from '../Utils/abilityScoreUtils';
 
 export const SkillsComponent = ({
   abilityScores,
@@ -45,7 +45,7 @@ export const SkillsComponent = ({
 
   const handleProficiencyCheckboxClick = (event) => {
     if (skillProficiencies.has(event.target.name)) {
-      let newSkills = new Set([...skillProficiencies]);
+      const newSkills = new Set([...skillProficiencies]);
       newSkills.delete(event.target.name);
       setSkillProficiencies(newSkills);
     } else {
@@ -53,29 +53,48 @@ export const SkillsComponent = ({
     }
   };
 
-  const getSkillVal = (skill) => {
-    return (
-      scoreToModifier(abilityScores[skills[skill]]) +
-      (skillProficiencies.has(skill) ? proficiencyBonus : 0) +
-      (expertise.has(skill) ? proficiencyBonus : 0)
-    )
-  }
+  const handleExpertiseCheckboxClick = (event) => {
+    if (expertise.has(event.target.name)) {
+      const newExpertise = new Set([...expertise]);
+      newExpertise.delete(event.target.name);
+      setExpertise(newExpertise);
+    } else {
+      setExpertise(new Set([...expertise, event.target.name]));
+    }
+  };
 
-  return ( // map thorugh skill keys
-    <Card elevation={style.elevation} style={{ width: 250, paddingBottom: 10 }}>
-      <Typography color="textSecondary" gutterBottom variant="caption">
-        Skills
-      </Typography>
+  const getSkillVal = (skill) => (
+    scoreToModifier(abilityScores[skills[skill]])
+      + (skillProficiencies.has(skill) ? proficiencyBonus : 0)
+      + (expertise.has(skill) ? proficiencyBonus : 0)
+  );
+
+  return (
+    <Card elevation={style.elevation} style={{ width: 250, paddingBottom: 10, paddingTop: 10 }}>
       <List disablePadding dense>
+        <ListItem align="flex-start">
+          <Typography variant="button">
+            Skills
+          </Typography>
+        </ListItem>
         {Object.keys(skills).map((skill) => (
-          <ListItem key={skill} role={undefined} dense>
+          <ListItem key={skill} style={{ marginBottom: 0, paddingBottom: 0, paddingTop: 0 }}>
             <ListItemIcon>
               <Checkbox
                 icon={<RadioButtonUncheckedIcon fontSize="small" />}
                 checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
-                name="checkedH"
                 size="small"
                 onChange={handleProficiencyCheckboxClick}
+                color="primary"
+                edge="start"
+              />
+              <Checkbox
+                icon={<RadioButtonUncheckedIcon fontSize="small" />}
+                checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
+                size="small"
+                onChange={handleExpertiseCheckboxClick}
+                color="primary"
+                edge="start"
               />
             </ListItemIcon>
             <TextField
@@ -88,11 +107,15 @@ export const SkillsComponent = ({
                   width: 25,
                   height: 0,
                   textAlign: 'center',
-                  marginLeft: -20,
+                  marginLeft: -5,
+                  marginRight: 0,
                 },
               }}
             />
-            <ListItemText id={`${skill}-text`} primary={skill} />
+            <ListItemText
+              id={`${skill}-text`}
+              primary={skill}
+            />
           </ListItem>
         ))}
       </List>

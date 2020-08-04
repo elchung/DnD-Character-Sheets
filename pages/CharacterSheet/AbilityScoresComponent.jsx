@@ -12,29 +12,29 @@ export const AbilityScoreComponent = ({
   setAbilityScores,
   style,
 }) => (
-  <Card elevation={style.elevation} style={{ width: 125, paddingBottom: 10 }}>
-    <Grid container spacing={1} direction="column" justify="center" alignItems="center" wrap="nowrap">
+  <Card elevation={style.elevation} style={{ width: 125, paddingBottom: 20 }}>
+    <Grid container direction="column" justify="center" alignItems="flex-end" wrap="nowrap">
       <Grid item>
-        <FormControlLabel
-          control={(
-            <Switch
-              size="small"
-              checked={!scoreOnTop}
-              onChange={() => setScoreOnTop((state) => !state)}
-            />
-            )}
+        <Switch
+          size="small"
+          checked={!scoreOnTop}
+          onChange={() => setScoreOnTop((state) => !state)}
+          color="primary"
+
         />
       </Grid>
-      {Object.keys(abilityScores).map((ability) => (
-        <Grid item>
-          <BaseAbilityScoreComponent
-            ability={ability}
-            abilityScores={abilityScores}
-            setAbilityScores={setAbilityScores}
-            scoreOnTop={scoreOnTop}
-          />
-        </Grid>
-      ))}
+      <Grid container spacing={3} direction="column" justify="center" alignItems="center" wrap="nowrap">
+        {Object.keys(abilityScores).map((ability) => (
+          <Grid item>
+            <BaseAbilityScoreComponent
+              ability={ability}
+              abilityScores={abilityScores}
+              setAbilityScores={setAbilityScores}
+              scoreOnTop={scoreOnTop}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </Grid>
   </Card>
 );

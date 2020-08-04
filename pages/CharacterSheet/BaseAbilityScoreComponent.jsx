@@ -32,7 +32,7 @@ export const BaseAbilityScoreComponent = ({
     <Card elevation={5} variant="outlined" style={{ width: 100, height: 115 }}>
       <CardContent style={{ paddingTop: 3 }}>
         <Typography align="center" noWrap color="textSecondary" gutterBottom variant="caption">
-          {`${ability}`}
+          {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
         </Typography>
         <div>
           <TextField
@@ -45,7 +45,7 @@ export const BaseAbilityScoreComponent = ({
             inputProps={{
               style: {
                 fontSize: 30,
-                width: 35,
+                width: 30,
                 height: 20,
                 textAlign: 'center',
               },
@@ -63,7 +63,7 @@ export const BaseAbilityScoreComponent = ({
             inputProps={{
               style: {
                 fontSize: 15,
-                width: 15,
+                width: 18,
                 height: 0,
                 textAlign: 'center',
                 marginLeft: -5,
