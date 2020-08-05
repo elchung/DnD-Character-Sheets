@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import BaseAbilityScoreComponent from './BaseAbilityScoreComponent';
 
-export const AbilityScoreComponent = ({
+const AbilityScoreComponent = ({
   scoreOnTop,
   setScoreOnTop,
   abilityScores,
@@ -23,7 +23,7 @@ export const AbilityScoreComponent = ({
 
         />
       </Grid>
-      <Grid container spacing={4} direction="column" justify="center" alignItems="center" wrap="nowrap">
+      <Grid container spacing={2} direction="column" justify="center" alignItems="center" wrap="nowrap">
         {Object.keys(abilityScores).map((ability) => (
           <Grid item>
             <BaseAbilityScoreComponent

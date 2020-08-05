@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
+import Badge from '@material-ui/core/Badge';
 
 export const BaseAbilityScoreComponent = ({
   ability,
@@ -30,51 +31,54 @@ export const BaseAbilityScoreComponent = ({
   };
 
   return (
-    <Card variant="outlined" style={{ width: 100, height: 115 }}>
-      <CardContent style={{ paddingTop: 3 }}>
-        <Typography align="center" noWrap gutterBottom variant="caption">
-          {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
-        </Typography>
-        <div>
+    <Card elevation={0} style={{ width: 100, height: 130 }}>
+      <Card elevation={3} variant='outlined'>
+        <CardContent style={{ paddingTop: 3 }}>
+          <Typography align="center" noWrap gutterBottom variant="caption">
+            {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
+          </Typography>
           <TextField
             id={`${ability}-ability-maintext`}
             value={mainText}
             onChange={handleChange}
             onBlur={handleBlur}
             disabled={!scoreOnTop}
-            variant="outlined"
+            underlineShow={false}
             inputProps={{
               style: {
-                fontSize: 30,
-                width: 30,
-                height: 20,
+                fontSize: 35,
                 textAlign: 'center',
               },
             }}
           />
-        </div>
-        <Box p={2} position="relative" bottom={30} left={25} zIndex="tooltip">
-          <TextField
-            id={`${ability}-ability-subtext`}
-            value={subText}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            disabled={scoreOnTop}
-            variant="outlined"
-            inputProps={{
-              style: {
-                fontSize: 15,
-                width: 18,
-                height: 0,
-                textAlign: 'center',
-                marginLeft: -5,
-                marginRight: -5,
-                background: 'white',
-              },
-            }}
-          />
-        </Box>
-      </CardContent>
+        </CardContent>
+      </Card>
+      <Box
+        p={2}
+        position="relative"
+        bottom={40}
+        left={13}
+        zIndex="tooltip"
+        style={{ width: 5, height: 5 }}
+      >
+        <TextField
+          id={`${ability}-ability-subtext`}
+          value={subText}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          disabled={scoreOnTop}
+          variant="outlined"
+          inputProps={{
+            style: {
+              fontSize: 15,
+              width: 15,
+              height: 5,
+              textAlign: 'center',
+              background: 'white',
+            },
+          }}
+        />
+      </Box>
     </Card>
   );
 };

@@ -9,8 +9,8 @@ import InspirationComponent from './CharacterSheet/InspirationComponent';
 const style = {
   elevation: 3,
   headerStyle: { marginTop: -2, marginBottom: -2 },
-  skillComponent: { width: 250, paddingBottom: 10, paddingTop: 10 },
-  savingThrowComponent: { width: 250, paddingBottom: 10, paddingTop: 10 },
+  skillComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
+  savingThrowComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
   proficiencyComponent: { width: 250 },
   inspirationComponent: { width: 250 },
   skillComponentListItem: {

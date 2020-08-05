@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import CardActions from '@material-ui/core/CardActions';
 
-export const ProficiencyBonusComponent = ({
+const ProficiencyBonusComponent = ({
   proficiencyBonus,
   setProficiencyBonus,
   style,

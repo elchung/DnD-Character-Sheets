@@ -27,7 +27,7 @@ const theme = createMuiTheme({
   },
 });
 
-export const SkillsComponent = ({
+const SkillsComponent = ({
   abilityScores,
   proficiencyBonus,
   savingThrowProficiencies,

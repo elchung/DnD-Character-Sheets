@@ -22,7 +22,28 @@ const theme = createMuiTheme({
   },
 });
 
-export const SkillsComponent = ({
+const skills = {
+  'Acrobatics (Dex)': 'dexterity',
+  'Animal Handling (Wis)': 'wisdom',
+  'Arcana (Int)': 'intelligence',
+  'Athletics (Str)': 'strength',
+  'Deception (Cha)': 'charisma',
+  'History (Int)': 'intelligence',
+  'Insight (Wis)': 'wisdom',
+  'Intimidation (Cha)': 'charisma',
+  'Investigation (Int)': 'intelligence',
+  'Medicine (Wis)': 'wisdom',
+  'Nature (Int)': 'intelligence',
+  'Perception (Wis)': 'wisdom',
+  'Performance (Cha)': 'charisma',
+  'Persuasion (Cha)': 'charisma',
+  'Religion (Cha)': 'charisma',
+  'Sleight of Hand (Dex)': 'dexterity',
+  'Stealth (Dex)': 'dexterity',
+  'Survival (Wis)': 'wisdom',
+};
+
+const SkillsComponent = ({
   abilityScores,
   proficiencyBonus,
   skillProficiencies,
@@ -31,27 +52,6 @@ export const SkillsComponent = ({
   setExpertise,
   style,
 }) => {
-  const skills = {
-    'Acrobatics (Dex)': 'dexterity',
-    'Animal Handling (Wis)': 'wisdom',
-    'Arcana (Int)': 'intelligence',
-    'Athletics (Str)': 'strength',
-    'Deception (Cha)': 'charisma',
-    'History (Int)': 'intelligence',
-    'Insight (Wis)': 'wisdom',
-    'Intimidation (Cha)': 'charisma',
-    'Investigation (Int)': 'intelligence',
-    'Medicine (Wis)': 'wisdom',
-    'Nature (Int)': 'intelligence',
-    'Perception (Wis)': 'wisdom',
-    'Performance (Cha)': 'charisma',
-    'Persuasion (Cha)': 'charisma',
-    'Religion (Cha)': 'charisma',
-    'Sleight of Hand (Dex)': 'dexterity',
-    'Stealth (Dex)': 'dexterity',
-    'Survival (Wis)': 'wisdom',
-  };
-
   const handleProficiencyCheckboxClick = (event) => {
     if (skillProficiencies.has(event.target.name)) {
       const newSkills = new Set([...skillProficiencies]);
@@ -107,7 +107,7 @@ export const SkillsComponent = ({
               disabled
               inputProps={{
                 style: {
-                  fontSize: 15,
+                  fontSize: 17,
                   width: 25,
                   height: 3,
                   textAlign: 'center',
