@@ -3,11 +3,17 @@ import Grid from '@material-ui/core/Grid';
 import AbilityScoreComponent from './CharacterSheet/AbilityScoresComponent';
 import SkillsComponent from './CharacterSheet/SkillsComponent';
 import SavingThrowsComponent from './CharacterSheet/SavingThrowsComponent';
+import ProficiencyBonusComponent from "./CharacterSheet/ProficiencyBonusComponent";
 
 const style = {
   elevation: 3,
   skillComponent: { width: 250, paddingBottom: 10, paddingTop: 10 },
+  savingThrowComponent: { width: 250, paddingBottom: 10, paddingTop: 10 },
+  proficiencyComponent: { width: 250 },
   skillComponentListItem: {
+    marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
+  },
+  savingThrowComponentListItem: {
     marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
   },
 };
@@ -28,8 +34,8 @@ export default function Home() {
   const [expertise, setExpertise] = React.useState(new Set());
 
   return (
-    <Grid container spacing={2} direction="row" alignItems="flexStart">
-      <Grid item xs={7}>
+    <Grid container spacing={2} direction="row" style={{backgroundColor: 'red', width: "33%"}}>
+      <Grid item>
         <AbilityScoreComponent
           scoreOnTop={scoreOnTop}
           setScoreOnTop={setScoreOnTop}
@@ -38,7 +44,14 @@ export default function Home() {
           style={style}
         />
       </Grid>
-      <Grid container direction="column" spacing={2} xs={5}>
+      <Grid container direction="column" spacing={2}>
+        <Grid item>
+          <ProficiencyBonusComponent
+            proficiencyBonus={proficiencyBonus}
+            setProficiencyBonus={setProficiencyBonus}
+            style={style}
+          />
+        </Grid>
         <Grid item>
           <SavingThrowsComponent
             abilityScores={abilityScores}

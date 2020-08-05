@@ -54,11 +54,14 @@ export const SkillsComponent = ({
   );
 
   return (
-    <Card elevation={style.elevation} style={style.skillComponent}>
+    <Card elevation={style.elevation} style={style.savingThrowComponent}>
       <Typography align="center" color="textSecondary">Saving Throws</Typography>
+      <ThemeProvider theme={theme}>
+        <Typography variant="subtitle1">Prof.</Typography>
+      </ThemeProvider>
       <List disablePadding dense>
         {Object.keys(skills).map((skill) => (
-          <ListItem key={skill} style={style.skillComponentListItem}>
+          <ListItem key={skill} style={style.savingThrowComponentListItem}>
             <Checkbox
               icon={<RadioButtonUncheckedIcon fontSize="small" />}
               checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
