@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
 const CombatStatsComponent = ({
   armorClass,
@@ -22,29 +25,50 @@ const CombatStatsComponent = ({
 
 
   return (
-    <Card elevation={style.elevation} style={style.savingThrowComponent}>
-      <Paper variant="outlined">
-        <Typography align="center" color="textSecondary" style={style.headerStyle}>Armor Class</Typography>
-      </Paper>
-      <Paper variant="outlined">
-        <Typography align="center" color="textSecondary" style={style.headerStyle}>Initiative</Typography>
-      </Paper>
-      <Paper variant="outlined">
-        <Typography align="center" color="textSecondary" style={style.headerStyle}>Speed</Typography>
-      </Paper>
-      <Paper variant="outlined">
-        <Typography variant="subtitle1">Maximum Hit Points</Typography>
-        <Typography align="center" color="textSecondary" style={style.headerStyle}>Current Hit Points</Typography>
-      </Paper>
-      <Paper variant="outlined">
-        <Typography align="center" color="textSecondary" style={style.headerStyle}>Hit Dice</Typography>
-      </Paper>
-      <Paper variant="outlined">
-        <Typography align="center" color="textSecondary" style={style.headerStyle}>Death Saves</Typography>
-      </Paper>
-
-
-    </Card>
+    <Paper elevation={style.elevation} style={style.savingThrowComponent}>
+      <Grid container spacing={2} direction="column">
+        <Grid item>
+          <Grid container direction="row">
+            <Grid item>
+              <Paper variant="outlined">
+                <Typography align="center" color="textSecondary" style={style.headerStyle}>Armor Class</Typography>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper variant="outlined">
+                <Typography align="center" color="textSecondary" style={style.headerStyle}>Initiative</Typography>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper variant="outlined">
+                <Typography align="center" color="textSecondary" style={style.headerStyle}>Speed</Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Paper variant="outlined">
+            <Typography variant="subtitle1">Maximum Hit Points</Typography>
+            <Typography align="center" color="textSecondary" style={style.headerStyle}>Current Hit Points</Typography>
+            <Typography variant="subtitle1">Temp Hit Points</Typography>
+          </Paper>
+        </Grid>
+        <Grid item>
+          <Grid container>
+            <Grid item>
+              <Paper variant="outlined">
+                <Typography align="center" color="textSecondary" style={style.headerStyle}>Hit Dice</Typography>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper variant="outlined">
+                <Typography align="center" color="textSecondary" style={style.headerStyle}>Death Saves</Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 
