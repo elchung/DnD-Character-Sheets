@@ -18,5 +18,6 @@ module.exports = {
     'react',
   ],
   rules: {
+    'linebreak-style': ['error', (require('os').EOL === '\r\n' ? 'windows' : 'unix')],
   },
 };

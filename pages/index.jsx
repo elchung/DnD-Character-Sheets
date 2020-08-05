@@ -1,13 +1,15 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import AbilityScoreComponent from './CharacterSheet/AbilityScoresComponent';
 import SkillsComponent from './CharacterSheet/SkillsComponent';
 import SavingThrowsComponent from './CharacterSheet/SavingThrowsComponent';
-import Grid from '@material-ui/core/Grid';
 
 const style = {
   elevation: 3,
   skillComponent: { width: 250, paddingBottom: 10, paddingTop: 10 },
-  skillComponentListItem: { marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0 },
+  skillComponentListItem: {
+    marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
+  },
 };
 
 export default function Home() {
@@ -26,8 +28,8 @@ export default function Home() {
   const [expertise, setExpertise] = React.useState(new Set());
 
   return (
-    <Grid container justify="center" spacing={2} direction="row">
-      <Grid item>
+    <Grid container spacing={2} direction="row" alignItems="flexStart">
+      <Grid item xs={7}>
         <AbilityScoreComponent
           scoreOnTop={scoreOnTop}
           setScoreOnTop={setScoreOnTop}
@@ -36,7 +38,7 @@ export default function Home() {
           style={style}
         />
       </Grid>
-      <Grid container direction="column" spacing={2}>
+      <Grid container direction="column" spacing={2} xs={5}>
         <Grid item>
           <SavingThrowsComponent
             abilityScores={abilityScores}
