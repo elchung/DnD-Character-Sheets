@@ -23,7 +23,7 @@ export const AbilityScoreComponent = ({
 
         />
       </Grid>
-      <Grid container spacing={3} direction="column" justify="center" alignItems="center" wrap="nowrap">
+      <Grid container spacing={4} direction="column" justify="center" alignItems="center" wrap="nowrap">
         {Object.keys(abilityScores).map((ability) => (
           <Grid item>
             <BaseAbilityScoreComponent

@@ -16,8 +16,13 @@ const theme = createMuiTheme({
   typography: {
     subtitle1: {
       fontSize: 12,
-      color: "gray",
+      color: 'gray',
       marginLeft: 12,
+    },
+    header1: {
+      color: 'gray',
+      marginTop: 10,
+      marginBottom: 10,
     },
   },
 });
@@ -55,7 +60,7 @@ export const SkillsComponent = ({
 
   return (
     <Card elevation={style.elevation} style={style.savingThrowComponent}>
-      <Typography align="center" color="textSecondary">Saving Throws</Typography>
+      <Typography align="center" color="textSecondary" style={style.headerStyle}>Saving Throws</Typography>
       <ThemeProvider theme={theme}>
         <Typography variant="subtitle1">Prof.</Typography>
       </ThemeProvider>

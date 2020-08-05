@@ -16,7 +16,7 @@ const theme = createMuiTheme({
   typography: {
     subtitle1: {
       fontSize: 12,
-      color: "gray",
+      color: 'gray',
       marginLeft: 12,
     },
   },
@@ -80,7 +80,7 @@ export const SkillsComponent = ({
 
   return (
     <Card elevation={style.elevation} style={style.skillComponent}>
-      <Typography align="center" color="textSecondary">Skills</Typography>
+      <Typography align="center" color="textSecondary" style={style.headerStyle}>Skills</Typography>
       <ThemeProvider theme={theme}>
         <Typography variant="subtitle1">Prof.  Exp.</Typography>
       </ThemeProvider>

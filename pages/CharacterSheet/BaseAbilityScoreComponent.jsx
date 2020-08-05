@@ -30,9 +30,9 @@ export const BaseAbilityScoreComponent = ({
   };
 
   return (
-    <Card elevation={5} variant="outlined" style={{ width: 100, height: 115 }}>
+    <Card variant="outlined" style={{ width: 100, height: 115 }}>
       <CardContent style={{ paddingTop: 3 }}>
-        <Typography align="center" noWrap color="textSecondary" gutterBottom variant="caption">
+        <Typography align="center" noWrap gutterBottom variant="caption">
           {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
         </Typography>
         <div>
