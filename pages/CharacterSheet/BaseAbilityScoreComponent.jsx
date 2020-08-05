@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
-import Badge from '@material-ui/core/Badge';
 
 export const BaseAbilityScoreComponent = ({
   ability,
@@ -32,7 +31,7 @@ export const BaseAbilityScoreComponent = ({
 
   return (
     <Card elevation={0} style={{ width: 100, height: 130 }}>
-      <Card elevation={3} variant='outlined'>
+      <Card elevation={3} variant="outlined">
         <CardContent style={{ paddingTop: 3 }}>
           <Typography align="center" noWrap gutterBottom variant="caption">
             {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
@@ -43,7 +42,6 @@ export const BaseAbilityScoreComponent = ({
             onChange={handleChange}
             onBlur={handleBlur}
             disabled={!scoreOnTop}
-            underlineShow={false}
             inputProps={{
               style: {
                 fontSize: 35,
@@ -85,7 +83,7 @@ export const BaseAbilityScoreComponent = ({
 
 BaseAbilityScoreComponent.propTypes = {
   ability: PropTypes.string.isRequired,
-  abilityScores: PropTypes.objectOf(PropTypes.object).isRequired,
+  abilityScores: PropTypes.objectOf(PropTypes.number).isRequired,
   setAbilityScores: PropTypes.func.isRequired,
   scoreOnTop: PropTypes.bool.isRequired,
 };

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import SingleItemDisplayComponent from "./SingleItemDisplayComponent";
 
 const CombatStatsComponent = ({
   armorClass,
@@ -17,36 +18,29 @@ const CombatStatsComponent = ({
   setCurrentHP,
   hitDice, //{numDice: number, diceType: number}
   currentHitDice,  //{successes: number, failures: number}
-  setcurrentHitDice,
+  setCurrentHitDice,
   deathSaves,
   setDeathSaves,
   style,
 }) => {
 
-
   return (
-    <Paper elevation={style.elevation} style={style.savingThrowComponent}>
+    <Paper elevation={style.elevation} style={style.combatStateComponent}>
       <Grid container spacing={2} direction="column">
         <Grid item>
-          <Grid container direction="row">
+          <Grid container direction="row" spacing={2} justify="space-evenly" alignItems="center">
             <Grid item>
-              <Paper variant="outlined">
-                <Typography align="center" color="textSecondary" style={style.headerStyle}>Armor Class</Typography>
-              </Paper>
+              <SingleItemDisplayComponent header="Armor Class" value={armorClass} updateValue={setArmorClass} style={style} />
             </Grid>
             <Grid item>
-              <Paper variant="outlined">
-                <Typography align="center" color="textSecondary" style={style.headerStyle}>Initiative</Typography>
-              </Paper>
+              <SingleItemDisplayComponent header="Initiative" value={initiative} updateValue={setInitiative} style={style} />
             </Grid>
             <Grid item>
-              <Paper variant="outlined">
-                <Typography align="center" color="textSecondary" style={style.headerStyle}>Speed</Typography>
-              </Paper>
+              <SingleItemDisplayComponent header="Speed" value={speed} updateValue={setSpeed} style={style} />
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
+        <Grid item alignItems="center" justify="center" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
           <Paper variant="outlined">
             <Typography variant="subtitle1">Maximum Hit Points</Typography>
             <Typography align="center" color="textSecondary" style={style.headerStyle}>Current Hit Points</Typography>
@@ -54,7 +48,7 @@ const CombatStatsComponent = ({
           </Paper>
         </Grid>
         <Grid item>
-          <Grid container>
+          <Grid container direction="row" spacing={2} justify="center" alignItems="center">
             <Grid item>
               <Paper variant="outlined">
                 <Typography align="center" color="textSecondary" style={style.headerStyle}>Hit Dice</Typography>

@@ -12,7 +12,7 @@ const AbilityScoreComponent = ({
   setAbilityScores,
   style,
 }) => (
-  <Card elevation={style.elevation} style={{ width: 125, paddingBottom: 20 }}>
+  <Card elevation={style.elevation} style={style.abilityScoreComponent}>
     <Grid container direction="column" justify="center" alignItems="flex-end" wrap="nowrap">
       <Grid item>
         <Switch
