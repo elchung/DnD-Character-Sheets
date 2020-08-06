@@ -1,20 +1,20 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import InputBase from '@material-ui/core/InputBase';
 
 const SingleItemDisplayComponent = ({
   header,
   value,
   updateValue,
-  style,
 }) => {
   const [displayText, setDisplayText] = React.useState(value);
+
   return (
-    <Paper variant="outlined" style={{ width: 100, height: 130 }}>
-      <Typography align="center" color="textSecondary" style={style.headerStyle}>{header}</Typography>
-      <TextField
+    <Paper variant="outlined" style={{ width: 100, height: 110 }}>
+      <Typography align="center" color="textSecondary" style={{ paddingTop: 7 }}>{header}</Typography>
+      <InputBase
         value={displayText}
         onChange={(event) => setDisplayText(event.target.value)}
         onBlur={() => updateValue(displayText)}
@@ -22,7 +22,11 @@ const SingleItemDisplayComponent = ({
           style: {
             fontSize: 35,
             textAlign: 'center',
+            color: 'gray',
+            paddingTop: 15,
           },
+          disableUnderline: true,
+          'aria-label': 'naked',
         }}
       />
     </Paper>

@@ -44,13 +44,13 @@ export default function Home() {
   const [speed, setSpeed] = React.useState(0);
   const [maxHP, setMaxHP] = React.useState(0);
   const [currentHP, setCurrentHP] = React.useState(0);
-  const [hitDice, setHitDice] = React.useState({numDice: 0, diceType: 0});
-  const [currentHitDice, setCurrentHitDice] = React.useState(0)
-  const [deathSaves, setDeathSaves] = React.useState({successes: 0, failures: 0})
+  const [hitDice, setHitDice] = React.useState({ numDice: 0, diceType: 0 });
+  const [currentHitDice, setCurrentHitDice] = React.useState(0);
+  const [deathSaves, setDeathSaves] = React.useState({ successes: 0, failures: 0 });
 
   return (
     <Grid container spacing={2} direction="row">
-      <Grid item >
+      <Grid item>
         <Grid container spacing={2}>
           <Grid item>
             <AbilityScoreComponent

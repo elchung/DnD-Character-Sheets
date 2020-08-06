@@ -3,70 +3,75 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import SingleItemDisplayComponent from "./SingleItemDisplayComponent";
+import SingleItemDisplayComponent from './SingleItemDisplayComponent';
+import HitPointComponent from './HitPointComponent';
 
 const CombatStatsComponent = ({
   armorClass,
-  setArmorClass, //see setter for initiative
+  setArmorClass, // see setter for initiative
   initiative,
-  setInitiative, //may just want to disable initiative and set it via calculation
+  setInitiative, // may just want to disable initiative and set it via calculation
   speed,
-  setSpeed, //see setter for initiative
-  maxHP, //might also consider passing in character level here?
+  setSpeed, // see setter for initiative
+  maxHP, // might also consider passing in character level here?
   setMaxHP,
-  currentHP, //can combine hp stats to one
+  currentHP, // can combine hp stats to one
   setCurrentHP,
-  hitDice, //{numDice: number, diceType: number}
-  currentHitDice,  //{successes: number, failures: number}
+  tempHP,
+  setTempHP,
+  hitDice, // {numDice: number, diceType: number}
+  currentHitDice, // {successes: number, failures: number}
   setCurrentHitDice,
   deathSaves,
   setDeathSaves,
   style,
-}) => {
-
-  return (
-    <Paper elevation={style.elevation} style={style.combatStateComponent}>
-      <Grid container spacing={2} direction="column">
-        <Grid item>
-          <Grid container direction="row" spacing={2} justify="space-evenly" alignItems="center">
-            <Grid item>
-              <SingleItemDisplayComponent header="Armor Class" value={armorClass} updateValue={setArmorClass} style={style} />
-            </Grid>
-            <Grid item>
-              <SingleItemDisplayComponent header="Initiative" value={initiative} updateValue={setInitiative} style={style} />
-            </Grid>
-            <Grid item>
-              <SingleItemDisplayComponent header="Speed" value={speed} updateValue={setSpeed} style={style} />
-            </Grid>
+}) => (
+  <Paper elevation={style.elevation} style={style.combatStateComponent}>
+    <Grid container spacing={2} direction="column">
+      <Grid item>
+        <Grid container direction="row" spacing={2} justify="space-evenly" alignItems="center">
+          <Grid item>
+            <SingleItemDisplayComponent header="Armor Class" value={armorClass} updateValue={setArmorClass} />
           </Grid>
-        </Grid>
-        <Grid item alignItems="center" justify="center" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
-          <Paper variant="outlined">
-            <Typography variant="subtitle1">Maximum Hit Points</Typography>
-            <Typography align="center" color="textSecondary" style={style.headerStyle}>Current Hit Points</Typography>
-            <Typography variant="subtitle1">Temp Hit Points</Typography>
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Grid container direction="row" spacing={2} justify="center" alignItems="center">
-            <Grid item>
-              <Paper variant="outlined">
-                <Typography align="center" color="textSecondary" style={style.headerStyle}>Hit Dice</Typography>
-              </Paper>
-            </Grid>
-            <Grid item>
-              <Paper variant="outlined">
-                <Typography align="center" color="textSecondary" style={style.headerStyle}>Death Saves</Typography>
-              </Paper>
-            </Grid>
+          <Grid item>
+            <SingleItemDisplayComponent header="Initiative" value={initiative} updateValue={setInitiative} />
+          </Grid>
+          <Grid item>
+            <SingleItemDisplayComponent header="Speed" value={speed} updateValue={setSpeed} />
           </Grid>
         </Grid>
       </Grid>
-    </Paper>
-  );
-};
+      <Grid item alignItems="center" justify="center" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
+        <HitPointComponent
+          maxHP={maxHP}
+          setMaxHP={setMaxHP}
+          currentHP={currentHP}
+          setCurrentHP={setCurrentHP}
+          tempHP={tempHP}
+          setTempHP={setTempHP}
+          style={style}
+        />
+      </Grid>
+      <Grid item>
+        <Grid container direction="row" spacing={2} justify="center" alignItems="center">
+          <Grid item>
+            <Paper variant="outlined">
+              <Typography align="center" color="textSecondary" style={style.headerStyle}>Hit Dice</Typography>
+            </Paper>
+          </Grid>
+          <Grid item>
+            <Paper variant="outlined">
+              <Typography align="center" color="textSecondary" style={style.headerStyle}>Death Saves</Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  </Paper>
+);
 
 CombatStatsComponent.propTypes = {
+  armorClass: PropTypes.number.isRequired,
   setArmorClass: PropTypes.func.isRequired,
   initiative: PropTypes.number.isRequired,
   setInitiative: PropTypes.func.isRequired,
@@ -76,9 +81,11 @@ CombatStatsComponent.propTypes = {
   setMaxHP: PropTypes.func.isRequired,
   currentHP: PropTypes.number.isRequired,
   setCurrentHP: PropTypes.func.isRequired,
+  tempHP: PropTypes.number.isRequired,
+  setTempHP: PropTypes.func.isRequired,
   hitDice: PropTypes.number.isRequired,
   currentHitDice: PropTypes.objectOf(PropTypes.object).isRequired,
-  setcurrentHitDice: PropTypes.func.isRequired,
+  setCurrentHitDice: PropTypes.func.isRequired,
   deathSaves: PropTypes.objectOf(PropTypes.object).isRequired,
   setDeathSaves: PropTypes.func.isRequired,
   style: PropTypes.objectOf(PropTypes.object).isRequired,
