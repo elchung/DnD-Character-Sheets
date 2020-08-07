@@ -11,7 +11,7 @@ import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import PropTypes from 'prop-types';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
-import { useStore } from '../Context/store';
+import { useStore } from '../Context/CharacterContext';
 
 const theme = createMuiTheme({
   typography: {

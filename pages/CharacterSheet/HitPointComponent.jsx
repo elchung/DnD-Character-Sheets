@@ -7,20 +7,20 @@ import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { useStore } from '../Context/store';
+import {
+  useCharacterState,
+  useSetCharacterState,
+} from '../Context/CharacterContext';
 
 const HitPointComponent = ({
-  maxHP,
-  setMaxHP,
-  currentHP,
-  setCurrentHP,
-  tempHP,
-  setTempHP,
   style,
 }) => {
-  const [displayMaxHP, setDisplayMaxHP] = React.useState(maxHP);
-  const [displayCurrentHP, setDisplayCurrentHP] = React.useState(currentHP);
-  const [displayTempHP, setDisplayTempHP] = React.useState(tempHP);
+  const characterState = useCharacterState();
+  const setCharacterState = useSetCharacterState();
+
+  const [displayMaxHP, setDisplayMaxHP] = React.useState(characterState.maxHP);
+  const [displayCurrentHP, setDisplayCurrentHP] = React.useState(characterState.currentHP);
+  const [displayTempHP, setDisplayTempHP] = React.useState(characterState.tempHP);
 
   const handleClick = (event) => {
     console.log('need to add modal to input damage or heal damage');

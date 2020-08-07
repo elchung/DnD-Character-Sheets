@@ -4,23 +4,26 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import CardActions from '@material-ui/core/CardActions';
-import { useStore } from "../Context/store"
+import {
+  useCharacterState,
+  useSetCharacterState,
+} from '../Context/CharacterContext';
 
 const ProficiencyBonusComponent = ({
   style,
 }) => {
-  const [displayedProficiency, setDisplayedProficiency] = React.useState(proficiencyBonus);
+  const characterState = useCharacterState();
+  const setCharacterState = useSetCharacterState();
+  const [displayedProficiency, setDisplayedProficiency] = React.useState(characterState.proficiencyBonus);
 
   return (
-    const {state, dispatch} = useStore();
-
     <Card elevation={style.elevation} style={style.proficiencyComponent}>
       <CardActions>
         <TextField
           id="proficiency-bonus-textfield"
           value={displayedProficiency}
           onChange={(event) => setDisplayedProficiency(event.target.value)}
-          onBlur={() => setProficiencyBonus(displayedProficiency)}
+          onBlur={() => setCharacterState.setProficiencyBonus(displayedProficiency)}
           variant="outlined"
           inputProps={{
             style: {
