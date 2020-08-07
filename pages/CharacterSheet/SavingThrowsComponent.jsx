@@ -80,16 +80,7 @@ const SkillsComponent = () => {
               id={`${skill}-textfield`}
               value={getSkillVal(skills[skill])}
               disabled
-              inputProps={{
-                style: {
-                  fontSize: 15,
-                  width: 25,
-                  height: 3,
-                  textAlign: 'center',
-                  marginLeft: -5,
-                  marginRight: 0,
-                },
-              }}
+              inputProps={style.skillModifierInputProps}
             />
             <ListItemText
               id={`${skill}-text`}

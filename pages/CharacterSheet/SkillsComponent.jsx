@@ -86,7 +86,7 @@ const SkillsComponent = () => {
     <Card elevation={style.elevation} style={style.skillComponent}>
       <Typography align="center" color="textSecondary" style={style.headerStyle}>Skills</Typography>
       <ThemeProvider theme={theme}>
-        <Typography variant="subtitle1">Prof.  Exp.</Typography>
+        <Typography variant="subtitle1">Prof. Exp.</Typography>
       </ThemeProvider>
       <List disablePadding dense>
         {Object.keys(skills).map((skill) => (
@@ -102,6 +102,7 @@ const SkillsComponent = () => {
               icon={<RadioButtonUncheckedIcon fontSize="small" />}
               checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
               onChange={handleExpertiseCheckboxClick}
+              style={{marginLeft: -15}}
               color="primary"
               edge="start"
             />
@@ -109,16 +110,7 @@ const SkillsComponent = () => {
               id={`${skill}-textfield`}
               value={getSkillVal(skill)}
               disabled
-              inputProps={{
-                style: {
-                  fontSize: 17,
-                  width: 25,
-                  height: 3,
-                  textAlign: 'center',
-                  marginLeft: -5,
-                  marginRight: 0,
-                },
-              }}
+              inputProps={style.skillModifierInputProps}
             />
             <ListItemText
               id={`${skill}-text`}

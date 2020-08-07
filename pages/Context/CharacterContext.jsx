@@ -59,6 +59,16 @@ export const CharacterContextProvider = (props) => {
       marginRight: 0,
       paddingTop: 4,
     },
+    skillModifierInputProps: {
+      style: {
+        fontSize: 17,
+        width: 25,
+        height: 3,
+        textAlign: 'center',
+        marginLeft: -5,
+        marginRight: 2,
+      },
+    },
   };
 
   const characterState = {
