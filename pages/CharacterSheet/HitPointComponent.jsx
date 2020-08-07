@@ -7,6 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import { useStore } from '../Context/store';
 
 const HitPointComponent = ({
   maxHP,

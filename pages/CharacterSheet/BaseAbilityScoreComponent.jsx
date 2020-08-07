@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
+import { useStore } from '../Context/store';
 
 export const BaseAbilityScoreComponent = ({
   ability,

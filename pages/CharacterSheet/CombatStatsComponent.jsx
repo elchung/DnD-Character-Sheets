@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import SingleItemDisplayComponent from './SingleItemDisplayComponent';
 import HitPointComponent from './HitPointComponent';
+import { useStore } from '../Context/store';
 
 const CombatStatsComponent = ({
   armorClass,
@@ -31,7 +32,7 @@ const CombatStatsComponent = ({
       <Grid item>
         <Grid container direction="row" spacing={2} justify="space-evenly" alignItems="center">
           <Grid item>
-            <SingleItemDisplayComponent header="Armor Class" value={armorClass} updateValue={setArmorClass} />
+            <SingleItemDisplayComponent header="Max HP" value={maxHP} updateValue={setMaxHP} />
           </Grid>
           <Grid item>
             <SingleItemDisplayComponent header="Initiative" value={initiative} updateValue={setInitiative} />
@@ -43,8 +44,6 @@ const CombatStatsComponent = ({
       </Grid>
       <Grid item alignItems="center" justify="center" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
         <HitPointComponent
-          maxHP={maxHP}
-          setMaxHP={setMaxHP}
           currentHP={currentHP}
           setCurrentHP={setCurrentHP}
           tempHP={tempHP}

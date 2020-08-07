@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import InputBase from '@material-ui/core/InputBase';
+import { useStore } from '../Context/store';
 
 const SingleItemDisplayComponent = ({
   header,
@@ -25,7 +26,6 @@ const SingleItemDisplayComponent = ({
             color: 'gray',
             paddingTop: 15,
           },
-          disableUnderline: true,
           'aria-label': 'naked',
         }}
       />
@@ -37,7 +37,6 @@ SingleItemDisplayComponent.propTypes = {
   header: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
   updateValue: PropTypes.func.isRequired,
-  style: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default SingleItemDisplayComponent;

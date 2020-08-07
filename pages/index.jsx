@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import { StoreProvider } from './Context/store';
 import AbilityScoreComponent from './CharacterSheet/AbilityScoresComponent';
 import SkillsComponent from './CharacterSheet/SkillsComponent';
 import SavingThrowsComponent from './CharacterSheet/SavingThrowsComponent';
@@ -49,78 +50,81 @@ export default function Home() {
   const [deathSaves, setDeathSaves] = React.useState({ successes: 0, failures: 0 });
 
   return (
-    <Grid container spacing={2} direction="row">
-      <Grid item>
-        <Grid container spacing={2}>
-          <Grid item>
-            <AbilityScoreComponent
-              scoreOnTop={scoreOnTop}
-              setScoreOnTop={setScoreOnTop}
-              abilityScores={abilityScores}
-              setAbilityScores={setAbilityScores}
-              style={style}
-            />
-          </Grid>
-          <Grid item>
-            <Grid container direction="column" spacing={1}>
-              <Grid item>
-                <InspirationComponent
-                  inspiration={inspiration}
-                  setInspiration={setInspiration}
-                  style={style}
-                />
-              </Grid>
-              <Grid item>
-                <ProficiencyBonusComponent
-                  proficiencyBonus={proficiencyBonus}
-                  setProficiencyBonus={setProficiencyBonus}
-                  style={style}
-                />
-              </Grid>
-              <Grid item>
-                <SavingThrowsComponent
-                  abilityScores={abilityScores}
-                  proficiencyBonus={proficiencyBonus}
-                  savingThrowProficiencies={savingThrowProficiencies}
-                  setSavingThrowProficiencies={setSavingThrowProficiencies}
-                  style={style}
-                />
-              </Grid>
-              <Grid item>
-                <SkillsComponent
-                  abilityScores={abilityScores}
-                  proficiencyBonus={proficiencyBonus}
-                  skillProficiencies={skillProficiencies}
-                  setSkillProficiencies={setSkillProficiencies}
-                  expertise={expertise}
-                  setExpertise={setExpertise}
-                  style={style}
-                />
+    <StoreProvider>
+      <Grid container spacing={2} direction="row">
+        <Grid item>
+          <Grid container spacing={2}>
+            <Grid item>
+              <AbilityScoreComponent
+                scoreOnTop={scoreOnTop}
+                setScoreOnTop={setScoreOnTop}
+                abilityScores={abilityScores}
+                setAbilityScores={setAbilityScores}
+                style={style}
+              />
+            </Grid>
+            <Grid item>
+              <Grid container direction="column" spacing={1}>
+                <Grid item>
+                  <InspirationComponent
+                    inspiration={inspiration}
+                    setInspiration={setInspiration}
+                    style={style}
+                  />
+                </Grid>
+                <Grid item>
+                  <ProficiencyBonusComponent
+                    proficiencyBonus={proficiencyBonus}
+                    setProficiencyBonus={setProficiencyBonus}
+                    style={style}
+                  />
+                </Grid>
+                <Grid item>
+                  <SavingThrowsComponent
+                    abilityScores={abilityScores}
+                    proficiencyBonus={proficiencyBonus}
+                    savingThrowProficiencies={savingThrowProficiencies}
+                    setSavingThrowProficiencies={setSavingThrowProficiencies}
+                    style={style}
+                  />
+                </Grid>
+                <Grid item>
+                  <SkillsComponent
+                    abilityScores={abilityScores}
+                    proficiencyBonus={proficiencyBonus}
+                    skillProficiencies={skillProficiencies}
+                    setSkillProficiencies={setSkillProficiencies}
+                    expertise={expertise}
+                    setExpertise={setExpertise}
+                    style={style}
+                  />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+        <Grid item>
+          <CombatStatsComponent
+            armorClass={armorClass}
+            setArmorClass={setArmorClass}
+            initiative={initiative}
+            setInitiative={setInitiative}
+            speed={speed}
+            setSpeed={setSpeed}
+            maxHP={maxHP}
+            setMaxHP={setMaxHP}
+            currentHP={currentHP}
+            setCurrentHP={setCurrentHP}
+            hitDice={hitDice}
+            currentHitDice={currentHitDice}
+            setCurrentHitDice={setCurrentHitDice}
+            deathSaves={deathSaves}
+            setDeathSaves={setDeathSaves}
+            style={style}
+          />
+        </Grid>
       </Grid>
-      <Grid item>
-        <CombatStatsComponent
-          armorClass={armorClass}
-          setArmorClass={setArmorClass}
-          initiative={initiative}
-          setInitiative={setInitiative}
-          speed={speed}
-          setSpeed={setSpeed}
-          maxHP={maxHP}
-          setMaxHP={setMaxHP}
-          currentHP={currentHP}
-          setCurrentHP={setCurrentHP}
-          hitDice={hitDice}
-          currentHitDice={currentHitDice}
-          setCurrentHitDice={setCurrentHitDice}
-          deathSaves={deathSaves}
-          setDeathSaves={setDeathSaves}
-          style={style}
-        />
-      </Grid>
-    </Grid>
+    </StoreProvider>
   );
 }
+// https://react.christmas/2019/7

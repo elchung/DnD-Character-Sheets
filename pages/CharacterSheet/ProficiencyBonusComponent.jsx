@@ -4,15 +4,16 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import CardActions from '@material-ui/core/CardActions';
+import { useStore } from "../Context/store"
 
 const ProficiencyBonusComponent = ({
-  proficiencyBonus,
-  setProficiencyBonus,
   style,
 }) => {
   const [displayedProficiency, setDisplayedProficiency] = React.useState(proficiencyBonus);
 
   return (
+    const {state, dispatch} = useStore();
+
     <Card elevation={style.elevation} style={style.proficiencyComponent}>
       <CardActions>
         <TextField
@@ -39,8 +40,6 @@ const ProficiencyBonusComponent = ({
 };
 
 ProficiencyBonusComponent.propTypes = {
-  proficiencyBonus: PropTypes.number.isRequired,
-  setProficiencyBonus: PropTypes.func.isRequired,
   style: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
