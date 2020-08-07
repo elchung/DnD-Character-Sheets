@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import InputBase from '@material-ui/core/InputBase';
-import { useStore } from '../Context/CharacterContext';
 
 const SingleItemDisplayComponent = ({
   header,

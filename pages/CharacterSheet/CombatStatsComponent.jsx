@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -11,10 +10,10 @@ import {
 } from '../Context/CharacterContext';
 
 const CombatStatsComponent = ({
-  style,
 }) => {
   const characterState = useCharacterState();
   const setCharacterState = useSetCharacterState();
+  const { style } = characterState;
 
   return (
     <Paper elevation={style.elevation} style={style.combatStateComponent}>
@@ -52,10 +51,6 @@ const CombatStatsComponent = ({
       </Grid>
     </Paper>
   );
-};
-
-CombatStatsComponent.propTypes = {
-  style: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default CombatStatsComponent;

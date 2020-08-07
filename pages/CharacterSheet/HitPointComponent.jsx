@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import PropTypes from 'prop-types';
 import Chip from '@material-ui/core/Chip';
 import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
@@ -12,17 +11,21 @@ import {
   useSetCharacterState,
 } from '../Context/CharacterContext';
 
-const HitPointComponent = ({
-  style,
-}) => {
-  const characterState = useCharacterState();
+const HitPointComponent = () => {
+  const {
+    maxHP,
+    currentHP,
+    tempHP,
+    style,
+  } = useCharacterState();
   const setCharacterState = useSetCharacterState();
 
-  const [displayMaxHP, setDisplayMaxHP] = React.useState(characterState.maxHP);
-  const [displayCurrentHP, setDisplayCurrentHP] = React.useState(characterState.currentHP);
-  const [displayTempHP, setDisplayTempHP] = React.useState(characterState.tempHP);
+  const [displayMaxHP, setDisplayMaxHP] = React.useState(maxHP);
+  const [displayCurrentHP, setDisplayCurrentHP] = React.useState(currentHP);
+  const [displayTempHP, setDisplayTempHP] = React.useState(tempHP);
 
   const handleClick = (event) => {
+    console.log(event);
     console.log('need to add modal to input damage or heal damage');
   };
 
@@ -38,17 +41,7 @@ const HitPointComponent = ({
               value={displayMaxHP}
               size="small"
               fullWidth
-              inputProps={{
-                style: {
-                  fontSize: 15,
-                  width: 300,
-                  height: 10,
-                  textAlign: 'center',
-                  marginLeft: -5,
-                  marginRight: 0,
-                  paddingTop: 4,
-                },
-              }}
+              inputProps={style.hitPointComponentInputStyle}
             />
           </Grid>
         </Grid>
@@ -77,16 +70,6 @@ const HitPointComponent = ({
       </Box>
     </>
   );
-};
-
-HitPointComponent.propTypes = {
-  maxHP: PropTypes.number.isRequired,
-  setMaxHP: PropTypes.func.isRequired,
-  currentHP: PropTypes.number.isRequired,
-  setCurrentHP: PropTypes.func.isRequired,
-  tempHP: PropTypes.number.isRequired,
-  setTempHP: PropTypes.func.isRequired,
-  style: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default HitPointComponent;

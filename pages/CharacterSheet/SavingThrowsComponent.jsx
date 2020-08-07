@@ -8,10 +8,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-import PropTypes from 'prop-types';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
-import { useStore } from '../Context/CharacterContext';
+import { useCharacterState, useSetCharacterState } from '../Context/CharacterContext';
 
 const theme = createMuiTheme({
   typography: {
@@ -28,13 +27,15 @@ const theme = createMuiTheme({
   },
 });
 
-const SkillsComponent = ({
-  abilityScores,
-  proficiencyBonus,
-  savingThrowProficiencies,
-  setSavingThrowProficiencies,
-  style,
-}) => {
+const SkillsComponent = () => {
+  const {
+    savingThrowProficiencies,
+    abilityScores,
+    proficiencyBonus,
+    style,
+  } = useCharacterState();
+  const { setSavingThrowProficiencies } = useSetCharacterState();
+
   const skills = {
     Strength: 'strength',
     Dexterity: 'dexterity',
@@ -99,14 +100,6 @@ const SkillsComponent = ({
       </List>
     </Card>
   );
-};
-
-SkillsComponent.propTypes = {
-  abilityScores: PropTypes.objectOf(PropTypes.object).isRequired,
-  proficiencyBonus: PropTypes.number.isRequired,
-  savingThrowProficiencies: PropTypes.instanceOf(Set).isRequired,
-  setSavingThrowProficiencies: PropTypes.func.isRequired,
-  style: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default SkillsComponent;

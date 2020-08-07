@@ -8,9 +8,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-import PropTypes from 'prop-types';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
+import { useCharacterState, useSetCharacterState } from '../Context/CharacterContext';
 
 const theme = createMuiTheme({
   typography: {
@@ -43,15 +43,19 @@ const skills = {
   'Survival (Wis)': 'wisdom',
 };
 
-const SkillsComponent = ({
-  abilityScores,
-  proficiencyBonus,
-  skillProficiencies,
-  setSkillProficiencies,
-  expertise,
-  setExpertise,
-  style,
-}) => {
+const SkillsComponent = () => {
+  const {
+    abilityScores,
+    proficiencyBonus,
+    skillProficiencies,
+    expertise,
+    style,
+  } = useCharacterState();
+  const {
+    setSkillProficiencies,
+    setExpertise,
+  } = useSetCharacterState();
+
   const handleProficiencyCheckboxClick = (event) => {
     if (skillProficiencies.has(event.target.name)) {
       const newSkills = new Set([...skillProficiencies]);
@@ -125,16 +129,6 @@ const SkillsComponent = ({
       </List>
     </Card>
   );
-};
-
-SkillsComponent.propTypes = {
-  abilityScores: PropTypes.objectOf(PropTypes.object).isRequired,
-  proficiencyBonus: PropTypes.number.isRequired,
-  skillProficiencies: PropTypes.instanceOf(Set).isRequired,
-  setSkillProficiencies: PropTypes.func.isRequired,
-  expertise: PropTypes.instanceOf(Set).isRequired,
-  setExpertise: PropTypes.func.isRequired,
-  style: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default SkillsComponent;
