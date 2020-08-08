@@ -27,7 +27,7 @@ const AbilityScoreComponent = () => {
         </Grid>
         <Grid container spacing={2} direction="column" justify="center" alignItems="center" wrap="nowrap">
           {Object.keys(characterState.abilityScores).map((ability) => (
-            <Grid item>
+            <Grid item key={`${ability}-grid-item`}>
               <BaseAbilityScoreComponent
                 ability={ability}
                 abilityScores={characterState.abilityScores}

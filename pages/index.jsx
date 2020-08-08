@@ -16,4 +16,3 @@ export default function Home() {
     </CharacterContextProvider>
   );
 }
-// https://react.christmas/2019/7

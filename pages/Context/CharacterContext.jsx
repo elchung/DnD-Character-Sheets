@@ -41,6 +41,7 @@ export const CharacterContextProvider = (props) => {
     savingThrowComponentListItem: {
       marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
     },
+    deathSaveComponent: { width: 100, height: 110 },
     singleLineDisplayComponent: { width: 250, height: 72 },
     singleLineDisplayInputProps: {
       style: {

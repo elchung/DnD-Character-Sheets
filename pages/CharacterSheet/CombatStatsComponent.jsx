@@ -1,9 +1,9 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import SingleItemDisplayComponent from './SingleItemDisplayComponent';
 import HitPointComponent from './HitPointComponent';
+import DeathSaveComponent from './DeathSaveComponent';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -11,9 +11,10 @@ import {
 
 const CombatStatsComponent = ({
 }) => {
-  const characterState = useCharacterState();
-  const setCharacterState = useSetCharacterState();
-  const { style } = characterState;
+  const {
+    maxHP, initiative, speed, style,
+  } = useCharacterState();
+  const { setMaxHP, setInitiative, setSpeed } = useSetCharacterState();
 
   return (
     <Paper elevation={style.elevation} style={style.combatStateComponent}>
@@ -21,31 +22,25 @@ const CombatStatsComponent = ({
         <Grid item>
           <Grid container direction="row" spacing={2} justify="space-evenly" alignItems="center">
             <Grid item>
-              <SingleItemDisplayComponent header="Max HP" value={characterState.maxHP} updateValue={setCharacterState.setMaxHP} />
+              <SingleItemDisplayComponent header="Max HP" value={maxHP} updateValue={setMaxHP} />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Initiative" value={characterState.initiative} updateValue={setCharacterState.setInitiative} />
+              <SingleItemDisplayComponent header="Initiative" value={initiative} updateValue={setInitiative} />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Speed" value={characterState.speed} updateValue={setCharacterState.setSpeed} />
+              <SingleItemDisplayComponent header="Speed" value={speed} updateValue={setSpeed} />
             </Grid>
           </Grid>
         </Grid>
-        <Grid item alignItems="center" justify="center" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
+        <Grid item alignItems="center" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
           <HitPointComponent style={style} />
         </Grid>
         <Grid item>
           <Grid container direction="row" spacing={2} justify="center" alignItems="center">
             <Grid item>
-              <Paper variant="outlined">
-                <Typography align="center" color="textSecondary" style={style.headerStyle}>Hit Dice</Typography>
-              </Paper>
+              <DeathSaveComponent />
             </Grid>
-            <Grid item>
-              <Paper variant="outlined">
-                <Typography align="center" color="textSecondary" style={style.headerStyle}>Death Saves</Typography>
-              </Paper>
-            </Grid>
+            <Grid item />
           </Grid>
         </Grid>
       </Grid>
