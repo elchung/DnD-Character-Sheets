@@ -12,15 +12,17 @@ import {
 const CombatStatsComponent = ({
 }) => {
   const {
-    maxHP, initiative, speed, style,
+    maxHP, initiative, speed, armorClass, style,
   } = useCharacterState();
-  const { setMaxHP, setInitiative, setSpeed } = useSetCharacterState();
+  const {
+    setMaxHP, setInitiative, setSpeed, setArmorClass,
+  } = useSetCharacterState();
 
   return (
-    <Paper elevation={style.elevation} style={style.combatStateComponent}>
+    <Paper elevation={style.elevation} style={style.combatStatsComponent}>
       <Grid container spacing={2} direction="column">
         <Grid item>
-          <Grid container direction="row" spacing={2} justify="space-evenly" alignItems="center">
+          <Grid container direction="row" justify="space-evenly">
             <Grid item>
               <SingleItemDisplayComponent header="Max HP" value={maxHP} updateValue={setMaxHP} />
             </Grid>
@@ -28,17 +30,20 @@ const CombatStatsComponent = ({
               <SingleItemDisplayComponent header="Initiative" value={initiative} updateValue={setInitiative} />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Speed" value={speed} updateValue={setSpeed} />
+              <SingleItemDisplayComponent header="Armor Class" value={armorClass} updateValue={setArmorClass} />
             </Grid>
           </Grid>
         </Grid>
-        <Grid item alignItems="center" style={{ paddingLeft: '5%', paddingRight: '5%' }}>
-          <HitPointComponent style={style} />
+        <Grid item style={{ paddingLeft: 26 }}>
+          <HitPointComponent />
         </Grid>
-        <Grid item>
-          <Grid container direction="row" spacing={2} justify="center" alignItems="center">
+        <Grid item style={{ paddingLeft: 0 }}>
+          <Grid container direction="row" spacing={2} justify="space-evenly">
             <Grid item>
               <DeathSaveComponent />
+            </Grid>
+            <Grid item>
+              <SingleItemDisplayComponent header="Speed" value={speed} updateValue={setSpeed} />
             </Grid>
             <Grid item />
           </Grid>

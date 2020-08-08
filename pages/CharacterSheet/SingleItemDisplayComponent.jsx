@@ -3,16 +3,18 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import InputBase from '@material-ui/core/InputBase';
+import { useCharacterState } from '../Context/CharacterContext';
 
 const SingleItemDisplayComponent = ({
   header,
   value,
   updateValue,
 }) => {
+  const { style } = useCharacterState();
   const [displayText, setDisplayText] = React.useState(value);
 
   return (
-    <Paper variant="outlined" style={{ width: 100, height: 110 }}>
+    <Paper variant="outlined" style={style.singleItemDisplayComponentStyle}>
       <Typography align="center" color="textSecondary" style={{ paddingTop: 7 }}>{header}</Typography>
       <InputBase
         value={displayText}
@@ -33,7 +35,7 @@ const SingleItemDisplayComponent = ({
 };
 
 SingleItemDisplayComponent.propTypes = {
-  header: PropTypes.number.isRequired,
+  header: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   updateValue: PropTypes.func.isRequired,
 };

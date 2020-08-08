@@ -31,20 +31,7 @@ const HitPointComponent = () => {
 
   return (
     <>
-      <Paper variant="outlined">
-        <Grid container direction="row" justify="flex-start" alignItems="flex-start">
-          <Grid item>
-            <Typography variant="subtitle1">Max HP</Typography>
-          </Grid>
-          <Grid item>
-            <TextField
-              value={displayMaxHP}
-              size="small"
-              fullWidth
-              inputProps={style.hitPointComponentInputStyle}
-            />
-          </Grid>
-        </Grid>
+      <Paper variant="outlined" style={{ width: 220, height: 110 }}>
         <Grid container direction="row" justify="space-evenly" alignItems="flex-end">
           <Grid item>
             <Paper>
@@ -58,7 +45,7 @@ const HitPointComponent = () => {
           </Grid>
         </Grid>
       </Paper>
-      <Box
+      {/* <Box
         p={2}
         position="relative"
         bottom={5}
@@ -67,7 +54,7 @@ const HitPointComponent = () => {
         style={{ width: 5, height: 5 }}
       >
         <Chip label={<AddIcon />} onClick={handleClick} variant="outlined" size="small" />
-      </Box>
+      </Box> */}
     </>
   );
 };

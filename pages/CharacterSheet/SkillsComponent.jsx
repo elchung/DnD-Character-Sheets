@@ -92,8 +92,8 @@ const SkillsComponent = () => {
         {Object.keys(skills).map((skill) => (
           <ListItem key={skill} style={style.skillComponentListItem}>
             <Checkbox
-              icon={<RadioButtonUncheckedIcon fontSize="medium" />}
-              checkedIcon={<RadioButtonCheckedIcon fontSize="medium" />}
+              icon={<RadioButtonUncheckedIcon />}
+              checkedIcon={<RadioButtonCheckedIcon />}
               onChange={handleProficiencyCheckboxClick}
               color="primary"
               edge="start"
@@ -102,7 +102,7 @@ const SkillsComponent = () => {
               icon={<RadioButtonUncheckedIcon fontSize="small" />}
               checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
               onChange={handleExpertiseCheckboxClick}
-              style={{marginLeft: -15}}
+              style={{ marginLeft: -15 }}
               color="primary"
               edge="start"
             />

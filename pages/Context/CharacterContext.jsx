@@ -34,14 +34,18 @@ export const CharacterContextProvider = (props) => {
     skillComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
     abilityScoreComponent: { width: 125, paddingBottom: 20 },
     savingThrowComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
-    combatStateComponent: { width: 400, paddingBottom: 20, paddingTop: 10 },
+    combatStatsComponent: {
+      width: 375, height: 370, paddingBottom: 20, paddingTop: 10,
+    },
     skillComponentListItem: {
       marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
     },
     savingThrowComponentListItem: {
       marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
     },
-    deathSaveComponent: { width: 100, height: 110 },
+    deathSaveComponent: {
+      width: 100, height: 110, marginTop: -2, marginBottom: -2, paddingTop: 5,
+    },
     singleLineDisplayComponent: { width: 250, height: 72 },
     singleLineDisplayInputProps: {
       style: {
@@ -51,6 +55,7 @@ export const CharacterContextProvider = (props) => {
         height: 20,
       },
     },
+    singleItemDisplayComponentStyle: { width: 100, height: 115 },
     hitPointComponentInputStyle: {
       fontSize: 15,
       width: 300,
