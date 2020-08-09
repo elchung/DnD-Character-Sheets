@@ -39,6 +39,9 @@ export const CharacterContextProvider = (props) => {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
     },
     headerStyle: { marginTop: -2, marginBottom: -2 },
+    hitDieComponent: {
+      width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
+    },
     hitPointComponentInputStyle: {
       fontSize: 15,
       width: 300,
