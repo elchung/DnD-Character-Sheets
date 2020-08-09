@@ -24,7 +24,6 @@ const SingleItemDisplayComponent = ({
           style: {
             fontSize: 35,
             textAlign: 'center',
-            color: 'gray',
             paddingTop: 15,
           },
           'aria-label': 'naked',

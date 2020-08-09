@@ -6,8 +6,9 @@ const CharacterDispatchContext = createContext();
 export const CharacterContextProvider = (props) => {
   const { children } = props;
 
-  const [scoreOnTop, setScoreOnTop] = React.useState(false);
-  const [abilityScores, setAbilityScores] = React.useState({
+  const [level, setLevel] = useState(1);
+  const [scoreOnTop, setScoreOnTop] = useState(false);
+  const [abilityScores, setAbilityScores] = useState({
     strength: 0,
     dexterity: 0,
     constitution: 0,
@@ -25,37 +26,19 @@ export const CharacterContextProvider = (props) => {
   const [speed, setSpeed] = useState(0);
   const [maxHP, setMaxHP] = useState(0);
   const [currentHP, setCurrentHP] = useState(0);
-  const [hitDice, setHitDice] = useState({ numDice: 0, diceType: 0 });
+  const [hitDice, setHitDice] = useState([{ numDice: 0, diceType: 0, numUsed: 0 }]);
   const [currentHitDice, setCurrentHitDice] = useState(0);
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
   const style = {
     elevation: 3,
-    headerStyle: { marginTop: -2, marginBottom: -2 },
-    skillComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
     abilityScoreComponent: { width: 125, paddingBottom: 20 },
-    savingThrowComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
     combatStatsComponent: {
       width: 375, height: 370, paddingBottom: 20, paddingTop: 10,
     },
-    skillComponentListItem: {
-      marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
-    },
-    savingThrowComponentListItem: {
-      marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
-    },
     deathSaveComponent: {
-      width: 100, height: 110, marginTop: -2, marginBottom: -2, paddingTop: 5,
+      width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
     },
-    singleLineDisplayComponent: { width: 250, height: 72 },
-    singleLineDisplayInputProps: {
-      style: {
-        textAlign: 'center',
-        fontSize: 30,
-        width: 30,
-        height: 20,
-      },
-    },
-    singleItemDisplayComponentStyle: { width: 100, height: 115 },
+    headerStyle: { marginTop: -2, marginBottom: -2 },
     hitPointComponentInputStyle: {
       fontSize: 15,
       width: 300,
@@ -64,6 +47,24 @@ export const CharacterContextProvider = (props) => {
       marginLeft: -5,
       marginRight: 0,
       paddingTop: 4,
+    },
+    skillComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
+    savingThrowComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
+    skillComponentListItem: {
+      marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
+    },
+    savingThrowComponentListItem: {
+      marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
+    },
+    singleItemDisplayComponentStyle: { width: 100, height: 105 },
+    singleLineDisplayComponent: { width: 250, height: 68 },
+    singleLineDisplayInputProps: {
+      style: {
+        textAlign: 'center',
+        fontSize: 30,
+        width: 25,
+        height: 15,
+      },
     },
     skillModifierInputProps: {
       style: {
@@ -78,6 +79,7 @@ export const CharacterContextProvider = (props) => {
   };
 
   const characterState = {
+    level,
     scoreOnTop,
     abilityScores,
     proficiencyBonus,
@@ -97,6 +99,7 @@ export const CharacterContextProvider = (props) => {
   };
 
   const characterDispatch = {
+    setLevel,
     setScoreOnTop,
     setAbilityScores,
     setProficiencyBonus,

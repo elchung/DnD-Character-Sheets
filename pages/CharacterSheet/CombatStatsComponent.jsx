@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import SingleItemDisplayComponent from './SingleItemDisplayComponent';
 import HitPointComponent from './HitPointComponent';
+import HitDieComponent from './HitDieComponent';
 import DeathSaveComponent from './DeathSaveComponent';
 import {
   useCharacterState,
@@ -41,6 +42,9 @@ const CombatStatsComponent = ({
           <Grid container direction="row" spacing={2} justify="space-evenly">
             <Grid item>
               <DeathSaveComponent />
+            </Grid>
+            <Grid item>
+              <HitDieComponent />
             </Grid>
             <Grid item>
               <SingleItemDisplayComponent header="Speed" value={speed} updateValue={setSpeed} />

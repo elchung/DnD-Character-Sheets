@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+import InputBase from '@material-ui/core/InputBase';
 import PropTypes from 'prop-types';
 import { scoreToModifier } from '../Utils/abilityScoreUtils';
 
@@ -31,22 +32,24 @@ const BaseAbilityScoreComponent = ({
 
   return (
     <Card elevation={0} style={{ width: 100, height: 130 }}>
-      <Card elevation={3} variant="outlined">
+      <Card elevation={3} variant="outlined" style={{ height: 105 }}>
         <CardContent style={{ paddingTop: 3 }}>
-          <Typography align="center" noWrap gutterBottom variant="caption">
+          <Typography align="center" noWrap variant="caption" color="textSecondary">
             {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
           </Typography>
-          <TextField
+          <InputBase
             id={`${ability}-ability-maintext`}
             value={mainText}
             onChange={handleChange}
             onBlur={handleBlur}
-            disabled={!scoreOnTop}
             inputProps={{
               style: {
                 fontSize: 35,
                 textAlign: 'center',
+                color: scoreOnTop ? 'black' : 'gray',
+                paddingTop: 7,
               },
+              'aria-label': 'naked',
             }}
           />
         </CardContent>
