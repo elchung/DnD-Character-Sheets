@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -12,8 +13,7 @@ import {
 const HitDieComponent = () => {
   const { hitDice, style } = useCharacterState();
   // const { } = useSetCharacterState();
-  // TODO: update num rows based on variety of classes taken
-  // { numDice: 0, diceType: 0, numUsed }
+  // { numDice: 0, diceType: 0, numUsed: 0 }
 
   return (
     <Paper variant="outlined" style={style.hitDieComponent}>
@@ -28,7 +28,48 @@ const HitDieComponent = () => {
         />
         {hitDice.map((row) => (
           <ListItem key={row} style={{}}>
-            something
+            <TextField
+              key={`level-${row.toString}`}
+              id={`level-${row.toString}`}
+              value={row.numDice}
+              disabled
+              variant="outlined"
+              InputProps={{
+                disableUnderline: true,
+                style: {
+                  ...style.HitDieComponentInputPropStyle,
+                  marginLeft: -7,
+                },
+              }}
+            />
+            <TextField
+              key={`dicetype-${row.toString}`}
+              id={`dicetype-${row.toString}`}
+              value={`d${row.diceType}`}
+              disabled
+              variant="outlined"
+              InputProps={{
+                disableUnderline: true,
+                style: {
+                  ...style.HitDieComponentInputPropStyle,
+                  marginLeft: 9,
+                },
+              }}
+            />
+            <TextField
+              key={`numUsed-${row.toString}`}
+              id={`numUsed-${row.toString}`}
+              value={row.numUsed}
+              disabled
+              variant="outlined"
+              InputProps={{
+                disableUnderline: true,
+                style: {
+                  ...style.HitDieComponentInputPropStyle,
+                  marginLeft: 13,
+                },
+              }}
+            />
           </ListItem>
         ))}
       </List>
@@ -37,20 +78,3 @@ const HitDieComponent = () => {
 };
 
 export default HitDieComponent;
-
-/*      <Table size="small" style={{ width: 'auto' }}>
-         <TableHead>
-          <TableCell>Level</TableCell>
-          <TableCell>Die</TableCell>
-          <TableCell>Used</TableCell>
-        </TableHead>
-        <TableBody>
-          {hitDice.map((row) => (
-            <TableRow>
-              <TableCell>{row.numDice}</TableCell>
-              <TableCell>{`d${row.diceType}`}</TableCell>
-              <TableCell>{row.numUsed}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table> */

@@ -38,7 +38,7 @@ const CombatStatsComponent = ({
         <Grid item style={{ paddingLeft: 26 }}>
           <HitPointComponent />
         </Grid>
-        <Grid item style={{ paddingLeft: 0 }}>
+        <Grid item style={{ paddingLeft: 26 }}>
           <Grid container direction="row" spacing={2} justify="space-evenly">
             <Grid item>
               <DeathSaveComponent />

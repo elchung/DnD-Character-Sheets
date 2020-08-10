@@ -25,6 +25,7 @@ export const CharacterContextProvider = (props) => {
   const [initiative, setInitiative] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [maxHP, setMaxHP] = useState(0);
+  const [tempHP, setTempHP] = useState(0);
   const [currentHP, setCurrentHP] = useState(0);
   const [hitDice, setHitDice] = useState([{ numDice: 0, diceType: 0, numUsed: 0 }]);
   const [currentHitDice, setCurrentHitDice] = useState(0);
@@ -33,7 +34,7 @@ export const CharacterContextProvider = (props) => {
     elevation: 3,
     abilityScoreComponent: { width: 125, paddingBottom: 20 },
     combatStatsComponent: {
-      width: 375, height: 370, paddingBottom: 20, paddingTop: 10,
+      width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },
     deathSaveComponent: {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
@@ -41,6 +42,12 @@ export const CharacterContextProvider = (props) => {
     headerStyle: { marginTop: -2, marginBottom: -2 },
     hitDieComponent: {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
+    },
+    HitDieComponentInputPropStyle: {
+      fontSize: 12,
+      width: 25,
+      height: 20,
+      marginTop: -5,
     },
     hitPointComponentInputStyle: {
       fontSize: 15,
@@ -50,6 +57,12 @@ export const CharacterContextProvider = (props) => {
       marginLeft: -5,
       marginRight: 0,
       paddingTop: 4,
+    },
+    hitPointComponentTemp: {
+      style: {
+        textAlign: 'center',
+        marginBottom: -6,
+      },
     },
     skillComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
     savingThrowComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
@@ -95,6 +108,7 @@ export const CharacterContextProvider = (props) => {
     speed,
     maxHP,
     currentHP,
+    tempHP,
     hitDice,
     currentHitDice,
     deathSaves,
@@ -115,6 +129,7 @@ export const CharacterContextProvider = (props) => {
     setSpeed,
     setMaxHP,
     setCurrentHP,
+    setTempHP,
     setHitDice,
     setCurrentHitDice,
     setDeathSaves,
