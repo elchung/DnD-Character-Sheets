@@ -1,14 +1,14 @@
-import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import SingleItemDisplayComponent from './SingleItemDisplayComponent';
 import HitPointComponent from './HitPointComponent';
-import HitDieComponent from './HitDieComponent';
-import DeathSaveComponent from './DeathSaveComponent';
+import Paper from '@material-ui/core/Paper';
 import {
   useCharacterState,
   useSetCharacterState,
 } from '../Context/CharacterContext';
+import DeathSaveComponent from './DeathSaveComponent';
+import HitDieComponent from './HitDieComponent';
+import React from 'react';
+import SingleItemDisplayComponent from './SingleItemDisplayComponent';
 
 const CombatStatsComponent = ({
 }) => {
@@ -21,17 +21,17 @@ const CombatStatsComponent = ({
 
   return (
     <Paper elevation={style.elevation} style={style.combatStatsComponent}>
-      <Grid container spacing={2} direction="column">
+      <Grid container direction="column" spacing={2}>
         <Grid item>
           <Grid container direction="row" justify="space-evenly">
             <Grid item>
-              <SingleItemDisplayComponent header="Max HP" value={maxHP} updateValue={setMaxHP} />
+              <SingleItemDisplayComponent header="Max HP" updateValue={setMaxHP} value={maxHP} />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Initiative" value={initiative} updateValue={setInitiative} />
+              <SingleItemDisplayComponent header="Initiative" updateValue={setInitiative} value={initiative} />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Armor Class" value={armorClass} updateValue={setArmorClass} />
+              <SingleItemDisplayComponent header="Armor Class" updateValue={setArmorClass} value={armorClass} />
             </Grid>
           </Grid>
         </Grid>
@@ -39,7 +39,7 @@ const CombatStatsComponent = ({
           <HitPointComponent />
         </Grid>
         <Grid item style={{ paddingLeft: 26 }}>
-          <Grid container direction="row" spacing={2} justify="space-evenly">
+          <Grid container direction="row" justify="space-evenly" spacing={2}>
             <Grid item>
               <DeathSaveComponent />
             </Grid>
@@ -47,7 +47,7 @@ const CombatStatsComponent = ({
               <HitDieComponent />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Speed" value={speed} updateValue={setSpeed} />
+              <SingleItemDisplayComponent header="Speed" updateValue={setSpeed} value={speed} />
             </Grid>
             <Grid item />
           </Grid>

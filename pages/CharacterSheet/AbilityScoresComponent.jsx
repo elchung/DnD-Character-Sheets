@@ -1,12 +1,12 @@
-import React from 'react';
-import Switch from '@material-ui/core/Switch';
-import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
 import BaseAbilityScoreComponent from './BaseAbilityScoreComponent';
+import Card from '@material-ui/core/Card';
 import {
   useCharacterState,
   useSetCharacterState,
 } from '../Context/CharacterContext';
+import Grid from '@material-ui/core/Grid';
+import React from 'react';
+import Switch from '@material-ui/core/Switch';
 
 const AbilityScoreComponent = () => {
   const characterState = useCharacterState();
@@ -15,24 +15,24 @@ const AbilityScoreComponent = () => {
 
   return (
     <Card elevation={style.elevation} style={style.abilityScoreComponent}>
-      <Grid container direction="column" justify="center" alignItems="flex-end" wrap="nowrap">
+      <Grid alignItems="flex-end" container direction="column" justify="center" wrap="nowrap">
         <Grid item>
           <Switch
-            size="small"
             checked={!characterState.scoreOnTop}
-            onChange={() => setCharacterState.setScoreOnTop((state) => !state)}
             color="primary"
+            onChange={() => setCharacterState.setScoreOnTop((state) => !state)}
+            size="small"
 
           />
         </Grid>
-        <Grid container spacing={3} direction="column" justify="center" alignItems="center" wrap="nowrap">
+        <Grid alignItems="center" container direction="column" justify="center" spacing={3} wrap="nowrap">
           {Object.keys(characterState.abilityScores).map((ability) => (
             <Grid item key={`${ability}-grid-item`}>
               <BaseAbilityScoreComponent
                 ability={ability}
                 abilityScores={characterState.abilityScores}
-                setAbilityScores={setCharacterState.setAbilityScores}
                 scoreOnTop={characterState.scoreOnTop}
+                setAbilityScores={setCharacterState.setAbilityScores}
               />
             </Grid>
           ))}

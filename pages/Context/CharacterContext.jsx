@@ -26,6 +26,7 @@ export const CharacterContextProvider = (props) => {
   const [speed, setSpeed] = useState(0);
   const [maxHP, setMaxHP] = useState(0);
   const [tempHP, setTempHP] = useState(0);
+  const [hitPointHistory, setHitPointHistory] = useState([]);
   const [currentHP, setCurrentHP] = useState(0);
   const [hitDice, setHitDice] = useState([{ numDice: 0, diceType: 0, numUsed: 0 }]);
   const [currentHitDice, setCurrentHitDice] = useState(0);
@@ -94,6 +95,11 @@ export const CharacterContextProvider = (props) => {
     },
   };
 
+  const damageTypes = [
+    'acid', 'bludgeoning', 'cold', 'fire', 'force', 'lightning',
+    'necrotic', 'piercing', 'poison', 'psychic', 'radiant', 'slashing', 'thunder'
+  ];
+
   const characterState = {
     level,
     scoreOnTop,
@@ -109,9 +115,11 @@ export const CharacterContextProvider = (props) => {
     maxHP,
     currentHP,
     tempHP,
+    hitPointHistory,
     hitDice,
     currentHitDice,
     deathSaves,
+    damageTypes,
     style,
   };
 
@@ -130,6 +138,7 @@ export const CharacterContextProvider = (props) => {
     setMaxHP,
     setCurrentHP,
     setTempHP,
+    setHitPointHistory,
     setHitDice,
     setCurrentHitDice,
     setDeathSaves,

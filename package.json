@@ -5,11 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint:fix": "eslint --fix --ext .js,.jsx ./"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "eslint-config-wyze": "^5.0.0",
+    "eslint-plugin-wyze": "^3.4.0",
     "lodash": "^4.17.19",
     "material-ui": "^0.20.2",
     "next": "9.3.5",

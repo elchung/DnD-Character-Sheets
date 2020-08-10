@@ -16,15 +16,16 @@ module.exports = {
   },
   plugins: [
     'react',
+    'wyze',
   ],
   rules: {
-    'linebreak-style': ['error', (require('os').EOL === '\r\n' ? 'windows' : 'unix')],
-    'sort-imports': ['error', {
-      ignoreCase: false,
-      ignoreDeclarationSort: false,
-      ignoreMemberSort: false,
-      memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-      allowSeparatedGroups: false,
+    "wyze/sort-imports": 2,
+    "react/jsx-sort-props": [2, {
+      "ignoreCase": false,
+      "callbacksLast": false,
+      "shorthandFirst": false
     }],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+
   },
 };

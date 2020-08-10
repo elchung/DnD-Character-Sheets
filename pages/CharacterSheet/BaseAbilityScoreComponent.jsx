@@ -1,12 +1,12 @@
-import React from 'react';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
-import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+import { scoreToModifier } from '../Utils/abilityScoreUtils';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import InputBase from '@material-ui/core/InputBase';
 import PropTypes from 'prop-types';
-import { scoreToModifier } from '../Utils/abilityScoreUtils';
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 const BaseAbilityScoreComponent = ({
   ability,
@@ -32,16 +32,13 @@ const BaseAbilityScoreComponent = ({
 
   return (
     <Card elevation={0} style={{ width: 100, height: 130 }}>
-      <Card elevation={3} variant="outlined" style={{ height: 105 }}>
+      <Card elevation={3} style={{ height: 105 }} variant="outlined">
         <CardContent style={{ paddingTop: 3 }}>
-          <Typography align="center" noWrap variant="caption" color="textSecondary">
+          <Typography align="center" color="textSecondary" noWrap variant="caption">
             {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
           </Typography>
           <InputBase
             id={`${ability}-ability-maintext`}
-            value={mainText}
-            onChange={handleChange}
-            onBlur={handleBlur}
             inputProps={{
               style: {
                 fontSize: 35,
@@ -51,24 +48,23 @@ const BaseAbilityScoreComponent = ({
               },
               'aria-label': 'naked',
             }}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={mainText}
           />
         </CardContent>
       </Card>
       <Box
-        p={2}
-        position="relative"
         bottom={40}
         left={13}
-        zIndex="tooltip"
+        p={2}
+        position="relative"
         style={{ width: 5, height: 5 }}
+        zIndex="speed dial"
       >
         <TextField
-          id={`${ability}-ability-subtext`}
-          value={subText}
-          onChange={handleChange}
-          onBlur={handleBlur}
           disabled={scoreOnTop}
-          variant="outlined"
+          id={`${ability}-ability-subtext`}
           inputProps={{
             style: {
               fontSize: 15,
@@ -78,6 +74,10 @@ const BaseAbilityScoreComponent = ({
               background: 'white',
             },
           }}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={subText}
+          variant="outlined"
         />
       </Box>
     </Card>

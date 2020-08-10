@@ -1,7 +1,7 @@
-import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import DeathSaveRadio from './DeathSaveRadio';
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -12,10 +12,10 @@ const DeathSaveComponent = () => {
   const { setDeathSaves } = useSetCharacterState();
 
   return (
-    <Paper variant="outlined" style={style.deathSaveComponent}>
+    <Paper style={style.deathSaveComponent} variant="outlined">
       <Typography align="center" color="textSecondary" style={style.headerStyle}>Death Saves</Typography>
       <Typography align="center" color="textSecondary" style={{ fontSize: 13, paddingTop: 2, marginBottom: -10 }}>Successes</Typography>
-      <DeathSaveRadio id="successes" deathSaves={deathSaves} setDeathSaves={setDeathSaves} />
+      <DeathSaveRadio deathSaves={deathSaves} id="successes" setDeathSaves={setDeathSaves} />
       <Typography
         align="center"
         color="textSecondary"
@@ -25,7 +25,7 @@ const DeathSaveComponent = () => {
       >
         Failures
       </Typography>
-      <DeathSaveRadio id="failures" deathSaves={deathSaves} setDeathSaves={setDeathSaves} />
+      <DeathSaveRadio deathSaves={deathSaves} id="failures" setDeathSaves={setDeathSaves} />
     </Paper>
   );
 };

@@ -1,16 +1,16 @@
-import React from 'react';
 import Card from '@material-ui/core/Card';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import { scoreToModifier } from '../Utils/abilityScoreUtils';
 import List from '@material-ui/core/List';
+import { useCharacterState, useSetCharacterState } from '../Context/CharacterContext';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { scoreToModifier } from '../Utils/abilityScoreUtils';
-import { useCharacterState, useSetCharacterState } from '../Context/CharacterContext';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 const theme = createMuiTheme({
   typography: {
@@ -66,21 +66,21 @@ const SkillsComponent = () => {
       <ThemeProvider theme={theme}>
         <Typography variant="subtitle1">Prof.</Typography>
       </ThemeProvider>
-      <List disablePadding dense>
+      <List dense disablePadding>
         {Object.keys(skills).map((skill) => (
           <ListItem key={skill} style={style.savingThrowComponentListItem}>
             <Checkbox
-              icon={<RadioButtonUncheckedIcon fontSize="small" />}
               checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
-              onChange={handleProficiencyCheckboxClick}
               color="primary"
               edge="start"
+              icon={<RadioButtonUncheckedIcon fontSize="small" />}
+              onChange={handleProficiencyCheckboxClick}
             />
             <TextField
-              id={`${skill}-textfield`}
-              value={getSkillVal(skills[skill])}
               disabled
+              id={`${skill}-textfield`}
               inputProps={style.skillModifierInputProps}
+              value={getSkillVal(skills[skill])}
             />
             <ListItemText
               id={`${skill}-text`}

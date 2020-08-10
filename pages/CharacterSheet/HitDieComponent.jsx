@@ -1,14 +1,14 @@
-import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import {
   useCharacterState,
   useSetCharacterState,
 } from '../Context/CharacterContext';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Paper from '@material-ui/core/Paper';
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 const HitDieComponent = () => {
   const { hitDice, style } = useCharacterState();
@@ -16,9 +16,9 @@ const HitDieComponent = () => {
   // { numDice: 0, diceType: 0, numUsed: 0 }
 
   return (
-    <Paper variant="outlined" style={style.hitDieComponent}>
+    <Paper style={style.hitDieComponent} variant="outlined">
       <Typography align="center" color="textSecondary" style={style.headerStyle}>Hit Dice</Typography>
-      <List disablePadding dense>
+      <List dense disablePadding>
         <ListItemText
           primary={(
             <Typography align="center" color="textSecondary" style={{ fontSize: 10 }}>
@@ -29,46 +29,43 @@ const HitDieComponent = () => {
         {hitDice.map((row) => (
           <ListItem key={row} style={{}}>
             <TextField
-              key={`level-${row.toString}`}
-              id={`level-${row.toString}`}
-              value={row.numDice}
-              disabled
-              variant="outlined"
               InputProps={{
-                disableUnderline: true,
                 style: {
                   ...style.HitDieComponentInputPropStyle,
                   marginLeft: -7,
                 },
               }}
+              disabled
+              id={`level-${row.toString}`}
+              key={`level-${row.toString}`}
+              value={row.numDice}
+              variant="outlined"
             />
             <TextField
-              key={`dicetype-${row.toString}`}
-              id={`dicetype-${row.toString}`}
-              value={`d${row.diceType}`}
-              disabled
-              variant="outlined"
               InputProps={{
-                disableUnderline: true,
                 style: {
                   ...style.HitDieComponentInputPropStyle,
                   marginLeft: 9,
                 },
               }}
+              disabled
+              id={`dicetype-${row.toString}`}
+              key={`dicetype-${row.toString}`}
+              value={`d${row.diceType}`}
+              variant="outlined"
             />
             <TextField
-              key={`numUsed-${row.toString}`}
-              id={`numUsed-${row.toString}`}
-              value={row.numUsed}
-              disabled
-              variant="outlined"
               InputProps={{
-                disableUnderline: true,
                 style: {
                   ...style.HitDieComponentInputPropStyle,
                   marginLeft: 13,
                 },
               }}
+              disabled
+              id={`numUsed-${row.toString}`}
+              key={`numUsed-${row.toString}`}
+              value={row.numUsed}
+              variant="outlined"
             />
           </ListItem>
         ))}

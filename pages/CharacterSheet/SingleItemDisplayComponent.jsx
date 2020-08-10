@@ -1,9 +1,9 @@
+import InputBase from '@material-ui/core/InputBase';
+import Paper from '@material-ui/core/Paper';
+import { useCharacterState } from '../Context/CharacterContext';
+import PropTypes from 'prop-types';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import PropTypes from 'prop-types';
-import InputBase from '@material-ui/core/InputBase';
-import { useCharacterState } from '../Context/CharacterContext';
 
 const SingleItemDisplayComponent = ({
   header,
@@ -14,12 +14,9 @@ const SingleItemDisplayComponent = ({
   const [displayText, setDisplayText] = React.useState(value);
 
   return (
-    <Paper variant="outlined" style={style.singleItemDisplayComponentStyle}>
+    <Paper style={style.singleItemDisplayComponentStyle} variant="outlined">
       <Typography align="center" color="textSecondary" style={{ paddingTop: 7 }}>{header}</Typography>
       <InputBase
-        value={displayText}
-        onChange={(event) => setDisplayText(event.target.value)}
-        onBlur={() => updateValue(displayText)}
         inputProps={{
           style: {
             fontSize: 35,
@@ -28,6 +25,9 @@ const SingleItemDisplayComponent = ({
           },
           'aria-label': 'naked',
         }}
+        onBlur={() => updateValue(displayText)}
+        onChange={(event) => setDisplayText(event.target.value)}
+        value={displayText}
       />
     </Paper>
   );

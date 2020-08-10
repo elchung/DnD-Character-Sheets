@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 function CurveText({ text, arc, radius }) {
   const characters = text.split('');
@@ -14,7 +14,8 @@ function CurveText({ text, arc, radius }) {
             height: `${radius}px`,
             transform: `rotate(${degree * i - arc / 2}deg)`,
             transformOrigin: `0 ${radius}px 0`,
-          }}>
+          }}
+        >
           {char}
         </span>
       ))}
