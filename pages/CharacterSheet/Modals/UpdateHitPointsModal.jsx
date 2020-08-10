@@ -70,7 +70,7 @@ const UpdateHitPointsModal = () => {
   };
 
   const handleSubmit = () => {
-
+    if damage, deal damage to temp then
   };
 
   return (
