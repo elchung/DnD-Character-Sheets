@@ -31,6 +31,7 @@ export const CharacterContextProvider = (props) => {
   const [hitDice, setHitDice] = useState([{ numDice: 0, diceType: 0, numUsed: 0 }]);
   const [currentHitDice, setCurrentHitDice] = useState(0);
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
+  const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set()})
   const style = {
     elevation: 3,
     abilityScoreComponent: { width: 125, paddingBottom: 20 },
@@ -120,6 +121,7 @@ export const CharacterContextProvider = (props) => {
     currentHitDice,
     deathSaves,
     damageTypes,
+    proficiencies,
     style,
   };
 
@@ -142,6 +144,7 @@ export const CharacterContextProvider = (props) => {
     setHitDice,
     setCurrentHitDice,
     setDeathSaves,
+    setProficiencies,
   };
 
   return (

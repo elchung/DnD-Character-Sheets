@@ -17,7 +17,7 @@ const LeftColumnComponent = () => {
           <AbilityScoreComponent />
         </Grid>
         <Grid item>
-          <Grid container direction="column" spacing={1}>
+          <Grid container direction="column" spacing={2}>
             <Grid item>
               <SingleLineDisplayComponent
                 setValue={setCharacterState.setInspiration}

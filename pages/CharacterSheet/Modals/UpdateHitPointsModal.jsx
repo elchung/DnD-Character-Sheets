@@ -27,8 +27,9 @@ const UpdateHitPointsModal = () => {
   const {
     currentHP,
     tempHP,
-    hitPointHistory,
+    maxHP,
     damageTypes,
+    hitPointHistory,
     style,
   } = useCharacterState();
   const {
@@ -38,7 +39,7 @@ const UpdateHitPointsModal = () => {
   } = useSetCharacterState();
   const [open, setOpen] = React.useState(false);
   const [healOrDamage, setHealOrDamage] = React.useState('damage');
-  const [tempOrMain, setTempOrMain] = React.useState('main');
+  const [healType, setHealType] = React.useState('main');
   const [amount, setAmount] = React.useState(0);
   const [damageType, setDamageType] = React.useState("")
 
@@ -55,7 +56,7 @@ const UpdateHitPointsModal = () => {
   };
 
   const handleHealTypeChange = (event) => {
-    setTempOrMain(event.target.value);
+    setHealType(event.target.value);
   };
 
   const handleDamageTypeChange = (event) => {
@@ -65,22 +66,31 @@ const UpdateHitPointsModal = () => {
   const handleCancel = () => {
     setOpen(false);
     setHealOrDamage('damage');
-    setTempOrMain('main');
+    setHealType('main');
     setDamageType('');
   };
 
   const handleSubmit = () => {
-    if damage, deal damage to temp then
+    if (healOrDamage === 'damage') {
+      const remainingDamage = tempHP - amount;
+      setTempHP(remainingDamage < 0 ? 0 : tempHP - amount);
+      setCurrentHP(remainingDamage < 0 ? currentHP + remainingDamage : currentHP);
+      setHitPointHistory([...hitPointHistory])
+    } else if (healType==="main"){
+      setCurrentHP(MATH.min(currentHP + amount, maxHP));
+    } else {
+      setTempHP(tempHP + amount)
+    }
   };
 
   return (
     <div>
       <Chip
-        label={<LocalPizzaIcon color="action" fontSize="small" />}
+        label={<LocalPizzaIcon color="action" fontSize="small" style={{ marginLeft: -5 }}/>}
         onClick={handleOpen}
         size="small"
         style={{
-          paddingTop: 3, marginTop: -7, width: 25,
+          paddingTop: 3, marginTop: -7, width: 27, marginRight: -10
         }}
       />
       <Modal
@@ -111,8 +121,8 @@ const UpdateHitPointsModal = () => {
                 </Grid>
                 <Grid item style={{ paddingLeft: 20, paddingRight: 20 }}>
                   <FormControl component="fieldset" disabled={healOrDamage === 'damage'}>
-                    <FormLabel component="legend">Heal Type</FormLabel>
-                    <RadioGroup aria-label="healType" name="healType" onChange={handleHealTypeChange} value={tempOrMain}>
+                    <Typography color={healOrDamage === 'damage' ? "textSecondary" : "primary"}>Heal Type</Typography>
+                    <RadioGroup aria-label="healType" name="healType" onChange={handleHealTypeChange} value={healType}>
                       <FormControlLabel control={<Radio color="primary" />} label="Main" value="main" />
                       <FormControlLabel control={<Radio color="primary" />} label="Temp" value="temp" />
                     </RadioGroup>
@@ -122,11 +132,11 @@ const UpdateHitPointsModal = () => {
                   <Divider orientation="vertical" />
                 </Grid>
                 <Grid item style={{ paddingLeft: 20 }}>
-                  <Typography color="textSecondary">Damage Type</Typography>
+                  <Typography color={healOrDamage === 'damage' ? "primary" : "textSecondary"}>Damage Type</Typography>
                   <Select
                     disabled={healOrDamage === 'heal'}
                     onChange={handleDamageTypeChange}
-                    style={{ width: 150 }}
+                    style={{ width: 125, paddingLeft: 5 }}
                     value={damageType}
                   >
                     {damageTypes.map((type) => (
@@ -135,10 +145,11 @@ const UpdateHitPointsModal = () => {
                   </Select>
                 </Grid>
               </Grid>
-              <Grid item style={{ paddingLeft: 20 }}>
+              <Grid item style={{ paddingLeft: 20, paddingTop: 20 }}>
                 <TextField
                   color="secondary"
                   id="outlined-secondary"
+                  type="number"
                   onChange={(event) => { setAmount(event.target.value); }}
                   value={amount}
                   variant="outlined"
