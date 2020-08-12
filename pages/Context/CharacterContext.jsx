@@ -94,6 +94,15 @@ export const CharacterContextProvider = (props) => {
         marginRight: 2,
       },
     },
+    tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100},
+    tableCellInputStyle: {
+      'aria-label': 'naked' ,
+      style: {
+        fontSize: 17,
+        height: 10,
+        textAlign: 'center',
+      },
+    },
   };
 
   const damageTypes = [
