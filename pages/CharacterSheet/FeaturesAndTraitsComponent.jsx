@@ -48,3 +48,5 @@ const FeaturesAndTraitsComponent = () => {
 }
 
 export default FeaturesAndTraitsComponent;
+
+// see https://react-dnd.github.io/react-dnd/examples/dustbin/single-target
