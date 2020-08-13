@@ -25,21 +25,23 @@ const FeaturesAndTraitsComponent = () => {
     );
   }, [skillsAndFeatures]);
 
-  const renderCard = (item, index) => (
-    <DraggableCard
-      id={item.id}
-      index={index}
-      key={item.id}
-      moveCard={moveCard}
-      setText={setSkillsAndFeatures}
-      text={item.text}
-    />
-  );
+  const updateSkillsAndFeatures = (value, index) => {
+    setSkillsAndFeatuers(skillsAndFeatures.map((item, i) => i === index ? value : item));
+  }
 
   return (
     <DndProvider backend={HTML5Backend}>
       <Paper elevation={style.elevation} style={style.combatStatsComponent}>
-        {skillsAndFeatures.map((item, i) => renderCard(item, i))}
+        {skillsAndFeatures.map((item, index) => (
+          <DraggableCard
+            id={item.id}
+            index={index}
+            key={item.id}
+            moveCard={moveCard}
+            setSkillsAndFeatures={setSkillsAndFeatures}
+            text={item.text}
+          />
+        ))}
       </Paper>
     </DndProvider>
   )

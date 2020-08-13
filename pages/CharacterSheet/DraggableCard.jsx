@@ -7,29 +7,24 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PropTypes from 'prop-types';
 
-const DraggableCard = ({ id, text, index, moveCard, setText }) => {
+const DraggableCard = ({ id, text, index, moveCard, updateSkillsAndFeatures }) => {
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: 'card',
     hover(item, monitor) {
       if (!ref.current) { return; }
-      const dragIndex = item.index;
+      const startingIndex = item.index;
       const hoverIndex = index;
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) { return; }
-      // Determine rectangle on screen
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
-      // Get vertical middle
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      // Determine mouse position
-      const clientOffset = monitor.getClientOffset();
-      // Get pixels to the top
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      if (startingIndex === hoverIndex) { return; } // Don't replace items with themselves
+      const hoverBoundingRect = ref.current?.getBoundingClientRect(); // Determine rectangle on screen
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2; // Get vertical middle
+      const clientOffset = monitor.getClientOffset(); // Determine mouse position
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top; // Get pixels to the top
       // Only perform the move when the mouse has crossed half of the items height
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) { return; }
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) { return; }
+      if (startingIndex < hoverIndex && hoverClientY < hoverMiddleY) { return; }
+      if (startingIndex > hoverIndex && hoverClientY > hoverMiddleY) { return; }
 
-      moveCard(dragIndex, hoverIndex);
+      moveCard(startingIndex, hoverIndex);
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
@@ -56,7 +51,7 @@ const DraggableCard = ({ id, text, index, moveCard, setText }) => {
       >
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}
-          onChange={(event) => setText({ ...text, header: event.target.value })}
+          onChange={(event) => updateSkillsAndFeatures({ ...text, header: event.target.value }, index)}
           value={text.header}
         />
       </AccordionSummary>
@@ -64,7 +59,7 @@ const DraggableCard = ({ id, text, index, moveCard, setText }) => {
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}
           multiline
-          onChange={(event) => ({ ...text, body: event.target.value })}
+          onChange={(event) => updateSkillsAndFeatures({ ...text, body: event.target.value }, index)}
           rowsMax={5}
           value={text.header}
         />
@@ -81,7 +76,7 @@ DraggableCard.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
   moveCard: PropTypes.func.isRequired,
-  setText: PropTypes.func.isRequired,
+  updateSkillsAndFeatures: PropTypes.func.isRequired,
 };
 
 export default DraggableCard;
