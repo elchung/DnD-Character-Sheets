@@ -75,11 +75,11 @@ const UpdateHitPointsModal = () => {
       const remainingDamage = tempHP - amount;
       setTempHP(remainingDamage < 0 ? 0 : tempHP - amount);
       setCurrentHP(remainingDamage < 0 ? currentHP + remainingDamage : currentHP);
-      setHitPointHistory([...hitPointHistory])
-    } else if (healType==="main"){
-      setCurrentHP(MATH.min(currentHP + amount, maxHP));
+      setHitPointHistory([...hitPointHistory]);
+    } else if (healType === 'main') {
+      setCurrentHP(Math.min(currentHP + amount, maxHP));
     } else {
-      setTempHP(tempHP + amount)
+      setTempHP(tempHP + amount);
     }
   };
 

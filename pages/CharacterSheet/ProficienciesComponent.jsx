@@ -38,7 +38,7 @@ const ProficienciesComponent = () => {
   };
 
   return (
-    <Paper elevation={style.elevation} style={style.combatStatsComponent}>
+    <Paper elevation={style.elevation} style={style.proficienciesComponent}>
       <Grid container direction="column" justify="center">
         <Grid item>
           <Typography align="center" color="textSecondary" style={style.headerStyle}>Proficiencies</Typography>

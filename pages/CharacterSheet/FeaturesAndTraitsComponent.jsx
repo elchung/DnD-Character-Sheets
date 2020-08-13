@@ -1,58 +1,48 @@
-import React from 'react'
-import Textfield from '@material-ui/core/TextField';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import Paper from '@material-ui/core/Paper';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import React, { useCallback } from 'react';
+import update from 'immutability-helper';
+import DraggableCard from './DraggableCard';
 import {
   useCharacterState,
   useSetCharacterState,
 } from '../Context/CharacterContext';
 
-const SkillsAndFeaturesComponent = () => {
-  {
-    const {
-      skillsAndFeatures, style,
-    } = useCharacterState();
-    const {
-      setSkillsAndFeatures,
-    } = useSetCharacterState();
-    
-    const moveCard = useCallback(
-      (dragIndex, hoverIndex) => {
-        const dragCard = cards[dragIndex]
-        setCards(
-          update(cards, {
-            $splice: [
-              [dragIndex, 1],
-              [hoverIndex, 0, dragCard],
-            ],
-          }),
-        )
-      },
-      [cards],
-    )
-    
-    const renderCard = (card, index) => {
-      return (
-        <Card
-          key={card.id}
-          index={index}
-          id={card.id}
-          text={card.text}
-          moveCard={moveCard}
-        />
-      )
-    }
-    return (
-      <>
-        {cards.map((card, i) => renderCard(card, i))}
-      </>
-    )
-    
-    return (
-      <DndProvider backend={HTML5Backend}>
-        
-      </DndProvider>
-    )
-  }
+const FeaturesAndTraitsComponent = () => {
+  const { skillsAndFeatures, style } = useCharacterState();
+  const { setSkillsAndFeatures } = useSetCharacterState();
+
+  const moveCard = useCallback((dragIndex, hoverIndex) => {
+    const dragCard = skillsAndFeatures[dragIndex];
+    setSkillsAndFeatures(
+      update(skillsAndFeatures, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragCard],
+        ],
+      }),
+    );
+  }, [skillsAndFeatures]);
+
+  const renderCard = (item, index) => (
+    <DraggableCard
+      id={item.id}
+      index={index}
+      key={item.id}
+      moveCard={moveCard}
+      setText={setSkillsAndFeatures}
+      text={item.text}
+    />
+  );
+
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <Paper elevation={style.elevation} style={style.combatStatsComponent}>
+        {skillsAndFeatures.map((item, i) => renderCard(item, i))}
+      </Paper>
+    </DndProvider>
+  )
 }
+
+export default FeaturesAndTraitsComponent;

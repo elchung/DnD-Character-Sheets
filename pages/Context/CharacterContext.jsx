@@ -31,16 +31,22 @@ export const CharacterContextProvider = (props) => {
   const [hitDice, setHitDice] = useState([{ numDice: 0, diceType: 0, numUsed: 0 }]);
   const [currentHitDice, setCurrentHitDice] = useState(0);
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
-  const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() })
-  const [featuresAndTraits, setFeaturesAndTraits] = useState([{}]) // {id: #, text: {title: '', body: ''}}
+  const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() });
+  const [featuresAndTraits, setFeaturesAndTraits] = useState([{}]); // {id: #, text: {title: '', body: ''}}
   const style = {
     elevation: 3,
     abilityScoreComponent: { width: 125, paddingBottom: 20 },
     combatStatsComponent: {
       width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },
+    proficienciesComponent: {
+      width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
+    },
     deathSaveComponent: {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
+    },
+    FeaturesAndTraitsComponent: {
+      maxHeight: 355, overflow: 'auto', width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },
     headerStyle: { marginTop: -2, marginBottom: -2 },
     hitDieComponent: {
@@ -133,6 +139,7 @@ export const CharacterContextProvider = (props) => {
     damageTypes,
     proficiencies,
     style,
+    featuresAndTraits
   };
 
   const characterDispatch = {
@@ -155,6 +162,7 @@ export const CharacterContextProvider = (props) => {
     setCurrentHitDice,
     setDeathSaves,
     setProficiencies,
+    setFeaturesAndTraits
   };
 
   return (

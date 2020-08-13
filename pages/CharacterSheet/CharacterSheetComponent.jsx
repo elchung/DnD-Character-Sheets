@@ -11,7 +11,7 @@ export default function Home() {
       <Grid container direction="row" spacing={2}>
         <LeftColumnComponent />
         <Grid item>
-          <Grid container spacing={2} direction="column">
+          <Grid container direction="column" spacing={2}>
             <Grid item>
               <CombatStatsComponent />
             </Grid>
