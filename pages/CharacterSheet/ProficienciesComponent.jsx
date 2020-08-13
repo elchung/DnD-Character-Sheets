@@ -19,8 +19,7 @@ import {
 } from '../Context/CharacterContext';
 import React from 'react';
 
-const ProficienciesComponent = ({
-}) => {
+const ProficienciesComponent = () => {
   const {
     proficiencies, style,
   } = useCharacterState();
