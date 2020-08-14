@@ -32,7 +32,7 @@ export const CharacterContextProvider = (props) => {
   const [currentHitDice, setCurrentHitDice] = useState(0);
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
   const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() });
-  const [featuresAndTraits, setFeaturesAndTraits] = useState([{}]); // {id: #, text: {title: '', body: ''}}
+  const [featuresAndTraits, setFeaturesAndTraits] = useState([{id: 0, text: {title: 'test title', body: 'this is the body'}}]);
   const style = {
     elevation: 3,
     abilityScoreComponent: { width: 125, paddingBottom: 20 },

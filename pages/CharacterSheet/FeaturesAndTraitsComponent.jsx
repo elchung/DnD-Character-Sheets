@@ -10,35 +10,35 @@ import {
 } from '../Context/CharacterContext';
 
 const FeaturesAndTraitsComponent = () => {
-  const { skillsAndFeatures, style } = useCharacterState();
-  const { setSkillsAndFeatures } = useSetCharacterState();
+  const { featuresAndTraits, style } = useCharacterState();
+  const { setFeaturesAndTraits } = useSetCharacterState();
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
-    const dragCard = skillsAndFeatures[dragIndex];
+    const dragCard = featuresAndTraits[dragIndex];
     setSkillsAndFeatures(
-      update(skillsAndFeatures, {
+      update(featuresAndTraits, {
         $splice: [
           [dragIndex, 1],
           [hoverIndex, 0, dragCard],
         ],
       }),
     );
-  }, [skillsAndFeatures]);
+  }, [featuresAndTraits]);
 
-  const updateSkillsAndFeatures = (value, index) => {
-    setSkillsAndFeatuers(skillsAndFeatures.map((item, i) => i === index ? value : item));
+  const updateFeaturesAndTraits = (value, index) => {
+    setFeaturesAndTraits(featuresAndTraits.map((item, i) => i === index ? value : item));
   }
 
   return (
     <DndProvider backend={HTML5Backend}>
       <Paper elevation={style.elevation} style={style.combatStatsComponent}>
-        {skillsAndFeatures.map((item, index) => (
+        {featuresAndTraits.map((item, index) => (
           <DraggableCard
             id={item.id}
             index={index}
             key={item.id}
             moveCard={moveCard}
-            setSkillsAndFeatures={setSkillsAndFeatures}
+            setFeaturesAndTraits={updateFeaturesAndTraits}
             text={item.text}
           />
         ))}

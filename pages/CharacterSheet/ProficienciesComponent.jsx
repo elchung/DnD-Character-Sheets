@@ -49,11 +49,11 @@ const ProficienciesComponent = () => {
         <Grid item>
           <Grid container direction="row" justify="space-evenly">
             {armorProficiencies.map((proficiency) => (
-              <Grid item>
+              <Grid item key={`${proficiency}-grid`}>
                 <FormControlLabel
                   control={
                     <Checkbox
-                      key={`${proficiency}`}
+                      key={`${proficiency}-checkbox`}
                       checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
                       color="primary"
                       icon={<RadioButtonUncheckedIcon fontSize="small" />}

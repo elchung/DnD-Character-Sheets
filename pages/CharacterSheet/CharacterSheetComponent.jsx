@@ -4,6 +4,7 @@ import { CharacterContextProvider } from '../Context/CharacterContext';
 import CombatStatsComponent from './CombatStatsComponent';
 import LeftColumnComponent from './LeftColumn/LeftColumnComponent';
 import ProficienciesComponent from './ProficienciesComponent';
+import FeaturesAndTraitsComponent from './FeaturesAndTraitsComponent';
 
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
             </Grid>
             <Grid item>
               <ProficienciesComponent />
+            </Grid>
+            <Grid item>
+              <FeaturesAndTraitsComponent />
             </Grid>
           </Grid>
         </Grid>

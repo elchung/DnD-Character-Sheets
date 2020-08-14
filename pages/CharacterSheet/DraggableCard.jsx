@@ -7,7 +7,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PropTypes from 'prop-types';
 
-const DraggableCard = ({ id, text, index, moveCard, updateSkillsAndFeatures }) => {
+const DraggableCard = ({ id, text, index, moveCard, updateFeaturesAndTraits }) => {
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: 'card',
@@ -45,13 +45,11 @@ const DraggableCard = ({ id, text, index, moveCard, updateSkillsAndFeatures }) =
   return (
     <Accordion>
       <AccordionSummary
-        aria-controls="panel1a-content"
         expandIcon={<ExpandMoreIcon />}
-        id="panel1a-header"
       >
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}
-          onChange={(event) => updateSkillsAndFeatures({ ...text, header: event.target.value }, index)}
+          onChange={(event) => updateFeaturesAndTraits({ ...text, header: event.target.value }, index)}
           value={text.header}
         />
       </AccordionSummary>
@@ -59,7 +57,7 @@ const DraggableCard = ({ id, text, index, moveCard, updateSkillsAndFeatures }) =
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}
           multiline
-          onChange={(event) => updateSkillsAndFeatures({ ...text, body: event.target.value }, index)}
+          onChange={(event) => updateFeaturesAndTraits({ ...text, body: event.target.value }, index)}
           rowsMax={5}
           value={text.header}
         />
@@ -76,7 +74,7 @@ DraggableCard.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
   moveCard: PropTypes.func.isRequired,
-  updateSkillsAndFeatures: PropTypes.func.isRequired,
+  updateFeaturesAndTraits: PropTypes.func,
 };
 
 export default DraggableCard;
