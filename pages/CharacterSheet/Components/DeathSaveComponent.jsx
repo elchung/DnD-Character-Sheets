@@ -1,11 +1,11 @@
 import Paper from '@material-ui/core/Paper';
-import DeathSaveRadio from './DeathSaveRadio';
+import DeathSaveRadio from './Reusable/DeathSaveRadio';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import {
   useCharacterState,
   useSetCharacterState,
-} from '../Context/CharacterContext';
+} from '../../Context/CharacterContext';
 
 const DeathSaveComponent = () => {
   const { deathSaves, style } = useCharacterState();

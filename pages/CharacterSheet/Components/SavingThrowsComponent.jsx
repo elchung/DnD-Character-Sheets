@@ -1,9 +1,9 @@
 import Card from '@material-ui/core/Card';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
-import { scoreToModifier } from '../Utils/abilityScoreUtils';
+import { scoreToModifier } from '../../Utils/abilityScoreUtils';
 import List from '@material-ui/core/List';
-import { useCharacterState, useSetCharacterState } from '../Context/CharacterContext';
+import { useCharacterState, useSetCharacterState } from '../../Context/CharacterContext';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';

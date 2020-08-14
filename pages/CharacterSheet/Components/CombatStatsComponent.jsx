@@ -4,11 +4,11 @@ import Paper from '@material-ui/core/Paper';
 import {
   useCharacterState,
   useSetCharacterState,
-} from '../Context/CharacterContext';
+} from '../../Context/CharacterContext';
 import DeathSaveComponent from './DeathSaveComponent';
 import HitDieComponent from './HitDieComponent';
 import React from 'react';
-import SingleItemDisplayComponent from './SingleItemDisplayComponent';
+import SingleItemDisplayComponent from './Reusable/SingleItemDisplayComponent';
 
 const CombatStatsComponent = ({
 }) => {

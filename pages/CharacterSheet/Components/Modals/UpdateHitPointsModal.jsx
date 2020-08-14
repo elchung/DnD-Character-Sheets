@@ -20,7 +20,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import {
   useCharacterState,
   useSetCharacterState,
-} from '../../Context/CharacterContext';
+} from '../../../Context/CharacterContext';
 
 
 const UpdateHitPointsModal = () => {
@@ -86,7 +86,7 @@ const UpdateHitPointsModal = () => {
   return (
     <div>
       <Chip
-        label={<LocalPizzaIcon color="action" fontSize="small" style={{ marginLeft: -5 }}/>}
+        label={<LocalPizzaIcon color="action" fontSize="small" style={{ marginLeft: -5 }} />}
         onClick={handleOpen}
         size="small"
         style={{

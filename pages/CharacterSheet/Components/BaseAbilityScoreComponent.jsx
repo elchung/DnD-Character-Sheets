@@ -1,5 +1,5 @@
 import Box from '@material-ui/core/Box';
-import { scoreToModifier } from '../Utils/abilityScoreUtils';
+import { scoreToModifier } from '../../Utils/abilityScoreUtils';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import InputBase from '@material-ui/core/InputBase';

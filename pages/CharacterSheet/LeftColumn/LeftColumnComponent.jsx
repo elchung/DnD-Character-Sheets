@@ -1,10 +1,10 @@
-import AbilityScoreComponent from '../AbilityScoresComponent';
+import AbilityScoreComponent from '../Components/AbilityScoresComponent';
 import Grid from '@material-ui/core/Grid';
 import { useCharacterState, useSetCharacterState } from '../../Context/CharacterContext';
 import React from 'react';
-import SavingThrowsComponent from '../SavingThrowsComponent';
-import SingleLineDisplayComponent from '../SingleLineDisplayComponent';
-import SkillsComponent from '../SkillsComponent';
+import SavingThrowsComponent from '../Components/SavingThrowsComponent';
+import SingleLineDisplayComponent from '../Components/Reusable/SingleLineDisplayComponent';
+import SkillsComponent from '../Components/SkillsComponent';
 
 const LeftColumnComponent = () => {
   const characterState = useCharacterState();

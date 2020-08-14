@@ -16,7 +16,7 @@ import Textfield from '@material-ui/core/TextField';
 import {
   useCharacterState,
   useSetCharacterState,
-} from '../Context/CharacterContext';
+} from '../../Context/CharacterContext';
 import React from 'react';
 
 const ProficienciesComponent = () => {

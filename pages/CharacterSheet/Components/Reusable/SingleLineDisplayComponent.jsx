@@ -1,7 +1,7 @@
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import PropTypes from 'prop-types';
-import { useCharacterState } from '../Context/CharacterContext';
+import { useCharacterState } from '../../../Context/CharacterContext';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';

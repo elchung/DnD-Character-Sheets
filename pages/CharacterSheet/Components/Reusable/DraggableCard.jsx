@@ -1,13 +1,16 @@
-import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import InputBase from '@material-ui/core/InputBase';
 import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import ClearIcon from '@material-ui/icons/Clear';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import InputBase from '@material-ui/core/InputBase';
 import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
 
-const DraggableCard = ({ id, text, index, moveCard, updateFeaturesAndTraits }) => {
+const DraggableCard = ({
+  id, text, index, moveCard, updateFeaturesAndTraits, removeFeatureAndTrait
+}) => {
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: 'card',
@@ -39,18 +42,21 @@ const DraggableCard = ({ id, text, index, moveCard, updateFeaturesAndTraits }) =
       isDragging: monitor.isDragging(),
     }),
   });
-  // const opacity = isDragging ? 0 : 1;
+  const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
 
   return (
-    <Accordion>
+    <Accordion ref={ref} style={{ opacity, marginRight: 10, marginLeft: 10 }}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
+        style={{ paddingTop: 0, paddingBottom: 0 }}
       >
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}
-          onChange={(event) => updateFeaturesAndTraits({ ...text, header: event.target.value }, index)}
-          value={text.header}
+          onChange={(event) => updateFeaturesAndTraits({ ...text, title: event.target.value }, index)}
+          onClick={(event) => event.stopPropagation()}
+          onFocus={(event) => event.stopPropagation()}
+          value={text.title}
         />
       </AccordionSummary>
       <AccordionDetails>
@@ -58,8 +64,18 @@ const DraggableCard = ({ id, text, index, moveCard, updateFeaturesAndTraits }) =
           inputProps={{ 'aria-label': 'naked' }}
           multiline
           onChange={(event) => updateFeaturesAndTraits({ ...text, body: event.target.value }, index)}
+          onClick={(event) => event.stopPropagation()}
+          onFocus={(event) => event.stopPropagation()}
           rowsMax={5}
-          value={text.header}
+          value={text.body}
+        />
+        <Chip
+          label={<ClearIcon color="action" fontSize="small" style={{ marginLeft: -5 }} />}
+          onClick={() => removeFeatureAndTrait(index)}
+          size="small"
+          style={{
+            paddingTop: 3, marginTop: -7, width: 27, marginRight: -10
+          }}
         />
       </AccordionDetails>
     </Accordion>
@@ -69,7 +85,7 @@ const DraggableCard = ({ id, text, index, moveCard, updateFeaturesAndTraits }) =
 DraggableCard.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.shape({
-    header: PropTypes.string,
+    title: PropTypes.string,
     body: PropTypes.string,
   }).isRequired,
   index: PropTypes.number.isRequired,

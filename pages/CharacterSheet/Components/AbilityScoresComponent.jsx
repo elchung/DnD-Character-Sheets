@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import {
   useCharacterState,
   useSetCharacterState,
-} from '../Context/CharacterContext';
+} from '../../Context/CharacterContext';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import Switch from '@material-ui/core/Switch';

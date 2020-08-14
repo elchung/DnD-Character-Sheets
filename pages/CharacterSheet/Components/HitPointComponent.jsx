@@ -1,7 +1,7 @@
 import {
   useCharacterState,
   useSetCharacterState,
-} from '../Context/CharacterContext';
+} from '../../Context/CharacterContext';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
