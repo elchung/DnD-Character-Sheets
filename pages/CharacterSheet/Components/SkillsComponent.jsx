@@ -1,9 +1,7 @@
 import Card from '@material-ui/core/Card';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Checkbox from '@material-ui/core/Checkbox';
-import { scoreToModifier } from '../../Utils/abilityScoreUtils';
 import List from '@material-ui/core/List';
-import { useCharacterState, useSetCharacterState } from '../../Context/CharacterContext';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
@@ -11,6 +9,8 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { useCharacterState, useSetCharacterState } from '../../Context/CharacterContext';
+import { scoreToModifier } from '../../Utils/abilityScoreUtils';
 
 const theme = createMuiTheme({
   typography: {

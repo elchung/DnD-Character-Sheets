@@ -6,13 +6,18 @@ import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box'
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
 const DraggableCard = ({
-  id, text, index, moveCard, updateFeaturesAndTraits, removeFeatureAndTrait
+  id,
+  text,
+  index,
+  moveCard,
+  updateFeaturesAndTraits,
+  removeFeatureAndTrait,
 }) => {
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -22,8 +27,8 @@ const DraggableCard = ({
       const startingIndex = item.index;
       const hoverIndex = index;
       if (startingIndex === hoverIndex) { return; } // Don't replace items with themselves
-      const hoverBoundingRect = ref.current?.getBoundingClientRect(); // Determine rectangle on screen
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2; // Get vertical middle
+      const hoverBoundingRect = ref.current?.getBoundingClientRect(); // get rectangle on screen
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2; // Get vert mid
       const clientOffset = monitor.getClientOffset(); // Determine mouse position
       const hoverClientY = clientOffset.y - hoverBoundingRect.top; // Get pixels to the top
       // Only perform the move when the mouse has crossed half of the items height
@@ -47,39 +52,48 @@ const DraggableCard = ({
   });
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
+  const [displayText, setDisplayText] = React.useState(text);
 
   return (
-    <Accordion ref={ref} style={{ opacity, marginRight: 10, marginLeft: 10 }}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+    <Accordion
+      ref={ref}
+      style={{
+        opacity, marginRight: 10, marginLeft: 10,
+      }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        style={{ borderBottom: '1px solid rgba(0, 0, 0, .125)', height: 0 }}
+      >
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}
-          onChange={(event) => updateFeaturesAndTraits({ ...text, title: event.target.value }, index)}
-          onClick={(event) => event.stopPropagation()}
-          onFocus={(event) => event.stopPropagation()}
-          value={text.title}
+          onBlur={() => updateFeaturesAndTraits(displayText, index)}
+          onChange={(e) => setDisplayText({ ...text, title: e.target.value })}
+          onClick={(e) => e.stopPropagation()}
+          onFocus={(e) => e.stopPropagation()}
+          value={displayText.title}
         />
       </AccordionSummary>
-      <AccordionDetails>
-        <InputBase
+      <AccordionDetails style={{ height: '5%', padding: 5 }}>
+        <OutlinedInput
           inputProps={{
-            'aria-label': 'naked',
             style: {
               fontSize: 12,
-            }
+              marginTop: -10,
+              marginBottom: -10,
+            },
           }}
+          fullWidth
           multiline
-          onChange={(event) => updateFeaturesAndTraits({ ...text, body: event.target.value }, index)}
-          onClick={(event) => event.stopPropagation()}
-          onFocus={(event) => event.stopPropagation()}
           rowsMax={5}
-          value={text.body}
+          onBlur={() => updateFeaturesAndTraits(displayText, index)}
+          onChange={(e) => setDisplayText({ ...text, body: e.target.value })}
+          value={displayText.body}
         />
         <Box
-          position='relative'
-          left="40%"
-          top={22}
+          position="relative"
         >
-          <IconButton onClick={() => removeFeatureAndTrait(index)} >
+          <IconButton onClick={() => removeFeatureAndTrait(index)}>
             <HighlightOffRoundedIcon color="action" />
           </IconButton>
         </Box>
@@ -97,6 +111,7 @@ DraggableCard.propTypes = {
   index: PropTypes.number.isRequired,
   moveCard: PropTypes.func.isRequired,
   updateFeaturesAndTraits: PropTypes.func,
+  removeFeatureAndTrait: PropTypes.func,
 };
 
 export default DraggableCard;

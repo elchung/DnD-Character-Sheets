@@ -6,13 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint:fix": "eslint --fix --ext .js,.jsx ./"
+    "lint": "eslint --fix --ext .js,.jsx ./"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "eslint-config-wyze": "^5.0.0",
-    "eslint-plugin-wyze": "^3.4.0",
     "immutability-helper": "^3.1.1",
     "lodash": "^4.17.19",
     "material-ui": "^0.20.2",
@@ -29,6 +28,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.5",
-    "eslint-plugin-react-hooks": "^4.0.8"
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-wyze": "^3.4.0"
   }
 }

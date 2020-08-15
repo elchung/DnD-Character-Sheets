@@ -1,9 +1,9 @@
 import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
-import { useCharacterState } from '../../../Context/CharacterContext';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { useCharacterState } from '../../../Context/CharacterContext';
 
 const SingleItemDisplayComponent = ({
   header,

@@ -1,12 +1,12 @@
-import BaseAbilityScoreComponent from './BaseAbilityScoreComponent';
 import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import React from 'react';
+import Switch from '@material-ui/core/Switch';
 import {
   useCharacterState,
   useSetCharacterState,
 } from '../../Context/CharacterContext';
-import Grid from '@material-ui/core/Grid';
-import React from 'react';
-import Switch from '@material-ui/core/Switch';
+import BaseAbilityScoreComponent from './BaseAbilityScoreComponent';
 
 const AbilityScoreComponent = () => {
   const characterState = useCharacterState();

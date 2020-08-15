@@ -1,17 +1,16 @@
 import Grid from '@material-ui/core/Grid';
-import HitPointComponent from './HitPointComponent';
 import Paper from '@material-ui/core/Paper';
+import React from 'react';
+import HitPointComponent from './HitPointComponent';
 import {
   useCharacterState,
   useSetCharacterState,
 } from '../../Context/CharacterContext';
 import DeathSaveComponent from './DeathSaveComponent';
 import HitDieComponent from './HitDieComponent';
-import React from 'react';
 import SingleItemDisplayComponent from './Reusable/SingleItemDisplayComponent';
 
-const CombatStatsComponent = ({
-}) => {
+const CombatStatsComponent = () => {
   const {
     maxHP, initiative, speed, armorClass, style,
   } = useCharacterState();

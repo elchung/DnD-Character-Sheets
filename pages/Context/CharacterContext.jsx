@@ -33,9 +33,9 @@ export const CharacterContextProvider = (props) => {
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
   const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() });
   const testCards = [
-    {id: 0, text: {title: 'test title', body: 'this is the body'}},
-    {id: 1, text: {title: 'test title1', body: 'this is the body1'}},
-    ];
+    { id: 0, text: { title: 'test title', body: 'this is the body' } },
+    { id: 1, text: { title: 'test title1', body: 'this is the body1' } },
+  ];
   const [featuresAndTraits, setFeaturesAndTraits] = useState(testCards);
   const style = {
     elevation: 3,
@@ -105,9 +105,9 @@ export const CharacterContextProvider = (props) => {
         marginRight: 2,
       },
     },
-    tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100},
+    tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
     tableCellInputStyle: {
-      'aria-label': 'naked' ,
+      'aria-label': 'naked',
       style: {
         fontSize: 17,
         height: 10,
@@ -118,7 +118,7 @@ export const CharacterContextProvider = (props) => {
 
   const damageTypes = [
     'acid', 'bludgeoning', 'cold', 'fire', 'force', 'lightning',
-    'necrotic', 'piercing', 'poison', 'psychic', 'radiant', 'slashing', 'thunder'
+    'necrotic', 'piercing', 'poison', 'psychic', 'radiant', 'slashing', 'thunder',
   ];
 
   const characterState = {
@@ -143,7 +143,7 @@ export const CharacterContextProvider = (props) => {
     damageTypes,
     proficiencies,
     style,
-    featuresAndTraits
+    featuresAndTraits,
   };
 
   const characterDispatch = {
@@ -166,7 +166,7 @@ export const CharacterContextProvider = (props) => {
     setCurrentHitDice,
     setDeathSaves,
     setProficiencies,
-    setFeaturesAndTraits
+    setFeaturesAndTraits,
   };
 
   return (

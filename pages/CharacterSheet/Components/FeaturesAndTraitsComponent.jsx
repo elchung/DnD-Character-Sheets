@@ -2,11 +2,11 @@
 import Paper from '@material-ui/core/Paper';
 import React, { useCallback } from 'react';
 import update from 'immutability-helper';
-import DraggableCard from './Reusable/DraggableCard';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import Typography from '@material-ui/core/Typography';
+import DraggableCard from './Reusable/DraggableCard';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -29,11 +29,9 @@ const FeaturesAndTraitsComponent = () => {
   }, [featuresAndTraits]);
 
   const updateFeaturesAndTraits = (value, index) => {
-    console.log(value);
-    console.log(index);
-    console.log(featuresAndTraits);
-    let temp = [...featuresAndTraits];
-    temp[index] = value
+    // setFeaturesAndTraits(featuresAndTraits.map(((item, i) => i === index ? { id: index, text: value } : item))
+    const temp = [...featuresAndTraits];
+    temp[index] = { id: index, text: value };
     setFeaturesAndTraits(temp);
   };
 
@@ -49,7 +47,7 @@ const FeaturesAndTraitsComponent = () => {
 
   return (
     <Paper elevation={style.elevation} style={style.FeaturesAndTraitsComponent}>
-      
+
       <Typography align="center" color="textSecondary" style={{ ...style.headerStyle, paddingBottom: 10 }}>Features/Traits</Typography>
       {featuresAndTraits.map((item, index) => (
         <DraggableCard
@@ -62,8 +60,8 @@ const FeaturesAndTraitsComponent = () => {
           updateFeaturesAndTraits={updateFeaturesAndTraits}
         />
       ))}
-      <Box display='flex' justifyContent='center'>
-        <IconButton onClick={handleAddNew} >
+      <Box display="flex" justifyContent="center">
+        <IconButton onClick={handleAddNew}>
           <AddCircleRoundedIcon color="action" style={{ marginLeft: -5 }} />
         </IconButton>
       </Box>

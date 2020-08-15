@@ -1,7 +1,7 @@
-import AbilityScoreComponent from '../Components/AbilityScoresComponent';
 import Grid from '@material-ui/core/Grid';
-import { useCharacterState, useSetCharacterState } from '../../Context/CharacterContext';
 import React from 'react';
+import AbilityScoreComponent from '../Components/AbilityScoresComponent';
+import { useCharacterState, useSetCharacterState } from '../../Context/CharacterContext';
 import SavingThrowsComponent from '../Components/SavingThrowsComponent';
 import SingleLineDisplayComponent from '../Components/Reusable/SingleLineDisplayComponent';
 import SkillsComponent from '../Components/SkillsComponent';

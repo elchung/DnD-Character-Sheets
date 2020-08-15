@@ -1,7 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import Divider from '@material-ui/core/Divider';
 import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -13,11 +12,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import InputBase from '@material-ui/core/InputBase';
 import Textfield from '@material-ui/core/TextField';
+import React from 'react';
 import {
   useCharacterState,
   useSetCharacterState,
 } from '../../Context/CharacterContext';
-import React from 'react';
 
 const ProficienciesComponent = () => {
   const {
@@ -26,8 +25,8 @@ const ProficienciesComponent = () => {
   const {
     setProficiencies,
   } = useSetCharacterState();
-  const armorProficiencies = ['light', 'medium', 'heavy', 'shields']
-  const weaponProficiencies = ['simple', 'martial', 'other:']
+  const armorProficiencies = ['light', 'medium', 'heavy', 'shields'];
+  const weaponProficiencies = ['simple', 'martial', 'other:'];
 
   const handleArmorProficiencyCheckboxClick = (event) => {
 
@@ -51,7 +50,7 @@ const ProficienciesComponent = () => {
             {armorProficiencies.map((proficiency) => (
               <Grid item key={`${proficiency}-grid`}>
                 <FormControlLabel
-                  control={
+                  control={(
                     <Checkbox
                       key={`${proficiency}-checkbox`}
                       checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
@@ -60,12 +59,11 @@ const ProficienciesComponent = () => {
                       onChange={handleArmorProficiencyCheckboxClick}
                       // checked={proficiencies.armor.has(prof)}
                     />
-                  }
+                  )}
                   label={proficiency}
                 />
               </Grid>
-            ))
-            }
+            ))}
           </Grid>
         </Grid>
         <Grid item>
@@ -76,7 +74,7 @@ const ProficienciesComponent = () => {
             {weaponProficiencies.map((proficiency) => (
               <Grid item>
                 <FormControlLabel
-                  control={
+                  control={(
                     <Checkbox
                       key={`${proficiency}`}
                       checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
@@ -85,16 +83,15 @@ const ProficienciesComponent = () => {
                       onChange={handleWeaponProficiencyCheckboxClick}
                       checked={proficiencies.weapons.has(proficiency)}
                     />
-                  }
+                  )}
                   label={proficiency}
                 />
               </Grid>
-            ))
-            }
+            ))}
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container direction="row" justify="space-evenly" alignItems="center" style={{paddingBottom: 5}}>
+          <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ paddingBottom: 5 }}>
             <Grid item>
               <Typography variant="caption">Languages</Typography>
             </Grid>
@@ -104,10 +101,10 @@ const ProficienciesComponent = () => {
           </Grid>
           <Grid container direction="row" justify="space-evenly" alignItems="center">
             <Grid item>
-              <TableContainer style={{maxHeight: 200}}>
+              <TableContainer style={{ maxHeight: 200 }}>
                 <Table>
                   <TableBody>
-                    {[...Array(8).keys()].map(index => (
+                    {[...Array(8).keys()].map((index) => (
                       <TableRow>
                         <TableCell style={style.tableCellStyle}>
                           <InputBase
@@ -125,10 +122,10 @@ const ProficienciesComponent = () => {
               <Divider orientation="vertical" variant="fullWidth"/>
             </Grid> */}
             <Grid item>
-              <TableContainer style={{maxHeight: 200}}>
+              <TableContainer style={{ maxHeight: 200 }}>
                 <Table>
                   <TableBody>
-                    {[...Array(8).keys()].map(index => (
+                    {[...Array(8).keys()].map((index) => (
                       <TableRow>
                         <TableCell style={style.tableCellStyle}>
                           <Textfield
@@ -152,9 +149,9 @@ const ProficienciesComponent = () => {
 
 export default ProficienciesComponent;
 
-//todo: update proficinecy table to look nicer (better grouped radio buttons),
-//add button to add additional proficinecies
-//allow weapon checkbox to be clickable
-//save all proficincies in correct location
-//show divider more clearly
-//consider converting table to two lists with outlined textfields????
+// todo: update proficinecy table to look nicer (better grouped radio buttons),
+// add button to add additional proficinecies
+// allow weapon checkbox to be clickable
+// save all proficincies in correct location
+// show divider more clearly
+// consider converting table to two lists with outlined textfields????

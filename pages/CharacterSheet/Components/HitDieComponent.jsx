@@ -1,7 +1,3 @@
-import {
-  useCharacterState,
-  useSetCharacterState,
-} from '../../Context/CharacterContext';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,6 +5,10 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import {
+  useCharacterState,
+  useSetCharacterState,
+} from '../../Context/CharacterContext';
 
 const HitDieComponent = () => {
   const { hitDice, style } = useCharacterState();

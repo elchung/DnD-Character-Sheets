@@ -1,15 +1,13 @@
-import {
-  useCharacterState,
-  useSetCharacterState,
-} from '../../Context/CharacterContext';
-import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
-import LocalPizzaIcon from '@material-ui/icons/LocalPizza';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import {
+  useCharacterState,
+  useSetCharacterState,
+} from '../../Context/CharacterContext';
 import UpdateHitPointsModal from './Modals/UpdateHitPointsModal';
 
 const HitPointComponent = () => {

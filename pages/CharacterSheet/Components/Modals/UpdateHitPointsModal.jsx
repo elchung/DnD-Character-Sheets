@@ -30,7 +30,6 @@ const UpdateHitPointsModal = () => {
     maxHP,
     damageTypes,
     hitPointHistory,
-    style,
   } = useCharacterState();
   const {
     setCurrentHP,
@@ -41,7 +40,7 @@ const UpdateHitPointsModal = () => {
   const [healOrDamage, setHealOrDamage] = React.useState('damage');
   const [healType, setHealType] = React.useState('main');
   const [amount, setAmount] = React.useState(0);
-  const [damageType, setDamageType] = React.useState("")
+  const [damageType, setDamageType] = React.useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -90,7 +89,7 @@ const UpdateHitPointsModal = () => {
         onClick={handleOpen}
         size="small"
         style={{
-          paddingTop: 3, marginTop: -7, width: 27, marginRight: -10
+          paddingTop: 3, marginTop: -7, width: 27, marginRight: -10,
         }}
       />
       <Modal
@@ -121,7 +120,7 @@ const UpdateHitPointsModal = () => {
                 </Grid>
                 <Grid item style={{ paddingLeft: 20, paddingRight: 20 }}>
                   <FormControl component="fieldset" disabled={healOrDamage === 'damage'}>
-                    <Typography color={healOrDamage === 'damage' ? "textSecondary" : "primary"}>Heal Type</Typography>
+                    <Typography color={healOrDamage === 'damage' ? 'textSecondary' : 'primary'}>Heal Type</Typography>
                     <RadioGroup aria-label="healType" name="healType" onChange={handleHealTypeChange} value={healType}>
                       <FormControlLabel control={<Radio color="primary" />} label="Main" value="main" />
                       <FormControlLabel control={<Radio color="primary" />} label="Temp" value="temp" />
@@ -132,7 +131,7 @@ const UpdateHitPointsModal = () => {
                   <Divider orientation="vertical" />
                 </Grid>
                 <Grid item style={{ paddingLeft: 20 }}>
-                  <Typography color={healOrDamage === 'damage' ? "primary" : "textSecondary"}>Damage Type</Typography>
+                  <Typography color={healOrDamage === 'damage' ? 'primary' : 'textSecondary'}>Damage Type</Typography>
                   <Select
                     disabled={healOrDamage === 'heal'}
                     onChange={handleDamageTypeChange}

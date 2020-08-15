@@ -1,5 +1,4 @@
 import Box from '@material-ui/core/Box';
-import { scoreToModifier } from '../../Utils/abilityScoreUtils';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import InputBase from '@material-ui/core/InputBase';
@@ -7,6 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { scoreToModifier } from '../../Utils/abilityScoreUtils';
 
 const BaseAbilityScoreComponent = ({
   ability,
