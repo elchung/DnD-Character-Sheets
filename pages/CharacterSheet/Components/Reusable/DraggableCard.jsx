@@ -2,9 +2,12 @@ import { useDrag, useDrop } from 'react-dnd';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
-import ClearIcon from '@material-ui/icons/Clear';
+import HighlightOffRoundedIcon from '@material-ui/icons/HighlightOffRounded';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box'
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
@@ -47,10 +50,7 @@ const DraggableCard = ({
 
   return (
     <Accordion ref={ref} style={{ opacity, marginRight: 10, marginLeft: 10 }}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        style={{ paddingTop: 0, paddingBottom: 0 }}
-      >
+      <AccordionSummary expandIcon={<ExpandMoreIcon />} >
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}
           onChange={(event) => updateFeaturesAndTraits({ ...text, title: event.target.value }, index)}
@@ -61,7 +61,12 @@ const DraggableCard = ({
       </AccordionSummary>
       <AccordionDetails>
         <InputBase
-          inputProps={{ 'aria-label': 'naked' }}
+          inputProps={{
+            'aria-label': 'naked',
+            style: {
+              fontSize: 12,
+            }
+          }}
           multiline
           onChange={(event) => updateFeaturesAndTraits({ ...text, body: event.target.value }, index)}
           onClick={(event) => event.stopPropagation()}
@@ -69,14 +74,15 @@ const DraggableCard = ({
           rowsMax={5}
           value={text.body}
         />
-        <Chip
-          label={<ClearIcon color="action" fontSize="small" style={{ marginLeft: -5 }} />}
-          onClick={() => removeFeatureAndTrait(index)}
-          size="small"
-          style={{
-            paddingTop: 3, marginTop: -7, width: 27, marginRight: -10
-          }}
-        />
+        <Box
+          position='relative'
+          left="40%"
+          top={22}
+        >
+          <IconButton onClick={() => removeFeatureAndTrait(index)} >
+            <HighlightOffRoundedIcon color="action" />
+          </IconButton>
+        </Box>
       </AccordionDetails>
     </Accordion>
   );

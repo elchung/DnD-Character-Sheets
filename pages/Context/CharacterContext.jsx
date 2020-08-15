@@ -35,11 +35,6 @@ export const CharacterContextProvider = (props) => {
   const testCards = [
     {id: 0, text: {title: 'test title', body: 'this is the body'}},
     {id: 1, text: {title: 'test title1', body: 'this is the body1'}},
-    {id: 2, text: {title: 'test title2', body: 'this is the body2'}},
-    {id: 3, text: {title: 'test title3', body: 'this is the body3'}},
-    {id: 4, text: {title: 'test title4', body: 'this is the body4'}},
-    {id: 5, text: {title: 'test title5', body: 'this is the body5'}},
-    {id: 6, text: {title: 'test title6', body: 'this is the body6'}},
     ];
   const [featuresAndTraits, setFeaturesAndTraits] = useState(testCards);
   const style = {

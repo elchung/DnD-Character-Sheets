@@ -3,8 +3,10 @@ import Paper from '@material-ui/core/Paper';
 import React, { useCallback } from 'react';
 import update from 'immutability-helper';
 import DraggableCard from './Reusable/DraggableCard';
-import Chip from '@material-ui/core/Chip';
-import AddIcon from '@material-ui/icons/Add';
+import Box from '@material-ui/core/Box';
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
+import Typography from '@material-ui/core/Typography';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -29,12 +31,17 @@ const FeaturesAndTraitsComponent = () => {
   const updateFeaturesAndTraits = (value, index) => {
     console.log(value);
     console.log(index);
-    setFeaturesAndTraits(featuresAndTraits.map((item, i) => i === index ? value : item));
+    console.log(featuresAndTraits);
+    let temp = [...featuresAndTraits];
+    temp[index] = value
+    setFeaturesAndTraits(temp);
   };
 
-  const removeFeatureAndTrait = (index) => {
-    //TODO remove from index and adjust index key for all subsequent items
-  };
+  const removeFeatureAndTrait = (index) => (
+    setFeaturesAndTraits(featuresAndTraits
+      .filter(({ id }) => index !== id)
+      .map((item, i) => ({ text: item.text, id: i })))
+  );
 
   const handleAddNew = () => {
     setFeaturesAndTraits([...featuresAndTraits, { id: featuresAndTraits.length, text: { title: '', body: '' } }]);
@@ -42,6 +49,8 @@ const FeaturesAndTraitsComponent = () => {
 
   return (
     <Paper elevation={style.elevation} style={style.FeaturesAndTraitsComponent}>
+      
+      <Typography align="center" color="textSecondary" style={{ ...style.headerStyle, paddingBottom: 10 }}>Features/Traits</Typography>
       {featuresAndTraits.map((item, index) => (
         <DraggableCard
           id={item.id}
@@ -53,14 +62,11 @@ const FeaturesAndTraitsComponent = () => {
           updateFeaturesAndTraits={updateFeaturesAndTraits}
         />
       ))}
-      <Chip
-        label={<AddIcon color="action" fontSize="small" style={{ marginLeft: -5 }} />}
-        onClick={handleAddNew}
-        size="small"
-        style={{
-          paddingTop: 3, marginTop: -7, width: 27, marginRight: -10
-        }}
-      />
+      <Box display='flex' justifyContent='center'>
+        <IconButton onClick={handleAddNew} >
+          <AddCircleRoundedIcon color="action" style={{ marginLeft: -5 }} />
+        </IconButton>
+      </Box>
     </Paper>
   );
 };
