@@ -24,11 +24,11 @@ const DnDListComponent = (items, setItems) => {
     setItems(items.map(((item, i) => (i === index ? { id: index, text: value } : item))));
   };
 
-  const removeItem = (value, index) => (
+  const removeItem = (index) => {
     setItems(items
       .filter(({ id }) => index !== id)
-      .map((item, i) => ({ text: item.text, id: i })))
-  );
+      .map((item, i) => ({ text: item.text, id: i })));
+  };
 
   const handleAddNew = () => {
     setItems([...items, { id: items.length, text: '' }]);
