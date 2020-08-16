@@ -1,7 +1,9 @@
 import { useDrag, useDrop } from 'react-dnd';
 import InputBase from '@material-ui/core/InputBase';
+import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import React, { useRef } from 'react';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
@@ -60,19 +62,32 @@ const DraggableCard = ({
     <ListItem
       ref={ref}
       key={key}
-      style={{ opacity }}
+      style={{
+        opacity, padding: 0, marginTop: -10, marginBottom: -10,
+      }}
     >
-      <InputBase
-        inputProps={style.tableCellInputStyle}
-        onBlur={() => updateItem(displayText)}
-        onChange={(event) => setDisplayText(event.target.value)}
-        onClick={(e) => e.stopPropagation()}
-        onFocus={(e) => e.stopPropagation()}
-        value={displayText}
-      />
-      <IconButton onClick={() => removeItem(index)}>
-        <ClearIcon color="action" fontSize="small" />
-      </IconButton>
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Grid item>
+          <TextField
+            variant="outlined"
+            onBlur={() => updateItem(displayText)}
+            onChange={(event) => setDisplayText(event.target.value)}
+            onClick={(e) => e.stopPropagation()}
+            onFocus={(e) => e.stopPropagation()}
+            value={displayText}
+            inputProps={{
+              style: {
+                fontSize: 12, paddingTop: 5, paddingBottom: 5, width: 80,
+              },
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <IconButton onClick={() => removeItem(index)}>
+            <ClearIcon color="action" fontSize="small" />
+          </IconButton>
+        </Grid>
+      </Grid>
     </ListItem>
   );
 };

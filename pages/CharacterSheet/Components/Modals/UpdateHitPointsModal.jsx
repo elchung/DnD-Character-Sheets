@@ -17,6 +17,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -84,14 +85,16 @@ const UpdateHitPointsModal = () => {
 
   return (
     <div>
-      <Chip
-        label={<LocalPizzaIcon color="action" fontSize="small" style={{ marginLeft: -5 }} />}
-        onClick={handleOpen}
-        size="small"
-        style={{
-          paddingTop: 3, marginTop: -7, width: 27, marginRight: -10,
-        }}
-      />
+      <IconButton onClick={handleOpen}>
+        <LocalPizzaIcon
+          color="action"
+          fontSize="small"
+          size="small"
+          style={{
+            marginRight: -25, marginTop: -10,
+          }}
+        />
+      </IconButton>
       <Modal
         BackdropComponent={Backdrop}
         BackdropProps={{ timeout: 500 }}

@@ -57,7 +57,7 @@ export const CharacterContextProvider = (props) => {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
     },
     HitDieComponentInputPropStyle: {
-      fontSize: 12,
+      fontSize: 15,
       width: 25,
       height: 20,
       marginTop: -5,

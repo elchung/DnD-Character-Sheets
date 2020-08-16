@@ -21,8 +21,8 @@ const ProficienciesComponent = () => {
   } = useSetCharacterState();
   const armorProficiencies = ['light', 'medium', 'heavy', 'shields'];
   const weaponProficiencies = ['simple', 'martial', 'other:'];
-  const temp = [1, 2, 3];
-  const [tempRight, setTempRight] = React.useState([{ id: 0, text: '' }]);
+  const [temp, setTemp] = React.useState([{ id: 0, text: 'test' }]);
+  const [tempRight, setTempRight] = React.useState([{ id: 0, text: 'test' }]);
 
 
   const handleArmorProficiencyCheckboxClick = (event) => {
@@ -96,19 +96,20 @@ const ProficienciesComponent = () => {
               <Typography variant="caption">Tools/Other</Typography>
             </Grid>
           </Grid>
-          <Grid container direction="row" justify="space-evenly" alignItems="center">
+          <Grid container direction="row" justify="space-evenly" alignItems="flex-start" style={{ maxHeight: 100 }}>
             <Grid item>
               <DnDListComponent
                 items={temp}
+                setItems={setTemp}
+                style={{ marginRight: 0 }}
+              />
+            </Grid>
+            <Grid item>
+              <DnDListComponent
+                items={tempRight}
                 setItems={setTempRight}
               />
             </Grid>
-            {/* <Grid item>
-              <DnDListComponent
-                items={temp}
-                setItems={setTemp}
-              />
-            </Grid> */}
           </Grid>
         </Grid>
       </Grid>

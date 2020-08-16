@@ -7,7 +7,7 @@ import List from '@material-ui/core/List';
 import PropTypes from 'prop-types';
 import DraggableListItem from './DraggableListItem';
 
-const DnDListComponent = (items, setItems) => {
+const DnDListComponent = ({ items, setItems, style }) => {
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     const dragCard = items[dragIndex];
     setItems(
@@ -35,7 +35,7 @@ const DnDListComponent = (items, setItems) => {
   };
 
   return (
-    <>
+    <Box style={style}>
       <List>
         {items.map((item, index) => (
           <DraggableListItem
@@ -54,12 +54,16 @@ const DnDListComponent = (items, setItems) => {
           <AddCircleRoundedIcon color="action" style={{ marginLeft: -5 }} />
         </IconButton>
       </Box>
-    </>
+    </Box>
   );
 };
 
 DnDListComponent.propTypes = {
   items: PropTypes.array.isRequired,
   setItems: PropTypes.func.isRequired,
+  style: PropTypes.object,
 };
+
+DnDListComponent.defaultProps = { style: {} };
+
 export default DnDListComponent;
