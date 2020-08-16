@@ -65,7 +65,11 @@ const DraggableCard = ({
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        style={{ borderBottom: '1px solid rgba(0, 0, 0, .125)', height: 0 }}
+        style={{
+          borderBottom: '1px solid rgba(0, 0, 0, .125)',
+          borderTop: '1px solid rgba(0, 0, 0, .125)',
+          height: 0,
+        }}
       >
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}

@@ -18,7 +18,6 @@ const DraggableCard = ({
   updateItem,
   removeItem,
 }) => {
-  const { style } = useCharacterState();
   const [displayText, setDisplayText] = React.useState(text);
   const ref = useRef(null);
 

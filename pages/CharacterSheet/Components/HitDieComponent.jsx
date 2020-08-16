@@ -27,12 +27,13 @@ const HitDieComponent = () => {
           )}
         />
         {hitDice.map((row) => (
-          <ListItem key={row} style={{}}>
+          <ListItem
+            key={row}
+          >
             <TextField
-              InputProps={{
+              inputProps={{
                 style: {
                   ...style.HitDieComponentInputPropStyle,
-                  marginLeft: -7,
                 },
               }}
               disabled
@@ -42,7 +43,7 @@ const HitDieComponent = () => {
               variant="outlined"
             />
             <TextField
-              InputProps={{
+              inputProps={{
                 style: {
                   ...style.HitDieComponentInputPropStyle,
                   marginLeft: 9,
@@ -55,7 +56,7 @@ const HitDieComponent = () => {
               variant="outlined"
             />
             <TextField
-              InputProps={{
+              inputProps={{
                 style: {
                   ...style.HitDieComponentInputPropStyle,
                   marginLeft: 13,

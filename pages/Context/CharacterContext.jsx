@@ -39,12 +39,12 @@ export const CharacterContextProvider = (props) => {
   const [featuresAndTraits, setFeaturesAndTraits] = useState(testCards);
   const style = {
     elevation: 3,
-    abilityScoreComponent: { width: 125, paddingBottom: 20 },
+    abilityScoreComponent: { width: 125, paddingBottom: 20, height: 955 },
     combatStatsComponent: {
       width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },
     proficienciesComponent: {
-      width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
+      width: 375, height: 355, paddingBottom: 20, paddingTop: 10, overflow: 'auto',
     },
     deathSaveComponent: {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
@@ -59,8 +59,12 @@ export const CharacterContextProvider = (props) => {
     HitDieComponentInputPropStyle: {
       fontSize: 15,
       width: 25,
-      height: 20,
-      marginTop: -5,
+      height: 25,
+      margin: 0,
+      paddingTop: 0,
+      paddingBottom: 0,
+      paddingLeft: 5,
+      paddingRight: 5,
     },
     hitPointComponentInputStyle: {
       fontSize: 15,

@@ -8,27 +8,31 @@ import LeftColumnComponent from './LeftColumn/LeftColumnComponent';
 import ProficienciesComponent from './Components/ProficienciesComponent';
 import FeaturesAndTraitsComponent from './Components/FeaturesAndTraitsComponent';
 
-export default function Home() {
-  return (
-    <DndProvider backend={HTML5Backend}>
-      <CharacterContextProvider>
-        <Grid container direction="row" spacing={2}>
-          <LeftColumnComponent />
-          <Grid item>
-            <Grid container direction="column" spacing={2}>
-              <Grid item>
-                <CombatStatsComponent />
-              </Grid>
-              <Grid item>
-                <ProficienciesComponent />
-              </Grid>
+const CharacterSheetComponent = () => (
+  <DndProvider backend={HTML5Backend}>
+    <CharacterContextProvider>
+      <Grid container direction="row" spacing={2}>
+        <LeftColumnComponent />
+        <Grid item>
+          <Grid container direction="column" spacing={2}>
+            <Grid item>
+              <CombatStatsComponent />
             </Grid>
           </Grid>
-          <Grid item>
-            <FeaturesAndTraitsComponent />
+        </Grid>
+        <Grid item>
+          <Grid container direction='column' spacing={2}>
+            <Grid item>
+              <ProficienciesComponent />
+            </Grid>
+            <Grid item>
+              <FeaturesAndTraitsComponent />
+            </Grid>
           </Grid>
         </Grid>
-      </CharacterContextProvider>
-    </DndProvider>
-  );
-}
+      </Grid>
+    </CharacterContextProvider>
+  </DndProvider>
+);
+
+export default CharacterSheetComponent;
