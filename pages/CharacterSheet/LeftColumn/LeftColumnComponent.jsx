@@ -12,9 +12,9 @@ const LeftColumnComponent = () => {
 
   return (
     <Grid item>
-      <Grid container direction='column'>
+      <Grid container direction="column">
         <Grid item>
-          <Grid container direction='row' spacing={2}>
+          <Grid container direction="row" spacing={2}>
             <Grid item>
               <AbilityScoreComponent />
             </Grid>

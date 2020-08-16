@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -12,8 +13,25 @@ import {
 
 const HitDieComponent = () => {
   const { hitDice, style } = useCharacterState();
-  // const { } = useSetCharacterState();
+  const { setHitDice } = useSetCharacterState();
   // { numDice: 0, diceType: 0, numUsed: 0 }
+  const [numUsed, setNumUsed] = React.useState([0]);
+
+  React.useEffect(() => {
+    if (numUsed.length < hitDice.length) {
+      setNumUsed([...numUsed, ...Array(hitDice.length - numUsed.length).fill(0)]);
+    } else if (numUsed.length > hitDice.length) {
+      setNumUsed(numUsed.slice(0, hitDice.length));
+    }
+  }, hitDice);
+
+  const handleHitDiceChange = (value, index) => {
+    setNumUsed(numUsed.map((item, i) => (i === index ? value : item)));
+  };
+
+  const handleOnBlur = () => {
+    setHitDice(hitDice.map((item, index) => ({ ...hitDice[index], numUsed: numUsed[index] })));
+  };
 
   return (
     <Paper style={style.hitDieComponent} variant="outlined">
@@ -21,53 +39,62 @@ const HitDieComponent = () => {
       <List dense disablePadding>
         <ListItemText
           primary={(
-            <Typography align="center" color="textSecondary" style={{ fontSize: 10 }}>
+            <Typography align="center" color="textSecondary" style={{ fontSize: 10, marginBottom: -8 }}>
               Level - Die - Used
             </Typography>
           )}
         />
-        {hitDice.map((row) => (
-          <ListItem
-            key={row}
-          >
-            <TextField
-              inputProps={{
-                style: {
-                  ...style.HitDieComponentInputPropStyle,
-                },
-              }}
-              disabled
-              id={`level-${row.toString}`}
-              key={`level-${row.toString}`}
-              value={row.numDice}
-              variant="outlined"
-            />
-            <TextField
-              inputProps={{
-                style: {
-                  ...style.HitDieComponentInputPropStyle,
-                  marginLeft: 9,
-                },
-              }}
-              disabled
-              id={`dicetype-${row.toString}`}
-              key={`dicetype-${row.toString}`}
-              value={`d${row.diceType}`}
-              variant="outlined"
-            />
-            <TextField
-              inputProps={{
-                style: {
-                  ...style.HitDieComponentInputPropStyle,
-                  marginLeft: 13,
-                },
-              }}
-              disabled
-              id={`numUsed-${row.toString}`}
-              key={`numUsed-${row.toString}`}
-              value={row.numUsed}
-              variant="outlined"
-            />
+        {hitDice.map((row, index) => (
+          <ListItem key={row}>
+            <Grid container direction="row">
+              <Grid item>
+                <TextField
+                  inputProps={{
+                    style: {
+                      ...style.HitDieComponentInputPropStyle,
+                    },
+                  }}
+                  style={{ paddingRight: 4, marginLeft: -8 }}
+                  disabled
+                  id={`level-${row.toString}`}
+                  key={`level-${row.toString}`}
+                  value={row.numDice}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  inputProps={{
+                    style: {
+                      ...style.HitDieComponentInputPropStyle,
+                      width: 17,
+                    },
+                  }}
+                  style={{ paddingRight: 3, paddingLeft: 5 }}
+                  disabled
+                  id={`dicetype-${row.toString}`}
+                  key={`dicetype-${row.toString}`}
+                  value={`d${row.diceType}`}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid>
+                <TextField
+                  inputProps={{
+                    style: {
+                      ...style.HitDieComponentInputPropStyle,
+                    },
+                  }}
+                  style={{ paddingLeft: 5, marginRight: -8 }}
+                  id={`numUsed-${row.toString}`}
+                  key={`numUsed-${row.toString}`}
+                  value={numUsed[index]}
+                  onChange={(e) => handleHitDiceChange(e.target.value, index)}
+                  onBlur={handleOnBlur}
+                  variant="outlined"
+                />
+              </Grid>
+            </Grid>
           </ListItem>
         ))}
       </List>

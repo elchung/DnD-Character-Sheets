@@ -51,7 +51,7 @@ const DnDListComponent = ({ items, setItems, style }) => {
       </List>
       <Box display="flex" justifyContent="center">
         <IconButton onClick={handleAddNew}>
-          <AddCircleRoundedIcon color="action"/>
+          <AddCircleRoundedIcon color="action" />
         </IconButton>
       </Box>
     </Box>
