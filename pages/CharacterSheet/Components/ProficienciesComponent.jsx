@@ -5,14 +5,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import InputBase from '@material-ui/core/InputBase';
-import Textfield from '@material-ui/core/TextField';
 import React from 'react';
+import DnDListComponent from './Reusable/DnDListComponent';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -27,6 +21,9 @@ const ProficienciesComponent = () => {
   } = useSetCharacterState();
   const armorProficiencies = ['light', 'medium', 'heavy', 'shields'];
   const weaponProficiencies = ['simple', 'martial', 'other:'];
+  const temp = [1, 2, 3];
+  const [tempRight, setTempRight] = React.useState([{ id: 0, text: '' }]);
+
 
   const handleArmorProficiencyCheckboxClick = (event) => {
 
@@ -101,45 +98,17 @@ const ProficienciesComponent = () => {
           </Grid>
           <Grid container direction="row" justify="space-evenly" alignItems="center">
             <Grid item>
-              <TableContainer style={{ maxHeight: 200 }}>
-                <Table>
-                  <TableBody>
-                    {[...Array(8).keys()].map((index) => (
-                      <TableRow>
-                        <TableCell style={style.tableCellStyle}>
-                          <InputBase
-                            defaultValue="testinput"
-                            inputProps={style.tableCellInputStyle}
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <DnDListComponent
+                items={temp}
+                setItems={setTempRight}
+              />
             </Grid>
             {/* <Grid item>
-              <Divider orientation="vertical" variant="fullWidth"/>
+              <DnDListComponent
+                items={temp}
+                setItems={setTemp}
+              />
             </Grid> */}
-            <Grid item>
-              <TableContainer style={{ maxHeight: 200 }}>
-                <Table>
-                  <TableBody>
-                    {[...Array(8).keys()].map((index) => (
-                      <TableRow>
-                        <TableCell style={style.tableCellStyle}>
-                          <Textfield
-                            defaultValue="testinput"
-                            inputProps={style.tableCellInputStyle}
-                            variant="outlined"
-                          />
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
           </Grid>
         </Grid>
       </Grid>
