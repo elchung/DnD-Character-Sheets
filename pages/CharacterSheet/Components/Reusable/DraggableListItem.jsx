@@ -76,7 +76,7 @@ const DraggableCard = ({
             value={displayText}
             inputProps={{
               style: {
-                fontSize: 12, paddingTop: 5, paddingBottom: 5, width: 80,
+                fontSize: 15, paddingTop: 5, paddingBottom: 5, width: 90,
               },
             }}
           />

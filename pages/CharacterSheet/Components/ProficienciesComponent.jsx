@@ -93,7 +93,7 @@ const ProficienciesComponent = () => {
               <Typography variant="caption" style={{paddingLeft: 45}}>Languages</Typography>
             </Grid>
             <Grid>
-              <Typography variant="caption" style={{paddingLeft: 110}}>Tools/Other</Typography>
+              <Typography variant="caption" style={{paddingLeft: 125}}>Tools/Other</Typography>
             </Grid>
           </Grid>
           <Grid container direction="row" justify="space-evenly" alignItems="flex-start" style={{ maxHeight: 100 }}>
@@ -120,10 +120,3 @@ const ProficienciesComponent = () => {
 };
 
 export default ProficienciesComponent;
-
-// todo: update proficinecy table to look nicer (better grouped radio buttons),
-// add button to add additional proficinecies
-// allow weapon checkbox to be clickable
-// save all proficincies in correct location
-// show divider more clearly
-// consider converting table to two lists with outlined textfields????
