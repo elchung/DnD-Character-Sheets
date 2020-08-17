@@ -7,7 +7,7 @@ import List from '@material-ui/core/List';
 import PropTypes from 'prop-types';
 import DraggableListItem from './DraggableListItem';
 
-const DnDListComponent = ({ items, setItems, style }) => {
+const DnDListComponent = ({ items, setItems, minDisplay, style }) => {
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     const dragCard = items[dragIndex];
     setItems(
@@ -33,6 +33,12 @@ const DnDListComponent = ({ items, setItems, style }) => {
   const handleAddNew = () => {
     setItems([...items, { id: items.length, text: '' }]);
   };
+
+  React.useEffect(() => {
+    if (items.length < minDisplay) {
+      handleAddNew();
+    }
+  }, [items]);
 
   return (
     <Box style={style}>
@@ -62,8 +68,9 @@ DnDListComponent.propTypes = {
   items: PropTypes.array.isRequired,
   setItems: PropTypes.func.isRequired,
   style: PropTypes.object,
+  minDisplay: PropTypes.number,
 };
 
-DnDListComponent.defaultProps = { style: {} };
+DnDListComponent.defaultProps = { style: {}, minDisplay: 0 };
 
 export default DnDListComponent;

@@ -102,6 +102,7 @@ const ProficienciesComponent = () => {
                 items={temp}
                 setItems={setTemp}
                 style={{ marginRight: 0 }}
+                minDisplay={3}
               />
             </Grid>
             <Grid item>
