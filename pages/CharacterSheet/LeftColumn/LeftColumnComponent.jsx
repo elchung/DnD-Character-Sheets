@@ -16,7 +16,7 @@ const LeftColumnComponent = () => {
         <Grid item>
           <Grid container direction="row" spacing={2}>
             <Grid item>
-              <AbilityScoreComponent />
+              <AbilityScoreComponent orientation="column" />
             </Grid>
             <Grid item>
               <Grid container direction="column" spacing={2}>

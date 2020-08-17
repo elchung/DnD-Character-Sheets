@@ -65,6 +65,7 @@ export const CharacterContextProvider = (props) => {
       paddingBottom: 0,
       paddingLeft: 5,
       paddingRight: 5,
+      textAlign: 'center',
     },
     hitPointComponentInputStyle: {
       fontSize: 15,

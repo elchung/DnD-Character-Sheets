@@ -13,6 +13,7 @@ const BaseAbilityScoreComponent = ({
   abilityScores,
   setAbilityScores,
   scoreOnTop,
+  orientation,
 }) => {
   const [displayedAbilityScore, setDisplayedAbilityScore] = React.useState(abilityScores[ability]);
   const mainText = scoreOnTop ? displayedAbilityScore : scoreToModifier(abilityScores[ability]);
@@ -31,7 +32,7 @@ const BaseAbilityScoreComponent = ({
   };
 
   return (
-    <Card elevation={0} style={{ width: 100, height: 130 }}>
+    <Card elevation={0} style={orientation === 'column' ? { width: 100, height: 130 } : { widdth: 130, height: 100 }}>
       <Card elevation={3} style={{ height: 105 }} variant="outlined">
         <CardContent style={{ paddingTop: 3 }}>
           <Typography align="center" color="textPrimary" noWrap variant="caption">
