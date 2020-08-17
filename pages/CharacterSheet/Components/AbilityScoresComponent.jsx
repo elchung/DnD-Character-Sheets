@@ -17,16 +17,15 @@ const AbilityScoreComponent = ({ orientation }) => {
   return (
     <Card elevation={style.elevation} style={style.abilityScoreComponent}>
       <Grid alignItems="flex-end" container direction="column" justify="center" wrap="nowrap">
-        <Grid item>
+        <Grid item style={{paddingBottom: 15}}>
           <Switch
             checked={!characterState.scoreOnTop}
             color="primary"
             onChange={() => setCharacterState.setScoreOnTop((state) => !state)}
             size="small"
-
           />
         </Grid>
-        <Grid alignItems="center" container direction={orientation} justify="center" spacing={3} wrap="nowrap">
+        <Grid alignItems="center" container direction={orientation} justify="center" spacing={1} wrap="nowrap">
           {Object.keys(characterState.abilityScores).map((ability) => (
             <Grid item key={`${ability}-grid-item`}>
               <BaseAbilityScoreComponent

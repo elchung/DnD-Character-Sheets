@@ -23,9 +23,6 @@ const CharacterSheetComponent = () => (
         <Grid item>
           <Grid container direction="column" spacing={2}>
             <Grid item>
-              <ProficienciesComponent />
-            </Grid>
-            <Grid item>
               <FeaturesAndTraitsComponent />
             </Grid>
           </Grid>

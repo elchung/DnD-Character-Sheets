@@ -55,7 +55,7 @@ const DnDListComponent = ({ items, setItems, minDisplay, style }) => {
           />
         ))}
       </List>
-      <Box display="flex" justifyContent="center">
+      <Box display="flex" justifyContent="center" style={{ marginLeft: '-20%', marginTop: '-7%' }}>
         <IconButton onClick={handleAddNew}>
           <AddCircleRoundedIcon color="action" />
         </IconButton>

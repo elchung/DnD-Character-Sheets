@@ -40,10 +40,10 @@ const ProficienciesComponent = () => {
           <Typography align="center" color="textSecondary" style={style.headerStyle}>Proficiencies</Typography>
         </Grid>
         <Grid item>
-          <Typography align="center" variant="caption">Armor</Typography>
+          <Typography align="center" style={{ fontSize: 14, paddingTop: 10 }}>Armor</Typography>
         </Grid>
         <Grid item>
-          <Grid container direction="row" justify="space-evenly">
+          <Grid container direction="row" justify="center">
             {armorProficiencies.map((proficiency) => (
               <Grid item key={`${proficiency}-grid`}>
                 <FormControlLabel
@@ -57,17 +57,17 @@ const ProficienciesComponent = () => {
                       // checked={proficiencies.armor.has(prof)}
                     />
                   )}
-                  label={proficiency}
+                  label={<Typography color='textSecondary' style={{fontSize:15}}>{proficiency}</Typography>}
                 />
               </Grid>
             ))}
           </Grid>
         </Grid>
         <Grid item>
-          <Typography align="center" variant="caption">Weapons</Typography>
+          <Typography align="center" style={{fontSize: 14}}>Weapons</Typography>
         </Grid>
         <Grid item>
-          <Grid container direction="row" justify="space-evenly">
+          <Grid container direction="row" justify="center">
             {weaponProficiencies.map((proficiency) => (
               <Grid item>
                 <FormControlLabel
@@ -81,19 +81,19 @@ const ProficienciesComponent = () => {
                       checked={proficiencies.weapons.has(proficiency)}
                     />
                   )}
-                  label={proficiency}
+                  label={<Typography color='textSecondary' style={{fontSize:15}}>{proficiency}</Typography>}
                 />
               </Grid>
             ))}
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container direction="row" justify="space-evenly" alignItems="center" style={{ paddingBottom: 5 }}>
+          <Grid container direction="row" alignItems="center" style={{ marginBottom: -5 }}>
             <Grid item>
-              <Typography variant="caption">Languages</Typography>
+              <Typography variant="caption" style={{paddingLeft: 45}}>Languages</Typography>
             </Grid>
             <Grid>
-              <Typography variant="caption">Tools/Other</Typography>
+              <Typography variant="caption" style={{paddingLeft: 110}}>Tools/Other</Typography>
             </Grid>
           </Grid>
           <Grid container direction="row" justify="space-evenly" alignItems="flex-start" style={{ maxHeight: 100 }}>
@@ -109,6 +109,7 @@ const ProficienciesComponent = () => {
               <DnDListComponent
                 items={tempRight}
                 setItems={setTempRight}
+                minDisplay={3}
               />
             </Grid>
           </Grid>

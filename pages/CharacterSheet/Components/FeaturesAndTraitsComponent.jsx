@@ -47,7 +47,6 @@ const FeaturesAndTraitsComponent = () => {
 
   return (
     <Paper elevation={style.elevation} style={style.FeaturesAndTraitsComponent}>
-
       <Typography align="center" color="textSecondary" style={{ ...style.headerStyle, paddingBottom: 10 }}>Features/Traits</Typography>
       {featuresAndTraits.map((item, index) => (
         <DraggableCard
