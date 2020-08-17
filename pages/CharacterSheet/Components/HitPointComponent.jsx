@@ -14,14 +14,16 @@ const HitPointComponent = () => {
   const {
     currentHP,
     tempHP,
+    maxHP,
     hitPointHistory,
     style,
   } = useCharacterState();
   const { setCurrentHP, setTempHP, setHitPointHistory } = useSetCharacterState();
   const [displayCurrentHP, setDisplayCurrentHP] = React.useState(currentHP);
   const [displayTempHP, setDisplayTempHP] = React.useState(tempHP);
+  const [displayMaxHP, setDisplayMaxHP] = React.useState(tempHP);
 
-  const handleHPBlur = (isTemp) => {
+  const handleCurrentHPBlur = (isTemp) => {
     if (isTemp) {
       setTempHP(displayTempHP);
       setHitPointHistory([...hitPointHistory, displayTempHP]);
@@ -31,24 +33,53 @@ const HitPointComponent = () => {
     }
   };
 
+  const handleMaxHPBlur = () => {
+    console.log();
+  };
+
   return (
     <>
-      <Paper style={{ width: 220, height: 110 }} variant="outlined">
+      <Paper style={{ width: 220, height: 105 }} variant="outlined">
         <Grid alignItems="flex-end" container direction="row" justify="space-evenly">
           <Grid item>
-            <Typography align="center" color="textSecondary" style={{ paddingTop: 7 }}>Current Hit Points</Typography>
-            <InputBase
-              inputProps={{
-                style: {
-                  fontSize: 35,
-                  textAlign: 'center',
-                },
-                'aria-label': 'naked',
-              }}
-              onBlur={() => handleHPBlur(false)}
-              onChange={(event) => setDisplayCurrentHP(event.target.value)}
-              value={currentHP}
-            />
+            <Typography align="center" color="textSecondary" style={{ paddingTop: 7 }}>Hit Points</Typography>
+            <Grid container direction="row" justify="center" alignItems="flex-start">
+              <Grid item>
+                <InputBase
+                  inputProps={{
+                    style: {
+                      fontSize: 35,
+                      textAlign: 'center',
+                    },
+                    'aria-label': 'naked',
+                  }}
+                  style={{ width: 40, paddingRight: 10 }}
+                  onBlur={() => handleCurrentHPBlur(false)}
+                  onChange={(event) => setDisplayCurrentHP(event.target.value)}
+                  value={currentHP}
+                />
+              </Grid>
+              <Grid>
+                <Typography align="center" color="textSecondary" variant="h3">/</Typography>
+              </Grid>
+              <Grid item>
+                <InputBase
+                  inputProps={{
+                    style: {
+                      fontSize: 35,
+                      textAlign: 'center',
+                      color: 'black',
+                    },
+                    'aria-label': 'naked',
+                  }}
+                  style={{ width: 40, paddingLeft: 10 }}
+                  disabled
+                  // onBlur={() => handleMaxHPBlur(false)}
+                  // onChange={(event) => setDisplayMaxHP(event.target.value)}
+                  value={maxHP}
+                />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
             <Grid container direction="row" justify="flex-start">
@@ -61,7 +92,7 @@ const HitPointComponent = () => {
                 <TextField
                   align="center"
                   inputProps={style.hitPointComponentTemp}
-                  onBlur={() => handleHPBlur(true)}
+                  onBlur={() => handleMaxHPBlur(true)}
                   onChange={(event) => setDisplayTempHP(event.target.value)}
                   style={{
                     width: 80, marginTop: -8, paddingLeft: 3, paddingRight: 25,

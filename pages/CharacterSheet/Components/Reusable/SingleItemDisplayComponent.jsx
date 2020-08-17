@@ -21,7 +21,7 @@ const SingleItemDisplayComponent = ({
           style: {
             fontSize: 35,
             textAlign: 'center',
-            paddingTop: 15,
+            paddingTop: header.length < 15 ? 15 : 5,
           },
           'aria-label': 'naked',
         }}

@@ -18,6 +18,8 @@ const BaseAbilityScoreComponent = ({
   const [displayedAbilityScore, setDisplayedAbilityScore] = React.useState(abilityScores[ability]);
   const mainText = scoreOnTop ? displayedAbilityScore : scoreToModifier(abilityScores[ability]);
   const subText = scoreOnTop ? scoreToModifier(abilityScores[ability]) : displayedAbilityScore;
+  const width = orientation === 'column' ? 90 : 125;
+  const height = orientation === 'column' ? 120 : 90;
 
   const handleChange = (event) => {
     const numberInput = event.target.value.replace(/[^0-9]/g, '');
@@ -32,10 +34,10 @@ const BaseAbilityScoreComponent = ({
   };
 
   return (
-    <Card elevation={0} style={orientation === 'column' ? { width: 100, height: 130 } : { widdth: 130, height: 100 }}>
-      <Card elevation={3} style={{ height: 105 }} variant="outlined">
+    <Card elevation={0} style={{ width, height }}>
+      <Card elevation={3} style={{ height: 90 }} variant="outlined">
         <CardContent style={{ paddingTop: 3 }}>
-          <Typography align="center" color="textPrimary" noWrap variant="caption">
+          <Typography align="center" color="textPrimary" noWrap variant="caption" >
             {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
           </Typography>
           <InputBase
@@ -56,11 +58,10 @@ const BaseAbilityScoreComponent = ({
         </CardContent>
       </Card>
       <Box
-        bottom={40}
-        left={13}
+        bottom={height / 4}
+        left={width / 10}
         p={2}
         position="relative"
-        style={{ width: 5, height: 5 }}
         zIndex="speed dial"
       >
         <TextField
@@ -73,6 +74,8 @@ const BaseAbilityScoreComponent = ({
               height: 5,
               textAlign: 'center',
               background: 'white',
+              paddingBottom: 10,
+              paddingTop: 10,
             },
           }}
           onBlur={handleBlur}
@@ -90,6 +93,7 @@ BaseAbilityScoreComponent.propTypes = {
   abilityScores: PropTypes.objectOf(PropTypes.number).isRequired,
   setAbilityScores: PropTypes.func.isRequired,
   scoreOnTop: PropTypes.bool.isRequired,
+  orientation: PropTypes.string.isRequired,
 };
 
 export default BaseAbilityScoreComponent;

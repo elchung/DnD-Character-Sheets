@@ -21,20 +21,6 @@ const LeftColumnComponent = () => {
             <Grid item>
               <Grid container direction="column" spacing={2}>
                 <Grid item>
-                  <SingleLineDisplayComponent
-                    setValue={setCharacterState.setInspiration}
-                    text="Inspiration"
-                    value={characterState.inspiration}
-                  />
-                </Grid>
-                <Grid item>
-                  <SingleLineDisplayComponent
-                    setValue={setCharacterState.setProficiencyBonus}
-                    text="Proficiency Bonus"
-                    value={characterState.proficiencyBonus}
-                  />
-                </Grid>
-                <Grid item>
                   <SavingThrowsComponent />
                 </Grid>
                 <Grid item>

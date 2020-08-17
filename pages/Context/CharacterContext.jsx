@@ -7,7 +7,7 @@ export const CharacterContextProvider = (props) => {
   const { children } = props;
 
   const [level, setLevel] = useState(1);
-  const [scoreOnTop, setScoreOnTop] = useState(false);
+  const [scoreOnTop, setScoreOnTop] = useState(true);
   const [abilityScores, setAbilityScores] = useState({
     strength: 0,
     dexterity: 0,
@@ -39,7 +39,7 @@ export const CharacterContextProvider = (props) => {
   const [featuresAndTraits, setFeaturesAndTraits] = useState(testCards);
   const style = {
     elevation: 3,
-    abilityScoreComponent: { width: 125, paddingBottom: 20, height: 955 },
+    abilityScoreComponent: { width: 125, paddingBottom: 20 },
     combatStatsComponent: {
       width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },

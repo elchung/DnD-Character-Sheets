@@ -12,10 +12,10 @@ import SingleItemDisplayComponent from './Reusable/SingleItemDisplayComponent';
 
 const CombatStatsComponent = () => {
   const {
-    maxHP, initiative, speed, armorClass, style,
+    maxHP, initiative, speed, armorClass, proficiencyBonus, inspiration, style,
   } = useCharacterState();
   const {
-    setMaxHP, setInitiative, setSpeed, setArmorClass,
+    setMaxHP, setInitiative, setSpeed, setArmorClass, setProficiencyBonus, setInspiration
   } = useSetCharacterState();
 
   return (
@@ -24,21 +24,28 @@ const CombatStatsComponent = () => {
         <Grid item>
           <Grid container direction="row" justify="space-evenly">
             <Grid item>
-              <SingleItemDisplayComponent header="Max HP" updateValue={setMaxHP} value={maxHP} />
+              <SingleItemDisplayComponent header="Initiative" updateValue={setInitiative} value={initiative} />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Initiative" updateValue={setInitiative} value={initiative} />
+              <SingleItemDisplayComponent header="Speed" updateValue={setSpeed} value={speed} />
             </Grid>
             <Grid item>
               <SingleItemDisplayComponent header="Armor Class" updateValue={setArmorClass} value={armorClass} />
             </Grid>
           </Grid>
         </Grid>
-        <Grid item style={{ paddingLeft: 26 }}>
-          <HitPointComponent />
+        <Grid item>
+          <Grid container direction='row' justify='center' spacing={2}>
+            <Grid item>
+              <HitPointComponent />
+            </Grid>
+            <Grid item>
+              <SingleItemDisplayComponent header="Proficiency Bonus" updateValue={setProficiencyBonus} value={proficiencyBonus}/>
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item style={{ paddingLeft: 26 }}>
-          <Grid container direction="row" justify="space-evenly" spacing={2}>
+        <Grid item>
+          <Grid container direction="row" justify="center" spacing={2}>
             <Grid item>
               <DeathSaveComponent />
             </Grid>
@@ -46,9 +53,8 @@ const CombatStatsComponent = () => {
               <HitDieComponent />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Speed" updateValue={setSpeed} value={speed} />
+              <SingleItemDisplayComponent value={inspiration} updateValue={setInspiration} header="Inspiration" />
             </Grid>
-            <Grid item />
           </Grid>
         </Grid>
       </Grid>
