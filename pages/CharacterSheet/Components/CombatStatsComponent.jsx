@@ -15,7 +15,7 @@ const CombatStatsComponent = () => {
     maxHP, initiative, speed, armorClass, proficiencyBonus, inspiration, style,
   } = useCharacterState();
   const {
-    setMaxHP, setInitiative, setSpeed, setArmorClass, setProficiencyBonus, setInspiration
+    setMaxHP, setInitiative, setSpeed, setArmorClass, setProficiencyBonus, setInspiration,
   } = useSetCharacterState();
 
   return (
@@ -35,12 +35,12 @@ const CombatStatsComponent = () => {
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container direction='row' justify='center' spacing={2}>
+          <Grid container direction="row" justify="center" spacing={2}>
             <Grid item>
               <HitPointComponent />
             </Grid>
             <Grid item>
-              <SingleItemDisplayComponent header="Proficiency Bonus" updateValue={setProficiencyBonus} value={proficiencyBonus}/>
+              <SingleItemDisplayComponent header="Proficiency Bonus" updateValue={setProficiencyBonus} value={proficiencyBonus} />
             </Grid>
           </Grid>
         </Grid>

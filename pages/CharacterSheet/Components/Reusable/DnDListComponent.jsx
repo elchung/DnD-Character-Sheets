@@ -7,7 +7,9 @@ import List from '@material-ui/core/List';
 import PropTypes from 'prop-types';
 import DraggableListItem from './DraggableListItem';
 
-const DnDListComponent = ({ items, setItems, minDisplay, style }) => {
+const DnDListComponent = ({
+  items, setItems, minDisplay, style,
+}) => {
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     const dragCard = items[dragIndex];
     setItems(

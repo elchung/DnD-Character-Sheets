@@ -37,7 +37,7 @@ const BaseAbilityScoreComponent = ({
     <Card elevation={0} style={{ width, height }}>
       <Card elevation={3} style={{ height: 90 }} variant="outlined">
         <CardContent style={{ paddingTop: 3 }}>
-          <Typography align="center" color="textPrimary" noWrap variant="caption" >
+          <Typography align="center" color="textPrimary" noWrap variant="caption">
             {`${ability.charAt(0).toUpperCase() + ability.slice(1)}`}
           </Typography>
           <InputBase

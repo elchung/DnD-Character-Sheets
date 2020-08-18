@@ -17,7 +17,7 @@ const AbilityScoreComponent = ({ orientation }) => {
   return (
     <Card elevation={style.elevation} style={style.abilityScoreComponent}>
       <Grid alignItems="flex-end" container direction="column" justify="center" wrap="nowrap">
-        <Grid item style={{paddingBottom: 15}}>
+        <Grid item style={{ paddingBottom: 15 }}>
           <Switch
             checked={!characterState.scoreOnTop}
             color="primary"

@@ -57,14 +57,14 @@ const ProficienciesComponent = () => {
                       // checked={proficiencies.armor.has(prof)}
                     />
                   )}
-                  label={<Typography color='textSecondary' style={{fontSize:15}}>{proficiency}</Typography>}
+                  label={<Typography color="textSecondary" style={{ fontSize: 15 }}>{proficiency}</Typography>}
                 />
               </Grid>
             ))}
           </Grid>
         </Grid>
         <Grid item>
-          <Typography align="center" style={{fontSize: 14}}>Weapons</Typography>
+          <Typography align="center" style={{ fontSize: 14 }}>Weapons</Typography>
         </Grid>
         <Grid item>
           <Grid container direction="row" justify="center">
@@ -81,7 +81,7 @@ const ProficienciesComponent = () => {
                       checked={proficiencies.weapons.has(proficiency)}
                     />
                   )}
-                  label={<Typography color='textSecondary' style={{fontSize:15}}>{proficiency}</Typography>}
+                  label={<Typography color="textSecondary" style={{ fontSize: 15 }}>{proficiency}</Typography>}
                 />
               </Grid>
             ))}
@@ -90,10 +90,10 @@ const ProficienciesComponent = () => {
         <Grid item>
           <Grid container direction="row" alignItems="center" style={{ marginBottom: -5 }}>
             <Grid item>
-              <Typography variant="caption" style={{paddingLeft: 45}}>Languages</Typography>
+              <Typography variant="caption" style={{ paddingLeft: 45 }}>Languages</Typography>
             </Grid>
             <Grid>
-              <Typography variant="caption" style={{paddingLeft: 125}}>Tools/Other</Typography>
+              <Typography variant="caption" style={{ paddingLeft: 125 }}>Tools/Other</Typography>
             </Grid>
           </Grid>
           <Grid container direction="row" justify="space-evenly" alignItems="flex-start" style={{ maxHeight: 100 }}>

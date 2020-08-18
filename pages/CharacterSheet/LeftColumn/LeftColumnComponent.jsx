@@ -4,7 +4,7 @@ import AbilityScoreComponent from '../Components/AbilityScoresComponent';
 import { useCharacterState, useSetCharacterState } from '../../Context/CharacterContext';
 import SavingThrowsComponent from '../Components/SavingThrowsComponent';
 import SkillsComponent from '../Components/SkillsComponent';
-import ProficienciesComponent from "../Components/ProficienciesComponent";
+import ProficienciesComponent from '../Components/ProficienciesComponent';
 
 const LeftColumnComponent = () => (
   <Grid item>
