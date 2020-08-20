@@ -32,6 +32,8 @@ export const CharacterContextProvider = (props) => {
   const [currentHitDice, setCurrentHitDice] = useState(0);
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
   const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() });
+  const [spells, setSpells] = useState({});
+  const [preparedSpells, setPreparedSpells] = useState(new Set());
   const testCards = [
     { id: 0, text: { title: 'test title', body: 'this is the body' } },
     { id: 1, text: { title: 'test title1', body: 'this is the body1' } },
@@ -50,6 +52,9 @@ export const CharacterContextProvider = (props) => {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
     },
     FeaturesAndTraitsComponent: {
+      maxHeight: 355, overflow: 'auto', width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
+    },
+    spellsAccordion: {
       maxHeight: 355, overflow: 'auto', width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },
     headerStyle: { marginTop: -2, marginBottom: -2 },
@@ -149,6 +154,8 @@ export const CharacterContextProvider = (props) => {
     proficiencies,
     style,
     featuresAndTraits,
+    spells,
+    preparedSpells,
   };
 
   const characterDispatch = {
@@ -172,6 +179,8 @@ export const CharacterContextProvider = (props) => {
     setDeathSaves,
     setProficiencies,
     setFeaturesAndTraits,
+    setSpells,
+    setPreparedSpells,
   };
 
   return (
