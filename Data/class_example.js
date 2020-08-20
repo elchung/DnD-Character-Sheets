@@ -8,8 +8,8 @@ const dwarf = {
     speed: { number: 25, text: 'Your speed is not reduced by wearing heavy armor' },
   },
   features: [
-    { name: 'Darkvision', text: "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray" },
-    { name: 'Dwarven Resilience', text: 'You have advantage on saving throws against poison, and you ahve resistance against poison damage' },
+    { name: 'Darkvision', text: "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray", range: 60 },
+    { name: 'Dwarven Resilience', text: 'You have advantage on saving throws against poison, and you ahve resistance against poison damage', _tag: { resistance: ['poison'], advantage: ['poison save'] } },
     { name: 'Stonecunning', text: 'Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.' },
   ],
   proficiencies: {
@@ -20,11 +20,11 @@ const dwarf = {
   subrace: {
     'Hill Dwarf': {
       ability_score: { wisdom: 1 },
-      features: [{ name: 'Dwarven Toughness', text: 'Your hit point maximum increases by 1, and it increases by 1 every time you gain a level' }],
+      features: [{ name: 'Dwarven Toughness', text: 'Your hit point maximum increases by 1, and it increases by 1 every time you gain a level', _tag: { hp: [1, 1] } }],
     },
     'Mountain Dwarf': {
       ability_score: { strength: 2 },
-      features: [{ name: 'Dwarven Armor Training', text: 'You have proficiency with light and medium armor' }],
+      features: [{ name: 'Dwarven Armor Training', text: 'You have proficiency with light and medium armor', _tag: { proficiency: { armor: ['light, medium'] } } }],
     },
   },
 };
@@ -39,9 +39,9 @@ const elf = {
     speed: { number: 30, text: '' },
   },
   features: [
-    { name: 'Darkvision', text: "Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray." },
-    { name: 'Keen Senses', text: 'You have proficiency in the Perception skill.' },
-    { name: 'Fey Ancestry', text: " You have advantage on saving throws against being charmed, and magic can't put you to sleep" },
+    { name: 'Darkvision', text: "Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.", range: 60 },
+    { name: 'Keen Senses', text: 'You have proficiency in the Perception skill.', _tag: { proficiency: { skills: ['perception'] } } },
+    { name: 'Fey Ancestry', text: " You have advantage on saving throws against being charmed, and magic can't put you to sleep", _tag: { advantage: ['charm save'] } },
     { name: 'Trance', text: "Elves don't need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is 'trance.') While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep" },
   ],
   proficiencies: {
@@ -53,30 +53,38 @@ const elf = {
     'High Elf': {
       ability_score: { intelligence: 1 },
       features: [
-        { name: 'Elf Weapon Training', text: 'You have proficiency with the longsword, shortsword, shortbow, and longbow' },
-        { name: 'Cantrip', text: 'You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.' },
-        { name: 'Extra Language', text: 'You can speak, read, and write one extra language of your choice.' },
+        { name: 'Elf Weapon Training', text: 'You have proficiency with the longsword, shortsword, shortbow, and longbow', _tag: { proficiency: { weapons: ['longsword', 'shortsword', 'shortbow', 'longbow'] } } },
+        { name: 'Cantrip', text: 'You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.', _tag: { spell: [1, 0, 'wizard'] } },
+        { name: 'Extra Language', text: 'You can speak, read, and write one extra language of your choice.', _tag: { number: 1 } },
       ],
     },
     'Wood Elf': {
       ability_score: { wisdom: 1 },
       features: [
-        { name: 'Elf Weapon Training', text: 'You have proficiency with the longsword, shortsword, shortbow, and longbow' }
-        { name: 'Fleet of Foot', text: 'Your base walking speed increases to 35 feet' },
-        { name: 'Mask of the Wild', text: 'You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, or other natural phenomena'}
+        { name: 'Elf Weapon Training', text: 'You have proficiency with the longsword, shortsword, shortbow, and longbow', _tag: { proficiency: { weapons: ['longsword', 'shortsword', 'shortbow', 'longbow'] } } },
+        { name: 'Fleet of Foot', text: 'Your base walking speed increases to 35 feet', _tag: { speed: 35 } },
+        { name: 'Mask of the Wild', text: 'You can attempt to hide even when you are only lightly obscured by foliage, heavy rain, falling snow, mist, or other natural phenomena' },
       ],
     },
     'Dark Elf (Drow)': {
       ability_score: { charisma: 1 },
       features: [
-        { name: 'Superior Darkvision', text: 'Your darkvision has a radius of 120 feet' },
+        { name: 'Superior Darkvision', text: 'Your darkvision has a radius of 120 feet', range: 120 },
         { name: 'Sunlight Sensitivity', text: 'You have disadvantage on attack rolls and on Wisdom (Perception) checks that rely on sight when you, the target of your attack, or whatever you are trying to perceive is in direct sunlight.' },
-        { name: 'Drow Magic', text: "You know the dancing lights cantrip. When you reach 3rd level, you can cast the faerie fire spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells." },
-        { name: 'Drow Weapon Training', text: 'You have proficiency with rapiers, shortswords, and hand crossbows' },
+        { name: 'Drow Magic', text: 'You know the dancing lights cantrip. When you reach 3rd level, you can cast the faerie fire spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.' },
+        { name: 'Drow Weapon Training', text: 'You have proficiency with rapiers, shortswords, and hand crossbows', _tag: { proficiency: { weapons: ['rapiers, shortswords, hand crossbows'] } } },
       ],
     },
   },
 };
 
 
-//https://thetrove.net/Books/Dungeons%20&%20Dragons/5th%20Edition%20(5e)/Core/Player%27s%20Handbook%20%5B10th%20Print%5D.pdf
+// https://thetrove.net/Books/Dungeons%20&%20Dragons/5th%20Edition%20(5e)/Core/Player%27s%20Handbook%20%5B10th%20Print%5D.pdf
+_tags:
+  hp: [amount/level],
+    resistance: [what resistances]
+advantage: [waht advantages, if 'save' in name, add to saves component]
+proficiency: {object of armor[], weapons[], skills[], saves[], other[]}
+spell: [number learned, level spell, class] or set of spells learned
+language: {number: int of how many more to learn, language[]}
+speed: int of new speed

@@ -23,5 +23,6 @@ CREATE TABLE classes (
     proficiencies JSON,
     saving_throws TEXT [],
     starting_equipment TEXT [],
-
 )
+
+
