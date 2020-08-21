@@ -7,6 +7,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
@@ -17,8 +21,11 @@ const DraggableCard = ({
   key,
   index,
   moveCard,
-  updateFeaturesAndTraits,
-  removeFeatureAndTrait,
+  updateItems,
+  removeItems,
+  includeCheckbox,
+  checkBoxChecked,
+  checkBoxClicked,
 }) => {
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -71,9 +78,27 @@ const DraggableCard = ({
           height: 0,
         }}
       >
+        {includeCheckbox && (
+          <FormControlLabel
+            aria-label="Acknowledge"
+            onClick={(event) => event.stopPropagation()}
+            onFocus={(event) => event.stopPropagation()}
+            control={(
+              <Checkbox
+                checkedIcon={<RadioButtonCheckedIcon />}
+                edge="start"
+                size="small"
+                id={`${id}-checkbox`}
+                icon={<RadioButtonUncheckedIcon />}
+                checked={checkBoxChecked}
+                onChange={checkBoxClicked}
+              />
+            )}
+          />
+        )}
         <InputBase
           inputProps={{ 'aria-label': 'naked' }}
-          onBlur={() => updateFeaturesAndTraits(displayText, index)}
+          onBlur={() => updateItems(displayText, index)}
           onChange={(e) => setDisplayText({ ...text, title: e.target.value })}
           onClick={(e) => e.stopPropagation()}
           onFocus={(e) => e.stopPropagation()}
@@ -92,14 +117,14 @@ const DraggableCard = ({
           fullWidth
           multiline
           rowsMax={5}
-          onBlur={() => updateFeaturesAndTraits(displayText, index)}
+          onBlur={() => updateItems(displayText, index)}
           onChange={(e) => setDisplayText({ ...text, body: e.target.value })}
           value={displayText.body}
         />
         <Box
           position="relative"
         >
-          <IconButton onClick={() => removeFeatureAndTrait(index)}>
+          <IconButton onClick={() => removeItems(index)}>
             <HighlightOffRoundedIcon color="action" fontSize="small" />
           </IconButton>
         </Box>
@@ -117,8 +142,17 @@ DraggableCard.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
   moveCard: PropTypes.func.isRequired,
-  updateFeaturesAndTraits: PropTypes.func.isRequired,
-  removeFeatureAndTrait: PropTypes.func.isRequired,
+  updateItems: PropTypes.func.isRequired,
+  removeItems: PropTypes.func.isRequired,
+  includeCheckbox: PropTypes.bool,
+  checkBoxChecked: PropTypes.bool,
+  checkBoxClicked: PropTypes.func,
+};
+
+DraggableCard.defaultProps = {
+  includeCheckbox: false,
+  checkBoxChecked: false,
+  checkBoxClicked: () => console.error('checkbox click when no function provided'),
 };
 
 export default DraggableCard;

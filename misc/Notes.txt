@@ -1,0 +1,19 @@
+for spells lookup, look into https://material-ui.com/components/tabs/ under vertical tabs
+
+
+add spells modal:
+  tabs? option to:
+   add from list,
+    vertical list with checkboxes on left, clicking checkbox will add to group to be added to spellbook,clicking list item will open description of spell (any item already in spellbook will be grayed out?
+   add custom
+    field that requires user to add:
+      name,
+      range,
+      duration,
+      components,
+
+   add blank:
+    simple screen that has number only input on number of blanks to add
+
+  on CANCEL, clear everything and close modal
+  on ADD, format spells and add to spells context

@@ -29,7 +29,7 @@ const FeaturesAndTraitsComponent = () => {
   }, [featuresAndTraits]);
 
   const updateFeaturesAndTraits = (value, index) => {
-    // setFeaturesAndTraits(featuresAndTraits.map(((item, i) => i === index ? { id: index, text: value } : item))
+    // setFeaturesAndTraits(featuresAndTraits.map((item, i) => i === index ? { id: index, text: value } : item)
     const temp = [...featuresAndTraits];
     temp[index] = { id: index, text: value };
     setFeaturesAndTraits(temp);
@@ -54,9 +54,9 @@ const FeaturesAndTraitsComponent = () => {
           index={index}
           key={item.id}
           moveCard={moveCard}
-          removeFeatureAndTrait={removeFeatureAndTrait}
+          removeItems={removeFeatureAndTrait}
           text={item.text}
-          updateFeaturesAndTraits={updateFeaturesAndTraits}
+          updateItems={updateFeaturesAndTraits}
         />
       ))}
       <Box display="flex" justifyContent="center">

@@ -32,7 +32,12 @@ export const CharacterContextProvider = (props) => {
   const [currentHitDice, setCurrentHitDice] = useState(0);
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
   const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() });
-  const [spells, setSpells] = useState({});
+  //spells will be formatted when adding to spell list as: {id: 0, text: {title: `${spell.name}${spell.ritual ? '(R)' : ''} - ${spell.casting_time} - ${spell.range}`, body: `Duration: ${spell.duration} - ${spell.components.raw} - ${spell.description}`}}
+  const tempSpells = {
+    0: [{id: 0, text: {title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description'}}],
+    1: [{id: 0, text: {title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description'}}],
+  };
+  const [spells, setSpells] = useState(tempSpells);
   const [preparedSpells, setPreparedSpells] = useState(new Set());
   const testCards = [
     { id: 0, text: { title: 'test title', body: 'this is the body' } },
