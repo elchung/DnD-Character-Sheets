@@ -44,6 +44,13 @@ export const CharacterContextProvider = (props) => {
     { id: 1, text: { title: 'test title1', body: 'this is the body1' } },
   ];
   const [featuresAndTraits, setFeaturesAndTraits] = useState(testCards);
+  const [spellSlots, setSpellSlots] = useState({
+    0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0,
+  });
+  const [usedSpellSlots, setUsedSpellSlots] = useState({
+    0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0,
+  });
+
   const style = {
     elevation: 3,
     abilityScoreComponent: { width: 125, paddingBottom: 20, height: 787 },
@@ -161,6 +168,8 @@ export const CharacterContextProvider = (props) => {
     featuresAndTraits,
     spells,
     preparedSpells,
+    spellSlots,
+    usedSpellSlots,
   };
 
   const characterDispatch = {
@@ -186,6 +195,8 @@ export const CharacterContextProvider = (props) => {
     setFeaturesAndTraits,
     setSpells,
     setPreparedSpells,
+    setSpellSlots,
+    setUsedSpellSlots,
   };
 
   return (
