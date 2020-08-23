@@ -76,13 +76,13 @@ const AddSpellsModalComponent = () => {
               </Tabs>
             </AppBar>
             <TabPanel value={topTabNum} index={0}>
-              Item One
+              <AddSpellsComponent />
             </TabPanel>
             <TabPanel value={topTabNum} index={1}>
-              Item Two
+              <AddCustomSpellComponent />
             </TabPanel>
             <TabPanel value={topTabNum} index={2}>
-              Item Three
+              <AddBlankSpellComponent />
             </TabPanel>
             <Grid container direction="row" justify="flex-end">
               <Grid item>

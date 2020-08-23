@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 import DraggableCard from './DraggableCard';
+import Paper from '@material-ui/core/Paper';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -23,7 +24,8 @@ const SpellLevelListComponent = ({spellsAtLevel, level}) => {
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     const dragCard = spells[level][dragIndex];
-    setSpells({...spells,
+    setSpells({
+      ...spells,
       [level]: update(spells[level], {
         $splice: [
           [dragIndex, 1],
@@ -69,8 +71,12 @@ const SpellLevelListComponent = ({spellsAtLevel, level}) => {
   );
 };
 
+SpellLevelListComponent.defaultProps = {
+  spellsAtLevel: [],
+}
+
 SpellLevelListComponent.propTypes = {
-  spellsAtLevel: PropTypes.array.isRequired,
+  spellsAtLevel: PropTypes.array,
   level: PropTypes.number.isRequired,
 };
 

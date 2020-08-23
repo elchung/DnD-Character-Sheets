@@ -7,23 +7,29 @@ import CombatStatsComponent from './Components/CombatStatsComponent';
 import LeftColumnComponent from './LeftColumn/LeftColumnComponent';
 import ProficienciesComponent from './Components/ProficienciesComponent';
 import FeaturesAndTraitsComponent from './Components/FeaturesAndTraitsComponent';
+import SpellsComponent from "./Components/SpellsComponent";
 
 const CharacterSheetComponent = () => (
   <DndProvider backend={HTML5Backend}>
     <CharacterContextProvider>
       <Grid container direction="row" spacing={2}>
-        <LeftColumnComponent />
-        <Grid item>
-          <Grid container direction="column" spacing={2}>
-            <Grid item>
-              <CombatStatsComponent />
-            </Grid>
-          </Grid>
+        <Grid item xs={4}>
+          <LeftColumnComponent />
         </Grid>
-        <Grid item>
-          <Grid container direction="column" spacing={2}>
+        <Grid item xs={8}>
+          <Grid container direction="column">
             <Grid item>
-              <FeaturesAndTraitsComponent />
+              <Grid container direction="row">
+                <Grid item>
+                  <CombatStatsComponent />
+                </Grid>
+                <Grid item>
+                  <FeaturesAndTraitsComponent />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <SpellsComponent />
             </Grid>
           </Grid>
         </Grid>

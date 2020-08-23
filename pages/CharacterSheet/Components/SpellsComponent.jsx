@@ -2,6 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import SpellLevelListComponent from './Reusable/SpellLevelListComponent';
 import SpellsHeaderComponent from './SpellsHeaderComponent';
+import SpellLevelHeaderComponent from "./Reusable/SpellLevelHeaderComponent";
 import {
   useCharacterState,
   useSetCharacterState,
