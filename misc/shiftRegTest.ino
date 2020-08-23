@@ -77,9 +77,9 @@ void incrementRTCHour() {
 void updateTime() {    
   digitalWrite(latchPin, LOW);
 
-  shiftOut(dataPin, clockPin, MSBFIRST, abcd[time_second]); 
-  shiftOut(dataPin, clockPin, MSBFIRST, abcd[time_minute]); 
-  shiftOut(dataPin, clockPin, MSBFIRST, abcd[time_hour]); 
+  shiftOut(dataPin, clockPin, LSBFIRST, abcd[time_second]); 
+  shiftOut(dataPin, clockPin, LSBFIRST, abcd[time_minute]); 
+  shiftOut(dataPin, clockPin, LSBFIRST, abcd[time_hour]); 
 
   digitalWrite(latchPin, HIGH);
 }
