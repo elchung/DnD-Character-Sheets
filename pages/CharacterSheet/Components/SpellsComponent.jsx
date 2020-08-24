@@ -2,7 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import SpellLevelListComponent from './Reusable/SpellLevelListComponent';
 import SpellsHeaderComponent from './SpellsHeaderComponent';
-import SpellLevelHeaderComponent from "./Reusable/SpellLevelHeaderComponent";
+import SpellLevelHeaderComponent from './Reusable/SpellLevelHeaderComponent';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -13,7 +13,7 @@ const SpellsComponent = () => {
   const { } = useSetCharacterState();
 
   return (
-    <Paper elevation={style.elevation} style={style.spellsAccordion}>
+    <Paper elevation={style.elevation} style={{ width: '100%', maxHeight: 740 }}>
       <SpellsHeaderComponent />
       {Array(9).fill().map((_, level) => (
         <>

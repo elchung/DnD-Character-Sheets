@@ -58,7 +58,7 @@ export const CharacterContextProvider = (props) => {
       width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },
     proficienciesComponent: {
-      width: '100%', height: 290, paddingBottom: 20, paddingTop: 10, overflow: 'auto',
+      width: '100%', height: 290, paddingBottom: 20, paddingTop: 10, overflow: 'auto', maxWidth: 390,
     },
     deathSaveComponent: {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
