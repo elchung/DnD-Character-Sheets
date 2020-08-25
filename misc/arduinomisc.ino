@@ -60,6 +60,12 @@ byte abcd[] = {
   32,  40,  36,  44,  34,  42,  38,  46,  33,  41, 160, 168, 164, 172, 162, 170, 166, 174, 161, 169
 };
 
+byte cdab = {
+  0, 128, 64, 192, 32, 160, 96, 224, 16, 144, 8, 136, 72, 200, 40, 168, 104, 232, 24, 152, 4, 132,
+  68, 196, 36, 164, 100, 228, 20, 148, 12, 140, 76, 204, 44, 172, 108, 236, 28, 156, 2, 130, 66,
+  194, 34, 162, 98, 226, 18, 146, 10, 138, 74, 202, 42, 170, 106, 234, 26, 154
+]
+
 void checkButtonPress(void (*)());
 void incrementLEDState();
 void incrementRTCMinute();
@@ -101,8 +107,8 @@ void checkButtonPress(int sw, boolean lastState, void (*incrementFunc)()) {
     delay(20);
     boolean newState = digitalRead(sw);
     if (newState == HIGH) {
-      (*incrementFunc)();
       lastState = HIGH;
+      (*incrementFunc)();
     }
   } else if ((buttonState == LOW) && (lastState == HIGH)) {
     delay(20);
@@ -141,13 +147,13 @@ void checkTime() {
   }
 }
 
-void updateTime() {    
+void updateTime() {
   t = rtc.getTime();
   digitalWrite(latchPin, LOW);
 
-  shiftOut(dataPin, clockPin, LSBFIRST, abcd[t.hour]);
-  shiftOut(dataPin, clockPin, LSBFIRST, abcd[t.min]);  
-  shiftOut(dataPin, clockPin, LSBFIRST, abcd[t.sec]); 
+  shiftOut(dataPin, clockPin, LSBFIRST, cdab[t.hour]);
+  shiftOut(dataPin, clockPin, LSBFIRST, cdab[t.min]);
+  shiftOut(dataPin, clockPin, LSBFIRST, cdab[t.sec]);
 
   digitalWrite(latchPin, HIGH);
 }
