@@ -3,27 +3,20 @@
 //pb4 (pin 18) miso
 //pb5 (pin 19) sck
 
-#include "RTClib.h"
+#include <DS3231.h>
 #include <Adafruit_NeoPixel.h>
 
-RTC_DS3231 rtc;
+#define SDA A4
+#define SCL A5
+DS3231 rtc(SDA, SCL);
 
 //switch pins
-const int swLED = 3;  // switches are pull down resistors ( low, activate on high )
 const int swMin = 5;
 const int swHr = 6;
-int lastSwLEDState = LOW;
+const int swLED = 3;  // switches are pull down resistors ( low, activate on high )
 int lastSwMinState = LOW;
 int lastSwHrState = LOW;
-
-//shift register pins
-const int dataPin = A2;
-const int latchPin = A3; // srclk, storage register clock pin
-const int clockPin = 1;
-const int serialClear = 0;  //keep high
-int lastSec = 0;
-int lastMin = 0;
-int lastHr = 0;
+int lastSwLEDState = LOW;
 
 //led data pin
 const int ledData = A1;
@@ -47,72 +40,59 @@ enum ledStates {
 };
 ledStates ledState = BLUE;
 
+//shift register pins
+const int dataPin = A2;
+const int latchPin = A3; // srclk, storage register clock pin
+const int clockPin = 1;
+const int serialClear = 0;  //keep high
+int lastSec = 0;
+int lastMin = 0;
+int lastHr = 0;
+Time t;
 //rtc pins
 const int rtcScl = 8;  // serial clock  should be pc5
 const int rtcRst = 9;  // active low reset (keep high)
 const int rtcSda = 10;  // serial data io  should be pc4
 
-int abcdabcd[] = {
+byte abcd[] = {
   0,   8,   4,   12,  2,   10,  6,   14,  1,   9,  128, 136, 132, 140, 130, 138, 134, 142, 129, 137,
   64,  72,  68,  76,  66,  74,  70,  78,  65,  73, 192, 200, 196, 204, 194, 202, 198, 206, 193, 201,
   32,  40,  36,  44,  34,  42,  38,  46,  33,  41, 160, 168, 164, 172, 162, 170, 166, 174, 161, 169
 };
 
-
 void checkButtonPress(void (*)());
 void incrementLEDState();
 void incrementRTCMinute();
-void incrementRTCHour()
+void incrementRTCHour();
 
 void setup(){
   pinMode(swLED, INPUT);
   pinMode(swMin, INPUT);
   pinMode(swHr, INPUT);
 
+  pinMode(ledData, OUTPUT);
   pinMode(latchPin, OUTPUT);
   pinMode(dataPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
   pinMode(serialClear, OUTPUT); //keep high
   digitalWrite(serialClear, HIGH);
-
-  pinMode(ledData, OUTPUT);
-
   pinMode(rtcRst, OUTPUT);
   digitalWrite(rtcRst, HIGH);
+  rtc.begin();
+  updateTime();
 
-  delay(1000);
+  delay(100);
   strip.begin();
   strip.setBrightness(ledBrightness);
   strip.show();
 
-  Serial.begin(9600);
-
-  //rtc setup
-  if(!rtc.begin()) {
-      Serial.println("Couldn't find RTC!");
-      Serial.flush();
-      abort();
-  }
-  if(rtc.lostPower()) {
-    // this will adjust to the date and time at compilation
-    rtc.adjust(DateTime(2020, 8, 20, 0, 0, 0));
-  }
-  rtc.disable32K();
 }
 
 void loop() {
   checkButtonPress(swLED, lastSwLEDState, incrementLEDState);
   checkButtonPress(swMin, lastSwMinState, incrementRTCMinute);
   checkButtonPress(swHr,  lastSwHrState,  incrementRTCHour);
-
-  delay(5);  
-  DateTime now = rtc.now();
-  if (lastHr != now.hour() || lastMin != now.minute() || lastSec != now.second()) {
-    lastHr = now.hour();
-    lastMin = now.minute();
-    lastSec = now.second();
-    updateShiftRegister(now);
-  }
+  checkTime();
 }
 
 void checkButtonPress(int sw, boolean lastState, void (*incrementFunc)()) {
@@ -133,47 +113,47 @@ void checkButtonPress(int sw, boolean lastState, void (*incrementFunc)()) {
   }
 }
 
-void updateShiftRegister(DateTime now) {
-  digitalWrite(latchPin, LOW);
-  shiftOut(dataPin, clockPin, LSBFIRST, combineTime(now));
-  digitalWrite(latchPin, HIGH);
-}
-
-int combineTime(DateTime now) {
-  int hour = abcdabcd[now.hour()];
-  int min = abcdabcd[now.minute()];
-  int second = abcdabcd[now.second()];
-  return hour<<16 + min<<8 + second;
-}
-
 void incrementRTCMinute() {
-  DateTime now = rtc.now();
-  rtc.adjust(DateTime(
-    now.year(),
-    now.month(),
-    now.day(),
-    now.hour(),
-    now.minute() + 1,
-    0
-  ));
+  t = rtc.getTime();
+  if (t.min == 59) {
+    rtc.setTime(t.hour, 0, 0);
+  } else {
+    rtc.setTime(t.hour, t.min + 1, 0);
+  }
 }
 
 void incrementRTCHour() {
-  DateTime now = rtc.now();
-  rtc.adjust(DateTime(
-    now.year(),
-    now.month(),
-    now.day(),
-    now.hour() + 1,
-    now.minute(),
-    0
-  ));
+  t = rtc.getTime();
+  if (t.hour = 12) {
+    rtc.setTime(0, t.min, 0);
+  } else {
+    rtc.setTime(t.hour + 1, t.min, 0);
+  }
 }
 
-void colorWipe(uint32_t color, int wait)
-{
-    for (int i = 0; i < strip.numPixels(); i++)
-    {                                  // For each pixel in strip...
+void checkTime() {
+  t = rtc.getTime();
+  if (t.sec != lastSec || t.min != lastMin || t.hour != lastHr) {
+    lastSec = t.sec;
+    lastMin = t.min;
+    lastHr = t.hour;
+    updateTime();
+  }
+}
+
+void updateTime() {    
+  t = rtc.getTime();
+  digitalWrite(latchPin, LOW);
+
+  shiftOut(dataPin, clockPin, LSBFIRST, abcd[t.hour]);
+  shiftOut(dataPin, clockPin, LSBFIRST, abcd[t.min]);  
+  shiftOut(dataPin, clockPin, LSBFIRST, abcd[t.sec]); 
+
+  digitalWrite(latchPin, HIGH);
+}
+
+void colorWipe(uint32_t color, int wait) {
+    for (int i = 0; i < strip.numPixels(); i++) {
         strip.setPixelColor(i, color); //  Set pixel's color (in RAM)
         strip.show();                  //  Update strip to match
         delay(wait);                   //  Pause for a moment
@@ -225,4 +205,4 @@ void incrementLEDState() {
       colorWipe(strip.Color(255, 255, 255), 20);
       break;
   }
-};
+}
