@@ -67,7 +67,7 @@ export const CharacterContextProvider = (props) => {
       maxHeight: 355, overflow: 'auto', width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },
     spellsAccordion: {
-      maxHeight: 355, overflow: 'auto', width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
+      maxHeight: 355, overflow: 'auto', width: '33%', height: 170, paddingBottom: 20, paddingTop: 10,
     },
     headerStyle: { marginTop: -2, marginBottom: -2 },
     hitDieComponent: {
@@ -127,6 +127,7 @@ export const CharacterContextProvider = (props) => {
         marginRight: 2,
       },
     },
+    spellLevelheader: { width: '33%', height: '10%' },
     tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
     tableCellInputStyle: {
       'aria-label': 'naked',

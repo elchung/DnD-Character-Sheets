@@ -1,9 +1,9 @@
 import React from 'react';
 
-import CharacterSheetComponent from './CharacterSheet/CharacterSheetComponent';
+import CharacterSheetTabComponent from './CharacterSheet/CharacterSheetTabComponent';
 
 export default function Home() {
   return (
-    <CharacterSheetComponent />
+    <CharacterSheetTabComponent />
   );
 }

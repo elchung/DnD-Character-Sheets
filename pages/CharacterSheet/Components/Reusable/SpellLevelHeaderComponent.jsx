@@ -31,32 +31,37 @@ const SpellLevelHeaderComponent = ({ level }) => {
   };
 
   return (
-    <Paper elevation={style.elevation} style={style.singleLineDisplayComponent}>
+    <Paper elevation={style.elevation} style={style.spellLevelheader}>
       {level === 0
         ? <Typography variant="h6">Cantrip</Typography>
         : (
-          <>
+          <div>
             <TextField
-              inputProps={style.singleLineDisplayInputProps}
+              inputProps={{ style: { textAlign: 'center', fontSize: 20 } }}
               disabled
               value={level}
               variant="outlined"
+              label="Level"
             />
             <TextField
-              inputProps={style.singleLineDisplayInputProps}
+              inputProps={{ style: { textAlign: 'center', fontSize: 30, width: 25, height: 15 } }}
+              style={{ width: '30%' }}
               onBlur={handleSpellSlotBlur}
               onChange={(event) => setDisplayedSpellSlots(event.target.value)}
               value={displayedSpellSlots}
               variant="outlined"
+              label="Spell Slots"
             />
             <TextField
               inputProps={style.singleLineDisplayInputProps}
+              style={{ width: '30%' }}
               onBlur={handleUsedSpellSlotBlur}
               onChange={(event) => setDisplayedUsedSpellSlots(event.target.value)}
               value={displayedUsedSpellSlots}
               variant="outlined"
+              label="Used"
             />
-          </>
+          </div>
         )}
     </Paper>
   );
