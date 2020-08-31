@@ -1,8 +1,9 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import SpellLevelListComponent from './Reusable/SpellLevelListComponent';
+import Grid from '@material-ui/core/Grid';
+import SpellLevelListComponent from './SpellLevelListComponent';
 import SpellsHeaderComponent from './SpellsHeaderComponent';
-import SpellLevelHeaderComponent from './Reusable/SpellLevelHeaderComponent';
+import SpellLevelHeaderComponent from './SpellLevelHeaderComponent';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -13,17 +14,49 @@ const SpellsComponent = () => {
   const { } = useSetCharacterState();
 
   return (
-    <Paper elevation={style.elevation} style={{ width: '100%', maxHeight: 740 }}>
-      <SpellsHeaderComponent />
-      {Array(9).fill().map((_, level) => (
-        <>
-          <SpellLevelHeaderComponent level={level} />
-          <SpellLevelListComponent
-            spellsAtLevel={spells.level}
-            level={level}
-          />
-        </>
-      ))}
+    <Paper elevation={style.elevation} style={{ width: 1180, height: 1146, padding: 16 }}>
+      {/* <SpellsHeaderComponent /> */}
+      <Grid container spacing={2} direction="row">
+        <Grid item>
+          <Grid container direction="column" spacing={2}>
+            {[0, 1, 2].map((level) => {
+              <Grid item>
+                <SpellLevelHeaderComponent level={level} />
+                <SpellLevelListComponent
+                  spellsAtLevel={spells.level}
+                  level={level}
+                />
+              </Grid>;
+            })}
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Grid container direction="column">
+            {[3, 4, 5].map((level) => {
+              <Grid item>
+                <SpellLevelHeaderComponent level={level} />
+                <SpellLevelListComponent
+                  spellsAtLevel={spells.level}
+                  level={level}
+                />
+              </Grid>;
+            })}
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Grid container direction="column">
+            {[6, 7, 8, 9].map((level) => {
+              <Grid item>
+                <SpellLevelHeaderComponent level={level} />
+                <SpellLevelListComponent
+                  spellsAtLevel={spells.level}
+                  level={level}
+                />
+              </Grid>;
+            })}
+          </Grid>
+        </Grid>
+      </Grid>
     </Paper>
   );
 };

@@ -7,10 +7,10 @@ import Tab from '@material-ui/core/Tab';
 import { CharacterContextProvider } from '../Context/CharacterContext';
 import CharacterSheetComponent from './CharacterSheetComponent';
 import SpellsComponent from './Components/SpellsComponent';
-import {TabPanel} from './TabPanel';
+import { TabPanel } from './TabPanel';
 
 const CharacterSheetTabComponent = () => {
-  const [tabVal, setTabVal] = React.useState(0);
+  const [tabVal, setTabVal] = React.useState(1);
   const handleChange = (event, newValue) => {
     setTabVal(newValue);
   };
