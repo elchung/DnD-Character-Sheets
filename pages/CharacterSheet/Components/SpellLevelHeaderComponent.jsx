@@ -36,11 +36,11 @@ const SpellLevelHeaderComponent = ({ level }) => {
       {level === 0
         ? <Typography variant="h6">Cantrip</Typography>
         : (
-          <Grid container direction="row" spacing={2}>
+          <Grid container direction="row">
             <Grid item>
               <TextField
-                inputProps={{ style: { textAlign: 'center', fontSize: 20 } }}
-                style={{ width: '10%', paddingRight: 10 }}
+                inputProps={{ style: { textAlign: 'center', fontSize: 20, width: 30, height: 15 } }}
+                style={{ marginTop: 10 }}
                 disabled
                 value={level}
                 variant="outlined"
@@ -51,10 +51,10 @@ const SpellLevelHeaderComponent = ({ level }) => {
               <TextField
                 inputProps={{
                   style: {
-                    textAlign: 'center', fontSize: 30, width: 25, height: 15,
+                    textAlign: 'center', fontSize: 30, width: 100, height: 15,
                   },
                 }}
-                style={{ width: '30%' }}
+                // style={{ width: '30%' }}
                 onBlur={handleSpellSlotBlur}
                 onChange={(event) => setDisplayedSpellSlots(event.target.value)}
                 value={displayedSpellSlots}
@@ -64,8 +64,12 @@ const SpellLevelHeaderComponent = ({ level }) => {
             </Grid>
             <Grid item>
               <TextField
-                inputProps={style.singleLineDisplayInputProps}
-                style={{ width: '30%' }}
+                inputProps={{
+                  style: {
+                    textAlign: 'center', fontSize: 30, width: 100, height: 15,
+                  },
+                }}
+                // style={{ width: '30%' }}
                 onBlur={handleUsedSpellSlotBlur}
                 onChange={(event) => setDisplayedUsedSpellSlots(event.target.value)}
                 value={displayedUsedSpellSlots}

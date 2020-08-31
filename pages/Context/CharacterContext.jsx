@@ -124,9 +124,9 @@ export const CharacterContextProvider = (props) => {
         marginRight: 2,
       },
     },
-    spellLevelheader: { width: '75%', height: '10%' },
+    spellLevelheader: { width: '100%', height: 50 },
     spellsAccordion: {
-      maxHeight: 355, overflow: 'auto', width: '75%', height: 170, paddingBottom: 20, paddingTop: 10,
+      maxHeight: 355, overflow: 'auto', width: '100%', height: 170, paddingBottom: 20, paddingTop: 10,
     },
     tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
     tableCellInputStyle: {
