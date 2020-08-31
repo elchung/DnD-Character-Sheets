@@ -32,10 +32,10 @@ export const CharacterContextProvider = (props) => {
   const [currentHitDice, setCurrentHitDice] = useState(0);
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
   const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() });
-  //spells will be formatted when adding to spell list as: {id: 0, text: {title: `${spell.name}${spell.ritual ? '(R)' : ''} - ${spell.casting_time} - ${spell.range}`, body: `Duration: ${spell.duration} - ${spell.components.raw} - ${spell.description}`}}
+  // spells will be formatted when adding to spell list as: {id: 0, text: {title: `${spell.name}${spell.ritual ? '(R)' : ''} - ${spell.casting_time} - ${spell.range}`, body: `Duration: ${spell.duration} - ${spell.components.raw} - ${spell.description}`}}
   const tempSpells = {
-    0: [{id: 0, text: {title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description'}}],
-    1: [{id: 0, text: {title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description'}}],
+    0: [{ id: 0, text: { title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description' } }],
+    1: [{ id: 0, text: { title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description' } }],
   };
   const [spells, setSpells] = useState(tempSpells);
   const [preparedSpells, setPreparedSpells] = useState(new Set());
@@ -65,9 +65,6 @@ export const CharacterContextProvider = (props) => {
     },
     FeaturesAndTraitsComponent: {
       maxHeight: 355, overflow: 'auto', width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
-    },
-    spellsAccordion: {
-      maxHeight: 355, overflow: 'auto', width: '33%', height: 170, paddingBottom: 20, paddingTop: 10,
     },
     headerStyle: { marginTop: -2, marginBottom: -2 },
     hitDieComponent: {
@@ -127,7 +124,10 @@ export const CharacterContextProvider = (props) => {
         marginRight: 2,
       },
     },
-    spellLevelheader: { width: '33%', height: '10%' },
+    spellLevelheader: { width: '75%', height: '10%' },
+    spellsAccordion: {
+      maxHeight: 355, overflow: 'auto', width: '75%', height: 170, paddingBottom: 20, paddingTop: 10,
+    },
     tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
     tableCellInputStyle: {
       'aria-label': 'naked',

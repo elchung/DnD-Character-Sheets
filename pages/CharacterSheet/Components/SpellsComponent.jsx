@@ -16,46 +16,22 @@ const SpellsComponent = () => {
   return (
     <Paper elevation={style.elevation} style={{ width: 1180, height: 1146, padding: 16 }}>
       {/* <SpellsHeaderComponent /> */}
-      <Grid container spacing={2} direction="row">
-        <Grid item>
-          <Grid container direction="column" spacing={2}>
-            {[0, 1, 2].map((level) => {
-              <Grid item>
-                <SpellLevelHeaderComponent level={level} />
-                <SpellLevelListComponent
-                  spellsAtLevel={spells.level}
-                  level={level}
-                />
-              </Grid>;
-            })}
+      <Grid container direction="row" spacing={2} justify="space-evenly">
+        {[[0, 1, 2], [3, 4, 5], [6, 7, 8, 9]].map((columns) => (
+          <Grid item>
+            <Grid container direction="column">
+              {columns.map((level) => (
+                <Grid item>
+                  <SpellLevelHeaderComponent level={level} />
+                  <SpellLevelListComponent
+                    spellsAtLevel={spells.level}
+                    level={level}
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item>
-          <Grid container direction="column">
-            {[3, 4, 5].map((level) => {
-              <Grid item>
-                <SpellLevelHeaderComponent level={level} />
-                <SpellLevelListComponent
-                  spellsAtLevel={spells.level}
-                  level={level}
-                />
-              </Grid>;
-            })}
-          </Grid>
-        </Grid>
-        <Grid item>
-          <Grid container direction="column">
-            {[6, 7, 8, 9].map((level) => {
-              <Grid item>
-                <SpellLevelHeaderComponent level={level} />
-                <SpellLevelListComponent
-                  spellsAtLevel={spells.level}
-                  level={level}
-                />
-              </Grid>;
-            })}
-          </Grid>
-        </Grid>
+        ))}
       </Grid>
     </Paper>
   );
