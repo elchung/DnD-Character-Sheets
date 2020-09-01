@@ -1,9 +1,9 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import AbilityScoreComponent from '../Components/AbilityScoresComponent';
-import SavingThrowsComponent from '../Components/SavingThrowsComponent';
-import SkillsComponent from '../Components/SkillsComponent';
-import ProficienciesComponent from '../Components/ProficienciesComponent';
+import AbilityScoreComponent from './AbilityScoresComponent';
+import SavingThrowsComponent from './SavingThrowsComponent';
+import SkillsComponent from './SkillsComponent';
+import ProficienciesComponent from './ProficienciesComponent';
 
 const LeftColumnComponent = () => (
   <Grid item style={{maxWidth: 1170}}>

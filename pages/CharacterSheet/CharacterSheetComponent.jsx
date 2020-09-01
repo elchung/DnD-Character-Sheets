@@ -2,7 +2,7 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import CombatStatsComponent from './Components/CombatStatsComponent';
-import LeftColumnComponent from './LeftColumn/LeftColumnComponent';
+import LeftColumnComponent from './Components/LeftColumnComponent';
 import FeaturesAndTraitsComponent from './Components/FeaturesAndTraitsComponent';
 import SpellsComponent from './Components/SpellsComponent';
 

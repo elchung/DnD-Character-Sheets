@@ -1,4 +1,4 @@
-[
+export const spells = [
   {
     casting_time: '1 action',
     classes: [
@@ -10879,3 +10879,5 @@
     type: '3rd-level evocation',
   },
 ];
+
+export default spells;

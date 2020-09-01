@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-export const TabPanel = ({ children, value, index, ...other }) => (
+export const TabPanel = ({
+  children, value, index, ...other
+}) => (
   <div
     role="tabpanel"
     hidden={value !== index}
@@ -13,7 +14,7 @@ export const TabPanel = ({ children, value, index, ...other }) => (
   >
     {value === index && (
       <Box p={3}>
-        <Typography>{children}</Typography>
+        {children}
       </Box>
     )}
   </div>

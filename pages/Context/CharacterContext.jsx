@@ -4,6 +4,7 @@ const CharacterStateContext = createContext();
 const CharacterDispatchContext = createContext();
 
 export const CharacterContextProvider = (props) => {
+  // eslint-disable-next-line react/prop-types
   const { children } = props;
 
   const [level, setLevel] = useState(1);
@@ -124,9 +125,9 @@ export const CharacterContextProvider = (props) => {
         marginRight: 2,
       },
     },
-    spellLevelheader: { width: '100%', height: 50 },
+    spellLevelheader: { width: '100%', height: '10%' },
     spellsAccordion: {
-      maxHeight: 355, overflow: 'auto', width: '100%', height: 170, paddingBottom: 20, paddingTop: 10,
+      maxHeight: 355, overflow: 'auto', width: '100%', height: '90%', paddingBottom: 20, paddingTop: 10,
     },
     tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
     tableCellInputStyle: {

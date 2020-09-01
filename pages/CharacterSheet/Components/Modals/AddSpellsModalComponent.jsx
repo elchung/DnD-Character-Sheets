@@ -5,18 +5,20 @@ import Modal from '@material-ui/core/Modal';
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import IconButton from '@material-ui/core/IconButton';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import Tabs from '@material-ui/core/Tabs';
 import AppBar from '@material-ui/core/AppBar';
-import TabPanel from '../Reusable/SpellTabPanel';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
+import TabPanel from '../SpellTabPanel';
+import { AddSpellsComponent } from './AddSpellsComponent';
 // import {
 //   useCharacterState,
 //   useSetCharacterState,
 // } from '../../../Context/CharacterContext';
 
-const AddSpellsModalComponent = () => {
+export const AddSpellsModalComponent = ({ positioning }) => {
   // const { } = useCharacterState();
   // const { } = useSetCharacterState();
   const [open, setOpen] = React.useState(false);
@@ -44,18 +46,9 @@ const AddSpellsModalComponent = () => {
 
   return (
     <div>
-      <IconButton
-        onClick={handleOpen}
-        style={{
-          marginRight: -25, marginTop: -18,
-        }}
-      >
-        <MenuBookIcon
-          color="action"
-          fontSize="small"
-          size="small"
-        />
-      </IconButton>
+      <Fab size="small" color="primary" aria-label="add" onClick={handleOpen} style={positioning}>
+        <MenuBookIcon />
+      </Fab>
       <Modal
         BackdropComponent={Backdrop}
         BackdropProps={{ timeout: 500 }}
@@ -79,10 +72,12 @@ const AddSpellsModalComponent = () => {
               <AddSpellsComponent />
             </TabPanel>
             <TabPanel value={topTabNum} index={1}>
-              <AddCustomSpellComponent />
+              Temp Add custom component
+              {/* <AddCustomSpellComponent /> */}
             </TabPanel>
             <TabPanel value={topTabNum} index={2}>
-              <AddBlankSpellComponent />
+              Temp Add blank spell component
+              {/* <AddBlankSpellComponent /> */}
             </TabPanel>
             <Grid container direction="row" justify="flex-end">
               <Grid item>
