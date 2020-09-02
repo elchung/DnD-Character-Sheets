@@ -60,9 +60,16 @@ export const AddSpellsModalComponent = ({ positioning }) => {
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         <Fade in={open}>
-          <Paper style={{ padding: 20 }}>
+          <Paper style={{
+            padding: 20, overflow: 'auto', height: 700, width: 900,
+          }}
+          >
             <AppBar position="static">
-              <Tabs value={topTabNum} onChange={handleTopTabChange} aria-label="top level tabs">
+              <Tabs
+                value={topTabNum}
+                onChange={handleTopTabChange}
+                style={{ borderRight: '1px solid' }}
+              >
                 <Tab label="Add Spell From List" />
                 <Tab label="Add Custom spell" />
                 <Tab label="Add Blank" />
