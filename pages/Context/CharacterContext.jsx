@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 const CharacterStateContext = createContext();
 const CharacterDispatchContext = createContext();
@@ -52,11 +53,21 @@ export const CharacterContextProvider = (props) => {
     0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0,
   });
 
-  const style = {
+  const globalStyle = {
+    elevation: 3,
+  };
+
+  const useStyles = makeStyles({
     elevation: 3,
     abilityScoreComponent: { width: 125, paddingBottom: 20, height: 787 },
+    addSpellsTabs: { borderRight: '1px solid' },
+    addSpellsTab: { wrapper: { alignItems: 'flex-start', justify: 'flex-start', float: 'left' } },
     combatStatsComponent: {
       width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
+    },
+    deathSaveSuccessText: { fontSize: 13, paddingTop: 2, marginBottom: -10 },
+    deathSaveFailText: {
+      fontSize: 13, paddingTop: 2, marginBottom: -10, marginTop: -10,
     },
     proficienciesComponent: {
       width: '100%', height: 290, paddingBottom: 20, paddingTop: 10, overflow: 'auto', maxWidth: 390,
@@ -107,14 +118,6 @@ export const CharacterContextProvider = (props) => {
     },
     singleItemDisplayComponentStyle: { width: 100, height: 105 },
     singleLineDisplayComponent: { width: 250, height: 68 },
-    singleLineDisplayInputProps: {
-      style: {
-        textAlign: 'center',
-        fontSize: 30,
-        width: 25,
-        height: 15,
-      },
-    },
     skillModifierInputProps: {
       style: {
         fontSize: 17,
@@ -128,6 +131,103 @@ export const CharacterContextProvider = (props) => {
     spellLevelheader: { width: '100%', height: '10%' },
     spellsAccordion: {
       maxHeight: 355, overflow: 'auto', width: '100%', height: '90%', paddingBottom: 20, paddingTop: 10,
+    },
+    spellsComponentPaper: {
+      width: 1180,
+      height: 1146,
+      padding: 16,
+      maxHeight: 1146,
+      overflow: 'auto',
+    },
+    tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
+    tableCellInputStyle: {
+      'aria-label': 'naked',
+      style: {
+        fontSize: 17,
+        height: 10,
+        textAlign: 'center',
+      },
+    },
+  });
+  const style = {
+    elevation: 3,
+    abilityScoreComponent: { width: 125, paddingBottom: 20, height: 787 },
+    combatStatsComponent: {
+      width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
+    },
+    deathSaveSuccessText: { fontSize: 13, paddingTop: 2, marginBottom: -10 },
+    deathSaveFailText: {
+      fontSize: 13, paddingTop: 2, marginBottom: -10, marginTop: -10,
+    },
+    proficienciesComponent: {
+      width: '100%', height: 290, paddingBottom: 20, paddingTop: 10, overflow: 'auto', maxWidth: 390,
+    },
+    deathSaveComponent: {
+      width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
+    },
+    FeaturesAndTraitsComponent: {
+      maxHeight: 355, overflow: 'auto', width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
+    },
+    headerStyle: { marginTop: -2, marginBottom: -2 },
+    hitDieComponent: {
+      width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
+    },
+    HitDieComponentInputPropStyle: {
+      fontSize: 15,
+      width: 10,
+      height: 25,
+      margin: 0,
+      paddingTop: 0,
+      paddingBottom: 0,
+      paddingLeft: 5,
+      paddingRight: 5,
+      textAlign: 'center',
+    },
+    hitPointComponentInputStyle: {
+      fontSize: 15,
+      width: 300,
+      height: 10,
+      textAlign: 'center',
+      marginLeft: -5,
+      marginRight: 0,
+      paddingTop: 4,
+    },
+    hitPointComponentTemp: {
+      style: {
+        textAlign: 'center',
+        marginBottom: -6,
+      },
+    },
+    skillComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
+    savingThrowComponent: { width: 250, paddingBottom: 20, paddingTop: 10 },
+    skillComponentListItem: {
+      marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
+    },
+    savingThrowComponentListItem: {
+      marginBottom: -13, marginTop: -10, paddingBottom: 0, paddingTop: 0,
+    },
+    singleItemDisplayComponentStyle: { width: 100, height: 105 },
+    singleLineDisplayComponent: { width: 250, height: 68 },
+    skillModifierInputProps: {
+      style: {
+        fontSize: 17,
+        width: 25,
+        height: 3,
+        textAlign: 'center',
+        marginLeft: -5,
+        marginRight: 2,
+      },
+    },
+    spellLevelheader: { width: '100%', height: '10%' },
+    spellsAccordion: {
+      maxHeight: 355, overflow: 'auto', width: '100%', height: '90%', paddingBottom: 20, paddingTop: 10,
+    },
+    spellsComponentPaper: {
+      width: 1180,
+      height: 1146,
+      padding: 16,
+      maxHeight: 1146,
+      overflow: 'auto',
     },
     tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
     tableCellInputStyle: {
@@ -166,12 +266,14 @@ export const CharacterContextProvider = (props) => {
     deathSaves,
     damageTypes,
     proficiencies,
-    style,
+    globalStyle,
     featuresAndTraits,
     spells,
     preparedSpells,
     spellSlots,
     usedSpellSlots,
+    useStyles,
+    style,
   };
 
   const characterDispatch = {

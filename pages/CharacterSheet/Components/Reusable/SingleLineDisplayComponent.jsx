@@ -12,14 +12,22 @@ const SingleLineDisplayComponent = ({
   setValue,
 }) => {
   const [displayedValue, setDisplayedValue] = React.useState(value);
-  const { style } = useCharacterState();
+  const { useStyles, globalStyles } = useCharacterState();
+  const classes = useStyles();
 
   return (
-    <Card elevation={style.elevation} style={style.singleLineDisplayComponent}>
+    <Card elevation={globalStyles.elevation} className={classes.singleLineDisplayComponent}>
       <CardActions>
         <TextField
           id="proficiency-bonus-textfield"
-          inputProps={style.singleLineDisplayInputProps}
+          inputProps={{
+            style: {
+              textAlign: 'center',
+              fontSize: 30,
+              width: 25,
+              height: 15,
+            },
+          }}
           onBlur={() => setValue(displayedValue)}
           onChange={(event) => setDisplayedValue(event.target.value)}
           value={displayedValue}

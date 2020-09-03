@@ -41,6 +41,8 @@ TabPanel.propTypes = {
 };
 
 export const AddSpellsComponent = () => {
+  const { useStyles } = useCharacterState();
+  const classes = useStyles();
   const [selectedSpells, setSelectedSpells] = React.useState({
     cantrip: {},
     1: {},
@@ -74,19 +76,20 @@ export const AddSpellsComponent = () => {
         value={tabVal}
         onChange={handleTabSelection}
         aria-label="spell list"
-        style={{ borderRight: '1px solid ' }}
+        className={classes.addSpellsTabs}
+        style={{ borderRight: '1px solid' }}
       >
         {displayedSpells.map((spell) => (
           <Tab
             label={(
-              <div display="inline-flex" flex-direction="row">
+              <div>
                 <Checkbox
                   checked={selectedSpells[spell.level][spell.name]}
                   onChange={handleCheckboxChange}
                   onClick={(event) => event.stopPropagation()}
                   onFocus={(event) => event.stopPropagation()}
                   color="primary"
-                  inputProps={{ 'aria-label': 'secondary checkbox' }}
+                  InputProps={{ 'aria-label': 'secondary checkbox' }}
                 />
                 <Typography variant="caption">{spell.name}</Typography>
               </div>
@@ -94,6 +97,7 @@ export const AddSpellsComponent = () => {
             id={`vertical-tab-${spell.name}`}
             key={`vertical-tab-${spell.name}`}
             aria-controls={`vertical-tabpanel-${spell.name}`}
+            classes={{ wrapper: { alignItems: 'flex-start', justify: 'flex-start' } }}
           />
         ))}
       </Tabs>

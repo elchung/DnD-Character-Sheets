@@ -12,10 +12,11 @@ import BaseAbilityScoreComponent from './BaseAbilityScoreComponent';
 const AbilityScoreComponent = ({ orientation }) => {
   const characterState = useCharacterState();
   const setCharacterState = useSetCharacterState();
-  const { style } = useCharacterState();
+  const { useStyles, globalStyle } = useCharacterState();
+  const classes = useStyles();
 
   return (
-    <Card elevation={style.elevation} style={style.abilityScoreComponent}>
+    <Card elevation={globalStyle.elevation} className={classes.abilityScoreComponent}>
       <Grid alignItems="flex-end" container direction="column" justify="center" wrap="nowrap">
         <Grid item style={{ paddingBottom: 15 }}>
           <Switch

@@ -12,14 +12,15 @@ import SingleItemDisplayComponent from './Reusable/SingleItemDisplayComponent';
 
 const CombatStatsComponent = () => {
   const {
-    maxHP, initiative, speed, armorClass, proficiencyBonus, inspiration, style,
+    maxHP, initiative, speed, armorClass, proficiencyBonus, inspiration, globalStyle, useStyles,
   } = useCharacterState();
   const {
     setMaxHP, setInitiative, setSpeed, setArmorClass, setProficiencyBonus, setInspiration,
   } = useSetCharacterState();
+  const classes = useStyles();
 
   return (
-    <Paper elevation={style.elevation} style={style.combatStatsComponent}>
+    <Paper elevation={globalStyle.elevation} className={classes.combatStatsComponent}>
       <Grid container direction="column" spacing={2}>
         <Grid item>
           <Grid container direction="row" justify="space-evenly">

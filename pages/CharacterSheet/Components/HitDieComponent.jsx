@@ -12,8 +12,9 @@ import {
 } from '../../Context/CharacterContext';
 
 const HitDieComponent = () => {
-  const { hitDice, style } = useCharacterState();
+  const { hitDice, useStyles, style } = useCharacterState();
   const { setHitDice } = useSetCharacterState();
+  const classes = useStyles();
   // { numDice: 0, diceType: 0, numUsed: 0 }
   const [numUsed, setNumUsed] = React.useState([0]);
 
@@ -34,8 +35,8 @@ const HitDieComponent = () => {
   };
 
   return (
-    <Paper style={style.hitDieComponent} variant="outlined">
-      <Typography align="center" color="textSecondary" style={style.headerStyle}>Hit Dice</Typography>
+    <Paper className={classes.hitDieComponent} variant="outlined">
+      <Typography align="center" color="textSecondary" className={classes.headerStyle}>Hit Dice</Typography>
       <List dense disablePadding>
         <ListItemText
           primary={(
@@ -49,11 +50,7 @@ const HitDieComponent = () => {
             <Grid container direction="row">
               <Grid item>
                 <TextField
-                  inputProps={{
-                    style: {
-                      ...style.HitDieComponentInputPropStyle,
-                    },
-                  }}
+                  inputProps={{ style: style.HitDieComponentInputPropStyle }}
                   style={{ paddingRight: 4, marginLeft: -8 }}
                   disabled
                   id={`level-${row.toString}`}
@@ -80,11 +77,7 @@ const HitDieComponent = () => {
               </Grid>
               <Grid>
                 <TextField
-                  inputProps={{
-                    style: {
-                      ...style.HitDieComponentInputPropStyle,
-                    },
-                  }}
+                  inputProps={{ style: style.HitDieComponentInputPropStyle }}
                   style={{ paddingLeft: 5, marginRight: -8 }}
                   id={`numUsed-${row.toString}`}
                   key={`numUsed-${row.toString}`}

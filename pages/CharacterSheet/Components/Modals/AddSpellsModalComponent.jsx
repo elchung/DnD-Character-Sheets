@@ -13,13 +13,14 @@ import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 import TabPanel from '../SpellTabPanel';
 import { AddSpellsComponent } from './AddSpellsComponent';
-// import {
-//   useCharacterState,
-//   useSetCharacterState,
-// } from '../../../Context/CharacterContext';
+import {
+  useCharacterState,
+  useSetCharacterState,
+} from '../../../Context/CharacterContext';
 
 export const AddSpellsModalComponent = ({ positioning }) => {
-  // const { } = useCharacterState();
+  const { useStyles } = useCharacterState();
+  const classes = useStyles();
   // const { } = useSetCharacterState();
   const [open, setOpen] = React.useState(false);
   const [topTabNum, setTopTabNum] = React.useState(0);

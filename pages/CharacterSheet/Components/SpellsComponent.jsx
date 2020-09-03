@@ -9,18 +9,13 @@ import SpellLevelHeaderComponent from './SpellLevelHeaderComponent';
 import { useCharacterState } from '../../Context/CharacterContext';
 
 export const SpellsComponent = () => {
-  const { spells, style } = useCharacterState();
+  const { spells, globalStyle, useStyles } = useCharacterState();
+  const classes = useStyles();
 
   return (
     <Paper
-      elevation={style.elevation}
-      style={{
-        width: 1180,
-        height: 1146,
-        padding: 16,
-        maxHeight: 1146,
-        overflow: 'auto',
-      }}
+      elevation={globalStyle.elevation}
+      className={classes.spellsComponentPaper}
     >
       <Grid container direction="column" justify="space-evenly" spacing={2}>
         <Grid item>
@@ -45,7 +40,7 @@ export const SpellsComponent = () => {
                 </Grid>
                 {columns[0] < 6
                 && (
-                  <Grid item alignContent="center" style={{ width: '1%' }}>
+                  <Grid item style={{ width: '1%' }}>
                     <Divider orientation="vertical" />
                   </Grid>
                 )}

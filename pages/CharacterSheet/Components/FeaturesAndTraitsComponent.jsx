@@ -13,8 +13,9 @@ import {
 } from '../../Context/CharacterContext';
 
 const FeaturesAndTraitsComponent = () => {
-  const { featuresAndTraits, style } = useCharacterState();
+  const { featuresAndTraits, globalStyle, useStyles } = useCharacterState();
   const { setFeaturesAndTraits } = useSetCharacterState();
+  const classes = useStyles();
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     const dragCard = featuresAndTraits[dragIndex];
@@ -46,8 +47,8 @@ const FeaturesAndTraitsComponent = () => {
   };
 
   return (
-    <Paper elevation={style.elevation} style={style.FeaturesAndTraitsComponent}>
-      <Typography align="center" color="textSecondary" style={{ ...style.headerStyle, paddingBottom: 10 }}>Features/Traits</Typography>
+    <Paper elevation={globalStyle.elevation} className={classes.FeaturesAndTraitsComponent}>
+      <Typography align="center" color="textSecondary" style={{ paddingBottom: 10 }} className={classes.headerStyle}>Features/Traits</Typography>
       {featuresAndTraits.map((item, index) => (
         <DraggableCard
           id={item.id}

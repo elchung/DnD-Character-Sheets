@@ -87,9 +87,7 @@ const UpdateHitPointsModal = () => {
     <div>
       <IconButton
         onClick={handleOpen}
-        style={{
-          marginRight: -25, marginTop: -18,
-        }}
+        style={{ marginRight: -25, marginTop: -18 }}
       >
         <LocalPizzaIcon
           color="action"

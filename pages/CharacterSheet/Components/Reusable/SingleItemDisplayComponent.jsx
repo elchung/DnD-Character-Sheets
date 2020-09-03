@@ -10,11 +10,12 @@ const SingleItemDisplayComponent = ({
   value,
   updateValue,
 }) => {
-  const { style } = useCharacterState();
+  const { useStyles } = useCharacterState();
+  const classes = useStyles();
   const [displayText, setDisplayText] = React.useState(value);
 
   return (
-    <Paper style={style.singleItemDisplayComponentStyle} variant="outlined">
+    <Paper className={classes.singleItemDisplayComponentStyle} variant="outlined">
       <Typography align="center" color="textSecondary" style={{ paddingTop: 7 }}>{header}</Typography>
       <InputBase
         inputProps={{
