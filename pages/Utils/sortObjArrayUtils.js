@@ -1,6 +1,7 @@
 export const sortAlphabeticalAsc = (arr, key) => {
+  console.time('sort');
   arr.sort((a, b) => (a[key] < b[key] ? -1 : 1));
-
+  console.timeEnd('sort');
   return arr;
 };
 

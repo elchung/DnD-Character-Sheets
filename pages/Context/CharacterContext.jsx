@@ -60,8 +60,6 @@ export const CharacterContextProvider = (props) => {
   const useStyles = makeStyles({
     elevation: 3,
     abilityScoreComponent: { width: 125, paddingBottom: 20, height: 787 },
-    addSpellsTabs: { borderRight: '1px solid' },
-    addSpellsTab: { wrapper: { alignItems: 'flex-start', justify: 'flex-start', float: 'left' } },
     combatStatsComponent: {
       width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
     },
