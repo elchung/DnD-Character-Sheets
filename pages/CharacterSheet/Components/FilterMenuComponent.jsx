@@ -4,6 +4,12 @@ import Menu from '@material-ui/core/Menu';
 import SortIcon from '@material-ui/icons/Sort';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 export const SpellFilterMenu = ({
   displayed,
@@ -11,10 +17,10 @@ export const SpellFilterMenu = ({
   filterByOptions,
   filterBy,
   setFilterBy,
-  SortByOptions,
+  sortByOptions,
   sortBy,
   setSortBy,
-  DisplayOptions,
+  displayOptions,
   display,
   setDisplay,
 }) => {
@@ -26,6 +32,18 @@ export const SpellFilterMenu = ({
 
   const handleClose = () => {
     setMenuOpen(null);
+  };
+
+  const handleDisplayChange = (event) => {
+    console.log(event.target);
+  };
+
+  const handleFilterChange = (event) => {
+    console.log(event.target);
+  };
+
+  const handleSortChange = (event) => {
+    setSortBy(event.target.value);
   };
 
   return (
@@ -44,18 +62,37 @@ export const SpellFilterMenu = ({
         keepMounted
         open={open}
         onClose={handleClose}
-        PaperProps={{
-          style: {
-            width: '20ch',
-          },
-        }}
+        // PaperProps={{
+        //   style: {
+        //     width: '20ch',
+        //   },
+        // }}
       >
-        <Typography>Filter by:</Typography>
-        <Typography>checkbox: spell level, class, ritual or not, school</Typography>
-        <Typography>Sort By:</Typography>
-        <Typography>radiogroup(tristate, asc, desc, off: spell level, class,</Typography>
         <Typography>Display:</Typography>
         <Typography>checkboxes: range, class, level,</Typography>
+        <div>
+          <FormLabel component="legend">Filter By:</FormLabel>
+          {filterByOptions.map((filterName) => (
+            <Checkbox
+              checked={filterBy.has(filterName)}
+              onChange={handleFilterChange}
+              color="primary"
+              size="small"
+              label={filterName}
+              labelPlacement="top"
+              inputProps={{ 'aria-label': 'primary checkbox' }}
+            />
+          ))}
+        </div>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Sort By:</FormLabel>
+          <RadioGroup aria-label="sortBy" name="sortBy" value={sortBy} onChange={handleSortChange}>
+            {sortByOptions.map((sortName) => (
+              <FormControlLabel value={sortName} control={<Radio size="small" />} label={sortName} />
+            ))}
+          </RadioGroup>
+        </FormControl>
+        <Typography>radiogroup(tristate, asc, desc, off: spell level, class,</Typography>
       </Menu>
     </div>
   );

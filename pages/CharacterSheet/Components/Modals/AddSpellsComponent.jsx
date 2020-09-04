@@ -5,11 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
-import { FixedSizeList } from 'react-window';
 import { withStyles } from '@material-ui/core/styles';
 import FilterMenuComponent from '../FilterMenuComponent';
 import * as Sort from '../../../Utils/sortObjArrayUtils';
-import VerticalTabCheckbox from '../Reusable/VerticalTabCheckbox';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -40,6 +38,13 @@ export const AddSpellsComponent = () => {
   const [displayedSpells, setDisplayedSpells] = React.useState(Sort.sortAlphabeticalAsc(Object.keys(spellList)));
   const [tabVal, setTabVal] = React.useState(0);
   const [selectedSpellName, setSelectedSpellName] = React.useState(displayedSpells[tabVal]);
+  const [filterBy, setFilterBy] = React.useState(new Set());
+  const [sortBy, setSortBy] = React.useState('');
+  const [display, setDisplay] = React.useState(new Set());
+
+  const sortByOptions = ['level', 'class'];
+  const filterByOptions = ['level', 'class'];
+  const displayOptions = [''];
 
   const handleTabSelection = (event, newValue) => {
     setTabVal(newValue);
@@ -53,21 +58,45 @@ export const AddSpellsComponent = () => {
 
   return (
     <div style={{ display: 'flex', flexGrow: 1, height: 570 }}>
-      <FilterMenuComponent displayed={displayedSpells} setDisplayed={setDisplayedSpells} />
-      <VirtualizedTabs
+      <FilterMenuComponent
+        displayed={displayedSpells}
+        setDisplayed={setDisplayedSpells}
+        filterByOptions={filterByOptions}
+        filterBy={filterBy}
+        setFilterBy={setFilterBy}
+        sortByOptions={sortByOptions}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        displayOptions={displayOptions}
+        display={display}
+        setDisplay={setDisplay}
+      />
+      <Tabs
         orientation="vertical"
         variant="scrollable"
         value={tabVal}
         onChange={handleTabSelection}
-        style={{ paddingTop: 0, paddingBottom: 0 }}
-        height={500}
-        itemSize={48}
-        itemCount={displayedSpells.length}
-        renderData={{ handleCheckboxChange, itemList: displayedSpells }}
-        renderRow={
-          VerticalTabCheckbox
-        }
-      />
+      >
+        {displayedSpells.map((spell) => (
+          <VerticalTab
+            label={(
+              <div>
+                <Checkbox
+                  onChange={handleCheckboxChange}
+                  onClick={(event) => event.stopPropagation()}
+                  onFocus={(event) => event.stopPropagation()}
+                  color="primary"
+                  InputProps={{ 'aria-label': 'secondary checkbox' }}
+                />
+                <Typography variant="caption">{spell}</Typography>
+              </div>
+            )}
+            id={`vertical-tab-${displayedSpells[0]}`}
+            key={`vertical-tab-${displayedSpells[0]}`}
+            aria-controls={`vertical-tabpanel-${displayedSpells[0]}`}
+          />
+        ))}
+      </Tabs>
       <div
         role="tabpanel"
         id="vertical-tabpanel-display"
