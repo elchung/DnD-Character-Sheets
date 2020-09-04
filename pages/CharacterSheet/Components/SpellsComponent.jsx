@@ -9,7 +9,7 @@ import SpellLevelHeaderComponent from './SpellLevelHeaderComponent';
 import { useCharacterState } from '../../Context/CharacterContext';
 
 export const SpellsComponent = () => {
-  const { spells, globalStyle, useStyles } = useCharacterState();
+  const { knownSpells, globalStyle, useStyles } = useCharacterState();
   const classes = useStyles();
 
   return (
@@ -31,7 +31,7 @@ export const SpellsComponent = () => {
                       <Grid item style={{ height: '33%' }}>
                         <SpellLevelHeaderComponent level={level} />
                         <SpellLevelListComponent
-                          spellsAtLevel={spells.level}
+                          spellsAtLevel={knownSpells.level}
                           level={level}
                         />
                       </Grid>

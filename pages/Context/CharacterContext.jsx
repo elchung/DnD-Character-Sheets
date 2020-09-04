@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { spells } from '../../Data/Spells';
 
 const CharacterStateContext = createContext();
 const CharacterDispatchContext = createContext();
@@ -39,7 +40,11 @@ export const CharacterContextProvider = (props) => {
     0: [{ id: 0, text: { title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description' } }],
     1: [{ id: 0, text: { title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description' } }],
   };
-  const [spells, setSpells] = useState(tempSpells);
+  const [knownSpells, setKnownSpells] = useState(tempSpells);
+  const [spellList, setSpellList] = useState(spells.reduce((acc, spell) => {
+    acc[spell.name] = spell;
+    return acc;
+  }, {}));
   const [preparedSpells, setPreparedSpells] = useState(new Set());
   const testCards = [
     { id: 0, text: { title: 'test title', body: 'this is the body' } },
@@ -266,8 +271,9 @@ export const CharacterContextProvider = (props) => {
     proficiencies,
     globalStyle,
     featuresAndTraits,
-    spells,
+    knownSpells,
     preparedSpells,
+    spellList,
     spellSlots,
     usedSpellSlots,
     useStyles,
@@ -295,8 +301,9 @@ export const CharacterContextProvider = (props) => {
     setDeathSaves,
     setProficiencies,
     setFeaturesAndTraits,
-    setSpells,
+    setKnownSpells,
     setPreparedSpells,
+    setSpellList,
     setSpellSlots,
     setUsedSpellSlots,
   };

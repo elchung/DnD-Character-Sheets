@@ -5,9 +5,11 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
+import { FixedSizeList } from 'react-window';
 import { withStyles } from '@material-ui/core/styles';
-import { spells } from '../../../../Data/Spells';
+import FilterMenuComponent from '../FilterMenuComponent';
 import * as Sort from '../../../Utils/sortObjArrayUtils';
+import VerticalTabCheckbox from '../Reusable/VerticalTabCheckbox';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -31,73 +33,50 @@ const VerticalTab = withStyles(() => ({
 }))(Tab);
 
 export const AddSpellsComponent = () => {
-  const { useStyles } = useCharacterState();
+  const { useStyles, spellList } = useCharacterState();
   const [selectedSpells, setSelectedSpells] = React.useState({
-    cantrip: {},
-    1: {},
-    2: {},
-    3: {},
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
-    9: {},
-  }); // keys are 0-9
-  const [displayedSpells, setDisplayedSpells] = React.useState(Sort.sortAlphabeticalAsc(spells, 'name'));
+    0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 8: {}, 9: {},
+  });
+  const [displayedSpells, setDisplayedSpells] = React.useState(Sort.sortAlphabeticalAsc(Object.keys(spellList)));
   const [tabVal, setTabVal] = React.useState(0);
-  const [selectedSpell, setSelectedSpell] = React.useState(displayedSpells[tabVal]);
+  const [selectedSpellName, setSelectedSpellName] = React.useState(displayedSpells[tabVal]);
 
   const handleTabSelection = (event, newValue) => {
     setTabVal(newValue);
-    setSelectedSpell(displayedSpells[newValue]);
+    setSelectedSpellName(displayedSpells[newValue]);
   };
 
   const handleCheckboxChange = (event, val) => {
     console.log('', event);
     console.log('', val);
   };
-  // need to add sorting/filtering to spell list (by name, level, class)
-  // need to add checkbox for selected spells
+
   return (
     <div style={{ display: 'flex', flexGrow: 1, height: 570 }}>
-      <Tabs
+      <FilterMenuComponent displayed={displayedSpells} setDisplayed={setDisplayedSpells} />
+      <VirtualizedTabs
         orientation="vertical"
         variant="scrollable"
         value={tabVal}
         onChange={handleTabSelection}
         style={{ paddingTop: 0, paddingBottom: 0 }}
-      >
-        {displayedSpells.map((spell) => (
-          <VerticalTab
-            label={(
-              <div>
-                <Checkbox
-                  checked={selectedSpells[spell.level][spell.name]}
-                  onChange={handleCheckboxChange}
-                  onClick={(event) => event.stopPropagation()}
-                  onFocus={(event) => event.stopPropagation()}
-                  color="primary"
-                  InputProps={{ 'aria-label': 'secondary checkbox' }}
-                />
-                <Typography variant="caption">{spell.name}</Typography>
-              </div>
-            )}
-            id={`vertical-tab-${spell.name}`}
-            key={`vertical-tab-${spell.name}`}
-            aria-controls={`vertical-tabpanel-${spell.name}`}
-          />
-        ))}
-      </Tabs>
+        height={500}
+        itemSize={48}
+        itemCount={displayedSpells.length}
+        renderData={{ handleCheckboxChange, itemList: displayedSpells }}
+        renderRow={
+          VerticalTabCheckbox
+        }
+      />
       <div
         role="tabpanel"
         id="vertical-tabpanel-display"
         style={{ width: '80%' }}
       >
         <Box p={3}>
-          <Typography variant="h6">{selectedSpell.name}</Typography>
-          <Typography variant="subtitle1">{`${selectedSpell.casting_time} - range: ${selectedSpell.range}`}</Typography>
-          <Typography variant="body1">{selectedSpell.description}</Typography>
+          <Typography variant="h6">{selectedSpellName}</Typography>
+          <Typography variant="subtitle1">{`${spellList[selectedSpellName].casting_time} - range: ${spellList[selectedSpellName].range}`}</Typography>
+          <Typography variant="body1">{spellList[selectedSpellName].description}</Typography>
         </Box>
       </div>
     </div>
