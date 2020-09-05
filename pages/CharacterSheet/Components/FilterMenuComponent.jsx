@@ -10,6 +10,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import TriStateCheckbox from './Reusable/TriStateCheckbox';
 
 export const SpellFilterMenu = ({
   displayed,
@@ -25,7 +27,11 @@ export const SpellFilterMenu = ({
   setDisplay,
 }) => {
   const [menuOpen, setMenuOpen] = React.useState(null);
+  const [displaySort, setDisplaySort] = React.useState(sortBy);
+  const [displayedFilter, setDisplayedFilter] = React.useState(filterBy);
+  const [displayedDisplay, setDisplayedDisplay] = React.useState(display);
   const open = Boolean(menuOpen);
+
   const handleClick = (event) => {
     setMenuOpen(event.currentTarget);
   };
@@ -35,15 +41,22 @@ export const SpellFilterMenu = ({
   };
 
   const handleDisplayChange = (event) => {
-    console.log(event.target);
+    console.log('', event.target);
   };
 
   const handleFilterChange = (event) => {
-    console.log(event.target);
+    if (displayedFilter.has(event.target.name)) {
+      const temp = new Set([...displayedFilter]);
+      temp.delete(event.target.name);
+      setDisplayedFilter(temp);
+    } else {
+      setDisplayedFilter(new Set([...displayedFilter, event.target.name]));
+    }
+    console.log('', event.target.name);
   };
 
   const handleSortChange = (event) => {
-    setSortBy(event.target.value);
+    setDisplaySort(event.target.value);
   };
 
   return (
@@ -62,33 +75,38 @@ export const SpellFilterMenu = ({
         keepMounted
         open={open}
         onClose={handleClose}
-        // PaperProps={{
-        //   style: {
-        //     width: '20ch',
-        //   },
-        // }}
       >
-        <Typography>Display:</Typography>
+        <FormLabel component="legend">Display:</FormLabel>
         <Typography>checkboxes: range, class, level,</Typography>
-        <div>
-          <FormLabel component="legend">Filter By:</FormLabel>
+        <FormLabel component="legend">Filter By:</FormLabel>
+        <FormGroup row>
           {filterByOptions.map((filterName) => (
-            <Checkbox
-              checked={filterBy.has(filterName)}
-              onChange={handleFilterChange}
-              color="primary"
-              size="small"
+            <TriStateCheckbox
+              state={}
+              onClick={}
+              size={}
+              name={}
+            />
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  checked={displayedFilter.has(filterName)}
+                  onChange={handleFilterChange}
+                  color="primary"
+                  size="small"
+                  name={filterName}
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
+              )}
               label={filterName}
-              labelPlacement="top"
-              inputProps={{ 'aria-label': 'primary checkbox' }}
             />
           ))}
-        </div>
+        </FormGroup>
         <FormControl component="fieldset">
           <FormLabel component="legend">Sort By:</FormLabel>
-          <RadioGroup aria-label="sortBy" name="sortBy" value={sortBy} onChange={handleSortChange}>
+          <RadioGroup aria-label="sortBy" name="sortBy" row value={displaySort} onChange={handleSortChange}>
             {sortByOptions.map((sortName) => (
-              <FormControlLabel value={sortName} control={<Radio size="small" />} label={sortName} />
+              <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={sortName} />
             ))}
           </RadioGroup>
         </FormControl>

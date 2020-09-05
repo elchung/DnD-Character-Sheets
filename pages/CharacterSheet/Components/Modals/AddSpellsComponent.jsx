@@ -39,10 +39,10 @@ export const AddSpellsComponent = () => {
   const [tabVal, setTabVal] = React.useState(0);
   const [selectedSpellName, setSelectedSpellName] = React.useState(displayedSpells[tabVal]);
   const [filterBy, setFilterBy] = React.useState(new Set());
-  const [sortBy, setSortBy] = React.useState('');
+  const [sortBy, setSortBy] = React.useState('name');
   const [display, setDisplay] = React.useState(new Set());
 
-  const sortByOptions = ['level', 'class'];
+  const sortByOptions = ['name', 'level'];
   const filterByOptions = ['level', 'class'];
   const displayOptions = [''];
 

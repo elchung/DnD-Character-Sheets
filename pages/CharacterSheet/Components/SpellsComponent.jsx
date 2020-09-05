@@ -22,7 +22,7 @@ export const SpellsComponent = () => {
           <SpellsHeaderComponent />
         </Grid>
         <Grid item>
-          <Grid container direction="row" justify="flex-start" spacing={1}>
+          <Grid container direction="row" w justify="flex-start" spacing={1}>
             {[[0, 1, 2], [3, 4, 5], [6, 7, 8, 9]].map((columns) => (
               <>
                 <Grid item style={{ width: '32%' }}>
