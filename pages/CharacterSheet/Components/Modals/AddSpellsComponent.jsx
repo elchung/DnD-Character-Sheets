@@ -38,12 +38,11 @@ export const AddSpellsComponent = () => {
   const [displayedSpells, setDisplayedSpells] = React.useState(Sort.sortAlphabeticalAsc(Object.keys(spellList)));
   const [tabVal, setTabVal] = React.useState(0);
   const [selectedSpellName, setSelectedSpellName] = React.useState(displayedSpells[tabVal]);
-  const [filterBy, setFilterBy] = React.useState(new Set());
+  const [filterBy, setFilterBy] = React.useState({ level: '', class: '' });
   const [sortBy, setSortBy] = React.useState('name');
   const [display, setDisplay] = React.useState(new Set());
 
   const sortByOptions = ['name', 'level'];
-  const filterByOptions = ['level', 'class'];
   const displayOptions = [''];
 
   const handleTabSelection = (event, newValue) => {
@@ -61,7 +60,7 @@ export const AddSpellsComponent = () => {
       <FilterMenuComponent
         displayed={displayedSpells}
         setDisplayed={setDisplayedSpells}
-        filterByOptions={filterByOptions}
+        filterByOptions={Object.keys(filterBy)}
         filterBy={filterBy}
         setFilterBy={setFilterBy}
         sortByOptions={sortByOptions}

@@ -28,8 +28,6 @@ export const SpellFilterMenu = ({
 }) => {
   const [menuOpen, setMenuOpen] = React.useState(null);
   const [displaySort, setDisplaySort] = React.useState(sortBy);
-  const [displayedFilter, setDisplayedFilter] = React.useState(filterBy);
-  const [displayedDisplay, setDisplayedDisplay] = React.useState(display);
   const open = Boolean(menuOpen);
 
   const handleClick = (event) => {
@@ -45,14 +43,7 @@ export const SpellFilterMenu = ({
   };
 
   const handleFilterChange = (event) => {
-    if (displayedFilter.has(event.target.name)) {
-      const temp = new Set([...displayedFilter]);
-      temp.delete(event.target.name);
-      setDisplayedFilter(temp);
-    } else {
-      setDisplayedFilter(new Set([...displayedFilter, event.target.name]));
-    }
-    console.log('', event.target.name);
+    console.log('', event.target);
   };
 
   const handleSortChange = (event) => {
@@ -82,23 +73,10 @@ export const SpellFilterMenu = ({
         <FormGroup row>
           {filterByOptions.map((filterName) => (
             <TriStateCheckbox
-              state={}
-              onClick={}
-              size={}
-              name={}
-            />
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  checked={displayedFilter.has(filterName)}
-                  onChange={handleFilterChange}
-                  color="primary"
-                  size="small"
-                  name={filterName}
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                />
-              )}
-              label={filterName}
+              state={filterBy[filterName]}
+              onClick={handleFilterChange}
+              size="small"
+              name={filterName}
             />
           ))}
         </FormGroup>
