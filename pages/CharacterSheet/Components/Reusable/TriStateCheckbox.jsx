@@ -10,9 +10,8 @@ const TriStateCheckbox = ({
   state, onClick, size, name,
 }) => (
   <IconButton
-    color={state === 'ACCEPT' ? 'primary' : state === 'REJECT' ? 'secondary' : 'default'}
-    onClick={onClick}
-    aria-label={name}
+    color={state === 'ACCEPT' ? 'primary' : 'default'}
+    onClick={() => onClick(name)}
   >
     {
       state === 'ACCEPT'

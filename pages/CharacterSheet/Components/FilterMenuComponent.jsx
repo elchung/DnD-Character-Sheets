@@ -11,6 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import Button from '@material-ui/core/Button';
 import TriStateCheckbox from './Reusable/TriStateCheckbox';
 
 export const SpellFilterMenu = ({
@@ -27,8 +28,12 @@ export const SpellFilterMenu = ({
   setDisplay,
 }) => {
   const [menuOpen, setMenuOpen] = React.useState(null);
-  const [displaySort, setDisplaySort] = React.useState(sortBy);
+  const [displayedFilterBy, setDisplayedFilterBy] = React.useState(filterBy);
   const open = Boolean(menuOpen);
+
+  React.useEffect(() => {
+    setFilterBy(displayedFilterBy);
+  }, [displayedFilterBy]);
 
   const handleClick = (event) => {
     setMenuOpen(event.currentTarget);
@@ -42,12 +47,18 @@ export const SpellFilterMenu = ({
     console.log('', event.target);
   };
 
-  const handleFilterChange = (event) => {
-    console.log('', event.target);
+  const handleFilterChange = (name) => {
+    if (displayedFilterBy[name] === 'ACCEPT') {
+      setDisplayedFilterBy({ ...displayedFilterBy, [name]: 'REJECT' });
+    } else if (filterBy[name] === 'REJECT') {
+      setDisplayedFilterBy({ ...displayedFilterBy, [name]: '' });
+    } else {
+      setDisplayedFilterBy({ ...displayedFilterBy, [name]: 'ACCEPT' });
+    }
   };
 
   const handleSortChange = (event) => {
-    setDisplaySort(event.target.value);
+    setSortBy(event.target.value);
   };
 
   return (
@@ -73,7 +84,7 @@ export const SpellFilterMenu = ({
         <FormGroup row>
           {filterByOptions.map((filterName) => (
             <TriStateCheckbox
-              state={filterBy[filterName]}
+              state={displayedFilterBy[filterName]}
               onClick={handleFilterChange}
               size="small"
               name={filterName}
@@ -82,13 +93,14 @@ export const SpellFilterMenu = ({
         </FormGroup>
         <FormControl component="fieldset">
           <FormLabel component="legend">Sort By:</FormLabel>
-          <RadioGroup aria-label="sortBy" name="sortBy" row value={displaySort} onChange={handleSortChange}>
+          <RadioGroup aria-label="sortBy" name="sortBy" row value={sortBy} onChange={handleSortChange}>
             {sortByOptions.map((sortName) => (
               <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={sortName} />
             ))}
           </RadioGroup>
         </FormControl>
         <Typography>radiogroup(tristate, asc, desc, off: spell level, class,</Typography>
+        <Button color="primary" style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
       </Menu>
     </div>
   );
