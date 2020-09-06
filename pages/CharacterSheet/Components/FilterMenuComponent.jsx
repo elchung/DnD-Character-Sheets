@@ -27,20 +27,18 @@ export const SpellFilterMenu = ({
   display,
   setDisplay,
 }) => {
-  const [menuOpen, setMenuOpen] = React.useState(null);
+  const [anchor, setAnchor] = React.useState(null);
   const [displayedFilterBy, setDisplayedFilterBy] = React.useState(filterBy);
-  const open = Boolean(menuOpen);
-
-  React.useEffect(() => {
-    setFilterBy(displayedFilterBy);
-  }, [displayedFilterBy]);
+  const [displayedSortBy, setDisplayedSortBy] = React.useState(sortBy);
+  const [displayedDisplayedBy, setDisplayedDisplayedBy] = React.useState(display);
+  const open = Boolean(anchor);
 
   const handleClick = (event) => {
-    setMenuOpen(event.currentTarget);
+    setAnchor(event.currentTarget);
   };
 
   const handleClose = () => {
-    setMenuOpen(null);
+    setAnchor(null);
   };
 
   const handleDisplayChange = (event) => {
@@ -58,7 +56,14 @@ export const SpellFilterMenu = ({
   };
 
   const handleSortChange = (event) => {
-    setSortBy(event.target.value);
+    setDisplayedSortBy(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    setSortBy(displayedSortBy);
+    setFilterBy(displayedFilterBy);
+    setDisplay(displayedDisplayedBy);
+    handleClose();
   };
 
   return (
@@ -73,7 +78,7 @@ export const SpellFilterMenu = ({
       </IconButton>
       <Menu
         id="long-menu"
-        anchorEl={menuOpen}
+        anchorEl={anchor}
         keepMounted
         open={open}
         onClose={handleClose}
@@ -93,14 +98,13 @@ export const SpellFilterMenu = ({
         </FormGroup>
         <FormControl component="fieldset">
           <FormLabel component="legend">Sort By:</FormLabel>
-          <RadioGroup aria-label="sortBy" name="sortBy" row value={sortBy} onChange={handleSortChange}>
+          <RadioGroup aria-label="sortBy" name="sortBy" row value={displayedSortBy} onChange={handleSortChange}>
             {sortByOptions.map((sortName) => (
               <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={sortName} />
             ))}
           </RadioGroup>
         </FormControl>
-        <Typography>radiogroup(tristate, asc, desc, off: spell level, class,</Typography>
-        <Button color="primary" style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
+        <Button color="primary" onClick={handleSubmit} style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
       </Menu>
     </div>
   );
