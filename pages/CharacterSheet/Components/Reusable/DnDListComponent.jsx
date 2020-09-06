@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import update from 'immutability-helper';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
@@ -36,7 +36,7 @@ const DnDListComponent = ({
     setItems([...items, { id: items.length, text: '' }]);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (items.length < minDisplay) {
       handleAddNew();
     }

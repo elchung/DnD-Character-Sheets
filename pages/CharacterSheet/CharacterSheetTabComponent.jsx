@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Tabs from '@material-ui/core/Tabs';
@@ -10,7 +10,7 @@ import SpellsComponent from './Components/SpellsComponent';
 import { TabPanel } from './TabPanel';
 
 const CharacterSheetTabComponent = () => {
-  const [tabVal, setTabVal] = React.useState(1);
+  const [tabVal, setTabVal] = useState(1);
   const handleChange = (event, newValue) => {
     setTabVal(newValue);
   };

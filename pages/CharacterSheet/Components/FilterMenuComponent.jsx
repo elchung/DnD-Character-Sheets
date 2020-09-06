@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import SortIcon from '@material-ui/icons/Sort';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
-import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -12,6 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import TriStateCheckbox from './Reusable/TriStateCheckbox';
 
 export const SpellFilterMenu = ({
@@ -27,18 +27,33 @@ export const SpellFilterMenu = ({
   display,
   setDisplay,
 }) => {
-  const [anchor, setAnchor] = React.useState(null);
-  const [displayedFilterBy, setDisplayedFilterBy] = React.useState(filterBy);
-  const [displayedSortBy, setDisplayedSortBy] = React.useState(sortBy);
-  const [displayedDisplayedBy, setDisplayedDisplayedBy] = React.useState(display);
+  const [anchor, setAnchor] = useState(null);
+  const [displayedFilterBy, setDisplayedFilterBy] = useState(filterBy);
+  const [displayedSortBy, setDisplayedSortBy] = useState(sortBy);
+  const [displayedDisplayedBy, setDisplayedDisplayedBy] = useState(display);
   const open = Boolean(anchor);
+  const [isApplying, setIsApplying] = useState(false);
 
-  const handleClick = (event) => {
+  useEffect(() => {
+    setFilterBy(displayedFilterBy);
+  }, [displayedFilterBy]);
+
+  useEffect(() => {
+    setSortBy(displayedSortBy);
+  }, [displayedSortBy]);
+
+  useEffect(() => {
+    setDisplayedDisplayedBy(display);
+  }, [displayedDisplayedBy]);
+
+  const handleOpen = (event) => {
     setAnchor(event.currentTarget);
+    setIsApplying(false);
   };
 
   const handleClose = () => {
     setAnchor(null);
+    setIsApplying(false);
   };
 
   const handleDisplayChange = (event) => {
@@ -60,10 +75,12 @@ export const SpellFilterMenu = ({
   };
 
   const handleSubmit = () => {
+    setIsApplying(true);
     setSortBy(displayedSortBy);
     setFilterBy(displayedFilterBy);
     setDisplay(displayedDisplayedBy);
     handleClose();
+    setIsApplying(false);
   };
 
   return (
@@ -72,7 +89,7 @@ export const SpellFilterMenu = ({
         aria-label="more"
         aria-controls="long-menu"
         aria-haspopup="true"
-        onClick={handleClick}
+        onClick={handleOpen}
       >
         <SortIcon />
       </IconButton>
@@ -104,10 +121,27 @@ export const SpellFilterMenu = ({
             ))}
           </RadioGroup>
         </FormControl>
-        <Button color="primary" onClick={handleSubmit} style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
+        <div>
+          {isApplying && <CircularProgress />}
+          <Button color="primary" onClick={handleSubmit} style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
+        </div>
       </Menu>
     </div>
   );
+};
+
+SpellFilterMenu.propTypes = {
+  displayed: PropTypes.bool.isRequired,
+  setDisplayed: PropTypes.func.isRequired,
+  filterByOptions: PropTypes.array.isRequired,
+  filterBy: PropTypes.instanceOf(Set).isRequired,
+  setFilterBy: PropTypes.func.isRequired,
+  sortByOptions: PropTypes.array.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  setSortBy: PropTypes.func.isRequired,
+  displayOptions: PropTypes.array.isRequired,
+  display: PropTypes.instanceOf(Set).isRequired,
+  setDisplay: PropTypes.func.isRequired,
 };
 
 export default SpellFilterMenu;

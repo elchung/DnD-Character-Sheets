@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import {
@@ -19,9 +19,9 @@ const HitPointComponent = () => {
     style,
   } = useCharacterState();
   const { setCurrentHP, setTempHP, setHitPointHistory } = useSetCharacterState();
-  const [displayCurrentHP, setDisplayCurrentHP] = React.useState(currentHP);
-  const [displayTempHP, setDisplayTempHP] = React.useState(tempHP);
-  const [displayMaxHP, setDisplayMaxHP] = React.useState(tempHP);
+  const [displayCurrentHP, setDisplayCurrentHP] = useState(currentHP);
+  const [displayTempHP, setDisplayTempHP] = useState(tempHP);
+  const [displayMaxHP, setDisplayMaxHP] = useState(tempHP);
 
   const handleCurrentHPBlur = (isTemp) => {
     if (isTemp) {

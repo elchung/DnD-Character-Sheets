@@ -7,7 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Modal from '@material-ui/core/Modal';
 import Divider from '@material-ui/core/Divider';
-import React from 'react';
+import React, { useState } from 'react';
 import FormLabel from '@material-ui/core/FormLabel';
 import Paper from '@material-ui/core/Paper';
 import LocalPizzaIcon from '@material-ui/icons/LocalPizza';
@@ -37,11 +37,11 @@ const UpdateHitPointsModal = () => {
     setTempHP,
     setHitPointHistory,
   } = useSetCharacterState();
-  const [open, setOpen] = React.useState(false);
-  const [healOrDamage, setHealOrDamage] = React.useState('damage');
-  const [healType, setHealType] = React.useState('main');
-  const [amount, setAmount] = React.useState(0);
-  const [damageType, setDamageType] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [healOrDamage, setHealOrDamage] = useState('damage');
+  const [healType, setHealType] = useState('main');
+  const [amount, setAmount] = useState(0);
+  const [damageType, setDamageType] = useState('');
 
   const handleOpen = () => {
     setOpen(true);

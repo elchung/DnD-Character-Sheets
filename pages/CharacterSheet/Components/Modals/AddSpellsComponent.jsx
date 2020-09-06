@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -32,15 +32,15 @@ const VerticalTab = withStyles(() => ({
 
 export const AddSpellsComponent = () => {
   const { useStyles, spellList } = useCharacterState();
-  const [selectedSpells, setSelectedSpells] = React.useState({
+  const [selectedSpells, setSelectedSpells] = useState({
     0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 8: {}, 9: {},
   });
-  const [displayedSpells, setDisplayedSpells] = React.useState(Sort.sortAlphabeticalAsc(Object.keys(spellList)));
-  const [tabVal, setTabVal] = React.useState(0);
-  const [selectedSpellName, setSelectedSpellName] = React.useState(displayedSpells[tabVal]);
-  const [filterBy, setFilterBy] = React.useState({ level: '', class: '' });
-  const [sortBy, setSortBy] = React.useState('name');
-  const [display, setDisplay] = React.useState(new Set());
+  const [displayedSpells, setDisplayedSpells] = useState(Sort.sortAlphabeticalAsc(Object.keys(spellList)));
+  const [tabVal, setTabVal] = useState(0);
+  const [selectedSpellName, setSelectedSpellName] = useState(displayedSpells[tabVal]);
+  const [filterBy, setFilterBy] = useState({ level: '', class: '' });
+  const [sortBy, setSortBy] = useState('name');
+  const [display, setDisplay] = useState(new Set());
 
   const sortByOptions = ['name', 'level'];
   const displayOptions = [''];

@@ -13,7 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 const DraggableCard = ({
   id,
@@ -60,7 +60,7 @@ const DraggableCard = ({
   });
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
-  const [displayText, setDisplayText] = React.useState(text);
+  const [displayText, setDisplayText] = useState(text);
 
   return (
     <Accordion

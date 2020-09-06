@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import { useCharacterState } from '../../../Context/CharacterContext';
@@ -18,7 +18,7 @@ const DraggableCard = ({
   updateItem,
   removeItem,
 }) => {
-  const [displayText, setDisplayText] = React.useState(text);
+  const [displayText, setDisplayText] = useState(text);
   const ref = useRef(null);
 
   const [, drop] = useDrop({

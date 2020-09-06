@@ -2,7 +2,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -16,9 +16,9 @@ const HitDieComponent = () => {
   const { setHitDice } = useSetCharacterState();
   const classes = useStyles();
   // { numDice: 0, diceType: 0, numUsed: 0 }
-  const [numUsed, setNumUsed] = React.useState([0]);
+  const [numUsed, setNumUsed] = useState([0]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (numUsed.length < hitDice.length) {
       setNumUsed([...numUsed, ...Array(hitDice.length - numUsed.length).fill(0)]);
     } else if (numUsed.length > hitDice.length) {

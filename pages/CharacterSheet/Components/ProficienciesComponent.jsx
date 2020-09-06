@@ -5,7 +5,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import React from 'react';
+import React, { useState } from 'react';
 import DnDListComponent from './Reusable/DnDListComponent';
 import {
   useCharacterState,
@@ -21,8 +21,8 @@ const ProficienciesComponent = () => {
   } = useSetCharacterState();
   const armorProficiencies = ['light', 'medium', 'heavy', 'shields'];
   const weaponProficiencies = ['simple', 'martial', 'other:'];
-  const [temp, setTemp] = React.useState([{ id: 0, text: 'test' }]);
-  const [tempRight, setTempRight] = React.useState([{ id: 0, text: 'test' }]);
+  const [temp, setTemp] = useState([{ id: 0, text: 'test' }]);
+  const [tempRight, setTempRight] = useState([{ id: 0, text: 'test' }]);
 
 
   const handleArmorProficiencyCheckboxClick = (event) => {

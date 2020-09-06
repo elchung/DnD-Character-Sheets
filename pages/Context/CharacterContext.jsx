@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { spells } from '../../Data/Spells';
 
@@ -318,7 +318,7 @@ export const CharacterContextProvider = (props) => {
 };
 
 const safeUseContext = (context) => {
-  const result = React.useContext(context);
+  const result = useContext(context);
   if (result === undefined) {
     throw new Error('The hook you are attempting to use must be used within a CharacterContextProvider');
   }

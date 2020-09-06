@@ -1,7 +1,7 @@
 import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { useCharacterState } from '../../../Context/CharacterContext';
 
@@ -12,7 +12,7 @@ const SingleItemDisplayComponent = ({
 }) => {
   const { useStyles } = useCharacterState();
   const classes = useStyles();
-  const [displayText, setDisplayText] = React.useState(value);
+  const [displayText, setDisplayText] = useState(value);
 
   return (
     <Paper className={classes.singleItemDisplayComponentStyle} variant="outlined">

@@ -2,7 +2,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
-import React from 'react';
+import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import Fab from '@material-ui/core/Fab';
@@ -22,8 +22,8 @@ export const AddSpellsModalComponent = ({ positioning }) => {
   const { useStyles } = useCharacterState();
   const classes = useStyles();
   // const { } = useSetCharacterState();
-  const [open, setOpen] = React.useState(false);
-  const [topTabNum, setTopTabNum] = React.useState(0);
+  const [open, setOpen] = useState(false);
+  const [topTabNum, setTopTabNum] = useState(0);
 
   const handleOpen = () => {
     setOpen(true);
