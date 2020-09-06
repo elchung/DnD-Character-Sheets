@@ -16,3 +16,5 @@ const AddSpellsDescriptionComponent = ({ spell }) => (
     </Box>
   </div>
 );
+
+export default AddSpellsDescriptionComponent;

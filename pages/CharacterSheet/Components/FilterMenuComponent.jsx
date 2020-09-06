@@ -125,4 +125,4 @@ SpellFilterMenu.propTypes = {
   setDisplay: PropTypes.func.isRequired,
 };
 
-export default memo(SpellFilterMenu);
+export default useMemo(SpellFilterMenu);

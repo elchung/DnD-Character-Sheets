@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-import { AddSpellsModalComponent } from './Modals/AddSpellsModalComponent';
+import { AddSpellsModalComponent } from './Modals/AddSpellsModal/AddSpellsModalComponent';
 import SpellLevelListComponent from './SpellLevelListComponent';
 import SpellsHeaderComponent from './SpellsHeaderComponent';
 import SpellLevelHeaderComponent from './SpellLevelHeaderComponent';
