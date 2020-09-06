@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState, memo, useMemo, useCallback,
+} from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import SortIcon from '@material-ui/icons/Sort';
@@ -14,9 +16,8 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TriStateCheckbox from './Reusable/TriStateCheckbox';
 
+
 export const SpellFilterMenu = ({
-  displayed,
-  setDisplayed,
   filterByOptions,
   filterBy,
   setFilterBy,
@@ -34,33 +35,20 @@ export const SpellFilterMenu = ({
   const open = Boolean(anchor);
   const [isApplying, setIsApplying] = useState(false);
 
-  useEffect(() => {
-    setFilterBy(displayedFilterBy);
-  }, [displayedFilterBy]);
-
-  useEffect(() => {
-    setSortBy(displayedSortBy);
-  }, [displayedSortBy]);
-
-  useEffect(() => {
-    setDisplayedDisplayedBy(display);
-  }, [displayedDisplayedBy]);
-
-  const handleOpen = (event) => {
+  const handleOpen = useCallback((event) => {
     setAnchor(event.currentTarget);
     setIsApplying(false);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchor(null);
-    setIsApplying(false);
-  };
+  }, []);
 
-  const handleDisplayChange = (event) => {
+  const handleDisplayChange = useCallback((event) => {
     console.log('', event.target);
-  };
+  }, []);
 
-  const handleFilterChange = (name) => {
+  const handleFilterChange = useCallback((name) => {
     if (displayedFilterBy[name] === 'ACCEPT') {
       setDisplayedFilterBy({ ...displayedFilterBy, [name]: 'REJECT' });
     } else if (filterBy[name] === 'REJECT') {
@@ -68,20 +56,18 @@ export const SpellFilterMenu = ({
     } else {
       setDisplayedFilterBy({ ...displayedFilterBy, [name]: 'ACCEPT' });
     }
-  };
+  }, []);
 
-  const handleSortChange = (event) => {
+  const handleSortChange = useCallback((event) => {
     setDisplayedSortBy(event.target.value);
-  };
+  }, []);
 
-  const handleSubmit = () => {
-    setIsApplying(true);
+  const handleSubmit = useCallback(() => {
     setSortBy(displayedSortBy);
     setFilterBy(displayedFilterBy);
     setDisplay(displayedDisplayedBy);
     handleClose();
-    setIsApplying(false);
-  };
+  }, []);
 
   return (
     <div>
@@ -121,18 +107,13 @@ export const SpellFilterMenu = ({
             ))}
           </RadioGroup>
         </FormControl>
-        <div>
-          {isApplying && <CircularProgress />}
-          <Button color="primary" onClick={handleSubmit} style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
-        </div>
+        <Button color="primary" onClick={handleSubmit} style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
       </Menu>
     </div>
   );
 };
 
 SpellFilterMenu.propTypes = {
-  displayed: PropTypes.bool.isRequired,
-  setDisplayed: PropTypes.func.isRequired,
   filterByOptions: PropTypes.array.isRequired,
   filterBy: PropTypes.instanceOf(Set).isRequired,
   setFilterBy: PropTypes.func.isRequired,
@@ -144,4 +125,4 @@ SpellFilterMenu.propTypes = {
   setDisplay: PropTypes.func.isRequired,
 };
 
-export default SpellFilterMenu;
+export default memo(SpellFilterMenu);

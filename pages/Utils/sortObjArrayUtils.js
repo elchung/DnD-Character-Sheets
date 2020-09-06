@@ -1,11 +1,11 @@
-export const sortAlphabeticalAsc = (arr) => {
+export const sortABCAsc = (arr) => {
   console.time('sort');
   arr.sort((a, b) => (a < b ? -1 : 1));
   console.timeEnd('sort');
   return arr;
 };
 
-export const sortAlphabeticalDesc = (arr) => {
+export const sortABCDesc = (arr) => {
   console.time('sort');
   arr.sort((a, b) => (a > b ? -1 : 1));
   console.timeEnd('sort');
