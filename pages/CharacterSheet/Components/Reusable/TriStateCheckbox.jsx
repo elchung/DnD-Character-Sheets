@@ -4,6 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
+import FormLabel from '@material-ui/core/FormLabel';
 import PropTypes from 'prop-types';
 
 const TriStateCheckbox = ({
@@ -18,12 +19,15 @@ const TriStateCheckbox = ({
     return <CheckBoxOutlineBlankIcon size={size} aria-label={name} />;
   };
   return (
-    <IconButton
-      color={state === 'ACCEPT' ? 'primary' : state === 'REJECT' ? 'secondary' : 'default'}
-      onClick={() => onClick(name)}
-    >
-      {getIcon()}
-    </IconButton>
+    <>
+      <IconButton
+        color={state === 'ACCEPT' ? 'primary' : state === 'REJECT' ? 'secondary' : 'default'}
+        onClick={() => onClick(name)}
+      >
+        {getIcon()}
+      </IconButton>
+      <FormLabel>{name}</FormLabel>
+    </>
   );
 };
 

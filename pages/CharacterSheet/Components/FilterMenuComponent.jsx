@@ -92,12 +92,15 @@ export const SpellFilterMenu = ({
         <FormLabel component="legend">Filter By:</FormLabel>
         <FormGroup row>
           {filterByOptions.map((filterName) => (
-            <TriStateCheckbox
-              state={displayedFilterBy[filterName]}
-              onClick={handleFilterChange}
-              size="small"
-              name={filterName}
+            <Menu
+              id={filterName}
             />
+            // <TriStateCheckbox
+            //   state={displayedFilterBy[filterName]}
+            //   onClick={handleFilterChange}
+            //   size="small"
+            //   name={filterName}
+            // />
           ))}
         </FormGroup>
         <FormControl component="fieldset">
