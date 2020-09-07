@@ -35,39 +35,40 @@ export const SpellFilterMenu = ({
   const open = Boolean(anchor);
   const [isApplying, setIsApplying] = useState(false);
 
-  const handleOpen = useCallback((event) => {
+  const handleOpen = (event) => {
     setAnchor(event.currentTarget);
     setIsApplying(false);
-  }, []);
+  };
 
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     setAnchor(null);
-  }, []);
+  };
 
-  const handleDisplayChange = useCallback((event) => {
+  const handleDisplayChange = (event) => {
     console.log('', event.target);
-  }, []);
+  };
 
-  const handleFilterChange = useCallback((name) => {
+  const handleFilterChange = (name) => {
     if (displayedFilterBy[name] === 'ACCEPT') {
       setDisplayedFilterBy({ ...displayedFilterBy, [name]: 'REJECT' });
-    } else if (filterBy[name] === 'REJECT') {
+    } else if (displayedFilterBy[name] === 'REJECT') {
       setDisplayedFilterBy({ ...displayedFilterBy, [name]: '' });
     } else {
       setDisplayedFilterBy({ ...displayedFilterBy, [name]: 'ACCEPT' });
     }
-  }, []);
+    console.log(displayedFilterBy[name]);
+  };
 
-  const handleSortChange = useCallback((event) => {
+  const handleSortChange = (event) => {
     setDisplayedSortBy(event.target.value);
-  }, []);
+  };
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = () => {
     setSortBy(displayedSortBy);
     setFilterBy(displayedFilterBy);
     setDisplay(displayedDisplayedBy);
     handleClose();
-  }, []);
+  };
 
   return (
     <div>
@@ -125,4 +126,4 @@ SpellFilterMenu.propTypes = {
   setDisplay: PropTypes.func.isRequired,
 };
 
-export default useMemo(SpellFilterMenu);
+export default SpellFilterMenu;

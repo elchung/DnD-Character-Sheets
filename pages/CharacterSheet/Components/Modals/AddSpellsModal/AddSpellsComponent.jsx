@@ -89,8 +89,8 @@ export const AddSpellsComponent = () => {
                 <Typography variant="caption">{spell}</Typography>
               </div>
             )}
-            id={`vertical-tab-${displayedSpells[0]}`}
-            key={`vertical-tab-${displayedSpells[0]}`}
+            id={`add-spells-id-tab-${displayedSpells[0]}`}
+            key={`add-spells-keyc-tab-${displayedSpells[0]}`}
             aria-controls={`vertical-tabpanel-${displayedSpells[0]}`}
           />
         ))}

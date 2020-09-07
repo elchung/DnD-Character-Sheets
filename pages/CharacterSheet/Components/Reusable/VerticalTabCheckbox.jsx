@@ -37,9 +37,9 @@ export const VerticalTabCheckbox = ({ index, data }) => (
         <Typography variant="caption">{data.itemList[index]}</Typography>
       </div>
     )}
-    id={`vertical-tab-${data.itemList[index]}`}
-    key={`vertical-tab-${data.itemList[index]}`}
-    aria-controls={`vertical-tabpanel-${data.itemList[index]}`}
+    id={`id-vertical-tab-${data.itemList[index]}`}
+    key={`key-vertical-tab-${data.itemList[index]}`}
+    aria-controls={`controls-vertical-tabpanel-${data.itemList[index]}`}
   />
 );
 

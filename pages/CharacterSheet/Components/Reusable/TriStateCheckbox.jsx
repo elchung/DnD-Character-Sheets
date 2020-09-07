@@ -8,20 +8,24 @@ import PropTypes from 'prop-types';
 
 const TriStateCheckbox = ({
   state, onClick, size, name,
-}) => (
-  <IconButton
-    color={state === 'ACCEPT' ? 'primary' : state === 'REJECT' ? 'secondary' : 'default'}
-    onClick={() => onClick(name)}
-  >
-    {
-      state === 'ACCEPT'
-        ? <CheckBoxIcon size={size} aria-label={name} />
-        : state === 'REJECT'
-          ? <IndeterminateCheckBoxIcon />
-          : <CheckBoxOutlineBlankIcon />
+}) => {
+  const getIcon = () => {
+    if (state === 'ACCEPT') {
+      return <CheckBoxIcon size={size} aria-label={name} />;
+    } if (state === 'REJECT') {
+      return <IndeterminateCheckBoxIcon size={size} aria-label={name} />;
     }
-  </IconButton>
-);
+    return <CheckBoxOutlineBlankIcon size={size} aria-label={name} />;
+  };
+  return (
+    <IconButton
+      color={state === 'ACCEPT' ? 'primary' : state === 'REJECT' ? 'secondary' : 'default'}
+      onClick={() => onClick(name)}
+    >
+      {getIcon()}
+    </IconButton>
+  );
+};
 
 TriStateCheckbox.propTypes = {
   state: PropTypes.string.isRequired,
