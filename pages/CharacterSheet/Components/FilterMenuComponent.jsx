@@ -15,10 +15,10 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TriStateCheckbox from './Reusable/TriStateCheckbox';
+import FilterMenuFilterBySubmenuComponent from './Modals/AddSpellsModal/FilterMenuFilterBySubmenuComponent';
 
 
 export const SpellFilterMenu = ({
-  filterByOptions,
   filterBy,
   setFilterBy,
   sortByOptions,
@@ -46,17 +46,6 @@ export const SpellFilterMenu = ({
 
   const handleDisplayChange = (event) => {
     console.log('', event.target);
-  };
-
-  const handleFilterChange = (name) => {
-    if (displayedFilterBy[name] === 'ACCEPT') {
-      setDisplayedFilterBy({ ...displayedFilterBy, [name]: 'REJECT' });
-    } else if (displayedFilterBy[name] === 'REJECT') {
-      setDisplayedFilterBy({ ...displayedFilterBy, [name]: '' });
-    } else {
-      setDisplayedFilterBy({ ...displayedFilterBy, [name]: 'ACCEPT' });
-    }
-    console.log(displayedFilterBy[name]);
   };
 
   const handleSortChange = (event) => {
@@ -91,16 +80,13 @@ export const SpellFilterMenu = ({
         <Typography>checkboxes: range, class, level,</Typography>
         <FormLabel component="legend">Filter By:</FormLabel>
         <FormGroup row>
-          {filterByOptions.map((filterName) => (
-            <Menu
-              id={filterName}
+          {Object.keys(filterBy).map((filterKey) => (
+            <FilterMenuFilterBySubmenuComponent
+              options={Object.keys(filterBy[filterKey])}
+              filterKey={filterKey}
+              filters={filterBy}
+              setFilters={setFilterBy}
             />
-            // <TriStateCheckbox
-            //   state={displayedFilterBy[filterName]}
-            //   onClick={handleFilterChange}
-            //   size="small"
-            //   name={filterName}
-            // />
           ))}
         </FormGroup>
         <FormControl component="fieldset">
@@ -118,7 +104,6 @@ export const SpellFilterMenu = ({
 };
 
 SpellFilterMenu.propTypes = {
-  filterByOptions: PropTypes.array.isRequired,
   filterBy: PropTypes.instanceOf(Set).isRequired,
   setFilterBy: PropTypes.func.isRequired,
   sortByOptions: PropTypes.array.isRequired,

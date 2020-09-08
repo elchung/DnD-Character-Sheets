@@ -8,31 +8,32 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
-
-const options = [
-  'Show some love to Material-UI',
-  'Show all notification content',
-  'Hide sensitive notification content',
-  'Hide all notification content',
-];
+import Checkbox from '@material-ui/core/Checkbox';
 
 export const FilterMenuFilterBySubmenuComponent = ({
-  options, setSelected,
+  options, filters, setFilters, filterKey,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedItems, setSelectedItems] = React.useState(options.filter((acc, option) => {
-    acc[option] = '';
-    return acc;
-  }, {}));
+  console.log('filters ', filters);
+  console.log('filter key', filterKey);
+  const totalSelected = Object.keys(filters[filterKey]).reduce((total, item) => (
+    filters[filterKey][item] !== '' ? total + 1 : total
+  ), 0);
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
-    setAnchorEl(null);
+  const handleOptionsClick = (option) => {
+    // eslint-disable-next-line no-nested-ternary
+    const newState = filters[filterKey][option] === 'ACCEPT' ? 'REJECT' : filters[filterKey][option] === 'REJECT' ? '' : 'ACCEPT';
+    setFilters({
+      ...filters,
+      [filterKey]: {
+        ...filters[filterKey],
+        [option]: newState,
+      },
+    });
   };
 
   const handleClose = () => {
@@ -44,12 +45,9 @@ export const FilterMenuFilterBySubmenuComponent = ({
       <List component="nav" aria-label="Device settings">
         <ListItem
           button
-          aria-haspopup="true"
-          aria-controls="lock-menu"
-          aria-label="when device is locked"
           onClick={handleClickListItem}
         >
-          <ListItemText primary="Filter By" secondary={`${selectedItems.size} Selected`} />
+          <ListItemText primary={`${filterKey}:`} secondary={`${totalSelected} Selected`} />
         </ListItem>
       </List>
       <Menu
@@ -64,12 +62,21 @@ export const FilterMenuFilterBySubmenuComponent = ({
           <FormGroup>
             {options.map((option) => (
               <FormControlLabel
-                control={<Checkbox checked={selectedItems[option]} onChange={handleChange} name={option} />}
+                control={(
+                  <Checkbox
+                    checked={filters[filterKey][option]}
+                    indeterminate={filters[filterKey][option] === 'REJECT'}
+                    onChange={() => handleOptionsClick(option)}
+                    name={option}
+                  />
+                )}
                 label={option}
               />
             ))}
           </FormGroup>
-          <FormHelperText>Be careful</FormHelperText>
+          <FormHelperText>
+            {`${totalSelected} Selected`}
+          </FormHelperText>
         </FormControl>
       </Menu>
     </div>

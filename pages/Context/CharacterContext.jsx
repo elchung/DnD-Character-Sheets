@@ -58,6 +58,14 @@ export const CharacterContextProvider = (props) => {
     0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0,
   });
 
+  const classList = [
+    'Artificer', 'Barbarian', 'Bard',
+    'Cleric', 'Druid', 'Fighter',
+    'Monk', 'Paladin', 'Ranger',
+    'Rogue', 'Sorcerer', 'Warlock',
+    'Wizard',
+  ];
+
   const globalStyle = {
     elevation: 3,
   };
@@ -249,6 +257,7 @@ export const CharacterContextProvider = (props) => {
   ];
 
   const characterState = {
+    classList,
     level,
     scoreOnTop,
     abilityScores,

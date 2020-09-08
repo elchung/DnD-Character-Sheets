@@ -4,6 +4,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
+import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FilterMenuComponent from '../../FilterMenuComponent';
@@ -32,16 +33,25 @@ const VerticalTab = withStyles(() => ({
 }))(Tab);
 
 export const AddSpellsComponent = () => {
-  const { useStyles, spellList } = useCharacterState();
+  const { useStyles, spellList, classList } = useCharacterState();
   const [selectedSpells, setSelectedSpells] = useState({
     0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 8: {}, 9: {},
   });
   const [displayedSpells, setDisplayedSpells] = useState(Sort.sortABCAsc(Object.keys(spellList)));
   const [tabVal, setTabVal] = useState(0);
   const [selectedSpellName, setSelectedSpellName] = useState(displayedSpells[tabVal]);
-  const [filterBy, setFilterBy] = useState({ level: '', class: '' });
   const [sortBy, setSortBy] = useState('name');
   const [display, setDisplay] = useState(new Set());
+  const [filterBy, setFilterBy] = useState({
+    level: [...Array(10).keys()].reduce((acc, item) => {
+      acc[item] = '';
+      return acc;
+    }, {}),
+    class: classList.reduce((acc, item) => {
+      acc[item] = '';
+      return acc;
+    }, {}),
+  });
 
   const sortByOptions = ['name', 'level'];
   const displayOptions = [''];
@@ -59,7 +69,6 @@ export const AddSpellsComponent = () => {
   return (
     <div style={{ display: 'flex', flexGrow: 1, height: 570 }}>
       <FilterMenuComponent
-        filterByOptions={Object.keys(filterBy)}
         filterBy={filterBy}
         setFilterBy={setFilterBy}
         sortByOptions={sortByOptions}
@@ -89,8 +98,7 @@ export const AddSpellsComponent = () => {
                 <Typography variant="caption">{spell}</Typography>
               </div>
             )}
-            id={`add-spells-id-tab-${displayedSpells[0]}`}
-            key={`add-spells-keyc-tab-${displayedSpells[0]}`}
+            key={`add-spells-key-tab-${uuidv4()}`}
             aria-controls={`vertical-tabpanel-${displayedSpells[0]}`}
           />
         ))}
