@@ -1,7 +1,7 @@
 export const sortABCAsc = (arr) => {
-  console.time('sort');
+  console.time('regular sort');
   arr.sort((a, b) => (a < b ? -1 : 1));
-  console.timeEnd('sort');
+  console.timeEnd('regular sort');
   return arr;
 };
 

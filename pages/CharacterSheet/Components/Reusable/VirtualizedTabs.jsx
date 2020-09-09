@@ -3,16 +3,36 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import { FixedSizeList } from 'react-window';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import VerticalTabCheckbox from './VerticalTabCheckbox';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+
+const renderRow = ({ index }) => (
+  <ListItem key={index} style={style} role={undefined} button onClick={() => onTabClick(index)}>
+    <ListItemIcon>
+      <Checkbox
+        edge="start"
+        checked={checked.indexOf(value) !== -1}
+        tabIndex={-1}
+        disableRipple
+        inputProps={{ 'aria-labelledby': labelId }}
+      />
+    </ListItemIcon>
+    <ListItemText
+      id={labelId}
+      primary={spellName}
+      secondary={secondary ? secondaryText : null}
+    />
+  </ListItem>
+);
 
 export const VirtualizedTabs = ({
-  orientation, variant, value, onChange, style, height, itemSize, itemCount, renderData, renderRow,
+  value, onTabClick, style, totalHeight, items, renderData, renderRow,
 }) => (
-  <FixedSizeList height={height} itemSize={itemSize} itemCount={itemCount} renderData={renderData}>
+  <FixedSizeList height={totalHeight} itemSize={48} itemCount={itemCount} renderData={renderData}>
     {renderRow}
   </FixedSizeList>
 );
