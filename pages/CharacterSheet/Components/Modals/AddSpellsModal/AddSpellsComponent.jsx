@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FilterMenuComponent from '../../FilterMenuComponent';
 import * as Sort from '../../../../Utils/sortObjArrayUtils';
 import AddSpellsDescriptionComponent from './AddSpellsDescriptionComponent';
@@ -62,14 +62,25 @@ export const AddSpellsComponent = () => {
     }
   };
 
-  const tabData = displayedSpells.map((spellName, index) => ({
+  const [tabData, setTabData] = useState(displayedSpells.map((spellName, index) => ({
     name: spellName,
     handleCheckBoxChange: handleCheckboxChange,
     onChange: handleTabSelection,
     item: displayedSpells[index],
     secondary: display.size,
     secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : '',
-  }));
+  })));
+
+  useEffect(() => {
+    setTabData(displayedSpells.map((spellName, index) => ({
+      name: spellName,
+      handleCheckBoxChange: handleCheckboxChange,
+      onChange: handleTabSelection,
+      item: displayedSpells[index],
+      secondary: display.size,
+      secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : '',
+    })));
+  }, [displayedSpells, display]);
 
   return (
     <div style={{ display: 'flex', flexGrow: 1, height: 570 }}>
@@ -84,7 +95,7 @@ export const AddSpellsComponent = () => {
         setDisplay={setDisplay}
       />
       <VirtualizedTabs
-        height={570}
+        height={550}
         itemData={tabData}
       />
       <AddSpellsDescriptionComponent
