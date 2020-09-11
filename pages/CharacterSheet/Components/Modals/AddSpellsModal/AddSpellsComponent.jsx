@@ -1,42 +1,15 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Checkbox from '@material-ui/core/Checkbox';
-import { v4 as uuidv4 } from 'uuid';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import FilterMenuComponent from '../../FilterMenuComponent';
 import * as Sort from '../../../../Utils/sortObjArrayUtils';
 import AddSpellsDescriptionComponent from './AddSpellsDescriptionComponent';
 import {
   useCharacterState,
-  useSetCharacterState,
 } from '../../../../Context/CharacterContext';
-
-const VerticalTab = withStyles(() => ({
-  root: {
-    borderRight: '2px solid lightgray',
-    textAlign: 'left',
-    padding: 0,
-  },
-  selected: {
-    color: '#4ABDAC',
-    borderRight: '3px solid #4ABDAC',
-    textAlign: 'left',
-  },
-  wrapper: {
-    alignItems: 'flex-start',
-    padding: 0,
-  },
-}))(Tab);
+import VirtualizedTabs from '../../Reusable/VirtualizedTabs';
 
 export const AddSpellsComponent = () => {
-  const { useStyles, spellList, classList } = useCharacterState();
-  const [selectedSpells, setSelectedSpells] = useState({
-    0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 8: {}, 9: {},
-  });
+  const { spellList, classList } = useCharacterState();
+  const [selectedSpells, setSelectedSpells] = useState(new Set());
   const [displayedSpells, setDisplayedSpells] = useState(Sort.sortABCAsc(Object.keys(spellList)));
   const [tabVal, setTabVal] = useState(0);
   const [selectedSpellName, setSelectedSpellName] = useState(displayedSpells[tabVal]);
@@ -54,17 +27,49 @@ export const AddSpellsComponent = () => {
   });
 
   const sortByOptions = ['name', 'level'];
-  const displayOptions = [''];
+  const displayOptions = ['Casting time', 'Duration', 'Level', 'Range', 'School', 'Ritual'];
+  const displayOptionToKey = {
+    'Casting time': 'casting_time',
+    Duration: 'duration',
+    Level: 'level',
+    Range: 'range',
+    School: 'school',
+    Ritual: 'ritual',
+  };
+
+  const getSecondaryText = (spellName) => (
+    displayOptions.filter((acc, option) => {
+      if (display.has(option)) {
+        acc += acc ? ' - ' : '';
+        acc += spellList[spellName][displayOptionToKey[option]];
+      }
+      return acc;
+    }, '')
+  );
 
   const handleTabSelection = (event, newValue) => {
     setTabVal(newValue);
     setSelectedSpellName(displayedSpells[newValue]);
   };
 
-  const handleCheckboxChange = (event, val) => {
-    console.log('', event);
-    console.log('', val);
+  const handleCheckboxChange = (event, index) => {
+    if (event.target.name === true) {
+      setSelectedSpells(new Set([...selectedSpells, displayedSpells[index]]));
+    } else {
+      const temp = new Set([...selectedSpells]);
+      temp.delete(displayedSpells[index]);
+      setSelectedSpells(temp);
+    }
   };
+
+  const tabData = displayedSpells.map((spellName, index) => ({
+    name: spellName,
+    handleCheckBoxChange: handleCheckboxChange,
+    onChange: handleTabSelection,
+    item: displayedSpells[index],
+    secondary: display.size,
+    secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : '',
+  }));
 
   return (
     <div style={{ display: 'flex', flexGrow: 1, height: 570 }}>
@@ -78,31 +83,10 @@ export const AddSpellsComponent = () => {
         display={display}
         setDisplay={setDisplay}
       />
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={tabVal}
-        onChange={handleTabSelection}
-      >
-        {displayedSpells.map((spell) => (
-          <VerticalTab
-            label={(
-              <div>
-                <Checkbox
-                  onChange={handleCheckboxChange}
-                  onClick={(event) => event.stopPropagation()}
-                  onFocus={(event) => event.stopPropagation()}
-                  color="primary"
-                  InputProps={{ 'aria-label': 'secondary checkbox' }}
-                />
-                <Typography variant="caption">{spell}</Typography>
-              </div>
-            )}
-            key={`add-spells-key-tab-${uuidv4()}`}
-            aria-controls={`vertical-tabpanel-${displayedSpells[0]}`}
-          />
-        ))}
-      </Tabs>
+      <VirtualizedTabs
+        height={570}
+        itemData={tabData}
+      />
       <AddSpellsDescriptionComponent
         spell={spellList[selectedSpellName]}
       />
