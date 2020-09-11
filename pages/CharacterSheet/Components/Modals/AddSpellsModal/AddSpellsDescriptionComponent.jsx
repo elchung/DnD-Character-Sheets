@@ -7,7 +7,6 @@ const AddSpellsDescriptionComponent = ({ spell }) => (
   <div
     role="tabpanel"
     id="vertical-tabpanel-display"
-    style={{ width: '80%' }}
   >
     <Box p={3}>
       <Typography variant="h6">{spell.name}</Typography>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Grid from '@material-ui/core/Grid';
 import FilterMenuComponent from '../../FilterMenuComponent';
 import * as Sort from '../../../../Utils/sortObjArrayUtils';
 import AddSpellsDescriptionComponent from './AddSpellsDescriptionComponent';
 import {
   useCharacterState,
 } from '../../../../Context/CharacterContext';
+// eslint-disable-next-line import/no-named-as-default
 import VirtualizedTabs from '../../Reusable/VirtualizedTabs';
 
 export const AddSpellsComponent = () => {
@@ -12,7 +14,6 @@ export const AddSpellsComponent = () => {
   const [selectedSpells, setSelectedSpells] = useState(new Set());
   const [displayedSpells, setDisplayedSpells] = useState(Sort.sortABCAsc(Object.keys(spellList)));
   const [tabVal, setTabVal] = useState(0);
-  const [selectedSpellName, setSelectedSpellName] = useState(displayedSpells[tabVal]);
   const [sortBy, setSortBy] = useState('name');
   const [display, setDisplay] = useState(new Set());
   const [filterBy, setFilterBy] = useState({
@@ -47,9 +48,9 @@ export const AddSpellsComponent = () => {
     }, '')
   );
 
-  const handleTabSelection = (event, newValue) => {
+  const handleTabSelection = (newValue) => {
+    console.log(newValue);
     setTabVal(newValue);
-    setSelectedSpellName(displayedSpells[newValue]);
   };
 
   const handleCheckboxChange = (event, index) => {
@@ -77,31 +78,41 @@ export const AddSpellsComponent = () => {
       handleCheckBoxChange: handleCheckboxChange,
       onChange: handleTabSelection,
       item: displayedSpells[index],
-      secondary: display.size,
-      secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : '',
+      secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
+      selected: tabVal,
     })));
-  }, [displayedSpells, display]);
+  }, [displayedSpells, display, tabVal]);
 
   return (
-    <div style={{ display: 'flex', flexGrow: 1, height: 570 }}>
-      <FilterMenuComponent
-        filterBy={filterBy}
-        setFilterBy={setFilterBy}
-        sortByOptions={sortByOptions}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        displayOptions={displayOptions}
-        display={display}
-        setDisplay={setDisplay}
-      />
-      <VirtualizedTabs
-        height={550}
-        itemData={tabData}
-      />
-      <AddSpellsDescriptionComponent
-        spell={spellList[selectedSpellName]}
-      />
-    </div>
+    <Grid container direction="row" style={{ display: 'flex', flexGrow: 1, height: 570 }}>
+      <Grid item xs={3}>
+        <Grid container direction="column">
+          <Grid item>
+            <FilterMenuComponent
+              filterBy={filterBy}
+              setFilterBy={setFilterBy}
+              sortByOptions={sortByOptions}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              displayOptions={displayOptions}
+              display={display}
+              setDisplay={setDisplay}
+            />
+          </Grid>
+          <Grid item>
+            <VirtualizedTabs
+              height={540}
+              itemData={tabData}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item xs={9} style={{ border: '2px solid lightgray' }}>
+        <AddSpellsDescriptionComponent
+          spell={spellList[displayedSpells[tabVal]]}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

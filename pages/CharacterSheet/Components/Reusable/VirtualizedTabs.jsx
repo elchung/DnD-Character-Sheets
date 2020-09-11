@@ -6,34 +6,41 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-const renderRow = ({ index, style, data }) => (
-  <ListItem
-    key={index}
-    style={style}
-    // renderData.value === index ? ...{
-    //   color: '#4ABDAC',
-    //   borderRight: '3px solid #4ABDAC',
-    // }
-    //   : null}
-    button
-    onClick={() => data.onChange(index)}
-    dense={data.secondary}
-  >
-    <ListItemIcon>
-      <Checkbox
-        edge="start"
-        tabIndex={-1}
-        disableRipple
-        onChange={(e) => data.handleCheckboxChange(e, index)}
+const renderRow = ({ index, style, data }) => {
+  const listStyle = {
+    ...style,
+    ...(data[index].selected === index ? {
+      color: '#4ABDAC',
+      borderRight: '3px solid #4ABDAC',
+    } : null),
+  };
+
+  return (
+    <ListItem
+      key={index}
+      style={listStyle}
+      selected={data[index].selected === index}
+      button
+      onClick={() => data[index].onChange(index)}
+      dense={!!data[index].secondaryText}
+    >
+      <ListItemIcon style={{ marginRight: -25, marginLeft: -5 }}>
+        <Checkbox
+          edge="start"
+          tabIndex={-1}
+          color="primary"
+          disableRipple
+          onChange={(e) => data[index].handleCheckBoxChange(e, index)}
+        />
+      </ListItemIcon>
+      <ListItemText
+        id={data[index].name}
+        primary={data[index].name}
+        secondary={data[index].secondaryText}
       />
-    </ListItemIcon>
-    <ListItemText
-      id={data.name}
-      primary={data.name}
-      secondary={data.secondary ? data.getSecondaryText(data.name) : null}
-    />
-  </ListItem>
-);
+    </ListItem>
+  );
+};
 
 export const VirtualizedTabs = ({ height, itemData }) => (
   <FixedSizeList
@@ -41,7 +48,6 @@ export const VirtualizedTabs = ({ height, itemData }) => (
     itemSize={48}
     itemCount={itemData.length}
     itemData={itemData}
-    style={{ borderRight: '2px solid lightgray' }}
   >
     {renderRow}
   </FixedSizeList>
