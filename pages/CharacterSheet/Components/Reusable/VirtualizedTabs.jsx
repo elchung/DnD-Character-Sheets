@@ -6,7 +6,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SimpleBar from 'simplebar-react';
-import styles from './scrollbar.module.css';
 
 const renderRow = ({ index, style, data }) => {
   const listStyle = {
@@ -57,7 +56,6 @@ export const VirtualizedTabs = ({ height, itemData }) => (
         itemData={itemData}
         outerRef={scrollableNodeRef}
         innerRef={contentNodeRef}
-        className={styles.simplebarContentWrapper}
       >
         {renderRow}
       </FixedSizeList>
