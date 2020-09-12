@@ -11,6 +11,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "babel": "^6.23.0",
     "eslint-config-wyze": "^5.0.0",
     "immutability-helper": "^3.1.1",
     "lodash": "^4.17.20",
@@ -18,15 +19,18 @@
     "next": "9.3.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-custom-scrollbars": "^4.2.1",
     "react-dnd": "^11.1.3",
     "react-dnd-html5-backend": "^11.1.3",
     "react-dom": "16.13.1",
+    "react-scrollbars-custom": "^4.0.25",
     "react-window": "^1.8.5",
+    "simplebar-react": "^3.0.0-beta.5",
     "uuid": "^8.3.0",
     "uuidv4": "^6.2.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "eslint": "^7.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
