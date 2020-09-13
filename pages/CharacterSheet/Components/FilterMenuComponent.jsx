@@ -1,10 +1,7 @@
-import React, {
-  useState, memo, useMemo, useCallback,
-} from 'react';
+import React, { useState } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import SortIcon from '@material-ui/icons/Sort';
-import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -14,6 +11,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
+import Box from '@material-ui/core/Box';
 import FilterMenuFilterBySubmenuComponent from './Modals/AddSpellsModal/FilterMenuFilterBySubmenuComponent';
 
 
@@ -43,9 +41,13 @@ export const SpellFilterMenu = ({
     setAnchor(null);
   };
 
-  const handleDisplayChange = (event, name) => {
-    console.log('', event.target.value);
-    console.log('', event.target.name);
+  const handleDisplayChange = (event) => {
+    if (event.target.checked) {
+      setDisplayedDisplayedBy(new Set([...displayedDisplayedBy, event.target.name]));
+    } else {
+      // eslint-disable-next-line max-len
+      setDisplayedDisplayedBy(new Set([...displayedDisplayedBy].filter((item) => item !== event.target.name)));
+    }
   };
 
   const handleSortChange = (event) => {
@@ -76,44 +78,45 @@ export const SpellFilterMenu = ({
         open={open}
         onClose={handleClose}
       >
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Display By:</FormLabel>
-          {displayOptions.map((displayName) => (
-            <FormControlLabel
-              control={(
-                <Checkbox
-                  color="primary"
-                  checked={displayedDisplayedBy.has(displayName)}
-                  onChange={(e) => handleDisplayChange(e, displayName)}
-                  name={displayName}
-                  size="small"
-                />
-              )}
-              label={displayName}
-            />
-          ))}
-        </FormControl>
-        <Typography>checkboxes: range, class, level,</Typography>
-        <FormLabel component="legend">Filter By:</FormLabel>
-        <FormGroup row>
-          {Object.keys(filterBy).map((filterKey) => (
-            <FilterMenuFilterBySubmenuComponent
-              options={Object.keys(filterBy[filterKey])}
-              filterKey={filterKey}
-              filters={filterBy}
-              setFilters={setFilterBy}
-            />
-          ))}
-        </FormGroup>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Sort By:</FormLabel>
-          <RadioGroup aria-label="sortBy" name="sortBy" row value={displayedSortBy} onChange={handleSortChange}>
-            {sortByOptions.map((sortName) => (
-              <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={sortName} />
+        <div style={{ paddingLeft: 20, paddingRight: 10, paddingTop: 10 }}>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Display By:</FormLabel>
+            {displayOptions.map((displayName) => (
+              <FormControlLabel
+                control={(
+                  <Checkbox
+                    color="primary"
+                    checked={displayedDisplayedBy.has(displayName)}
+                    onChange={handleDisplayChange}
+                    name={displayName}
+                    size="small"
+                  />
+                )}
+                label={displayName}
+              />
             ))}
-          </RadioGroup>
-        </FormControl>
-        <Button color="primary" onClick={handleSubmit} style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
+          </FormControl>
+          <FormLabel component="legend">Filter By:</FormLabel>
+          <FormGroup row>
+            {Object.keys(filterBy).map((filterKey) => (
+              <FilterMenuFilterBySubmenuComponent
+                options={Object.keys(filterBy[filterKey])}
+                filterKey={filterKey}
+                filters={filterBy}
+                setFilters={setFilterBy}
+              />
+            ))}
+          </FormGroup>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Sort By:</FormLabel>
+            <RadioGroup aria-label="sortBy" name="sortBy" column value={displayedSortBy} onChange={handleSortChange}>
+              {sortByOptions.map((sortName) => (
+                <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={sortName} />
+              ))}
+            </RadioGroup>
+          </FormControl>
+          <Button color="primary" onClick={handleSubmit} style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
+        </div>
       </Menu>
     </div>
   );

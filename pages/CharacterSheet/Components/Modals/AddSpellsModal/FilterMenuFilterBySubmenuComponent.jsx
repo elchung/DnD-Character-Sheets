@@ -42,7 +42,7 @@ export const FilterMenuFilterBySubmenuComponent = ({
 
   return (
     <div>
-      <List component="nav" aria-label="Device settings">
+      <List component="nav" aria-label="Device settings" style={{ paddingTop: 0, paddingBottom: 0 }}>
         <ListItem
           button
           onClick={handleClickListItem}

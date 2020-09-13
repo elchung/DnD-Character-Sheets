@@ -5,7 +5,6 @@ import { FixedSizeList } from 'react-window';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import SimpleBar from 'simplebar-react';
 
 const renderRow = ({ index, style, data }) => {
   const listStyle = {
@@ -44,23 +43,14 @@ const renderRow = ({ index, style, data }) => {
 };
 
 export const VirtualizedTabs = ({ height, itemData }) => (
-  <SimpleBar
-    data-simplebar-force-visible="x"
-    style={{ marginRight: 5 }}
+  <FixedSizeList
+    height={height}
+    itemSize={48}
+    itemCount={itemData.length}
+    itemData={itemData}
   >
-    {({ scrollableNodeRef, contentNodeRef }) => (
-      <FixedSizeList
-        height={height}
-        itemSize={48}
-        itemCount={itemData.length}
-        itemData={itemData}
-        outerRef={scrollableNodeRef}
-        innerRef={contentNodeRef}
-      >
-        {renderRow}
-      </FixedSizeList>
-    )}
-  </SimpleBar>
+    {renderRow}
+  </FixedSizeList>
 );
 
 VirtualizedTabs.propTypes = {
