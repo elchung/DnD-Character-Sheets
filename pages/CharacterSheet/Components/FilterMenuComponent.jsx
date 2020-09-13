@@ -13,8 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import TriStateCheckbox from './Reusable/TriStateCheckbox';
+import Checkbox from '@material-ui/core/Checkbox';
 import FilterMenuFilterBySubmenuComponent from './Modals/AddSpellsModal/FilterMenuFilterBySubmenuComponent';
 
 
@@ -44,8 +43,9 @@ export const SpellFilterMenu = ({
     setAnchor(null);
   };
 
-  const handleDisplayChange = (event) => {
-    console.log('', event.target);
+  const handleDisplayChange = (event, name) => {
+    console.log('', event.target.value);
+    console.log('', event.target.name);
   };
 
   const handleSortChange = (event) => {
@@ -76,7 +76,23 @@ export const SpellFilterMenu = ({
         open={open}
         onClose={handleClose}
       >
-        <FormLabel component="legend">Display:</FormLabel>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Display By:</FormLabel>
+          {displayOptions.map((displayName) => (
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  color="primary"
+                  checked={displayedDisplayedBy.has(displayName)}
+                  onChange={(e) => handleDisplayChange(e, displayName)}
+                  name={displayName}
+                  size="small"
+                />
+              )}
+              label={displayName}
+            />
+          ))}
+        </FormControl>
         <Typography>checkboxes: range, class, level,</Typography>
         <FormLabel component="legend">Filter By:</FormLabel>
         <FormGroup row>
@@ -106,10 +122,10 @@ export const SpellFilterMenu = ({
 SpellFilterMenu.propTypes = {
   filterBy: PropTypes.instanceOf(Set).isRequired,
   setFilterBy: PropTypes.func.isRequired,
-  sortByOptions: PropTypes.array.isRequired,
+  sortByOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   sortBy: PropTypes.string.isRequired,
   setSortBy: PropTypes.func.isRequired,
-  displayOptions: PropTypes.array.isRequired,
+  displayOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   display: PropTypes.instanceOf(Set).isRequired,
   setDisplay: PropTypes.func.isRequired,
 };
