@@ -11,7 +11,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
-import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
 import FilterMenuFilterBySubmenuComponent from './Modals/AddSpellsModal/FilterMenuFilterBySubmenuComponent';
 
 
@@ -96,7 +96,8 @@ export const SpellFilterMenu = ({
               />
             ))}
           </FormControl>
-          <FormLabel component="legend">Filter By:</FormLabel>
+          <Divider />
+          <FormLabel component="legend" style={{ paddingTop: 10 }}>Filter By:</FormLabel>
           <FormGroup row>
             {Object.keys(filterBy).map((filterKey) => (
               <FilterMenuFilterBySubmenuComponent
@@ -107,8 +108,9 @@ export const SpellFilterMenu = ({
               />
             ))}
           </FormGroup>
+          <Divider />
           <FormControl component="fieldset">
-            <FormLabel component="legend">Sort By:</FormLabel>
+            <FormLabel component="legend" style={{ paddingTop: 10 }}>Sort By:</FormLabel>
             <RadioGroup aria-label="sortBy" name="sortBy" column value={displayedSortBy} onChange={handleSortChange}>
               {sortByOptions.map((sortName) => (
                 <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={sortName} />

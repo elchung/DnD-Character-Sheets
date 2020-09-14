@@ -7,11 +7,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 const renderRow = ({ index, style, data }) => {
+  const color = '#3f51b5';
   const listStyle = {
     ...style,
     ...(data[index].selected === index ? {
-      color: '#4ABDAC',
-      borderRight: '3px solid #4ABDAC',
+      color,
+      borderRight: `3px solid ${color}`,
     } : null),
   };
 
