@@ -49,7 +49,6 @@ export const AddSpellsComponent = () => {
   );
 
   const handleTabSelection = (newValue) => {
-    console.log(newValue);
     setTabVal(newValue);
   };
 

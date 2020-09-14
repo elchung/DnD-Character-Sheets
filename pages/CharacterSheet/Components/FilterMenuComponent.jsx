@@ -101,10 +101,10 @@ export const SpellFilterMenu = ({
           <FormGroup row>
             {Object.keys(filterBy).map((filterKey) => (
               <FilterMenuFilterBySubmenuComponent
-                options={Object.keys(filterBy[filterKey])}
+                options={Object.keys(displayedFilterBy[filterKey])}
                 filterKey={filterKey}
-                filters={filterBy}
-                setFilters={setFilterBy}
+                filters={displayedFilterBy}
+                setFilters={setDisplayedFilterBy}
               />
             ))}
           </FormGroup>
