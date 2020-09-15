@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Resizable, ResizableBox } from 'react-resizable';
 import FilterMenuComponent from '../../FilterMenuComponent';
 import * as Sort from '../../../../Utils/sortObjArrayUtils';
 import AddSpellsDescriptionComponent from './AddSpellsDescriptionComponent';
@@ -9,6 +8,7 @@ import {
 } from '../../../../Context/CharacterContext';
 // eslint-disable-next-line import/no-named-as-default
 import VirtualizedTabs from '../../Reusable/VirtualizedTabs';
+import { getFilteredSpells } from '../../../../Utils/addSpellUtils';
 
 export const AddSpellsComponent = () => {
   const { spellList, classList } = useCharacterState();
@@ -17,18 +17,21 @@ export const AddSpellsComponent = () => {
   const [tabVal, setTabVal] = useState(0);
   const [sortBy, setSortBy] = useState('name');
   const [display, setDisplay] = useState(new Set());
+  const [prioritizeFilterOut, setPrioritizeFilterOut] = useState(false);
   const [filterBy, setFilterBy] = useState({
     level: [...Array(10).keys()].reduce((acc, item) => {
-      acc[item] = '';
+      acc[item] = true;
       return acc;
     }, {}),
     class: classList.reduce((acc, item) => {
-      acc[item] = '';
+      acc[item] = true;
       return acc;
     }, {}),
   });
 
   useEffect(() => {
+    // filter, then sort
+    const filteredSpells = getFilteredSpells(spellList, filterBy, prioritizeFilterOut);
     const newDisplayed = Sort.sortABCAsc(Object.keys(displayedSpells));
   }, [sortBy, filterBy]);
 
@@ -102,6 +105,8 @@ export const AddSpellsComponent = () => {
               displayOptions={displayOptions}
               display={display}
               setDisplay={setDisplay}
+              prioritizeFilterOut={prioritizeFilterOut}
+              setPrioritizeFilterOut={setPrioritizeFilterOut}
             />
           </Grid>
           <Grid item>

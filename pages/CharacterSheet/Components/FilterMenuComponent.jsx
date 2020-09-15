@@ -24,6 +24,8 @@ export const SpellFilterMenu = ({
   displayOptions,
   display,
   setDisplay,
+  prioritizeFilterOut,
+  setPrioritizeFilterOut,
 }) => {
   const [anchor, setAnchor] = useState(null);
   const [displayedFilterBy, setDisplayedFilterBy] = useState(filterBy);
@@ -112,6 +114,8 @@ export const SpellFilterMenu = ({
                 filterKey={filterKey}
                 filters={displayedFilterBy}
                 setFilters={setDisplayedFilterBy}
+                prioritizeFilterOut={prioritizeFilterOut}
+                setPrioritizeFilterOut={setPrioritizeFilterOut}
               />
             ))}
           </FormGroup>
@@ -141,6 +145,8 @@ SpellFilterMenu.propTypes = {
   displayOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   display: PropTypes.instanceOf(Set).isRequired,
   setDisplay: PropTypes.func.isRequired,
+  prioritizeFilterOut: PropTypes.bool.isRequired,
+  setPrioritizeFilterOut: PropTypes.func.isRequired,
 };
 
 export default SpellFilterMenu;
