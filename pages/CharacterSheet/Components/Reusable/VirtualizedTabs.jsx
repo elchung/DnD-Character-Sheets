@@ -5,6 +5,7 @@ import { FixedSizeList } from 'react-window';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const renderRow = ({ index, style, data }) => {
   const color = '#3f51b5';
@@ -15,31 +16,37 @@ const renderRow = ({ index, style, data }) => {
       borderRight: `3px solid ${color}`,
     } : null),
   };
+  const item = data[index];
+
+  const getFirstLetter = (name) => (name.charAt(0).toUpperCase());
 
   return (
-    <ListItem
-      key={index}
-      style={listStyle}
-      selected={data[index].selected === index}
-      button
-      onClick={() => data[index].onChange(index)}
-      dense={!!data[index].secondaryText}
-    >
-      <ListItemIcon style={{ marginRight: -25, marginLeft: -5 }}>
-        <Checkbox
-          edge="start"
-          tabIndex={-1}
-          color="primary"
-          disableRipple
-          onChange={(e) => data[index].handleCheckBoxChange(e, index)}
+    <>
+      <ListSubheader>{data.sortBy === 'name' ? getFirstLetter(item.name) : `Level ${item.level}`}</ListSubheader>
+      <ListItem
+        key={index}
+        style={listStyle}
+        selected={item.selected === index}
+        button
+        onClick={() => item.onChange(index)}
+        dense={!!item.secondaryText}
+      >
+        <ListItemIcon style={{ marginRight: -25, marginLeft: -5 }}>
+          <Checkbox
+            edge="start"
+            tabIndex={-1}
+            color="primary"
+            disableRipple
+            onChange={(e) => item.handleCheckBoxChange(e, index)}
+          />
+        </ListItemIcon>
+        <ListItemText
+          id={item.name}
+          primary={item.name}
+          secondary={item.secondaryText}
         />
-      </ListItemIcon>
-      <ListItemText
-        id={data[index].name}
-        primary={data[index].name}
-        secondary={data[index].secondaryText}
-      />
-    </ListItem>
+      </ListItem>
+    </>
   );
 };
 

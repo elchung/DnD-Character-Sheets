@@ -9,13 +9,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
+import Capitalize from '../../../../Utils/stringUtils';
 
 export const FilterMenuFilterBySubmenuComponent = ({
   options, filters, setFilters, filterKey,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  console.log('filters ', filters);
-  console.log('filter key', filterKey);
   const totalSelected = Object.keys(filters[filterKey]).reduce((total, item) => (
     filters[filterKey][item] !== '' ? total + 1 : total
   ), 0);
@@ -47,7 +46,7 @@ export const FilterMenuFilterBySubmenuComponent = ({
           button
           onClick={handleClickListItem}
         >
-          <ListItemText primary={`${filterKey}:`} secondary={`${totalSelected} Selected`} />
+          <ListItemText primary={`${Capitalize(filterKey)}:`} secondary={`${totalSelected} Selected`} />
         </ListItem>
       </List>
       <Menu
@@ -67,7 +66,7 @@ export const FilterMenuFilterBySubmenuComponent = ({
                     checked={filters[filterKey][option]}
                     indeterminate={filters[filterKey][option] === 'REJECT'}
                     onChange={() => handleOptionsClick(option)}
-                    name={option}
+                    name={Capitalize(option)}
                   />
                 )}
                 label={option}

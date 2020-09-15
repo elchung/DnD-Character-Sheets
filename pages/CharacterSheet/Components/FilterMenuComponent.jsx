@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
 import FilterMenuFilterBySubmenuComponent from './Modals/AddSpellsModal/FilterMenuFilterBySubmenuComponent';
-
+import Capitalize from '../../Utils/stringUtils';
 
 export const SpellFilterMenu = ({
   filterBy,
@@ -28,25 +28,32 @@ export const SpellFilterMenu = ({
   const [anchor, setAnchor] = useState(null);
   const [displayedFilterBy, setDisplayedFilterBy] = useState(filterBy);
   const [displayedSortBy, setDisplayedSortBy] = useState(sortBy);
-  const [displayedDisplayedBy, setDisplayedDisplayedBy] = useState(display);
+  const [displayedDisplay, setDisplayedDisplay] = useState(display);
   const open = Boolean(anchor);
-  const [isApplying, setIsApplying] = useState(false);
 
   const handleOpen = (event) => {
     setAnchor(event.currentTarget);
-    setIsApplying(false);
   };
 
-  const handleClose = () => {
+  const handleClose = (submit) => {
+    if (submit) {
+      setSortBy(displayedSortBy);
+      setFilterBy(displayedFilterBy);
+      setDisplay(displayedDisplay);
+    } else {
+      setDisplayedSortBy(sortBy);
+      setDisplayedFilterBy(filterBy);
+      setDisplayedDisplay(display);
+    }
     setAnchor(null);
   };
 
   const handleDisplayChange = (event) => {
     if (event.target.checked) {
-      setDisplayedDisplayedBy(new Set([...displayedDisplayedBy, event.target.name]));
+      setDisplayedDisplay(new Set([...displayedDisplay, event.target.name]));
     } else {
       // eslint-disable-next-line max-len
-      setDisplayedDisplayedBy(new Set([...displayedDisplayedBy].filter((item) => item !== event.target.name)));
+      setDisplayedDisplay(new Set([...displayedDisplay].filter((item) => item !== event.target.name)));
     }
   };
 
@@ -55,10 +62,7 @@ export const SpellFilterMenu = ({
   };
 
   const handleSubmit = () => {
-    setSortBy(displayedSortBy);
-    setFilterBy(displayedFilterBy);
-    setDisplay(displayedDisplayedBy);
-    handleClose();
+    handleClose(true);
   };
 
   return (
@@ -79,16 +83,18 @@ export const SpellFilterMenu = ({
         onClose={handleClose}
       >
         <div style={{ paddingLeft: 20, paddingRight: 10, paddingTop: 10 }}>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Display By:</FormLabel>
+          <Divider />
+          <FormLabel component="legend" style={{ paddingTop: 5, paddingBottom: 5 }}>Display Secondary Text:</FormLabel>
+          <Divider />
+          <FormControl component="fieldset" style={{ paddingBottom: 5 }}>
             {displayOptions.map((displayName) => (
               <FormControlLabel
                 control={(
                   <Checkbox
                     color="primary"
-                    checked={displayedDisplayedBy.has(displayName)}
+                    checked={displayedDisplay.has(displayName)}
                     onChange={handleDisplayChange}
-                    name={displayName}
+                    name={Capitalize(displayName)}
                     size="small"
                   />
                 )}
@@ -97,7 +103,8 @@ export const SpellFilterMenu = ({
             ))}
           </FormControl>
           <Divider />
-          <FormLabel component="legend" style={{ paddingTop: 10 }}>Filter By:</FormLabel>
+          <FormLabel component="legend" style={{ paddingTop: 5, paddingBottom: 5 }}>Filter By:</FormLabel>
+          <Divider />
           <FormGroup row>
             {Object.keys(filterBy).map((filterKey) => (
               <FilterMenuFilterBySubmenuComponent
@@ -109,11 +116,12 @@ export const SpellFilterMenu = ({
             ))}
           </FormGroup>
           <Divider />
+          <FormLabel component="legend" style={{ paddingTop: 5, paddingBottom: 5 }}>Sort By:</FormLabel>
+          <Divider />
           <FormControl component="fieldset">
-            <FormLabel component="legend" style={{ paddingTop: 10 }}>Sort By:</FormLabel>
             <RadioGroup aria-label="sortBy" name="sortBy" column value={displayedSortBy} onChange={handleSortChange}>
               {sortByOptions.map((sortName) => (
-                <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={sortName} />
+                <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={Capitalize(sortName)} />
               ))}
             </RadioGroup>
           </FormControl>

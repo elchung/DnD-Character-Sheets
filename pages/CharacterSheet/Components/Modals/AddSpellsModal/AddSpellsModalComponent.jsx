@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import Tabs from '@material-ui/core/Tabs';
 import AppBar from '@material-ui/core/AppBar';
 import Tab from '@material-ui/core/Tab';
@@ -17,6 +16,27 @@ import {
   useCharacterState,
   useSetCharacterState,
 } from '../../../../Context/CharacterContext';
+
+const styles = (theme) => ({
+  resizable: {
+    position: 'relative',
+    '& .react-resizable-handle': {
+      position: 'absolute',
+      width: 20,
+      height: 20,
+      bottom: 0,
+      right: 0,
+      background:
+        "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2IDYiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmYwMCIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iNnB4Ij48ZyBvcGFjaXR5PSIwLjMwMiI+PHBhdGggZD0iTSA2IDYgTCAwIDYgTCAwIDQuMiBMIDQgNC4yIEwgNC4yIDQuMiBMIDQuMiAwIEwgNiAwIEwgNiA2IEwgNiA2IFoiIGZpbGw9IiMwMDAwMDAiLz48L2c+PC9zdmc+')",
+      'background-position': 'bottom right',
+      padding: '0 3px 3px 0',
+      'background-repeat': 'no-repeat',
+      'background-origin': 'content-box',
+      'box-sizing': 'border-box',
+      cursor: 'se-resize',
+    },
+  },
+});
 
 export const AddSpellsModalComponent = ({ positioning }) => {
   const { useStyles } = useCharacterState();

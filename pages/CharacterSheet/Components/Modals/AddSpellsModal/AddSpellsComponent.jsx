@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
+import { Resizable, ResizableBox } from 'react-resizable';
 import FilterMenuComponent from '../../FilterMenuComponent';
 import * as Sort from '../../../../Utils/sortObjArrayUtils';
 import AddSpellsDescriptionComponent from './AddSpellsDescriptionComponent';
@@ -74,11 +75,12 @@ export const AddSpellsComponent = () => {
   useEffect(() => {
     setTabData(displayedSpells.map((spellName, index) => ({
       name: spellName,
+      level: spellList[spellName].level,
       handleCheckBoxChange: handleCheckboxChange,
       onChange: handleTabSelection,
-      item: displayedSpells[index],
       secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
       selected: tabVal,
+      sortBy,
     })));
   }, [displayedSpells, display, tabVal]);
 
