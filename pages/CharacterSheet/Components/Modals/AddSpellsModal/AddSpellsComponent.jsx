@@ -28,6 +28,10 @@ export const AddSpellsComponent = () => {
     }, {}),
   });
 
+  useEffect(() => {
+    const newDisplayed = Sort.sortABCAsc(Object.keys(displayedSpells));
+  }, [sortBy, filterBy]);
+
   const sortByOptions = ['name', 'level'];
   const displayOptions = ['Casting time', 'Duration', 'Level', 'Range', 'School', 'Ritual'];
   const displayOptionToKey = {
