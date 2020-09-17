@@ -82,7 +82,7 @@ export const AddSpellsModalComponent = ({ positioning }) => {
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         <Fade in={open}>
-          <ResizableBox width={700} height={900}>
+          <ResizableBox width={900} height={1100}>
             <Paper style={{ padding: 20, overflow: 'auto' }}>
               <AppBar position="static">
                 <Tabs

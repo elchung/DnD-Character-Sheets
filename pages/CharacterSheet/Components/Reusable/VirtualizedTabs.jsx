@@ -22,7 +22,6 @@ const renderRow = ({ index, style, data }) => {
 
   return (
     <>
-      <ListSubheader>{data.sortBy === 'name' ? getFirstLetter(item.name) : `Level ${item.level}`}</ListSubheader>
       <ListItem
         key={index}
         style={listStyle}
@@ -67,3 +66,5 @@ VirtualizedTabs.propTypes = {
 };
 
 export default VirtualizedTabs;
+// https://github.com/marchaos/react-virtualized-sticky-tree maybe looks at this for sticky header implementation
+// <ListSubheader>{data.sortBy === 'name' ? getFirstLetter(item.name) : `Level ${item.level}`}</ListSubheader>

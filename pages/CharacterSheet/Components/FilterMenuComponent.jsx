@@ -12,6 +12,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import FilterMenuFilterBySubmenuComponent from './Modals/AddSpellsModal/FilterMenuFilterBySubmenuComponent';
 import Capitalize from '../../Utils/stringUtils';
 
@@ -21,6 +23,8 @@ export const SpellFilterMenu = ({
   sortByOptions,
   sortBy,
   setSortBy,
+  ascending,
+  setAscending,
   displayOptions,
   display,
   setDisplay,
@@ -57,6 +61,10 @@ export const SpellFilterMenu = ({
       // eslint-disable-next-line max-len
       setDisplayedDisplay(new Set([...displayedDisplay].filter((item) => item !== event.target.name)));
     }
+  };
+
+  const handleSortDirChange = (event) => {
+    setAscending(event.target.checked);
   };
 
   const handleSortChange = (event) => {
@@ -123,6 +131,18 @@ export const SpellFilterMenu = ({
           <FormLabel component="legend" style={{ paddingTop: 5, paddingBottom: 5 }}>Sort By:</FormLabel>
           <Divider />
           <FormControl component="fieldset">
+            <FormControlLabel
+              control={(
+                <Checkbox
+                  checked={ascending}
+                  icon={<ArrowDropDownIcon color="primary" />}
+                  checkedIcon={<ArrowDropUpIcon color="primary" />}
+                  name="ascdesc"
+                  onChange={handleSortDirChange}
+                />
+              )}
+              label="Direction"
+            />
             <RadioGroup aria-label="sortBy" name="sortBy" column value={displayedSortBy} onChange={handleSortChange}>
               {sortByOptions.map((sortName) => (
                 <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={Capitalize(sortName)} />
@@ -142,6 +162,8 @@ SpellFilterMenu.propTypes = {
   sortByOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   sortBy: PropTypes.string.isRequired,
   setSortBy: PropTypes.func.isRequired,
+  ascending: PropTypes.bool.isRequired,
+  setAscending: PropTypes.func.isRequired,
   displayOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   display: PropTypes.instanceOf(Set).isRequired,
   setDisplay: PropTypes.func.isRequired,

@@ -74,18 +74,18 @@ export const FilterMenuFilterBySubmenuComponent = ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Typography component="div">
+        <Typography component="div" style={{ paddingLeft: 10, paddingRight: 10 }}>
           <Grid component="label" container alignItems="center" spacing={1}>
-            <Grid item>Prioritize Keep In</Grid>
+            <Grid item>Priority In</Grid>
             <Grid item>
               <Tooltip title={tooltipMessage}>
                 <Switch checked={prioritizeFilterOut} onChange={handleFilterPriorityChange} name="prioritySwitch" />
               </Tooltip>
             </Grid>
-            <Grid item>Prioritize Filter Out</Grid>
+            <Grid item>Priority Out</Grid>
           </Grid>
         </Typography>
-        <FormControl component="fieldset" size="small">
+        <FormControl component="fieldset" size="small" style={{ paddingLeft: 20 }}>
           <FormLabel component="legend">Filter by:</FormLabel>
           <FormGroup>
             {options.map((option) => (

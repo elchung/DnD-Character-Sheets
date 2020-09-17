@@ -13,11 +13,12 @@ import { getFilteredSpells } from '../../../../Utils/addSpellUtils';
 export const AddSpellsComponent = () => {
   const { spellList, classList } = useCharacterState();
   const [selectedSpells, setSelectedSpells] = useState(new Set());
-  const [displayedSpells, setDisplayedSpells] = useState(Sort.sortABCAsc(Object.keys(spellList)));
+  const [displayedSpells, setDisplayedSpells] = useState(Sort.sortAlphabetical(Object.keys(spellList), true));
   const [tabVal, setTabVal] = useState(0);
   const [sortBy, setSortBy] = useState('name');
   const [display, setDisplay] = useState(new Set());
   const [prioritizeFilterOut, setPrioritizeFilterOut] = useState(false);
+  const [ascending, setAscending] = useState(true);
   const [filterBy, setFilterBy] = useState({
     level: [...Array(10).keys()].reduce((acc, item) => {
       acc[item] = true;
@@ -32,7 +33,9 @@ export const AddSpellsComponent = () => {
   useEffect(() => {
     // filter, then sort
     const filteredSpells = getFilteredSpells(spellList, filterBy, prioritizeFilterOut);
-    const newDisplayed = Sort.sortABCAsc(Object.keys(displayedSpells));
+    const newDisplayed = Sort.sortAlphabetical(Object.keys(filteredSpells), ascending);
+    setDisplayedSpells(newDisplayed);
+    setTabVal(0);
   }, [sortBy, filterBy]);
 
   const sortByOptions = ['name', 'level'];
@@ -102,6 +105,8 @@ export const AddSpellsComponent = () => {
               sortByOptions={sortByOptions}
               sortBy={sortBy}
               setSortBy={setSortBy}
+              ascending={ascending}
+              setAscending={setAscending}
               displayOptions={displayOptions}
               display={display}
               setDisplay={setDisplay}
