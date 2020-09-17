@@ -21,7 +21,11 @@ export const AddSpellsComponent = () => {
   const [ascending, setAscending] = useState(true);
   const [filterBy, setFilterBy] = useState({
     level: [...Array(10).keys()].reduce((acc, item) => {
-      acc[item] = true;
+      if (item === 0) {
+        acc.cantrip = true;
+      } else {
+        acc[item] = true;
+      }
       return acc;
     }, {}),
     class: classList.reduce((acc, item) => {
@@ -83,15 +87,19 @@ export const AddSpellsComponent = () => {
   })));
 
   useEffect(() => {
-    setTabData(displayedSpells.map((spellName, index) => ({
-      name: spellName,
-      level: spellList[spellName].level,
-      handleCheckBoxChange: handleCheckboxChange,
-      onChange: handleTabSelection,
-      secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
-      selected: tabVal,
-      sortBy,
-    })));
+    setTabData(displayedSpells.map((spellName, index) => {
+      console.log(spellName);
+      console.log(spellList[spellName]);
+      return {
+        name: spellName,
+        level: spellList[spellName].level,
+        handleCheckBoxChange: handleCheckboxChange,
+        onChange: handleTabSelection,
+        secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
+        selected: tabVal,
+        sortBy,
+      };
+    }));
   }, [displayedSpells, display, tabVal]);
 
   return (

@@ -15,7 +15,9 @@ export const SpellsComponent = () => {
   return (
     <Paper
       elevation={globalStyle.elevation}
-      className={classes.spellsComponentPaper}
+      classes={{
+        root: classes.spellsComponentPaper.root,
+      }}
     >
       <Grid container direction="column" justify="space-evenly" spacing={2}>
         <Grid item>
@@ -24,11 +26,11 @@ export const SpellsComponent = () => {
         <Grid item>
           <Grid container direction="row" w justify="flex-start" spacing={1}>
             {[[0, 1, 2], [3, 4, 5], [6, 7, 8, 9]].map((columns) => (
-              <>
-                <Grid item style={{ width: '32%' }}>
+              <React.Fragment key={`spell-component-column-${columns}`}>
+                <Grid item style={{ width: '32%' }} key={`spell-component-column-${columns}`}>
                   <Grid container direction="column" spacing={1} alignItems="stretch">
                     {columns.map((level) => (
-                      <Grid item style={{ height: '33%' }}>
+                      <Grid item style={{ height: '33%' }} key={`spell-level-${level}-item`}>
                         <SpellLevelHeaderComponent level={level} />
                         <SpellLevelListComponent
                           spellsAtLevel={knownSpells.level}
@@ -44,13 +46,13 @@ export const SpellsComponent = () => {
                     <Divider orientation="vertical" />
                   </Grid>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </Grid>
         </Grid>
       </Grid>
       <AddSpellsModalComponent
-        positioning={{ position: 'relative', top: 470, left: 1120 }}
+        positioning={{ position: 'relative', bottom: 20, left: 20 }}
       />
     </Paper>
   );

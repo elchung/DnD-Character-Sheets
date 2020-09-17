@@ -144,11 +144,13 @@ export const CharacterContextProvider = (props) => {
       maxHeight: 355, overflow: 'auto', width: '100%', height: '90%', paddingBottom: 20, paddingTop: 10,
     },
     spellsComponentPaper: {
-      width: 1180,
-      height: 1146,
-      padding: 16,
-      maxHeight: 1146,
-      overflow: 'auto',
+      root: {
+        width: 1180,
+        height: 1146,
+        padding: 16,
+        maxHeight: 1146,
+        overflow: 'auto',
+      },
     },
     tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
     tableCellInputStyle: {
