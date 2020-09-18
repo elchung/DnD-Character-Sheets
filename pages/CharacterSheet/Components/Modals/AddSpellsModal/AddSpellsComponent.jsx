@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 import FilterMenuComponent from '../../FilterMenuComponent';
 import * as Sort from '../../../../Utils/sortObjArrayUtils';
 import AddSpellsDescriptionComponent from './AddSpellsDescriptionComponent';
@@ -87,24 +88,20 @@ export const AddSpellsComponent = () => {
   })));
 
   useEffect(() => {
-    setTabData(displayedSpells.map((spellName, index) => {
-      console.log(spellName);
-      console.log(spellList[spellName]);
-      return {
-        name: spellName,
-        level: spellList[spellName].level,
-        handleCheckBoxChange: handleCheckboxChange,
-        onChange: handleTabSelection,
-        secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
-        selected: tabVal,
-        sortBy,
-      };
-    }));
+    setTabData(displayedSpells.map((spellName, index) => ({
+      name: spellName,
+      level: spellList[spellName].level,
+      handleCheckBoxChange: handleCheckboxChange,
+      onChange: handleTabSelection,
+      secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
+      selected: tabVal,
+      sortBy,
+    })));
   }, [displayedSpells, display, tabVal]);
 
   return (
-    <Grid container direction="row" style={{ display: 'flex', flexGrow: 1, height: 570 }}>
-      <Grid item xs={3}>
+    <Grid container direction="row">
+      <Grid xs={4} item>
         <Grid container direction="column">
           <Grid item>
             <FilterMenuComponent
@@ -124,13 +121,13 @@ export const AddSpellsComponent = () => {
           </Grid>
           <Grid item>
             <VirtualizedTabs
-              height={540}
+              height={620}
               itemData={tabData}
             />
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={9} style={{ border: '2px solid lightgray' }}>
+      <Grid item xs={8} style={{ border: '2px solid lightgray' }}>
         <AddSpellsDescriptionComponent
           spell={spellList[displayedSpells[tabVal]]}
         />

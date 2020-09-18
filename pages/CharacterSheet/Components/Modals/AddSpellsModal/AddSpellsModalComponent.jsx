@@ -10,7 +10,6 @@ import Tabs from '@material-ui/core/Tabs';
 import AppBar from '@material-ui/core/AppBar';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
-import { Resizable, ResizableBox } from 'react-resizable';
 import TabPanel from '../../SpellTabPanel';
 import { AddSpellsComponent } from './AddSpellsComponent';
 import {
@@ -67,7 +66,7 @@ export const AddSpellsModalComponent = ({ positioning }) => {
   };
 
   return (
-    <div>
+    <>
       <Fab size="small" color="primary" aria-label="add" onClick={handleOpen} style={positioning}>
         <MenuBookIcon />
       </Fab>
@@ -82,43 +81,44 @@ export const AddSpellsModalComponent = ({ positioning }) => {
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         <Fade in={open}>
-          <ResizableBox width={900} height={1100}>
-            <Paper style={{ padding: 20, overflow: 'auto' }}>
-              <AppBar position="static">
-                <Tabs
-                  value={topTabNum}
-                  onChange={handleTopTabChange}
-                  style={{ borderRight: '1px solid' }}
-                >
-                  <Tab label="Add Spell From List" />
-                  <Tab label="Add Custom spell" />
-                  <Tab label="Add Blank" />
-                </Tabs>
-              </AppBar>
-              <TabPanel value={topTabNum} index={0}>
-                <AddSpellsComponent />
-              </TabPanel>
-              <TabPanel value={topTabNum} index={1}>
-                Temp Add custom component
-                {/* <AddCustomSpellComponent /> */}
-              </TabPanel>
-              <TabPanel value={topTabNum} index={2}>
-                Temp Add blank spell component
-                {/* <AddBlankSpellComponent /> */}
-              </TabPanel>
-              <Grid container direction="row" justify="flex-end">
-                <Grid item>
-                  <Button color="secondary" onClick={handleCancel}>Cancel</Button>
-                </Grid>
-                <Grid item>
-                  <Button color="primary" onClick={handleSubmit}>Submit</Button>
-                </Grid>
+          <Paper style={{
+            padding: 20, overflow: 'auto', width: 900, height: 800,
+          }}
+          >
+            <AppBar position="static">
+              <Tabs
+                value={topTabNum}
+                onChange={handleTopTabChange}
+                style={{ borderRight: '1px solid' }}
+              >
+                <Tab label="Add Spell From List" />
+                <Tab label="Add Custom spell" />
+                <Tab label="Add Blank" />
+              </Tabs>
+            </AppBar>
+            <TabPanel value={topTabNum} index={0}>
+              <AddSpellsComponent />
+            </TabPanel>
+            <TabPanel value={topTabNum} index={1}>
+              Temp Add custom component
+              {/* <AddCustomSpellComponent /> */}
+            </TabPanel>
+            <TabPanel value={topTabNum} index={2}>
+              Temp Add blank spell component
+              {/* <AddBlankSpellComponent /> */}
+            </TabPanel>
+            <Grid container direction="row" justify="flex-end">
+              <Grid item>
+                <Button color="secondary" onClick={handleCancel}>Cancel</Button>
               </Grid>
-            </Paper>
-          </ResizableBox>
+              <Grid item>
+                <Button color="primary" onClick={handleSubmit}>Submit</Button>
+              </Grid>
+            </Grid>
+          </Paper>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 };
 

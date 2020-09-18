@@ -68,6 +68,10 @@ export const CharacterContextProvider = (props) => {
 
   const globalStyle = {
     elevation: 3,
+    characterSheet: {
+      width: 1180,
+      height: 1146,
+    },
   };
 
   const useStyles = makeStyles({
@@ -142,15 +146,6 @@ export const CharacterContextProvider = (props) => {
     spellLevelheader: { width: '100%', height: '10%' },
     spellsAccordion: {
       maxHeight: 355, overflow: 'auto', width: '100%', height: '90%', paddingBottom: 20, paddingTop: 10,
-    },
-    spellsComponentPaper: {
-      root: {
-        width: 1180,
-        height: 1146,
-        padding: 16,
-        maxHeight: 1146,
-        overflow: 'auto',
-      },
     },
     tableCellStyle: { paddingTop: 0, paddingBottom: 0, width: 100 },
     tableCellInputStyle: {
@@ -236,8 +231,8 @@ export const CharacterContextProvider = (props) => {
       maxHeight: 355, overflow: 'auto', width: '100%', height: '90%', paddingBottom: 20, paddingTop: 10,
     },
     spellsComponentPaper: {
-      width: 1180,
-      height: 1146,
+      width: globalStyle.characterSheet.width,
+      height: globalStyle.characterSheet.height,
       padding: 16,
       maxHeight: 1146,
       overflow: 'auto',
