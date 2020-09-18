@@ -75,6 +75,16 @@ export const SpellFilterMenu = ({
     handleClose(true);
   };
 
+  const handleSubmenuClick = (option, key) => {
+    setDisplayedFilterBy({
+      ...displayedFilterBy,
+      [key]: {
+        ...displayedFilterBy[key],
+        [option]: !displayedFilterBy[key][option],
+      },
+    });
+  };
+
   return (
     <div>
       <IconButton
@@ -119,11 +129,11 @@ export const SpellFilterMenu = ({
             {Object.keys(filterBy).map((filterKey) => (
               <FilterMenuFilterBySubmenuComponent
                 options={Object.keys(displayedFilterBy[filterKey])}
-                filterKey={filterKey}
-                filters={displayedFilterBy}
-                setFilters={setDisplayedFilterBy}
-                prioritizeFilterOut={prioritizeFilterOut}
-                setPrioritizeFilterOut={setPrioritizeFilterOut}
+                key={filterKey}
+                selected={displayedFilterBy}
+                priority={prioritizeFilterOut}
+                setPriority={setPrioritizeFilterOut}
+                handleOptionsClick={(e) => handleSubmenuClick(e, filterKey)}
               />
             ))}
           </FormGroup>

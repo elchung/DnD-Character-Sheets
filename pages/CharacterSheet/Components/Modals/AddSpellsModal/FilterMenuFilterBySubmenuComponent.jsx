@@ -13,15 +13,14 @@ import Switch from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
+import PropTypes from 'prop-types';
 import Capitalize from '../../../../Utils/stringUtils';
 
 export const FilterMenuFilterBySubmenuComponent = ({
-  options, filters, setFilters, filterKey, prioritizeFilterOut, setPrioritizeFilterOut,
+  key, options, selected, priority, setPriority, handleOptionsClick, indeterminateOn,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const totalSelected = Object.keys(filters[filterKey]).reduce((total, item) => (
-    filters[filterKey][item] !== '' ? total + 1 : total
-  ), 0);
+  const totalSelected = selected.size || selected.length;
   const tooltipMessage = 'If a spell falls under multiple classes spell list, t'
     + 'his will prioritize removing the spell from the displayed list or keeping it in,'
     + ' based on what is classes are being filtered out.';
@@ -31,26 +30,7 @@ export const FilterMenuFilterBySubmenuComponent = ({
   };
 
   const handleFilterPriorityChange = (event) => {
-    setPrioritizeFilterOut(event.target.checked);
-  };
-
-  const handleOptionsClick = (option) => {
-    // let newState;
-    // if (filterKey === 'class') {
-    //   // eslint-disable-next-line no-nested-ternary
-    // eslint-disable-next-line max-len
-    //   newState = filters[filterKey][option] === 'ACCEPT' ? 'REJECT' : filters[filterKey][option] === 'REJECT' ? '' : 'ACCEPT';
-    // } else if (filterKey === 'level') {
-    //   newState = filters[filterKey][option] === 'ACCEPT' ? 'REJECT' : 'ACCEPT';
-    // }
-    const newState = !filters[filterKey][option];
-    setFilters({
-      ...filters,
-      [filterKey]: {
-        ...filters[filterKey],
-        [option]: newState,
-      },
-    });
+    setPriority(event.target.checked);
   };
 
   const handleClose = () => {
@@ -64,7 +44,7 @@ export const FilterMenuFilterBySubmenuComponent = ({
           button
           onClick={handleClickListItem}
         >
-          <ListItemText primary={`${Capitalize(filterKey)}:`} secondary={`${totalSelected} Selected`} />
+          <ListItemText primary={`${Capitalize(key)}:`} secondary={`${totalSelected} Selected`} />
         </ListItem>
       </List>
       <Menu
@@ -74,18 +54,20 @@ export const FilterMenuFilterBySubmenuComponent = ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Typography component="div" style={{ paddingLeft: 10, paddingRight: 10 }}>
-          <Grid component="label" container alignItems="center" spacing={1}>
-            <Grid item>Priority In</Grid>
-            <Grid item>
-              <Tooltip title={tooltipMessage}>
-                <Switch checked={prioritizeFilterOut} onChange={handleFilterPriorityChange} name="prioritySwitch" />
-              </Tooltip>
+        {setPriority ? (
+          <Typography component="div" style={{ paddingLeft: 10, paddingRight: 10 }}>
+            <Grid component="label" container alignItems="center" spacing={1}>
+              <Grid item>Priority In</Grid>
+              <Grid item>
+                <Tooltip title={tooltipMessage}>
+                  <Switch checked={priority} onChange={handleFilterPriorityChange} name="prioritySwitch" />
+                </Tooltip>
+              </Grid>
+              <Grid item>Priority Out</Grid>
             </Grid>
-            <Grid item>Priority Out</Grid>
-          </Grid>
-        </Typography>
-        <FormControl component="fieldset" size="small" style={{ paddingLeft: 20 }}>
+          </Typography>
+        ) : null}
+        <FormControl component="fieldset" size="small" style={{ padding: 20 }}>
           <FormLabel component="legend">Filter by:</FormLabel>
           <FormGroup>
             {options.map((option) => (
@@ -93,9 +75,9 @@ export const FilterMenuFilterBySubmenuComponent = ({
                 control={(
                   <Checkbox
                     checked
-                    indeterminate={!filters[filterKey][option]}
+                    indeterminate={indeterminateOn ? !selected[option] : false}
                     onChange={() => handleOptionsClick(option)}
-                    color={filters[filterKey][option] ? 'primary' : 'secondary'}
+                    color={selected[option] ? 'primary' : 'secondary'}
                     name={Capitalize(option)}
                   />
                 )}
@@ -110,6 +92,22 @@ export const FilterMenuFilterBySubmenuComponent = ({
       </Menu>
     </div>
   );
+};
+
+FilterMenuFilterBySubmenuComponent.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.instanceOf(Set).isRequired,
+  priority: PropTypes.bool,
+  setPriority: PropTypes.func,
+  handleOptionsClick: PropTypes.func.isRequired,
+  indeterminateOn: PropTypes.bool,
+  key: PropTypes.string.isRequired,
+};
+
+FilterMenuFilterBySubmenuComponent.defaultProps = {
+  priority: undefined,
+  setPriority: undefined,
+  indeterminateOn: false,
 };
 
 export default FilterMenuFilterBySubmenuComponent;

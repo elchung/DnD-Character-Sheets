@@ -82,7 +82,7 @@ export const AddSpellsModalComponent = ({ positioning }) => {
       >
         <Fade in={open}>
           <Paper style={{
-            padding: 20, overflow: 'auto', width: 900, height: 800,
+            padding: 20, overflow: 'auto', maxWidth: '90%',
           }}
           >
             <AppBar position="static">
@@ -100,8 +100,7 @@ export const AddSpellsModalComponent = ({ positioning }) => {
               <AddSpellsComponent />
             </TabPanel>
             <TabPanel value={topTabNum} index={1}>
-              Temp Add custom component
-              {/* <AddCustomSpellComponent /> */}
+              <AddCustomSpellComponent />
             </TabPanel>
             <TabPanel value={topTabNum} index={2}>
               Temp Add blank spell component
