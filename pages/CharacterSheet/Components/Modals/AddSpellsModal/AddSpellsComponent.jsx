@@ -21,18 +21,14 @@ export const AddSpellsComponent = () => {
   const [prioritizeFilterOut, setPrioritizeFilterOut] = useState(false);
   const [ascending, setAscending] = useState(true);
   const [filterBy, setFilterBy] = useState({
-    level: [...Array(10).keys()].reduce((acc, item) => {
-      if (item === 0) {
-        acc.cantrip = true;
-      } else {
-        acc[item] = true;
-      }
-      return acc;
-    }, {}),
-    class: classList.reduce((acc, item) => {
-      acc[item] = true;
-      return acc;
-    }, {}),
+    level: {
+      options: ['cantrip', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+      selected: new Set(),
+    },
+    class: {
+      options: classList,
+      selected: new Set(),
+    },
   });
 
   useEffect(() => {

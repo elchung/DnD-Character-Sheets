@@ -75,7 +75,7 @@ export const SpellFilterMenu = ({
     handleClose(true);
   };
 
-  const handleSubmenuClick = (option, key) => {
+  const handleSubmenuClick = (option, key) => { // TODO update this
     setDisplayedFilterBy({
       ...displayedFilterBy,
       [key]: {
@@ -128,12 +128,13 @@ export const SpellFilterMenu = ({
           <FormGroup row>
             {Object.keys(filterBy).map((filterKey) => (
               <FilterMenuFilterBySubmenuComponent
-                options={Object.keys(displayedFilterBy[filterKey])}
                 key={filterKey}
-                selected={displayedFilterBy}
+                options={filterBy[filterKey].options}
+                selected={filterBy[filterKey].selected}
                 priority={prioritizeFilterOut}
                 setPriority={setPrioritizeFilterOut}
                 handleOptionsClick={(e) => handleSubmenuClick(e, filterKey)}
+                indeterminateOn
               />
             ))}
           </FormGroup>
@@ -167,7 +168,7 @@ export const SpellFilterMenu = ({
 };
 
 SpellFilterMenu.propTypes = {
-  filterBy: PropTypes.instanceOf(Set).isRequired,
+  filterBy: PropTypes.instanceOf(Object).isRequired,
   setFilterBy: PropTypes.func.isRequired,
   sortByOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   sortBy: PropTypes.string.isRequired,

@@ -11,6 +11,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 import TabPanel from '../../SpellTabPanel';
+import AddCustomSpellComponent from './AddCustomSpellComponent';
 import { AddSpellsComponent } from './AddSpellsComponent';
 import {
   useCharacterState,
@@ -41,7 +42,6 @@ const styles = (theme) => ({
 export const AddSpellsModalComponent = ({ positioning }) => {
   const { useStyles } = useCharacterState();
   const classes = useStyles();
-  // const { } = useSetCharacterState();
   const [open, setOpen] = useState(false);
   const [topTabNum, setTopTabNum] = useState(0);
 
