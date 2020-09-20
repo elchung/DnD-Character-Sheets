@@ -74,7 +74,7 @@ export const AddCustomSpellComponent = () => {
         options={classList}
         selected={selectedClasses}
         handleOptionsClick={handleClassChange}
-        key="class"
+        name="class"
       />
       <Grid item>
         <TextField // need to make wider?

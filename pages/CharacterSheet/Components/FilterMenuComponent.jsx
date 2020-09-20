@@ -14,7 +14,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import CheckBoxListMenu from './Modals/AddSpellsModal/CheckBoxListMenu';
+import { v4 as uuid } from 'uuid';
+import { CheckBoxListMenu } from './Modals/AddSpellsModal/CheckBoxListMenu';
 import Capitalize from '../../Utils/stringUtils';
 
 export const SpellFilterMenu = ({
@@ -93,7 +94,7 @@ export const SpellFilterMenu = ({
   };
 
   return (
-    <div>
+    <>
       <IconButton
         aria-label="more"
         aria-controls="long-menu"
@@ -136,13 +137,14 @@ export const SpellFilterMenu = ({
           <FormGroup row>
             {Object.keys(filterBy).map((filterName) => (
               <CheckBoxListMenu
-                key={filterName}
+                name={filterName}
                 options={filterBy[filterName].options}
                 selected={filterBy[filterName].selected}
                 priority={prioritizeFilterOut}
                 setPriority={setPrioritizeFilterOut}
                 handleOptionsClick={(option) => handleSubmenuClick(option, filterName)}
                 indeterminateOn
+                key={uuid()}
               />
             ))}
           </FormGroup>
@@ -164,14 +166,19 @@ export const SpellFilterMenu = ({
             />
             <RadioGroup aria-label="sortBy" name="sortBy" column value={displayedSortBy} onChange={handleSortChange}>
               {sortByOptions.map((sortName) => (
-                <FormControlLabel value={sortName} control={<Radio size="small" color="primary" />} label={Capitalize(sortName)} />
+                <FormControlLabel
+                  value={sortName}
+                  control={<Radio size="small" color="primary" />}
+                  label={Capitalize(sortName)}
+                  key={uuid()}
+                />
               ))}
             </RadioGroup>
           </FormControl>
           <Button color="primary" onClick={handleSubmit} style={{ alignItems: 'flex-end', justify: 'flex-end', display: 'flex' }}>Apply</Button>
         </div>
       </Menu>
-    </div>
+    </>
   );
 };
 
