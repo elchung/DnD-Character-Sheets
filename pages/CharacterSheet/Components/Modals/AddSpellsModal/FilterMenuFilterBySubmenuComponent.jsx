@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
-import Capitalize from '../../../../Utils/stringUtils';
+import { Capitalize } from '../../../../Utils/stringUtils';
 
 export const FilterMenuFilterBySubmenuComponent = ({
   key, options, selected, priority, setPriority, handleOptionsClick, indeterminateOn,
@@ -24,6 +24,8 @@ export const FilterMenuFilterBySubmenuComponent = ({
   const tooltipMessage = 'If a spell falls under multiple classes spell list, t'
     + 'his will prioritize removing the spell from the displayed list or keeping it in,'
     + ' based on what is classes are being filtered out.';
+
+  console.log('key', key);
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);

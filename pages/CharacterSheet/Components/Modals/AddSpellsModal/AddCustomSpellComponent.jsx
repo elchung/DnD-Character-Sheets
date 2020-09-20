@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
 import FilterMenuFilterBySubmenuComponent from './FilterMenuFilterBySubmenuComponent';
-import Capitalize from '../../../../Utils/stringUtils';
+import { Capitalize } from '../../../../Utils/stringUtils';
 import {
   useCharacterState,
 } from '../../../../Context/CharacterContext';

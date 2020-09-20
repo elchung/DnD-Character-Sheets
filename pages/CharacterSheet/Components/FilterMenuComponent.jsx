@@ -76,11 +76,18 @@ export const SpellFilterMenu = ({
   };
 
   const handleSubmenuClick = (option, key) => { // TODO update this
+    let newSet;
+    if (displayedFilterBy[key].selected.has(option)) {
+      newSet = new Set([...displayedFilterBy[key].selected]);
+      newSet.delete(option);
+    } else {
+      newSet = new Set([...displayedFilterBy[key].selected, option]);
+    }
     setDisplayedFilterBy({
       ...displayedFilterBy,
       [key]: {
-        ...displayedFilterBy[key],
-        [option]: !displayedFilterBy[key][option],
+        options: displayedFilterBy[key].options,
+        selected: newSet,
       },
     });
   };
@@ -126,14 +133,14 @@ export const SpellFilterMenu = ({
           <FormLabel component="legend" style={{ paddingTop: 5, paddingBottom: 5 }}>Filter By:</FormLabel>
           <Divider />
           <FormGroup row>
-            {Object.keys(filterBy).map((filterKey) => (
+            {Object.keys(filterBy).map((filterName) => (
               <FilterMenuFilterBySubmenuComponent
-                key={filterKey}
-                options={filterBy[filterKey].options}
-                selected={filterBy[filterKey].selected}
+                key={filterName}
+                options={filterBy[filterName].options}
+                selected={filterBy[filterName].selected}
                 priority={prioritizeFilterOut}
                 setPriority={setPrioritizeFilterOut}
-                handleOptionsClick={(e) => handleSubmenuClick(e, filterKey)}
+                handleOptionsClick={(option) => handleSubmenuClick(option, filterName)}
                 indeterminateOn
               />
             ))}
