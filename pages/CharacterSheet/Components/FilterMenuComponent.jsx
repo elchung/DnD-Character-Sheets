@@ -14,7 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import FilterMenuFilterBySubmenuComponent from './Modals/AddSpellsModal/FilterMenuFilterBySubmenuComponent';
+import CheckBoxListMenu from './Modals/AddSpellsModal/CheckBoxListMenu';
 import Capitalize from '../../Utils/stringUtils';
 
 export const SpellFilterMenu = ({
@@ -126,6 +126,7 @@ export const SpellFilterMenu = ({
                   />
                 )}
                 label={displayName}
+                key={`filter-menu-${displayName}`}
               />
             ))}
           </FormControl>
@@ -134,7 +135,7 @@ export const SpellFilterMenu = ({
           <Divider />
           <FormGroup row>
             {Object.keys(filterBy).map((filterName) => (
-              <FilterMenuFilterBySubmenuComponent
+              <CheckBoxListMenu
                 key={filterName}
                 options={filterBy[filterName].options}
                 selected={filterBy[filterName].selected}

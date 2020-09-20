@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import FilterMenuFilterBySubmenuComponent from './FilterMenuFilterBySubmenuComponent';
+import CheckBoxListMenu from './CheckBoxListMenu';
 import { Capitalize } from '../../../../Utils/stringUtils';
 import {
   useCharacterState,
@@ -23,7 +23,7 @@ export const AddCustomSpellComponent = () => {
   const [material, setMaterial] = useState('');
 
   const levels = ['cantrip', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const schools = spellList.reduce((acc, spell) => {
+  const schools = Object.values(spellList).reduce((acc, spell) => {
     acc.add(spell.school);
     return acc;
   }, new Set());
@@ -70,7 +70,7 @@ export const AddCustomSpellComponent = () => {
       <Grid item>
         <TextField label="Duration" variant="outlined" />
       </Grid>
-      <FilterMenuFilterBySubmenuComponent // for selecting class
+      <CheckBoxListMenu // for selecting class
         options={classList}
         selected={selectedClasses}
         handleOptionsClick={handleClassChange}
