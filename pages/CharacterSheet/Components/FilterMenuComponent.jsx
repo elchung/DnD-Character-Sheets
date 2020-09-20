@@ -164,7 +164,7 @@ export const SpellFilterMenu = ({
               )}
               label="Direction"
             />
-            <RadioGroup aria-label="sortBy" name="sortBy" column value={displayedSortBy} onChange={handleSortChange}>
+            <RadioGroup aria-label="sortBy" name="sortBy" column="true" value={displayedSortBy} onChange={handleSortChange}>
               {sortByOptions.map((sortName) => (
                 <FormControlLabel
                   value={sortName}

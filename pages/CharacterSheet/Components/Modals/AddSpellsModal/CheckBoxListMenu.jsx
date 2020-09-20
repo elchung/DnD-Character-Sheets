@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import { Capitalize } from '../../../../Utils/stringUtils';
 
 export const CheckBoxListMenu = ({

@@ -34,8 +34,10 @@ export const AddSpellsComponent = () => {
   useEffect(() => {
     // filter, then sort
     const filteredSpells = getFilteredSpells(spellList, filterBy, prioritizeFilterOut);
+    console.log(filteredSpells);
     const newDisplayed = Sort.sortAlphabetical(Object.keys(filteredSpells), ascending);
     setDisplayedSpells(newDisplayed);
+    console.log(newDisplayed);
     setTabVal(0);
   }, [sortBy, filterBy]);
 

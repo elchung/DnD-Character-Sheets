@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 
 export const TabPanel = ({
   children, value, index, ...other
@@ -13,9 +14,11 @@ export const TabPanel = ({
     {...other}
   >
     {value === index && (
-      <Box p={3}>
-        {children}
-      </Box>
+      <Container>
+        <Box p={3}>
+          {children}
+        </Box>
+      </Container>
     )}
   </div>
 );

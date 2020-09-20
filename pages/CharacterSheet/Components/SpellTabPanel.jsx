@@ -1,8 +1,11 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
-const SpellTabPanel = ({ children, value, index, ...other }) => (
+const SpellTabPanel = ({
+  children, value, index, ...other
+}) => (
   <div
     role="tabpanel"
     hidden={value !== index}
@@ -11,9 +14,11 @@ const SpellTabPanel = ({ children, value, index, ...other }) => (
     {...other}
   >
     {value === index && (
-      <Box p={3}>
-        <Typography>{children}</Typography>
-      </Box>
+      <Container>
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      </Container>
     )}
   </div>
 );
