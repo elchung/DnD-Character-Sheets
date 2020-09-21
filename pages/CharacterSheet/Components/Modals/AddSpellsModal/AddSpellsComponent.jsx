@@ -77,25 +77,20 @@ export const AddSpellsComponent = () => {
     }
   };
 
-  const [tabData, setTabData] = useState(displayedSpells.map((spellName, index) => ({
+  const getNewTabData = () => (displayedSpells.map((spellName, index) => ({
     name: spellName,
+    level: spellList[spellName].level,
     handleCheckBoxChange: handleCheckboxChange,
     onChange: handleTabSelection,
-    item: displayedSpells[index],
-    secondary: display.size,
-    secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : '',
+    secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
+    selected: tabVal,
+    sortBy,
   })));
 
+  const [tabData, setTabData] = useState(getNewTabData());
+
   useEffect(() => {
-    setTabData(displayedSpells.map((spellName, index) => ({
-      name: spellName,
-      level: spellList[spellName].level,
-      handleCheckBoxChange: handleCheckboxChange,
-      onChange: handleTabSelection,
-      secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
-      selected: tabVal,
-      sortBy,
-    })));
+    setTabData(getNewTabData());
   }, [displayedSpells, display, tabVal]);
 
   return (
