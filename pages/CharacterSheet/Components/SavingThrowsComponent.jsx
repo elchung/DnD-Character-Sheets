@@ -46,13 +46,7 @@ const SkillsComponent = () => {
   };
 
   const handleProficiencyCheckboxClick = (event) => {
-    if (savingThrowProficiencies.has(event.target.name)) {
-      const newSkills = new Set([...savingThrowProficiencies]);
-      newSkills.delete(event.target.name);
-      setSavingThrowProficiencies(newSkills);
-    } else {
-      setSavingThrowProficiencies(new Set([...savingThrowProficiencies, event.target.name]));
-    }
+    setSavingThrowProficiencies(savingThrowProficiencies, event.target.name);
   };
 
   const getSkillVal = (skill) => (

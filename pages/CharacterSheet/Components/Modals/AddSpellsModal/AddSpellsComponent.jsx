@@ -20,14 +20,15 @@ export const AddSpellsComponent = () => {
   const [display, setDisplay] = useState(new Set());
   const [prioritizeFilterOut, setPrioritizeFilterOut] = useState(false);
   const [ascending, setAscending] = useState(true);
+  const levelOptions = ['cantrip', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const [filterBy, setFilterBy] = useState({
     level: {
-      options: ['cantrip', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-      selected: new Set(),
+      options: levelOptions,
+      selected: new Set(levelOptions),
     },
     class: {
       options: classList,
-      selected: new Set(),
+      selected: new Set(classList),
     },
   });
 

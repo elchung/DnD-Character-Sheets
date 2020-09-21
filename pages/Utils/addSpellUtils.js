@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
+// eslint-disable-next-line import/prefer-default-export
 export const getFilteredSpells = (spellList, filterBy, prioritizeFilterOut) => {
   // spellList is object of name:spell obj
   const keepClass = new Set([...filterBy.class.selected].map((name) => name.toLowerCase()));
+
   const filterPriorityHelper = (spell) => {
     if (prioritizeFilterOut) {
       if (spell.classes.some((className) => !keepClass.has(className))) { // if any match to be filtered out, filter out

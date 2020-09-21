@@ -15,6 +15,7 @@ import Divider from '@material-ui/core/Divider';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import { v4 as uuid } from 'uuid';
+import { flipSetItem } from '../../Utils/miscUtils';
 import { CheckBoxListMenu } from './Modals/AddSpellsModal/CheckBoxListMenu';
 import Capitalize from '../../Utils/stringUtils';
 
@@ -56,12 +57,7 @@ export const SpellFilterMenu = ({
   };
 
   const handleDisplayChange = (event) => {
-    if (event.target.checked) {
-      setDisplayedDisplay(new Set([...displayedDisplay, event.target.name]));
-    } else {
-      // eslint-disable-next-line max-len
-      setDisplayedDisplay(new Set([...displayedDisplay].filter((item) => item !== event.target.name)));
-    }
+    setDisplayedDisplay(flipSetItem(displayedDisplay, event.target.name));
   };
 
   const handleSortDirChange = (event) => {
@@ -77,20 +73,14 @@ export const SpellFilterMenu = ({
   };
 
   const handleSubmenuClick = (option, key) => { // TODO update this
-    let newSet;
-    if (displayedFilterBy[key].selected.has(option)) {
-      newSet = new Set([...displayedFilterBy[key].selected]);
-      newSet.delete(option);
-    } else {
-      newSet = new Set([...displayedFilterBy[key].selected, option]);
-    }
-    setDisplayedFilterBy({
+    const newFilterBy = {
       ...displayedFilterBy,
       [key]: {
         options: displayedFilterBy[key].options,
-        selected: newSet,
+        selected: flipSetItem(displayedFilterBy[key].selected, option),
       },
-    });
+    };
+    setDisplayedFilterBy(newFilterBy);
   };
 
   return (
@@ -142,7 +132,7 @@ export const SpellFilterMenu = ({
                 selected={filterBy[filterName].selected}
                 priority={prioritizeFilterOut}
                 setPriority={setPrioritizeFilterOut}
-                handleOptionsClick={(option) => handleSubmenuClick(option, filterName)}
+                handleOptionsClick={handleSubmenuClick}
                 indeterminateOn
                 key={uuid()}
               />

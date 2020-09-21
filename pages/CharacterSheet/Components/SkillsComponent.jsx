@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { useCharacterState, useSetCharacterState } from '../../Context/CharacterContext';
 import { scoreToModifier } from '../../Utils/abilityScoreUtils';
+import { flipSetItem } from '../../Utils/miscUtils';
 
 const theme = createMuiTheme({
   typography: {
@@ -57,23 +58,11 @@ const SkillsComponent = () => {
   } = useSetCharacterState();
 
   const handleProficiencyCheckboxClick = (event) => {
-    if (skillProficiencies.has(event.target.name)) {
-      const newSkills = new Set([...skillProficiencies]);
-      newSkills.delete(event.target.name);
-      setSkillProficiencies(newSkills);
-    } else {
-      setSkillProficiencies(new Set([...skillProficiencies, event.target.name]));
-    }
+    setSkillProficiencies(flipSetItem(skillProficiencies, event.target.name));
   };
 
   const handleExpertiseCheckboxClick = (event) => {
-    if (expertise.has(event.target.name)) {
-      const newExpertise = new Set([...expertise]);
-      newExpertise.delete(event.target.name);
-      setExpertise(newExpertise);
-    } else {
-      setExpertise(new Set([...expertise, event.target.name]));
-    }
+    setExpertise(flipSetItem(expertise, event.target.name));
   };
 
   const getSkillVal = (skill) => (

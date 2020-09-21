@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import CheckBoxListMenu from './CheckBoxListMenu';
 import { Capitalize } from '../../../../Utils/stringUtils';
+import { flipSetItem } from '../../../../Utils/miscUtils';
 import {
   useCharacterState,
 } from '../../../../Context/CharacterContext';
@@ -29,13 +30,7 @@ export const AddCustomSpellComponent = () => {
   }, new Set());
 
   const handleClassChange = (event) => {
-    if (event.target.checked) {
-      setSelectedClasses(new Set([...selectedClasses, event.target.name]));
-    } else {
-      const newClasses = new Set([...selectedClasses]);
-      newClasses.delete(event.target.name);
-      setSelectedClasses(newClasses);
-    }
+    setSelectedClasses(flipSetItem(selectedClasses, event.target.name));
   };
 
   const handleSchoolChange = (event) => {
@@ -47,13 +42,7 @@ export const AddCustomSpellComponent = () => {
   };
 
   const handleComponentChange = (event) => {
-    if (event.target.checked) {
-      setComponents(new Set([...components, event.target.name]));
-    } else {
-      const newComponents = new Set([...components]);
-      newComponents.delete(event.target.name);
-      setComponents(newComponents);
-    }
+    setComponents(flipSetItem(components, event.target.name));
   };
 
   return (

@@ -3,6 +3,7 @@ import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import DraggableCard from './Reusable/DraggableCard';
+import { flipSetItem } from '../../Utils/miscUtils';
 import {
   useCharacterState,
   useSetCharacterState,
@@ -13,13 +14,7 @@ const SpellLevelListComponent = ({ spellsAtLevel, level }) => {
   const { setSpells, setPreparedSpells } = useSetCharacterState();
 
   const handlePreparedClick = (event) => {
-    if (preparedSpells.has(event.target.name)) {
-      const newPrepared = new Set([...preparedSpells]);
-      newPrepared.delete(event.target.name);
-      setPreparedSpells(newPrepared);
-    } else {
-      setPreparedSpells(new Set([...preparedSpells, event.target.name]));
-    }
+    setPreparedSpells(flipSetItem(preparedSpells, event.target.name));
   };
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {

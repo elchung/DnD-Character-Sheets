@@ -75,10 +75,10 @@ export const CheckBoxListMenu = ({
               <FormControlLabel
                 control={(
                   <Checkbox
-                    checked
-                    indeterminate={indeterminateOn ? !selected[option] : false}
-                    onChange={() => handleOptionsClick(option)}
-                    color={selected[option] ? 'primary' : 'secondary'}
+                    checked={selected.has(option)}
+                    indeterminate={indeterminateOn ? !selected.has(option) : false}
+                    onChange={() => handleOptionsClick(option, name)}
+                    color={selected.has(option) ? 'primary' : 'secondary'}
                     name={Capitalize(option)}
                   />
                 )}
