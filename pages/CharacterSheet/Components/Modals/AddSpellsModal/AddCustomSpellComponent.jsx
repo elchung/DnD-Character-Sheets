@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
@@ -96,7 +98,7 @@ export const AddCustomSpellComponent = () => {
             value={school}
             onChange={handleSchoolChange}
           >
-            {schools.map((schoolName) => (
+            {[...schools].map((schoolName) => (
               <MenuItem value={schoolName}>{Capitalize(schoolName)}</MenuItem>
             ))}
           </Select>
@@ -111,7 +113,7 @@ export const AddCustomSpellComponent = () => {
             value={level}
             onChange={handleLevelChange}
           >
-            {schools.map((levelNum) => (
+            {[...schools].map((levelNum) => (
               <MenuItem value={levelNum}>{levelNum}</MenuItem>
             ))}
           </Select>
@@ -135,7 +137,6 @@ export const AddCustomSpellComponent = () => {
             />
             <TextField label="Material" disabled={!components.has('material')} variant="outlined" />
           </FormGroup>
-          <FormHelperText>Be careful</FormHelperText>
         </FormControl>
       </Grid>
     </Grid>

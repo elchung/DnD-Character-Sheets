@@ -20,14 +20,14 @@ import { Capitalize } from '../../../../Utils/stringUtils';
 export const CheckBoxListMenu = ({
   options, selected, priority, setPriority, handleOptionsClick, indeterminateOn, name,
 }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [menuAnchor, setMenuAnchor] = React.useState(null);
   const totalSelected = selected.size || selected.length;
   const tooltipMessage = 'If a spell falls under multiple classes spell list, t'
     + 'his will prioritize removing the spell from the displayed list or keeping it in,'
     + ' based on what is classes are being filtered out.';
 
   const handleClickListItem = (event) => {
-    setAnchorEl(event.currentTarget);
+    setMenuAnchor(event.currentTarget);
   };
 
   const handleFilterPriorityChange = (event) => {
@@ -35,11 +35,11 @@ export const CheckBoxListMenu = ({
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setMenuAnchor(null);
   };
 
   return (
-    <div>
+    <>
       <List component="nav" aria-label="Device settings" style={{ paddingTop: 0, paddingBottom: 0 }}>
         <ListItem
           button
@@ -50,9 +50,9 @@ export const CheckBoxListMenu = ({
       </List>
       <Menu
         id="lock-menu"
-        anchorEl={anchorEl}
+        anchorEl={menuAnchor}
         keepMounted
-        open={Boolean(anchorEl)}
+        open={Boolean(menuAnchor)}
         onClose={handleClose}
       >
         {setPriority ? (
@@ -92,7 +92,7 @@ export const CheckBoxListMenu = ({
           </FormHelperText>
         </FormControl>
       </Menu>
-    </div>
+    </>
   );
 };
 

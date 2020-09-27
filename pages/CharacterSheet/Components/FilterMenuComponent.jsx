@@ -72,7 +72,7 @@ export const SpellFilterMenu = ({
     handleClose(true);
   };
 
-  const handleSubmenuClick = (option, key) => { // TODO update this
+  const handleSubmenuClick = (option, key) => {
     const newFilterBy = {
       ...displayedFilterBy,
       [key]: {
@@ -128,8 +128,8 @@ export const SpellFilterMenu = ({
             {Object.keys(filterBy).map((filterName) => (
               <CheckBoxListMenu
                 name={filterName}
-                options={filterBy[filterName].options}
-                selected={filterBy[filterName].selected}
+                options={displayedFilterBy[filterName].options}
+                selected={displayedFilterBy[filterName].selected}
                 priority={prioritizeFilterOut}
                 setPriority={setPrioritizeFilterOut}
                 handleOptionsClick={handleSubmenuClick}
