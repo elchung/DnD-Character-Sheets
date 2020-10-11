@@ -10,7 +10,7 @@ import {
 } from '../../Context/CharacterContext';
 
 const SpellLevelHeaderComponent = ({ level }) => {
-  const { style, spellSlots, usedSpellSlots } = useCharacterState();
+  const { spellSlots, usedSpellSlots } = useCharacterState();
   const { setSpellSlots, setUsedSpellSlots } = useSetCharacterState();
   const [displayedSpellSlots, setDisplayedSpellSlots] = useState(spellSlots[level]);
   const [displayedUsedSpellSlots, setDisplayedUsedSpellSlots] = useState(usedSpellSlots[level]);
@@ -32,54 +32,59 @@ const SpellLevelHeaderComponent = ({ level }) => {
   };
 
   return (
-    <Paper elevation={style.elevation} style={style.spellLevelheader}>
-      {level === 0
-        ? <Typography variant="h6">Cantrip</Typography>
-        : (
-          <Grid container direction="row">
-            <Grid item>
-              <TextField
-                inputProps={{ style: { textAlign: 'center', fontSize: 20, width: 30, height: 15 } }}
-                style={{ marginTop: 10 }}
-                disabled
-                value={level}
-                variant="outlined"
-                label="Level"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                inputProps={{
-                  style: {
-                    textAlign: 'center', fontSize: 30, width: 100, height: 15,
-                  },
-                }}
-                // style={{ width: '30%' }}
-                onBlur={handleSpellSlotBlur}
-                onChange={(event) => setDisplayedSpellSlots(event.target.value)}
-                value={displayedSpellSlots}
-                variant="outlined"
-                label="Spell Slots"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                inputProps={{
-                  style: {
-                    textAlign: 'center', fontSize: 30, width: 100, height: 15,
-                  },
-                }}
-                // style={{ width: '30%' }}
-                onBlur={handleUsedSpellSlotBlur}
-                onChange={(event) => setDisplayedUsedSpellSlots(event.target.value)}
-                value={displayedUsedSpellSlots}
-                variant="outlined"
-                label="Used"
-              />
-            </Grid>
-          </Grid>
-        )}
-    </Paper>
+    <div style={{ width: '100%', height: 50 }}>
+      <Grid container direction="row">
+        <Grid item>
+          <TextField
+            inputProps={{
+              style: {
+                textAlign: 'center',
+                fontSize: 25,
+                height: 15,
+                width: 30,
+              },
+            }}
+            InputLabelProps={{
+              classes: {
+                root: { fontSize: 20 },
+              },
+            }}
+            disabled
+            value={level}
+            variant="outlined"
+            label="Level"
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            inputProps={{
+              style: {
+                textAlign: 'center', fontSize: 30, height: 15, width: 55,
+              },
+            }}
+            onBlur={handleSpellSlotBlur}
+            onChange={(event) => setDisplayedSpellSlots(event.target.value)}
+            value={displayedSpellSlots}
+            variant="outlined"
+            label="Spell Slots"
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            inputProps={{
+              style: {
+                textAlign: 'center', fontSize: 30, height: 15, width: 30,
+              },
+            }}
+            onBlur={handleUsedSpellSlotBlur}
+            onChange={(event) => setDisplayedUsedSpellSlots(event.target.value)}
+            value={displayedUsedSpellSlots}
+            variant="outlined"
+            label="Used"
+          />
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

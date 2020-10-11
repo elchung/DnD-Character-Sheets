@@ -41,6 +41,18 @@ export const AddSpellsModalComponent = ({ positioning }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [topTabNum, setTopTabNum] = useState(0);
+  const [selectedDefaultSpells, setSelectedDefaultSpells] = useState({
+    0: new Set(),
+    1: new Set(),
+    2: new Set(),
+    3: new Set(),
+    4: new Set(),
+    5: new Set(),
+    6: new Set(),
+    7: new Set(),
+    8: new Set(),
+    9: new Set()
+  });
 
   const handleOpen = () => {
     setOpen(true);
@@ -55,6 +67,10 @@ export const AddSpellsModalComponent = ({ positioning }) => {
   };
 
   const handleSubmit = () => {
+    // TODO save selected spells based on open page
+    if (topTabNum === 0) {
+
+    }
     setOpen(false);
   };
 
@@ -94,7 +110,7 @@ export const AddSpellsModalComponent = ({ positioning }) => {
               </Tabs>
             </AppBar>
             <TabPanel value={topTabNum} index={0}>
-              <AddSpellsComponent />
+              <AddSpellsComponent selecedSpells={selectedDefaultSpells} setSelectedSpells={setSelectedDefaultSpells} />
             </TabPanel>
             <TabPanel value={topTabNum} index={1}>
               <AddCustomSpellComponent />

@@ -47,7 +47,12 @@ const SpellLevelListComponent = ({ spellsAtLevel, level }) => {
   };
 
   return (
-    <Paper elevation={style.elevation} style={style.spellsAccordion}>
+    <Paper
+      elevation={style.elevation}
+      style={{
+        overflow: 'auto', width: '100%', height: level < 6 ? 315 : 222,
+      }}
+    >
       {spellsAtLevel.map((spell, index) => (
         <DraggableCard
           id={spell.name}

@@ -11,9 +11,8 @@ import {
 import VirtualizedTabs from '../../Reusable/VirtualizedTabs';
 import { getFilteredSpells } from '../../../../Utils/addSpellUtils';
 
-export const AddSpellsComponent = () => {
+export const AddSpellsComponent = ({selectedSpells, setSelectedSpells}) => {
   const { spellList, classList } = useCharacterState();
-  const [selectedSpells, setSelectedSpells] = useState(new Set());
   const [displayedSpells, setDisplayedSpells] = useState(Sort.sortAlphabetical(Object.keys(spellList), true));
   const [tabVal, setTabVal] = useState(0);
   const [sortBy, setSortBy] = useState('name');
@@ -68,18 +67,27 @@ export const AddSpellsComponent = () => {
   };
 
   const handleCheckboxChange = (event, index) => {
+    const selectedName = displayedSpells[index];
+    const selectedLevel = spellList[selectedName].level
     if (event.target.name === true) {
-      setSelectedSpells(new Set([...selectedSpells, displayedSpells[index]]));
+      setSelectedSpells({
+        ...selectedSpells,
+        [selectedLevel]: new Set([...selectedSpells[selectedLevel], selectedName]),
+      })
     } else {
-      const temp = new Set([...selectedSpells]);
-      temp.delete(displayedSpells[index]);
-      setSelectedSpells(temp);
+      const tempSelectedSpellsAtLevel = new Set([...selectedSpells[selectedLevel]]);
+      tempSelectedSpellsAtLevel.delete(selectedName);
+      setSelectedSpells({
+        ...selectedSpells,
+        [selectedLevel]: tempSelectedSpellsAtLevel,
+      });
     }
   };
 
   const getNewTabData = () => (displayedSpells.map((spellName, index) => ({
     name: spellName,
     level: spellList[spellName].level,
+    checked: selectedSpells[spellList[spellName].level].has(spellName),
     handleCheckBoxChange: handleCheckboxChange,
     onChange: handleTabSelection,
     secondaryText: display.size ? getSecondaryText(displayedSpells[index]) : null,
@@ -128,6 +136,12 @@ export const AddSpellsComponent = () => {
       </Grid>
     </Grid>
   );
+};
+
+
+AddSpellsComponent.propTypes = {
+  selectedSpells: PropTypes.instanceOf(Set).isRequired,
+  setSelectedSpells: PropTypes.func.isRequired,
 };
 
 export default AddSpellsComponent;

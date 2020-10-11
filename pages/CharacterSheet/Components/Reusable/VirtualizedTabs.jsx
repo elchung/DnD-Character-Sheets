@@ -18,8 +18,6 @@ const renderRow = ({ index, style, data }) => {
   };
   const item = data[index];
 
-  const getFirstLetter = (name) => (name.charAt(0).toUpperCase());
-
   return (
     <>
       <ListItem
@@ -36,6 +34,7 @@ const renderRow = ({ index, style, data }) => {
             tabIndex={-1}
             color="primary"
             disableRipple
+            checked={data[index].checked}
             onChange={(e) => item.handleCheckBoxChange(e, index)}
           />
         </ListItemIcon>
@@ -62,7 +61,16 @@ export const VirtualizedTabs = ({ height, itemData }) => (
 
 VirtualizedTabs.propTypes = {
   height: PropTypes.number.isRequired,
-  itemData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  itemData: PropTypes.shape({
+    name: PropTypes.string,
+    level: PropTypes.string,
+    checked: PropTypes.bool,
+    handleCheckBoxChange: PropTypes.func,
+    onChange: PropTypes.func,
+    secondaryText: PropTypes.string | null,
+    selected: PropTypes.number,
+    sortBy: PropTypes.string,
+  }).isRequired,
 };
 
 export default VirtualizedTabs;

@@ -19,7 +19,7 @@ import { Capitalize } from '../../../../Utils/stringUtils';
 
 export const CheckBoxListMenu = ({
   options, selected, priority, setPriority, handleOptionsClick, indeterminateOn, name,
-}) => {
+}) => { // TODO apparently handleoptionsclick closes the component
   const [menuAnchor, setMenuAnchor] = React.useState(null);
   const totalSelected = selected.size || selected.length;
   const tooltipMessage = 'If a spell falls under multiple classes spell list, t'

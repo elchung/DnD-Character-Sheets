@@ -36,11 +36,7 @@ export const CharacterContextProvider = (props) => {
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
   const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() });
   // spells will be formatted when adding to spell list as: {id: 0, text: {title: `${spell.name}${spell.ritual ? '(R)' : ''} - ${spell.casting_time} - ${spell.range}`, body: `Duration: ${spell.duration} - ${spell.components.raw} - ${spell.description}`}}
-  const tempSpells = {
-    0: [{ id: 0, text: { title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description' } }],
-    1: [{ id: 0, text: { title: 'Test Spell(R) - 1 action - 30 feet', body: 'Duration: instantaneous - [V, S, M] - some test description' } }],
-  };
-  const [knownSpells, setKnownSpells] = useState(tempSpells);
+  const [knownSpells, setKnownSpells] = useState({0: new Set(), 1: new Set(), 2: new Set(), 3: new Set(), 4: new Set(), 5: new Set(), 6: new Set(), 7: new Set(), 8: new Set(), 9: new Set()});
   const [spellList, setSpellList] = useState(spells.reduce((acc, spell) => {
     acc[spell.name] = spell;
     return acc;
@@ -143,7 +139,6 @@ export const CharacterContextProvider = (props) => {
         marginRight: 2,
       },
     },
-    spellLevelheader: { width: '100%', height: '10%' },
     spellsAccordion: {
       maxHeight: 355, overflow: 'auto', width: '100%', height: '90%', paddingBottom: 20, paddingTop: 10,
     },
@@ -231,7 +226,7 @@ export const CharacterContextProvider = (props) => {
       maxHeight: 355, overflow: 'auto', width: '100%', height: '90%', paddingBottom: 20, paddingTop: 10,
     },
     spellsComponentPaper: {
-      width: globalStyle.characterSheet.width,
+      width: '100%',
       height: globalStyle.characterSheet.height,
       padding: 16,
       maxHeight: 1146,

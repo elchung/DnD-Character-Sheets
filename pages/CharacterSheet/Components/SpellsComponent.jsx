@@ -24,14 +24,15 @@ export const SpellsComponent = () => {
           <Grid container direction="row" w justify="flex-start" spacing={1}>
             {[[0, 1, 2], [3, 4, 5], [6, 7, 8, 9]].map((columns) => (
               <React.Fragment key={`spell-component-column-${columns}`}>
-                <Grid item style={{ width: '32%' }} key={`spell-component-column-${columns}`}>
-                  <Grid container direction="column" spacing={1} alignItems="stretch">
+                <Grid item style={{ width: '32%', height: '100%' }} key={`spell-component-column-${columns}`}>
+                  <Grid container direction="column" style={{ height: '100%' }} spacing={1}>
                     {columns.map((level) => (
-                      <Grid item style={{ height: '33%' }} key={`spell-level-${level}-item`}>
+                      <Grid item style={{ height: '31%' }} key={`spell-level-${level}-item`}>
                         <SpellLevelHeaderComponent level={level} />
                         <SpellLevelListComponent
                           spellsAtLevel={knownSpells.level}
                           level={level}
+                          height="80%"
                         />
                       </Grid>
                     ))}
@@ -49,7 +50,13 @@ export const SpellsComponent = () => {
         </Grid>
       </Grid>
       <AddSpellsModalComponent
-        positioning={{ position: 'relative', top: 10, left: 20 }}
+        positioning={{
+          fab: {
+            position: 'fixed',
+            bottom: 16,
+            right: 16,
+          },
+        }}
       />
     </Paper>
   );
