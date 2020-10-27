@@ -51,7 +51,7 @@ export const AddSpellsModalComponent = ({ positioning }) => {
     6: new Set(),
     7: new Set(),
     8: new Set(),
-    9: new Set()
+    9: new Set(),
   });
 
   const handleOpen = () => {
@@ -110,7 +110,7 @@ export const AddSpellsModalComponent = ({ positioning }) => {
               </Tabs>
             </AppBar>
             <TabPanel value={topTabNum} index={0}>
-              <AddSpellsComponent selecedSpells={selectedDefaultSpells} setSelectedSpells={setSelectedDefaultSpells} />
+              <AddSpellsComponent selectedSpells={selectedDefaultSpells} setSelectedSpells={setSelectedDefaultSpells} />
             </TabPanel>
             <TabPanel value={topTabNum} index={1}>
               <AddCustomSpellComponent />

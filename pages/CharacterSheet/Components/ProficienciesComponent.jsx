@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import Checkbox from '@material-ui/core/Checkbox';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -50,9 +50,9 @@ const ProficienciesComponent = () => {
                   control={(
                     <Checkbox
                       key={`${proficiency}-checkbox`}
-                      checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
+                      checkedIcon={<CheckBoxIcon fontSize="small" />}
                       color="primary"
-                      icon={<RadioButtonUncheckedIcon fontSize="small" />}
+                      icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
                       onChange={handleArmorProficiencyCheckboxClick}
                       // checked={proficiencies.armor.has(prof)}
                     />
@@ -74,9 +74,9 @@ const ProficienciesComponent = () => {
                   control={(
                     <Checkbox
                       key={`${proficiency}`}
-                      checkedIcon={<RadioButtonCheckedIcon fontSize="small" />}
+                      checkedIcon={<CheckBoxIcon fontSize="small" />}
                       color="primary"
-                      icon={<RadioButtonUncheckedIcon fontSize="small" />}
+                      icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
                       onChange={handleWeaponProficiencyCheckboxClick}
                       checked={proficiencies.weapons.has(proficiency)}
                     />

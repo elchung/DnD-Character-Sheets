@@ -71,6 +71,7 @@ export const CheckBoxListMenu = ({
         <FormControl component="fieldset" size="small" style={{ padding: 20 }}>
           <FormLabel component="legend">Filter by:</FormLabel>
           <FormGroup>
+            {/* TODO change this into not another menu */}
             {options.map((option) => (
               <FormControlLabel
                 control={(

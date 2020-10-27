@@ -25,7 +25,7 @@ export const AddCustomSpellComponent = () => {
   const [components, setComponents] = useState(new Set());
   const [material, setMaterial] = useState('');
 
-  const levels = ['cantrip', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const levels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const schools = Object.values(spellList).reduce((acc, spell) => {
     acc.add(spell.school);
     return acc;

@@ -11,7 +11,7 @@ import {
 import VirtualizedTabs from '../../Reusable/VirtualizedTabs';
 import { getFilteredSpells } from '../../../../Utils/addSpellUtils';
 
-export const AddSpellsComponent = ({selectedSpells, setSelectedSpells}) => {
+export const AddSpellsComponent = ({ selectedSpells, setSelectedSpells }) => {
   const { spellList, classList } = useCharacterState();
   const [displayedSpells, setDisplayedSpells] = useState(Sort.sortAlphabetical(Object.keys(spellList), true));
   const [tabVal, setTabVal] = useState(0);
@@ -19,7 +19,7 @@ export const AddSpellsComponent = ({selectedSpells, setSelectedSpells}) => {
   const [display, setDisplay] = useState(new Set());
   const [prioritizeFilterOut, setPrioritizeFilterOut] = useState(false);
   const [ascending, setAscending] = useState(true);
-  const levelOptions = ['cantrip', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const levelOptions = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const [filterBy, setFilterBy] = useState({
     level: {
       options: levelOptions,
@@ -68,12 +68,12 @@ export const AddSpellsComponent = ({selectedSpells, setSelectedSpells}) => {
 
   const handleCheckboxChange = (event, index) => {
     const selectedName = displayedSpells[index];
-    const selectedLevel = spellList[selectedName].level
+    const selectedLevel = spellList[selectedName].level;
     if (event.target.name === true) {
       setSelectedSpells({
         ...selectedSpells,
         [selectedLevel]: new Set([...selectedSpells[selectedLevel], selectedName]),
-      })
+      });
     } else {
       const tempSelectedSpellsAtLevel = new Set([...selectedSpells[selectedLevel]]);
       tempSelectedSpellsAtLevel.delete(selectedName);
@@ -140,7 +140,7 @@ export const AddSpellsComponent = ({selectedSpells, setSelectedSpells}) => {
 
 
 AddSpellsComponent.propTypes = {
-  selectedSpells: PropTypes.instanceOf(Set).isRequired,
+  selectedSpells: PropTypes.instanceOf(PropTypes.object).isRequired,
   setSelectedSpells: PropTypes.func.isRequired,
 };
 

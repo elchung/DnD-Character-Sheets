@@ -6,7 +6,7 @@ import SkillsComponent from './SkillsComponent';
 import ProficienciesComponent from './ProficienciesComponent';
 
 const LeftColumnComponent = () => (
-  <Grid item style={{maxWidth: 1170}}>
+  <Grid item>
     <Grid container direction="column" spacing={2}>
       <Grid item>
         <Grid container direction="row" spacing={2}>

@@ -10,7 +10,7 @@ import SpellsComponent from './Components/SpellsComponent';
 import { TabPanel } from './TabPanel';
 
 const CharacterSheetTabComponent = () => {
-  const [tabVal, setTabVal] = useState(1);
+  const [tabVal, setTabVal] = useState(0);
   const handleChange = (event, newValue) => {
     setTabVal(newValue);
   };
