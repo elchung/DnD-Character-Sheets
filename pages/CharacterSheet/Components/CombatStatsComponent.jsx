@@ -20,10 +20,10 @@ const CombatStatsComponent = () => {
   const classes = useStyles();
 
   return (
-    <Paper elevation={globalStyle.elevation} className={classes.combatStatsComponent}>
+    <Paper elevation={globalStyle.elevation} className={{ width: '100%', padding: 10 }}>
       <Grid container direction="column" spacing={2}>
         <Grid item>
-          <Grid container direction="row" justify="space-evenly">
+          <Grid container direction="row" spacing={2}>
             <Grid item>
               <SingleItemDisplayComponent header="Initiative" updateValue={setInitiative} value={initiative} />
             </Grid>

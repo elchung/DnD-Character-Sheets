@@ -7,7 +7,7 @@ import FeaturesAndTraitsComponent from './Components/FeaturesAndTraitsComponent'
 import SpellsComponent from './Components/SpellsComponent';
 
 const CharacterSheetComponent = () => (
-  <Paper elevation={2} style={{ maxWidth: 1180, maxHeight: 1146, padding: 16 }}>
+  <Paper elevation={2} style={{ maxWidth: '100%', padding: 16 }}>
     <Grid container direction="row" spacing={2} justify="flex-start" alignItems="flex-start">
       <Grid item>
         <LeftColumnComponent />

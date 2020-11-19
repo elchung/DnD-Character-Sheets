@@ -36,7 +36,9 @@ export const CharacterContextProvider = (props) => {
   const [deathSaves, setDeathSaves] = useState({ successes: 0, failures: 0 });
   const [proficiencies, setProficiencies] = useState({ armor: new Set(), weapons: new Set(), other: new Set() });
   // spells will be formatted when adding to spell list as: {id: 0, text: {title: `${spell.name}${spell.ritual ? '(R)' : ''} - ${spell.casting_time} - ${spell.range}`, body: `Duration: ${spell.duration} - ${spell.components.raw} - ${spell.description}`}}
-  const [knownSpells, setKnownSpells] = useState({0: new Set(), 1: new Set(), 2: new Set(), 3: new Set(), 4: new Set(), 5: new Set(), 6: new Set(), 7: new Set(), 8: new Set(), 9: new Set()});
+  const [knownSpells, setKnownSpells] = useState({
+    0: new Set(), 1: new Set(), 2: new Set(), 3: new Set(), 4: new Set(), 5: new Set(), 6: new Set(), 7: new Set(), 8: new Set(), 9: new Set(),
+  });
   const [spellList, setSpellList] = useState(spells.reduce((acc, spell) => {
     acc[spell.name] = spell;
     return acc;
@@ -73,21 +75,19 @@ export const CharacterContextProvider = (props) => {
   const useStyles = makeStyles({
     elevation: 3,
     abilityScoreComponent: { width: 125, paddingBottom: 20, height: 787 },
-    combatStatsComponent: {
-      width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
-    },
+    combatStatsComponent: {},
     deathSaveSuccessText: { fontSize: 13, paddingTop: 2, marginBottom: -10 },
     deathSaveFailText: {
       fontSize: 13, paddingTop: 2, marginBottom: -10, marginTop: -10,
     },
     proficienciesComponent: {
-      width: '100%', height: 290, paddingBottom: 20, paddingTop: 10, overflow: 'auto', maxWidth: 390,
+      width: '100%', height: 290, paddingBottom: 20, paddingTop: 10, maxWidth: 390,
     },
     deathSaveComponent: {
       width: 100, height: 105, marginTop: -2, marginBottom: -2, paddingTop: 5,
     },
     FeaturesAndTraitsComponent: {
-      maxHeight: 355, overflow: 'auto', width: 375, height: 355, paddingBottom: 20, paddingTop: 10,
+      overflow: 'auto', width: 375, height: '100%', paddingBottom: 20, paddingTop: 10,
     },
     headerStyle: { marginTop: -2, marginBottom: -2 },
     hitDieComponent: {
