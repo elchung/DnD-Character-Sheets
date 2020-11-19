@@ -1,0 +1,152 @@
+CREATE TABLE character_data (
+	user 				TEXT not null,
+	name 				TEXT,
+	level 				TEXT,
+	class 				TEXT,
+	background 			TEXT,
+	race 				TEXT,
+	experience 			INT,
+	proficiency_bonus: 	INT,
+	inspiration: 		INT,
+	armor_class: 		INT,
+	initiative: 		INT,
+	speed: 				INT,
+	max_hp: 			INT,
+	temp_hp: 			INT,
+	current_hp:			INT,
+	hp_history: 		INT[]  #order matters here
+	spellcasting_ability
+);
+
+CREATE TABLE character_skill_proficiency (
+	character_data_id bigint not null
+		constraint character_skill_proficiency_fk
+		references character_data
+	name TEXT not null,
+	PRIMARY KEY(character_data_id, name)
+)
+
+CREATE TABLE character_saving_throw_proficiency (
+	character_data_id bigint not null
+		constraint character_saving_throw_proficiencyy_fk
+		references character_data
+	name TEXT not null,
+	PRIMARY KEY(character_data_id, name)
+)
+
+CREATE TABLE character_expertise (
+	character_data_id bigint not null
+		constraint character_expertise_fk
+		references character_data
+	name TEXT not null,
+	PRIMARY KEY(character_data_id, name)
+)
+
+CREATE TABLE character_proficiencies (
+	character_data_id bigint not null 
+		constraint character_proficiencies_fk
+		references character_data
+	name TEXT not null,
+	PRIMARY KEY(character_data_id, name)
+)
+
+CREATE TABLE character_ability_scores (
+	character_data_id bigint not null,
+		constraint character_ability_scores_fk
+			references character_data
+		constraint character_ability_scores_pkey
+			PRIMARY KEY
+	strength 	 INT,
+	dexterity    INT,
+	constitution INT,
+	intelligence INT,
+	wisdom		 INT,
+	charisma     INT
+)
+
+CREATE TABLE character_hit_dice (
+	character_data_id bigint not null,
+		constraint character_hit_dice_fk
+			references character_data
+	num_dice  INT not null,
+	dice_type INT not null,
+	num_used  INT not null
+)
+
+CREATE TABLE character_death_saves (
+	character_data_id bigint not null,
+		constraint character_ability_scores_fk
+			references character_data
+	successes INT not null,
+	failures  INT not null
+)
+
+CREATE TABLE character_known_spells (
+	zero  TEXT[],
+	one   TEXT[],
+	two   TEXT[],
+	three TEXT[],
+	four  TEXT[],
+	five  TEXT[],
+	six   TEXT[],
+	seven TEXT[],
+	eight TEXT[],
+	nine  TEXT[]
+)
+
+CREATE TABLE character_prepared_spells (
+
+	name TEXT
+)
+
+CREATE TABLE character_features_and_traits (
+	id INT not null,
+	description [from other table character_feature_and_traits_description],
+)
+
+CREATE TABLE character_feature_and_traits_description (
+	title TEXT not null,
+	body  TEXT
+)
+
+CREATE TABLE user_settings (
+	ability_score_on_top BOOL 
+)
+
+alter table table_name owner to admin_name;
+grant select,insert,delete,update on table table_name to user_name;
+
+
+	spellSlots: {
+    	0: {max: int, used: int}, 
+    	1: {max: int, used: int}, 
+    	2: {max: int, used: int}, 
+    	3: {max: int, used: int}, 
+    	4: {max: int, used: int}, 
+    	5: {max: int, used: int}, 
+    	6: {max: int, used: int}, 
+    	7: {max: int, used: int}, 
+    	8: {max: int, used: int},
+    	9: {max: int, used: int},
+  	}
+  	treasure: {
+  		money: {
+  			gold: int
+  			silver: int
+  			electrum: int
+  			copper: int
+  		}
+  		items: {
+  			name: String
+  			quantity: int
+  			weight: int
+  			bookmarked: bool
+  			magical: bool
+  			description: String
+  		}
+  	}
+
+  	_settings: {
+  		abilityScoreOnTop: bool
+  	}
+}
