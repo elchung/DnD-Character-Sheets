@@ -23,10 +23,8 @@ CREATE TABLE character_data (
 	general_proficiencies TEXT[],
 	prepared_spells TEXT[],
 	character_ability_scores_id INT FOREIGN KEY references character_ability_scores(id),
-	character_hit_dice_id INT FOREIGN KEY references character_hit_dice(id), -- how to have this be 1:m, this is wrong
 	character_death_save_id INT FOREIGN KEY references character_death_saves(id),
 	character_known_spells_id INT FOREIGN KEY references character_known_spells(id),
-	character_features_and_traits_id INT FOREIGN KEY references character_features_and_traits(id), -- how to have this be 1:m, this is wrong
 	character_spell_slots_id INT FOREIGN KEY references character_spell_slots(id),
 	character_treasure_id INT FOREIGN KEY references character_treasure(id),
 	character_sheet_settings_id INT FOREIGN KEY references character_sheet_settings(id)
@@ -45,6 +43,7 @@ CREATE TABLE character_ability_scores (  # 1:1
 
 CREATE TABLE character_hit_dice (  # 1:n
 	id SERIAL primary key,
+	character_id INT not null references character_data(character_id),
 	num_dice  INT not null,
 	dice_type INT not null,
 	num_used  INT not null
@@ -72,7 +71,8 @@ CREATE TABLE character_known_spells (  # 1:1
 
 CREATE TABLE character_features_and_traits (  # 1:n
 	id serial primary key,
-	character_features_and_traits_description_id INT FOREIGN KEY references character_feature_and_traits_description(id)
+	character_id INT not null references character_data(character_id),  --points to parent, since there can be many features
+	character_features_and_traits_description_id INT FOREIGN KEY references character_feature_and_traits_description(id) --points to descriptoin table, since only 1:1
 );
 
 CREATE TABLE character_feature_and_traits_description (  # 1:1
@@ -131,6 +131,19 @@ CREATE TABLE character_sheet_settings (
 	ability_score_on_top BOOL
 );
 
-alter table table_name owner to admin_name;
-grant select,insert,delete,update on table table_name to user_name;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public 
+	GRANT SELECT, INSERT, UPDATE, DELETE ON tables TO public;
 
+-- character_sheet_settings
+-- character_treasure_items
+-- character_treasure_money
+-- character_treasure
+-- character_spell_slot_data
+-- character_spell_slots
+-- character_feature_and_traits_description
+-- character_features_and_traits
+-- character_known_spells
+-- character_death_saves
+-- character_data
+-- character_hit_dice
+-- character_ability_scores
