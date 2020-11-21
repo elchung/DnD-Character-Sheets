@@ -8,14 +8,6 @@ CREATE TABLE character_ability_scores (
 	charisma     INT
 );
 
-CREATE TABLE character_hit_dice ( 
-	id SERIAL primary key,
-	num_dice  INT not null,
-	dice_type INT not null,
-	num_used  INT not null,
-	character_id INT not null references character_data(character_id)
-);
-
 CREATE TABLE character_death_saves ( 
 	id SERIAL primary key,
 	successes INT not null,
@@ -42,6 +34,12 @@ CREATE TABLE character_feature_and_traits_description (
 	body  TEXT
 );
 
+CREATE TABLE character_spell_slot_data (
+    id serial primary key,
+    max INT,
+    used INT
+);
+
 CREATE TABLE character_spell_slots (
     id serial primary key,
     zero_id INT references character_spell_slot_data(id),
@@ -54,18 +52,6 @@ CREATE TABLE character_spell_slots (
     seven_id INT references character_spell_slot_data(id),
     eight_id INT references character_spell_slot_data(id),
     nine_id INT references character_spell_slot_data(id)
-);
-
-CREATE TABLE character_spell_slot_data (
-    id serial primary key,
-    max INT,
-    used INT
-);
-
-CREATE TABLE character_treasure (
-	id serial primary key,
-	money_id INT references character_treasure_money(id),
-	items_id INT references character_treasure_items(id)
 );
 
 CREATE TABLE character_treasure_money (
@@ -86,6 +72,12 @@ CREATE TABLE character_treasure_items (
 	description_text TEXT
 );
 
+CREATE TABLE character_treasure (
+	id serial primary key,
+	money_id INT references character_treasure_money(id),
+	items_id INT references character_treasure_items(id)
+);
+
 
 CREATE TABLE character_sheet_settings (
 	id serial primary key,
@@ -94,13 +86,13 @@ CREATE TABLE character_sheet_settings (
 
 CREATE TABLE character_data (
 	character_id serial primary key,
-	user TEXT not null,
-	name TEXT,
+	user_name TEXT not null,
+	character_name TEXT,
 	level TEXT,
 	class TEXT,
 	background TEXT,
 	race TEXT,
-  spellcasting_ability TEXT,
+	spellcasting_ability TEXT,
 	experience INT,
 	proficiency_bonus INT,
 	inspiration INT,
@@ -122,6 +114,14 @@ CREATE TABLE character_data (
 	character_spell_slots_id INT references character_spell_slots(id),
 	character_treasure_id INT references character_treasure(id),
 	character_sheet_settings_id INT references character_sheet_settings(id)
+);
+
+CREATE TABLE character_hit_dice ( 
+	id SERIAL primary key,
+	num_dice  INT not null,
+	dice_type INT not null,
+	num_used  INT not null,
+	character_id INT not null references character_data(character_id)
 );
 
 CREATE TABLE character_features_and_traits (
