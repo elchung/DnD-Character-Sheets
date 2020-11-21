@@ -1,0 +1,161 @@
+// from https://dbdiagram.io/d
+Table character_ability_scores {
+  id serial [pk]
+  strength int
+  dexterity int
+  constitution int
+  intelligence int
+  wisdom int
+  charisma int
+}
+
+TABLE character_death_saves {
+	id SERIAL [pk]
+	successes INT [not null]
+	failures  INT [not null]
+}
+
+TABLE character_known_spells {
+  id SERIAL [pk]
+	zero  TEXT[]
+	one   TEXT[]
+	two   TEXT[]
+	three TEXT[]
+	four  TEXT[]
+	five  TEXT[]
+	six   TEXT[]
+	seven TEXT[]
+	eight TEXT[]
+	nine  TEXT[]
+}
+
+TABLE character_feature_and_traits_description {
+	id serial [pk]
+	title TEXT [not null]
+	body  TEXT
+}
+
+TABLE character_spell_slot_data {
+    id serial [pk]
+    max INT
+    used INT
+}
+
+
+TABLE character_spell_slots {
+    id serial [pk]
+    zero_id INT
+    one_id INT
+    two_id INT
+    three_id INT
+    four_id INT
+    five_id INT
+    six_id INT
+    seven_id INT
+    eight_id INT
+    nine_id INT
+}
+
+Ref: character_spell_slots.zero_id > character_spell_slot_data.id
+Ref: character_spell_slots.one_id > character_spell_slot_data.id
+Ref: character_spell_slots.two_id > character_spell_slot_data.id
+Ref: character_spell_slots.three_id > character_spell_slot_data.id
+Ref: character_spell_slots.four_id > character_spell_slot_data.id
+Ref: character_spell_slots.five_id > character_spell_slot_data.id
+Ref: character_spell_slots.six_id > character_spell_slot_data.id
+Ref: character_spell_slots.seven_id > character_spell_slot_data.id
+Ref: character_spell_slots.eight_id > character_spell_slot_data.id
+Ref: character_spell_slots.nine_id > character_spell_slot_data.id
+
+
+TABLE character_treasure_money {
+	id       serial [pk]
+	gold     INT
+	silver   INT
+	electrum INT
+	copper   INT
+}
+
+TABLE character_treasure_items {
+	id serial [pk]
+	name TEXT
+	quantity INT
+	weight_in_lbs INT
+	bookmarked BOOL
+	magical BOOL
+	description_text TEXT
+}
+
+TABLE character_treasure {
+	id serial [pk]
+	money_id INT
+	items_id INT
+}
+
+Ref: character_treasure.money_id > character_treasure_money.id
+Ref: character_treasure.money_id > character_treasure_items.id
+
+TABLE character_sheet_settings {
+	id serial [pk]
+	ability_score_on_top BOOL
+}
+
+TABLE character_data {
+	character_id serial [pk]
+	user_name TEXT [not null]
+	character_name TEXT
+	level TEXT
+	class TEXT
+	background TEXT
+	race TEXT
+  spellcasting_ability TEXT
+	experience INT
+	proficiency_bonus INT
+	inspiration INT
+	armor_class INT
+	initiative INT
+	speed INT
+	max_hp INT
+	temp_hp INT
+	current_hp INT
+	hp_history INT[]
+	skill_proficiencies TEXT[]
+	saving_throw_proficiencies TEXT[]
+	skill_expertise TEXT[]
+	general_proficiencies TEXT[]
+	prepared_spells TEXT[]
+	character_ability_scores_id INT
+	character_death_save_id INT
+	character_known_spells_id INT
+	character_spell_slots_id INT
+	character_treasure_id INT
+	character_sheet_settings_id INT
+}
+
+Ref: character_data.character_ability_scores_id > character_ability_scores.id
+Ref: character_data.character_death_save_id > character_death_saves.id
+Ref: character_data.character_known_spells_id > character_known_spells.id
+Ref: character_data.character_spell_slots_id > character_spell_slots.id
+Ref: character_data.character_treasure_id > character_treasure.id
+Ref: character_data.character_sheet_settings_id > character_sheet_settings.id
+  
+
+TABLE character_hit_dice {
+	id SERIAL [pk]
+	num_dice  INT [not null]
+	dice_type INT [not null]
+	num_used  INT [not null]
+	character_id INT [not null]
+}
+
+Ref: character_hit_dice.character_id > character_data.character_id
+
+TABLE character_features_and_traits {
+	id serial [pk]
+	character_id INT
+	character_features_and_traits_description_id INT
+}
+
+Ref: character_features_and_traits.character_id > character_data.character_id
+Ref: character_features_and_traits.character_features_and_traits_description_id > character_feature_and_traits_description.id
+

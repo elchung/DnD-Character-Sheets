@@ -42,16 +42,16 @@ CREATE TABLE character_spell_slot_data (
 
 CREATE TABLE character_spell_slots (
     id serial primary key,
-    zero_id INT references character_spell_slot_data(id),
-    one_id INT references character_spell_slot_data(id),
-    two_id INT references character_spell_slot_data(id),
-    three_id INT references character_spell_slot_data(id), 
-    four_id INT references character_spell_slot_data(id),
-    five_id INT references character_spell_slot_data(id),
-    six_id INT references character_spell_slot_data(id),
-    seven_id INT references character_spell_slot_data(id),
-    eight_id INT references character_spell_slot_data(id),
-    nine_id INT references character_spell_slot_data(id)
+    zero_id INT references character_spell_slot_data(id) on delete cascade,
+    one_id INT references character_spell_slot_data(id) on delete cascade,
+    two_id INT references character_spell_slot_data(id) on delete cascade,
+    three_id INT references character_spell_slot_data(id) on delete cascade, 
+    four_id INT references character_spell_slot_data(id) on delete cascade,
+    five_id INT references character_spell_slot_data(id) on delete cascade,
+    six_id INT references character_spell_slot_data(id) on delete cascade,
+    seven_id INT references character_spell_slot_data(id) on delete cascade,
+    eight_id INT references character_spell_slot_data(id) on delete cascade,
+    nine_id INT references character_spell_slot_data(id) on delete cascade
 );
 
 CREATE TABLE character_treasure_money (
@@ -74,8 +74,8 @@ CREATE TABLE character_treasure_items (
 
 CREATE TABLE character_treasure (
 	id serial primary key,
-	money_id INT references character_treasure_money(id),
-	items_id INT references character_treasure_items(id)
+	money_id INT references character_treasure_money(id) on delete cascade,
+	items_id INT references character_treasure_items(id) on delete cascade
 );
 
 
@@ -92,7 +92,7 @@ CREATE TABLE character_data (
 	class TEXT,
 	background TEXT,
 	race TEXT,
-	spellcasting_ability TEXT,
+    spellcasting_ability TEXT,
 	experience INT,
 	proficiency_bonus INT,
 	inspiration INT,
@@ -108,12 +108,12 @@ CREATE TABLE character_data (
 	skill_expertise TEXT[],
 	general_proficiencies TEXT[],
 	prepared_spells TEXT[],
-	character_ability_scores_id INT references character_ability_scores(id),
-	character_death_save_id INT references character_death_saves(id),
-	character_known_spells_id INT references character_known_spells(id),
-	character_spell_slots_id INT references character_spell_slots(id),
-	character_treasure_id INT references character_treasure(id),
-	character_sheet_settings_id INT references character_sheet_settings(id)
+	character_ability_scores_id INT references character_ability_scores(id) on delete cascade,
+	character_death_save_id INT references character_death_saves(id) on delete cascade,
+	character_known_spells_id INT references character_known_spells(id) on delete cascade,
+	character_spell_slots_id INT references character_spell_slots(id) on delete cascade,
+	character_treasure_id INT references character_treasure(id) on delete cascade,
+	character_sheet_settings_id INT references character_sheet_settings(id) on delete cascade
 );
 
 CREATE TABLE character_hit_dice ( 
@@ -121,11 +121,11 @@ CREATE TABLE character_hit_dice (
 	num_dice  INT not null,
 	dice_type INT not null,
 	num_used  INT not null,
-	character_id INT not null references character_data(character_id)
+	character_id INT not null references character_data(character_id) on delete cascade
 );
 
 CREATE TABLE character_features_and_traits (
 	id serial primary key,
 	character_id INT not null references character_data(character_id),
-	character_features_and_traits_description_id INT references character_feature_and_traits_description(id) 
+	character_features_and_traits_description_id INT references character_feature_and_traits_description(id) on delete cascade
 );
