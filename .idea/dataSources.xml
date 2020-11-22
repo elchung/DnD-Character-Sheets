@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://database-1.c6ffvdcps8bm.us-east-2.rds.amazonaws.com:5432/postgres</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="dnd-character-db" uuid="2177e9c5-d369-441c-9dec-f5d686fdef9c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://dnd-character-db.c6ffvdcps8bm.us-east-2.rds.amazonaws.com:5432/postgres</jdbc-url>
+    </data-source>
   </component>
 </project>
