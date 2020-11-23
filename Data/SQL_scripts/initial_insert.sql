@@ -9,13 +9,13 @@ WITH character_ability_scores_query as (
     RETURNING id
 ), character_known_spells_query as (
     INSERT INTO character_known_spells (
-      zero, 
-      one, 
+      zero,
+      one,
       two
     )
         VALUES (
-          '{mage hand, minor illusion, prestidigitation, toll the dead}', 
-          '{charm person, detect magic, find familiar, fog cloud, grease, mage armor, magic missile, shield}', 
+          '{mage hand, minor illusion, prestidigitation, toll the dead}',
+          '{charm person, detect magic, find familiar, fog cloud, grease, mage armor, magic missile, shield}',
           '{invisibility, knock, misty step, web}'
         )
     RETURNING id
@@ -30,12 +30,47 @@ WITH character_ability_scores_query as (
 ), character_spell_slot_data_query_two as (
     INSERT INTO character_spell_slot_data (max, used)
         VALUES (3, 0)
-    RETURNING id
+        RETURNING id
+), character_spell_slot_data_query_three as (
+    INSERT INTO character_spell_slot_data (max, used)
+        VALUES (0, 0)
+        RETURNING id
+), character_spell_slot_data_query_four as (
+    INSERT INTO character_spell_slot_data (max, used)
+        VALUES (0, 0)
+        RETURNING id
+), character_spell_slot_data_query_five as (
+    INSERT INTO character_spell_slot_data (max, used)
+        VALUES (0, 0)
+        RETURNING id
+), character_spell_slot_data_query_six as (
+    INSERT INTO character_spell_slot_data (max, used)
+        VALUES (0, 0)
+        RETURNING id
+), character_spell_slot_data_query_seven as (
+    INSERT INTO character_spell_slot_data (max, used)
+        VALUES (0, 0)
+        RETURNING id
+), character_spell_slot_data_query_eight as (
+    INSERT INTO character_spell_slot_data (max, used)
+        VALUES (0, 0)
+        RETURNING id
+), character_spell_slot_data_query_nine as (
+    INSERT INTO character_spell_slot_data (max, used)
+        VALUES (0, 0)
+        RETURNING id
 ), character_spell_slots_query as (
-    INSERT INTO character_spell_slots (one_id, two_id)
+    INSERT INTO character_spell_slots (one_id, two_id, three_id, four_id, five_id, six_id, seven_id, eight_id, nine_id)
         VALUES (
-            (SELECT id from character_spell_slot_data_query_one), 
-            (SELECT id from character_spell_slot_data_query_two)
+            (SELECT id from character_spell_slot_data_query_one),
+            (SELECT id from character_spell_slot_data_query_two),
+            (SELECT id from character_spell_slot_data_query_three),
+            (SELECT id from character_spell_slot_data_query_four),
+            (SELECT id from character_spell_slot_data_query_five),
+            (SELECT id from character_spell_slot_data_query_six),
+            (SELECT id from character_spell_slot_data_query_seven),
+            (SELECT id from character_spell_slot_data_query_eight),
+            (SELECT id from character_spell_slot_data_query_nine)
         )
     RETURNING id
 ), character_treasure_money_query as (  --will insert items later
@@ -78,7 +113,7 @@ WITH character_ability_scores_query as (
     )
         VALUES (
             'elchung',
-            'Binky',   
+            'Binky',
             4,
             'Wizard',
             'Haunted One',
