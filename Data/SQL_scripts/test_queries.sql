@@ -23,7 +23,7 @@ select
     'skill_expertise', cd.skill_expertise,
     'general_proficiencies', cd.general_proficiencies,
     'known_languages', cd.known_languages,
-    'tool_and_other_proficiencie', cd.tool_and_other_proficiencie,
+    'tool_and_other_proficiencie', cd.tool_and_other_proficiencies,
     'prepared_spells', cd.prepared_spells,
     'ability_scores', json_build_object(
       'id', ability_scores.id,
@@ -53,7 +53,7 @@ select
       'nine', known_spells.nine
     ),
     'spell_slots', json_build_object(
-      'id', ,
+      'id', spell_slots.id,
       'one', json_build_object(    
         'id', spell_slot_data_one.id,
         'max', spell_slot_data_one.max,
@@ -102,20 +102,20 @@ select
     ),
     'treasure', json_build_object(
       'id', treasure_table.id,
-      'items', json_build_array(
-        SELECT json_build_object( --need to figure out how to make this array
-          'id', treasure_items.id,
-          'name', treasure_items.name,
-          'quantity', treasure_items.quantity,
-          'weight_in_lbs', treasure_items.weight_in_lbs,
-          'bookmarked', treasure_items.bookmarked,
-          'magical', treasure_items.magical,
-          'description_text', treasure_items.description_text
-        ) 
-        FROM character_treasure ct
-        inner join character_treasure_items treasure_items on treasure_items.items_id = ct.id
-        WHERE id = cd.character_id
-      ),
+      -- 'items', json_build_array(
+      --   SELECT json_build_object( --need to figure out how to make this array
+      --     'id', treasure_items.id,
+      --     'name', treasure_items.name,
+      --     'quantity', treasure_items.quantity,
+      --     'weight_in_lbs', treasure_items.weight_in_lbs,
+      --     'bookmarked', treasure_items.bookmarked,
+      --     'magical', treasure_items.magical,
+      --     'description_text', treasure_items.description_text
+      --   ) 
+      --   FROM character_treasure ct
+      --   inner join character_treasure_items treasure_items on treasure_items.items_id = ct.id
+      --   WHERE id = cd.character_id
+      -- ),
       'money', json_build_object(
         'id', money_table.id,
         'gold', money_table.gold,
@@ -136,14 +136,14 @@ select
   inner join character_death_saves death_saves on death_saves.id = cd.character_death_save_id
   inner join character_ability_scores ability_scores on ability_scores.id = cd.character_ability_scores_id
   inner join character_spell_slots spell_slots on spell_slots.id = cd.character_spell_slots_id 
-  inner join character_spell_slots_data spell_slot_data_one on spell_slot_data_one.id = spell_slots.one_id
-  inner join character_spell_slots_data spell_slot_data_two on spell_slot_data_two.id = spell_slots.two_id
-  inner join character_spell_slots_data spell_slot_data_three on spell_slot_data_three.id = spell_slots.three_id
-  inner join character_spell_slots_data spell_slot_data_four on spell_slot_data_four.id = spell_slots.four_id
-  inner join character_spell_slots_data spell_slot_data_five on spell_slot_data_five.id = spell_slots.five_id
-  inner join character_spell_slots_data spell_slot_data_six on spell_slot_data_six.id = spell_slots.six_id
-  inner join character_spell_slots_data spell_slot_data_seven on spell_slot_data_seven.id = spell_slots.seven_id
-  inner join character_spell_slots_data spell_slot_data_eight on spell_slot_data_eight.id = spell_slots.eight_id
-  inner join character_spell_slots_data spell_slot_data_nine on spell_slot_data_nine.id = spell_slots.nine_id
-  WHERE char_id = cd.character_id --char_id should be either parameter passed in or adjusted in js query on the api side
+  inner join character_spell_slot_data spell_slot_data_one on character_spell_slots.one_id = spell_slot_data_one.id
+  inner join character_spell_slots spell_slot_data_two on character_spell_slots.two_id = spell_slot_data_two.id
+  inner join character_spell_slots spell_slot_data_three on character_spell_slots.three_id = spell_slot_data_three.id
+  inner join character_spell_slots spell_slot_data_four on character_spell_slots.four_id = spell_slot_data_four.id
+  inner join character_spell_slots spell_slot_data_five on character_spell_slots.five_id = spell_slot_data_five.id
+  inner join character_spell_slots spell_slot_data_six on character_spell_slots.six_id = spell_slot_data_six.id
+  inner join character_spell_slots spell_slot_data_seven on character_spell_slots.seven_id = spell_slot_data_seven.id
+  inner join character_spell_slots spell_slot_data_eight on character_spell_slots.eight_id = spell_slot_data_eight.id
+  inner join character_spell_slots spell_slot_data_nine on character_spell_slots.nine_id = spell_slot_data_nine.id
+  WHERE cd.character_id = 1 --char_id should be either parameter passed in or adjusted in js query on the api side
   --inner join table_name varname on varname.id = parent.id
