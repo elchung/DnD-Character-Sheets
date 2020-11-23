@@ -102,20 +102,20 @@ select
                 ),
             'treasure', json_build_object(
                     'id', treasure_table.id,
-                -- 'items', json_build_array(
-                --   SELECT json_build_object( --need to figure out how to make this array
-                --     'id', treasure_items.id,
-                --     'name', treasure_items.name,
-                --     'quantity', treasure_items.quantity,
-                --     'weight_in_lbs', treasure_items.weight_in_lbs,
-                --     'bookmarked', treasure_items.bookmarked,
-                --     'magical', treasure_items.magical,
-                --     'description_text', treasure_items.description_text
-                --   )
-                --   FROM character_treasure ct
-                --   inner join character_treasure_items treasure_items on treasure_items.items_id = ct.id
-                --   WHERE id = cd.character_id
-                -- ),
+                    'items', json_build_array(
+                      SELECT json_build_object( --need to figure out how to make this array
+                        'id', treasure_items.id,
+                        'name', treasure_items.name,
+                        'quantity', treasure_items.quantity,
+                        'weight_in_lbs', treasure_items.weight_in_lbs,
+                        'bookmarked', treasure_items.bookmarked,
+                        'magical', treasure_items.magical,
+                        'description_text', treasure_items.description_text
+                      )
+                      FROM treasure_items
+                      inner join treasure_items on treasure_items.items_id = ct.id
+                      WHERE id = cd.character_id
+                    ),
                     'money', json_build_object(
                             'id', money_table.id,
                             'gold', money_table.gold,
@@ -145,4 +145,5 @@ from character_data cd
     inner join character_spell_slot_data spell_slot_data_seven on spell_slot_data_seven.id = spell_slots.seven_id and spell_slots.id = cd.character_spell_slots_id
     inner join character_spell_slot_data spell_slot_data_eight on spell_slot_data_eight.id = spell_slots.eight_id and spell_slots.id = cd.character_spell_slots_id
     inner join character_spell_slot_data spell_slot_data_nine on spell_slot_data_nine.id = spell_slots.nine_id and spell_slots.id = cd.character_spell_slots_id
+    inner join character_treasure_items treasure_items on treasure_items.treasure_id = treasure_table.id
 WHERE cd.character_id = 1;
